@@ -1,19 +1,18 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, Image, Platform, View, Text} from 'react-native';
 import { useSession } from '@/context/authContext';
-
+import { useModal } from '@/context/playerModalContext';
+import { router } from "expo-router";
 
 export default function ProfileScreen() {
   const { signOut } = useSession();
+  const { open, close } = useModal();
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text
-        onPress={() => {
-          // The `app/(app)/_layout.tsx` will redirect to the sign-in screen.
-          signOut();
-        }}>
-        Sign Out
-      </Text>
+      <Text onPress={ async () => { await signOut(); router.replace("/(auth)/preview");}}>Sign Out</Text>
+
+      <Text onPress={() => { open()}}>Open modal</Text>
+      <Text onPress={() => {close(); }}>Close modal</Text>
     </View>
   );
 }

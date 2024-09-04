@@ -1,11 +1,17 @@
-import { Slot } from 'expo-router';
+import { Slot, Stack } from 'expo-router';
 import { SessionProvider } from '@/context/authContext';
+import { PlayerModalProvider } from '@/context/playerModalContext';
 
 export default function Root() {
-  // Set up the auth context and render our layout inside of it.
   return (
     <SessionProvider>
-      <Slot />
+      <PlayerModalProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+        </Stack>
+      </PlayerModalProvider>
     </SessionProvider>
   );
 }

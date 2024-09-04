@@ -5,20 +5,22 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
+import Record from '@/components/record/Record';
 
 export default function FunHomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-     <Link href="/(tabs)/fun/readers" asChild>
-        <Pressable>
-          <Text>Czytanki</Text>
-        </Pressable>
-      </Link>
-      <Link href="/(tabs)/fun/audio_play" asChild>
-        <Pressable>
-          <Text>Słuchowiska</Text>
-        </Pressable>
-      </Link>
+      <Record />
+      <Link href="/(tabs)/fun/readers" asChild>
+          <Pressable>
+            <Text>Czytanki</Text>
+          </Pressable>
+        </Link>
+        <Link href="/(tabs)/fun/audio_play" asChild>
+          <Pressable>
+            <Text>Słuchowiska</Text>
+          </Pressable>
+        </Link>
     </View>
   );
 }
