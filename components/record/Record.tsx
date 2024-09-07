@@ -19,7 +19,7 @@ export default function Record() {
 
     async function playSound() {
         console.log('Loading Sound');
-        const { sound } = await Audio.Sound.createAsync( require('@/assets/test.mp3'));
+        const { sound } = await Audio.Sound.createAsync(require('@/assets/test.mp3'));
         setSound(sound);
     
         console.log('Playing Sound');
@@ -45,7 +45,7 @@ export default function Record() {
       });
 
       console.log('Starting recording..');
-      const { recording } = await Audio.Recording.createAsync( Audio.RecordingOptionsPresets.HIGH_QUALITY);
+      const { recording } = await Audio.Recording.createAsync();
       setRecording(recording);
       console.log('Recording started');
     } catch (err) {
@@ -84,7 +84,7 @@ export default function Record() {
       for (const file of files) {
         const fileUri = folderUri + file;
         const content = await FileSystem.readAsStringAsync(fileUri);
-        console.log(`Content of ${file}`);
+        console.log(`Content of ${fileUri}`);
       }
     } catch (error) {
       console.error('Error reading files:', error);

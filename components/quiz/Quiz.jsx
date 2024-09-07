@@ -62,28 +62,25 @@ const Quiz = ({ quizData }) => {
   const handleOptionSelect = (optionIndex) => {
     const currentQuestion = quizData.questions[currentQuestionIndex];
     let newSelectedOptions = {...selectedOptions};
-    
+
     if (!newSelectedOptions[currentQuestionIndex]) {
-      newSelectedOptions[currentQuestionIndex] = [];
+        newSelectedOptions[currentQuestionIndex] = [];
     }
 
     if (currentQuestion.answerType === 'multiple') {
-      const index = newSelectedOptions[currentQuestionIndex].indexOf(optionIndex);
+        const index = newSelectedOptions[currentQuestionIndex].indexOf(optionIndex);
       if (index > -1) {
         newSelectedOptions[currentQuestionIndex].splice(index, 1);
       } else {
         newSelectedOptions[currentQuestionIndex].push(optionIndex);
       }
     } else {
-      newSelectedOptions[currentQuestionIndex] = [optionIndex];
+        newSelectedOptions[currentQuestionIndex] = [optionIndex];
     }
 
-    setSelectedOptions(newSelectedOptions);
+      setSelectedOptions(newSelectedOptions);
 
-    // do poprawy podgląd buttonówgdy odp jest poprawna
-   // if (quizData.checkAutoAnswer) {
-      checkAnswer(newSelectedOptions[currentQuestionIndex], currentQuestionIndex);
-  //  }
+      checkAnswer(newSelectedOptions[currentQuestionIndex], currentQuestionIndex)
   };
 
   /**
@@ -93,8 +90,9 @@ const Quiz = ({ quizData }) => {
    */
   const isAnswerCorrect = (options,questionIndex) => {
     const currentQuestion = quizData.questions[questionIndex];
+
     if (currentQuestion.answerType === 'multiple') {
-      return JSON.stringify(options.sort()) === JSON.stringify(currentQuestion.correctOptionIndexes.sort());
+      return JSON.stringify(options.sort()) === JSON.stringify(currentQuestion.correctOptionIndex.sort());
     } else {
       return options[0] === currentQuestion.correctOptionIndex;
     }
@@ -105,11 +103,27 @@ const Quiz = ({ quizData }) => {
    * @param {Array} options - Wybrane opcje
    */
   const checkAnswer = (options,questionIndex) => {
+    const currentQuestion = quizData.questions[questionIndex];
+    let newSelectedOptions = {...selectedOptions};
+
     if (isAnswerCorrect(options, questionIndex)) {
       setScore(prevScore => prevScore + (quizData.questions[questionIndex].points || 0));
     }
 
-    if (quizData.checkAutoAnswer) { 
+    if (!quizData.checkAutoAnswer) return;
+
+    if (currentQuestion.answerType === 'multiple') {
+      const selectedOptionsIndex = newSelectedOptions[questionIndex];
+
+      if(!selectedOptionsIndex) return;
+
+      const correctOptionIndexes = quizData.questions[questionIndex].correctOptionIndex;
+
+      if (correctOptionIndexes.length === selectedOptionsIndex.length) {
+          setAnswerChecked(prev => ({...prev, [questionIndex]: true}));
+      }
+
+    } else {
       setAnswerChecked(prev => ({...prev, [questionIndex]: true}));
     }
   };
@@ -127,10 +141,6 @@ const Quiz = ({ quizData }) => {
    * Przejście do następnego pytania lub zakończenie quizu
    */
   const handleNextQuestion = () => {
-    // if (!quizData.checkAutoAnswer) {
-    //   checkAnswer(selectedOptions);
-    // }
-
     if (currentQuestionIndex < quizData.questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
@@ -153,13 +163,32 @@ const Quiz = ({ quizData }) => {
       console.log(`Wysyłanie wyniku na adres: ${userEmail}`);
   };
   
+  const renderLabelCountAnswer = () => {
+    const currentQuestion = quizData.questions[currentQuestionIndex];
+    
+      if (currentQuestion.answerType === 'multiple') {
+         return `Wybierz ${currentQuestion.correctOptionIndex.length} poprawne odpowiedzi`
+      } else {
+        return 'Wybierz jedną poprawną odpowiedź'
+      }
+    
+  };
+
+  const renderProgressBar = () => { 
+    const progress = ((currentQuestionIndex + 1) / quizData.questions.length) * 100;
+    
+    return (
+    <View style={styles.progressBarContainer}>
+      <View style={[styles.progressBar, { width: `${progress}%` }]} />
+    </View>) 
+  };
 
   const getOptionStyle = (index) => {
     if (!answerChecked[currentQuestionIndex]) return styles.optionButton;
     
     const currentQuestion = quizData.questions[currentQuestionIndex];
     const isCorrect = currentQuestion.answerType === 'multiple' 
-      ? currentQuestion.correctOptionIndexes.includes(index)
+      ? currentQuestion.correctOptionIndex.includes(index)
       : currentQuestion.correctOptionIndex === index;
   
     if (isCorrect) {
@@ -178,8 +207,6 @@ const Quiz = ({ quizData }) => {
    const renderOption = (option, index) => {
     const currentQuestion = quizData.questions[currentQuestionIndex];
     const optionStyle = getOptionStyle(index);
-
-    // const safeOptionStyle = Array.isArray(optionStyle) ? optionStyle : [optionStyle];
     const isSelected = (selectedOptions[currentQuestionIndex] || []).includes(index);
 
     if (currentQuestion.type === 'image') {
@@ -218,7 +245,7 @@ const Quiz = ({ quizData }) => {
       <View>
         <Text style={styles.questionText}>{currentQuestion.text}</Text>
         <Text style={styles.questionTypeLabel}>
-          {currentQuestion.answerType === 'multiple' ? 'Wybierz wszystkie poprawne odpowiedzi' : 'Wybierz jedną poprawną odpowiedź'}
+          { renderLabelCountAnswer() }
         </Text>
         {currentQuestion.image && (
           <Image source={{ uri: currentQuestion.image }} style={styles.questionImage} />
@@ -231,26 +258,22 @@ const Quiz = ({ quizData }) => {
             resizeMode="contain"
           />
         )}
+        
         <View style={styles.optionsContainer}>
           {currentQuestion.options.map((option, index) => renderOption(option, index))}
         </View>
+
         <View style={styles.navigationContainer}>
-          <TouchableOpacity 
-            style={[styles.navButton, currentQuestionIndex === 0 ? styles.disabledButton : null]} 
-            onPress={handlePrevQuestion}
-            disabled={currentQuestionIndex === 0}
-          >
-            <Text style={styles.navButtonText}>Poprzednie</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.navButton} 
-            onPress={handleNextQuestion}
-            disabled={selectedOptions.length === 0}
-          >
-            <Text style={styles.navButtonText}>
-              {currentQuestionIndex === quizData.questions.length - 1 ? 'Zakończ' : 'Następne'}
-            </Text>
-          </TouchableOpacity>
+          {quizData.previousButton && 
+            <TouchableOpacity style={[styles.navButton, currentQuestionIndex === 0 ? styles.disabledButton : null]}  onPress={handlePrevQuestion} disabled={currentQuestionIndex === 0}>
+              <Text style={styles.navButtonText}>Poprzednie</Text>
+            </TouchableOpacity>}
+
+            <TouchableOpacity style={styles.navButton} onPress={handleNextQuestion} disabled={selectedOptions.length === 0}>
+              <Text style={styles.navButtonText}>
+                {currentQuestionIndex === quizData.questions.length - 1 ? 'Zakończ' : 'Następne'}
+              </Text>
+            </TouchableOpacity>
         </View>
       </View>
     );
@@ -274,7 +297,7 @@ const renderResult = () => (
         {question.answerType === 'multiple' ? (
           <View>
             <Text style={styles.correctAnswerText}>Poprawne odpowiedzi:</Text>
-            {question.correctOptionIndexes.map((correctIndex) => (
+            {question.correctOptionIndex.map((correctIndex) => (
               <Text key={correctIndex} style={styles.answerText}>
                 • {question.options[correctIndex]}
               </Text>
@@ -317,6 +340,7 @@ return (
   <View style={styles.container}>
     <Text style={styles.title}>{quizData.title || 'Quiz'}</Text>
     {quizData.synopsis && <Text style={styles.synopsis}>{quizData.synopsis}</Text>}
+    {renderProgressBar()}
     {!showResult && (
       <View style={styles.timerContainer}>
          { quizData.timer &&  
@@ -349,6 +373,17 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  progressBarContainer: {
+    height: 10,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 5,
+    marginBottom: 20,
+  },
+  progressBar: {
+    height: '100%',
+    backgroundColor: '#4CAF50',
+    borderRadius: 5,
   },
   selectedOption: {
     backgroundColor: '#e6f7ff', // Jasnoniebieski kolor dla wybranych opcji

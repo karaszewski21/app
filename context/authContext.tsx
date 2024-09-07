@@ -76,8 +76,8 @@ export function SessionProvider({ children }: PropsWithChildren) {
         signIn: async () => {
           const jwt = await signIn()
 
-          if (jwt) {
-            setSession(jwt);
+          if (true) {
+            setSession('jwt');
           }
         },
         signOut: async () => {
