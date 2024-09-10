@@ -7,11 +7,19 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { useSession } from '@/context/authContext';
 import { useModal } from '@/context/playerModalContext';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useTabsScreen } from '@/context/tabContext';
 
 export default function TabLayout() {
-  //const { session, isLoading } = useSession();
+  const { session, isLoading } = useSession();
   const { isOpen, close } = useModal();
   const colorScheme = useColorScheme();
+  const { tab } = useTabsScreen()
+
+  if (!session) {
+    return (
+      <Redirect href="/(auth)/preview" />
+    );
+  }
   
   return (
     <>
@@ -20,7 +28,7 @@ export default function TabLayout() {
             tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
             headerShown: false,
             tabBarStyle: { 
-              zIndex: 1
+              display: tab ? 'flex' : 'none'
             },
           }}>
           <Tabs.Screen

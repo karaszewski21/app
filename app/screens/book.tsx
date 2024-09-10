@@ -26,7 +26,7 @@ export default function BookStackScreen({route}:any) {
         }} 
         initialParams={route.params}
       />
-      <BookStack.Screen name="Quiz" component={QuizScreen} options={{headerShown: false}}/>
+      <BookStack.Screen name="Quiz" component={QuizScreen} options={{headerShown: false }}/>
       <BookStack.Screen name="Audiobook" component={AudiobookScreen} options={{headerShown: false}}/>
     </BookStack.Navigator>
   );

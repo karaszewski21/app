@@ -20,7 +20,11 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.smyksmyk.app"
+      "package": "com.smyksmyk.app",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -38,17 +42,18 @@
           "microphonePermission": "Allow Voice to Text Tutorial to access the microphone",
           "speechRecognitionPermission": "Allow Voice to Text Tutorial to securely recognize user speech"
         }
-      ],
-      [
-        "@react-native-voice/voice",
-        {
-          "microphonePermission": "Allow Voice to Text Tutorial to access the microphone",
-          "speechRecognitionPermission": "Allow Voice to Text Tutorial to securely recognize user speech"
-        }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "abee62ed-285d-4986-b961-c7cb8a9b270e"
+      }
     }
   }
 }

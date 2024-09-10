@@ -81,8 +81,8 @@ export function SessionProvider({ children }: PropsWithChildren) {
           }
         },
         signOut: async () => {
-          await signOut()
           setSession(null);
+          await signOut()
         },
         session,
         isLoading,

@@ -1,19 +1,25 @@
 import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import Quiz from '@/components/quiz/Quiz'
 import { quiz } from '@/constants/Quiz';
+import { useEffect } from 'react';
+import { useTabsScreen } from '@/context/tabContext';
 
-const QuizScreen = ({ navigation }:any) => (
+const QuizScreen = ({ navigation }:any) => { 
+  const { show, hidden } = useTabsScreen()
+  useEffect(()=> {
+    hidden()
+    return () => { show() }
+  }, [])
+  
+  return (
     <SafeAreaView>
       <ScrollView>
-        {/* <TouchableOpacity onPress={() => navigation.navigate('Books')}>
-          <Text style={styles.tileText}>Books</Text>
-        </TouchableOpacity> */}
         <View style={styles.contentContainer}>
           <Quiz quizData={quiz} />
         </View>
       </ScrollView>
-    </SafeAreaView>
-  );
+    </SafeAreaView>)
+  }
 
   const styles = StyleSheet.create({
     container: {

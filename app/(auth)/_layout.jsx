@@ -6,7 +6,6 @@ import Loader from '@/components/Loader';
 
 const AuthLayout = () => {
   const { session, isLoading } = useSession();
-  console.log('-->AuthLayout session, isLoading',session, isLoading)
 
   if (!isLoading && session) return <Redirect href="/(tabs)/" />;
 

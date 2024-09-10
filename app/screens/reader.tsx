@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, FlatList, Modal, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Zakładam, że używasz Expo
 import AudiobookScreen from '@/app/screens/audiobook'
 import QuizScreen from '@/app/screens/quiz'
 import Header from '@/components/layout/header';
+import PageFlipperScreen from '@/app/screens/page_flipper'
+import ReaderTextScreen from '@/app/screens/reader_text'
 
 const ReaderStack = createStackNavigator();
 
@@ -28,6 +30,8 @@ export default function ReaderStackScreen({route}:any) {
       />
       <ReaderStack.Screen name="Quiz" component={QuizScreen} options={{headerShown: false}}/>
       <ReaderStack.Screen name="Audiobook" component={AudiobookScreen} options={{headerShown: false}}/>
+      <ReaderStack.Screen name="PageFlipper" component={PageFlipperScreen} options={{headerShown: false}}/>
+      <ReaderStack.Screen name="ReaderText" component={ReaderTextScreen} options={{headerShown: false}}/>
     </ReaderStack.Navigator>
   );
 }
@@ -44,6 +48,26 @@ const ReaderScreen = ({ route, navigation }:any) => {
     { id: '1', title: 'Audio 1' },
     { id: '2', title: 'Audio 2'}
   ];
+
+  const renderReaderText = () => (
+    <TouchableOpacity 
+      style={styles.quizItem}
+      onPress={() => navigation.navigate('ReaderText')}
+    >
+      <Text style={styles.quizTitle}>Czytanka Text</Text>
+      <Ionicons name="chevron-forward" size={24} color="#3498db" />
+    </TouchableOpacity>
+  );
+
+  const renderReaderImage = () => (
+    <TouchableOpacity 
+      style={styles.quizItem}
+      onPress={() => navigation.navigate('PageFlipper')}
+    >
+      <Text style={styles.quizTitle}>Czytank Image</Text>
+      <Ionicons name="chevron-forward" size={24} color="#3498db" />
+    </TouchableOpacity>
+  );
 
   const renderQuizItem = ({ item }: any) => (
     <TouchableOpacity 
@@ -67,6 +91,10 @@ const ReaderScreen = ({ route, navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View>
+          {renderReaderText()}
+          {renderReaderImage()}
+      </View> 
       <View style={styles.headerContainer}>
         <Text style={styles.headerSubtitle}>Dostępne quizy</Text>
       </View>
@@ -134,5 +162,37 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginLeft: 15,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  closeButton: {
+    padding: 5,
+  },
+  modalContent: {
+    flex: 1,
+    padding: 20,
+  },
+  modalText: {
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -1,14 +1,18 @@
 import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
 
-const StoryScreen = ({ navigation }:any) => (
+const StoryScreen = ({route, navigation }:any) => { 
+  const { title } = route.params
+  
+  return(
     <SafeAreaView>
       <ScrollView>
         <View style={styles.contentContainer}>
-            Storise 
+            <Text>{title}</Text> 
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
+    ) 
+  }
 
   const styles = StyleSheet.create({
     container: {

@@ -7,6 +7,7 @@ import BookStackScreen from '@/app/screens/book';
 import NewsScreen from '@/app/screens/news';
 import StoryScreen from '@/app/screens/story';
 import ReaderStackScreen from '@/app/screens/reader';
+import AgeStackScreen from '@/app/screens/age';
 
 const HomeStack = createStackNavigator();
 
@@ -42,14 +43,18 @@ export default function HomeScreenStack() {
             headerShown: false
           }}
         />
+        <HomeStack.Screen 
+          name="Age" 
+          component={AgeStackScreen}
+          options={{
+            headerShown: false
+          }}
+        />
       </HomeStack.Navigator>
   );
 }
 
 const HomeScreen = ({ navigation }: any) => {
-  const top = [
-    { id: '1', title: 'Książka 1', image: 'https://via.placeholder.com/150' },
-  ];
 
   const stories = [
     { id: '1', title: 'Historia 1', image: 'https://via.placeholder.com/100' },
@@ -60,10 +65,17 @@ const HomeScreen = ({ navigation }: any) => {
     { id: '6', title: 'Historia 6', image: 'https://via.placeholder.com/100' },
   ];
 
+  const ages = [
+    { id: '1', title: 'Mały bobek', image: 'https://via.placeholder.com/100' },
+    { id: '2', title: 'Średnik bobke', image: 'https://via.placeholder.com/100' },
+    { id: '3', title: 'Duży bobke', image: 'https://via.placeholder.com/100' },
+    { id: '4', title: 'Szkolniak', image: 'https://via.placeholder.com/100' },
+  ];
+
   const books = [
-    { id: '1', title: 'Książka 1', image: 'https://via.placeholder.com/150' },
-    { id: '2', title: 'Książka 2', image: 'https://via.placeholder.com/150' },
-    { id: '3', title: 'Książka 3', image: 'https://via.placeholder.com/150' },
+    { id: '1', title: 'Książka 1', image: 'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png' },
+    { id: '2', title: 'Książka 2', image: 'https://goldfish.fra1.digitaloceanspaces.com/book_funny/Leonardo_Phoenix_Enchanting_company_logo_the_circular_design_e_1.jpg' },
+    { id: '3', title: 'Książka 3', image: 'https://goldfish.fra1.digitaloceanspaces.com/book1.jpg' },
     { id: '4', title: 'Książka 4', image: 'https://via.placeholder.com/150' },
   ];
 
@@ -74,21 +86,26 @@ const HomeScreen = ({ navigation }: any) => {
     { id: '4', title: 'Czytaka 4', image: 'https://via.placeholder.com/150' },
   ];
 
-  const renderTopItem = ({ item } :any) => (
-    <TouchableOpacity 
-        style={styles.newsButton}
-        onPress={() => navigation.navigate('News')}
+  const renderStoryItem = ({item}:any) => { 
+    return(
+      <TouchableOpacity 
+        key={item.id} 
+        style={styles.storyItem}
+        onPress={() => navigation.navigate('Story', { id: item.id, title: item.title })}  
       >
-      <Text style={styles.newsButtonText}>Aktualności</Text>
-      <Ionicons name="chevron-forward" size={24} color="#fff" />
-    </TouchableOpacity>
-  );
+        <Image source={{ uri: item.image }} style={styles.storyImage} />
+      </TouchableOpacity>
+    ) 
+  }
 
-  const renderStoryItem = ({ item } :any) => (
-    <TouchableOpacity style={styles.storyItem}>
-      <Image source={{ uri: item.image }} style={styles.storyImage} />
-      <Text style={styles.storyTitle}>{item.title}</Text>
-    </TouchableOpacity>
+  const renderFilterByAgeItem = ({ item } :any) => (
+    <TouchableOpacity 
+        key={item.id} 
+        style={styles.storyItem}
+        onPress={() => navigation.navigate('Age', { id: item.id, title: item.title })}  
+      >
+        <Image source={{ uri: item.image }} style={styles.ageImage} />
+      </TouchableOpacity>
   );
 
   const renderBookItem = (book: any) => (
@@ -98,7 +115,6 @@ const HomeScreen = ({ navigation }: any) => {
       onPress={() => navigation.navigate('BookDetails', { id: book.id, title: book.title })}
     >
       <Image source={{ uri: book.image }} style={styles.bookImage} />
-      <Text style={styles.bookTitle}>{book.title}</Text>
     </TouchableOpacity>
   );
 
@@ -116,14 +132,14 @@ const HomeScreen = ({ navigation }: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <FlatList
-          horizontal
-          data={top}
-          renderItem={renderTopItem}
-          keyExtractor={item => item.id}
-          showsHorizontalScrollIndicator={false}
-          style={styles.storyList}
-        />
+        <View>
+          <TouchableOpacity 
+            style={styles.newsButton}
+            onPress={() => navigation.navigate('News')}
+          >
+          <Text style={styles.newsButtonText}>Co nowego?</Text>
+        </TouchableOpacity>
+        </View>
 
         <Text style={styles.sectionTitle}>Historie</Text>
         <FlatList
@@ -134,6 +150,17 @@ const HomeScreen = ({ navigation }: any) => {
           showsHorizontalScrollIndicator={false}
           style={styles.storyList}
         />
+
+        <Text style={styles.sectionTitle}>Zacznij tutaj</Text>
+        <FlatList
+          horizontal
+          data={ages}
+          renderItem={renderFilterByAgeItem}
+          keyExtractor={item => item.id}
+          showsHorizontalScrollIndicator={false}
+          style={styles.storyList}
+        />
+
 
         <Text style={styles.sectionTitle}>Najnowsze książki</Text>
         <View style={styles.booksContainer}>
@@ -160,7 +187,7 @@ const styles = StyleSheet.create({
   },
   newsButton: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#3498db',
     padding: 15,
@@ -193,6 +220,11 @@ const styles = StyleSheet.create({
   storyTitle: {
     marginTop: 5,
     fontSize: 12,
+  },
+  ageImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
   },
   booksContainer: {
     flexDirection: 'row',
