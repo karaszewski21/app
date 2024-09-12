@@ -57,12 +57,12 @@ export default function HomeScreenStack() {
 const HomeScreen = ({ navigation }: any) => {
 
   const stories = [
-    { id: '1', title: 'Historia 1', image: 'https://via.placeholder.com/100' },
-    { id: '2', title: 'Historia 2', image: 'https://via.placeholder.com/100' },
-    { id: '3', title: 'Historia 3', image: 'https://via.placeholder.com/100' },
-    { id: '4', title: 'Historia 4', image: 'https://via.placeholder.com/100' },
-    { id: '5', title: 'Historia 5', image: 'https://via.placeholder.com/100' },
-    { id: '6', title: 'Historia 6', image: 'https://via.placeholder.com/100' },
+    { id: '1', title: 'Historia 1', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg' },
+    { id: '2', title: 'Historia 2', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg' },
+    { id: '3', title: 'Historia 3', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Physical_AttributesMediumsized_goldfish_with_1.jpg' },
+    { id: '4', title: 'Historia 4', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_modern_vibrant_social_media_post_featuring_3.jpg' },
+    { id: '5', title: 'Historia 5', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_modern_vibrant_social_media_post_featuring_3.jpg' },
+    { id: '6', title: 'Historia 6', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg' },
   ];
 
   const ages = [
@@ -132,13 +132,17 @@ const HomeScreen = ({ navigation }: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View>
+        <View style={styles.header}>
           <TouchableOpacity 
-            style={styles.newsButton}
-            onPress={() => navigation.navigate('News')}
-          >
-          <Text style={styles.newsButtonText}>Co nowego?</Text>
-        </TouchableOpacity>
+              style={styles.button}
+              onPress={() => navigation.navigate('News')}
+            >
+              <Image 
+                source={{uri: 'https://goldfish.fra1.digitaloceanspaces.com/goldfish-logo.png'}} 
+                style={styles.logo}
+              />
+          </TouchableOpacity>
+          <Text style={styles.sectionTitle}>Witaj Patryk Karaszewski</Text>
         </View>
 
         <Text style={styles.sectionTitle}>Historie</Text>
@@ -185,20 +189,32 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
-  newsButton: {
+  header: {
+    display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10
+  },
+  button: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#4CAF50', // Możesz dostosować kolor tła
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3498db',
-    padding: 15,
-    marginHorizontal: 10,
-    marginTop: 10,
-    borderRadius: 10,
+    elevation: 3, // Dla cienia na Androidzie
+    shadowColor: '#000', // Dla cienia na iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    overflow: 'hidden', // Zapewnia, że logo nie wyjdzie poza okrągły kształt przycisku
   },
-  newsButtonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+  logo: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 30, // Ten sam borderRadius co przycisk
+    resizeMode: 'cover', // Zmienione z 'contain' na 'cover' dla lepszego efektu
   },
   sectionTitle: {
     fontSize: 20,

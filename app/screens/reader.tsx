@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, FlatList, Modal, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // Zakładam, że używasz Expo
+import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { SafeAreaView } from "react-native-safe-area-context";
 import AudiobookScreen from '@/app/screens/audiobook'
 import QuizScreen from '@/app/screens/quiz'
-import Header from '@/components/layout/header';
-import PageFlipperScreen from '@/app/screens/page_flipper'
+import ReaderFlipperScreen from '@/app/screens/reader_flipper'
 import ReaderTextScreen from '@/app/screens/reader_text'
 
 const ReaderStack = createStackNavigator();
@@ -15,22 +15,13 @@ export default function ReaderStackScreen({route}:any) {
     <ReaderStack.Navigator>
       <ReaderStack.Screen 
         name="Details" 
-        component={ReaderScreen} 
-        options={{
-          header: ({ navigation, route }) => {
-            const { title } = route.params as { title : string}
-            return(
-            <Header 
-              title={title} 
-              showBackButton={true}
-            />
-            )}
-        }} 
+        component={ReaderScreen}
+        options={{headerShown: false}}
         initialParams={route.params}
       />
       <ReaderStack.Screen name="Quiz" component={QuizScreen} options={{headerShown: false}}/>
       <ReaderStack.Screen name="Audiobook" component={AudiobookScreen} options={{headerShown: false}}/>
-      <ReaderStack.Screen name="PageFlipper" component={PageFlipperScreen} options={{headerShown: false}}/>
+      <ReaderStack.Screen name="ReaderFlipper" component={ReaderFlipperScreen} options={{headerShown: false}}/>
       <ReaderStack.Screen name="ReaderText" component={ReaderTextScreen} options={{headerShown: false}}/>
     </ReaderStack.Navigator>
   );
@@ -62,7 +53,7 @@ const ReaderScreen = ({ route, navigation }:any) => {
   const renderReaderImage = () => (
     <TouchableOpacity 
       style={styles.quizItem}
-      onPress={() => navigation.navigate('PageFlipper')}
+      onPress={() => navigation.navigate('ReaderFlipper')}
     >
       <Text style={styles.quizTitle}>Czytank Image</Text>
       <Ionicons name="chevron-forward" size={24} color="#3498db" />

@@ -1,11 +1,12 @@
 import { useContext, createContext, type PropsWithChildren } from 'react';
+import { Platform } from 'react-native';
 import { useStorageState } from '@/hooks/useStorageState';
-import { GoogleSignin, isErrorWithCode, statusCodes } from '@react-native-google-signin/google-signin';
+// import { GoogleSignin, isErrorWithCode, statusCodes } from '@react-native-google-signin/google-signin';
 
-GoogleSignin.configure({
-    webClientId: '62513865915-impf1a6atltu69koftipuuu9ge2o26kj.apps.googleusercontent.com',
-    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-});
+// GoogleSignin.configure({
+//     webClientId: '62513865915-impf1a6atltu69koftipuuu9ge2o26kj.apps.googleusercontent.com',
+//     scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+// });
 
 const AuthContext = createContext<{
   signIn: () => void;
@@ -32,36 +33,36 @@ export function useSession() {
 }
 
 const signIn = async () => {
-  try {
-    await GoogleSignin.hasPlayServices();
-    await GoogleSignin.signIn();
-    const token = await GoogleSignin.getTokens();
-    const response = await fetch(`https://1d6c-188-47-110-123.ngrok-free.app/api/auth/google/callback?access_token=${token.accessToken}`);
-    const json = await response.json();
-    const { jwt } = json;
+  // try {
+  //   await GoogleSignin.hasPlayServices();
+  //   await GoogleSignin.signIn();
+  //   const token = await GoogleSignin.getTokens();
+  //   const response = await fetch(`https://1d6c-188-47-110-123.ngrok-free.app/api/auth/google/callback?access_token=${token.accessToken}`);
+  //   const json = await response.json();
+  //   const { jwt } = json;
 
-    return jwt
+  //   return jwt
 
-  } catch (error) {
-    if (isErrorWithCode(error)) {
-      switch (error.code) {
-        case statusCodes.SIGN_IN_CANCELLED:
-          break;
-        case statusCodes.IN_PROGRESS:
-          break;
-        case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-          break;
-        default:
-      }
-    } else {
-    }
-  }
+  // } catch (error) {
+  //   if (isErrorWithCode(error)) {
+  //     switch (error.code) {
+  //       case statusCodes.SIGN_IN_CANCELLED:
+  //         break;
+  //       case statusCodes.IN_PROGRESS:
+  //         break;
+  //       case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+  //         break;
+  //       default:
+  //     }
+  //   } else {
+  //   }
+  // }
 };
 
 const signOut = async () => {
   try {
-    await GoogleSignin.hasPlayServices();
-    await GoogleSignin.signOut();
+    // await GoogleSignin.hasPlayServices();
+    // await GoogleSignin.signOut();
   } catch (error) {
   
   }
@@ -74,8 +75,10 @@ export function SessionProvider({ children }: PropsWithChildren) {
     <AuthContext.Provider
       value={{
         signIn: async () => {
-          const jwt = await signIn()
-
+          // if (Platform.OS === 'android') {
+          //   const jwt = await signIn()
+          // }
+  
           if (true) {
             setSession('jwt');
           }

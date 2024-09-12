@@ -1,10 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Zakładam, że używasz Expo
 import AudiobookScreen from '@/app/screens/audiobook'
 import QuizScreen from '@/app/screens/quiz'
 import Header from '@/components/layout/header';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const BookStack = createStackNavigator();
 
@@ -14,19 +15,10 @@ export default function BookStackScreen({route}:any) {
       <BookStack.Screen 
         name="Details" 
         component={BookScreen} 
-        options={{
-          header: ({ navigation, route }) => {
-            const { title } = route.params as { title : string}
-            return(
-            <Header 
-              title={title} 
-              showBackButton={true}
-            />
-            )}
-        }} 
+        options={{headerShown: false}} 
         initialParams={route.params}
       />
-      <BookStack.Screen name="Quiz" component={QuizScreen} options={{headerShown: false }}/>
+      <BookStack.Screen name="Quiz" component={QuizScreen} options={{headerShown: false}} />
       <BookStack.Screen name="Audiobook" component={AudiobookScreen} options={{headerShown: false}}/>
     </BookStack.Navigator>
   );

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Audio } from 'expo-av';
+import { usePlayerModal } from '@/context/playerModalContext';
 
 const Audiobook = ({ audiobook }) => {
   const [sound, setSound] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentChapterIndex, setCurrentChapterIndex] = useState(0);
+  const { open, close, setFile } = usePlayerModal();
 
   useEffect(() => {
     return sound
@@ -16,19 +18,23 @@ const Audiobook = ({ audiobook }) => {
   }, [sound]);
 
   async function playSound() {
-    const path = `@/assets/${audiobook.versions[currentChapterIndex].audioFile}`
-    console.log("--->path",path)
-    const { sound } = await Audio.Sound.createAsync(require('@/assets/test.mp3'),{shouldPlay: true});
-    setSound(sound);
-    await sound.playAsync();
-    setIsPlaying(true);
+    open()
+    setFile('https://goldfish.fra1.digitaloceanspaces.com/camera_pans_left_3503b9.mp4')
+    // const path = `@/assets/${audiobook.versions[currentChapterIndex].audioFile}`
+    // console.log("--->path",path)
+    // const { sound } = await Audio.Sound.createAsync(require('@/assets/test.mp3'),{shouldPlay: true});
+    // setSound(sound);
+    // await sound.playAsync();
+    // setIsPlaying(true);
   }
 
   async function pauseSound() {
-    if (sound) {
-      await sound.pauseAsync();
-      setIsPlaying(false);
-    }
+    close()
+    
+    // if (sound) {
+    //   await sound.pauseAsync();
+    //   setIsPlaying(false);
+    // }
   }
 
   async function stopSound() {

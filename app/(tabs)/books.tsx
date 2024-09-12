@@ -1,21 +1,25 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ScrollView, View, Text, TouchableOpacity, StyleSheet, Button, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Button, FlatList } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import BookScreen from '@/app/screens/book'
+import BookScreen from '@/app/screens/book';
+import MediaPlayerScreen from '@/app/screens/media_player';
+import { usePlayerModal } from '@/context/playerModalContext';
 
 const BooksStack = createStackNavigator();
 
 export default function BooksStackScreen() {
   return (
     <BooksStack.Navigator>
-      <BooksStack.Screen name="Books" component={BooksScreen} options={{headerShown: true}}/>
+      <BooksStack.Screen name="Books" component={BooksScreen} options={{headerShown: false}}/>
       <BooksStack.Screen name="Book" component={BookScreen} options={{headerShown: false}}/>
+      {/* <BooksStack.Screen name="Media" component={MediaPlayerScreen} options={{headerShown: false}}/> */}
     </BooksStack.Navigator>
   );
 }
 
 const BooksScreen = ({ navigation }:any) => {
+  const { openLarge, openSmall } = usePlayerModal();
 
   const books = [
     { id: '1', title: 'Książka 1' },
@@ -36,6 +40,20 @@ const BooksScreen = ({ navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View>
+        <TouchableOpacity 
+            style={styles.bookItem}
+            onPress={() => openLarge()}
+          >
+            <Text style={styles.bookTitle}>Large</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+            style={styles.bookItem}
+            onPress={() => openSmall()}
+          >
+            <Text style={styles.bookTitle}>Small</Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
           data={books}
           renderItem={renderItem}

@@ -1,14 +1,13 @@
-import { SafeAreaView, ScrollView, View, StyleSheet, useWindowDimensions,Image, TouchableOpacity, Dimensions } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // Zakładam, że używasz Expo
-import { quiz } from '@/constants/Quiz';
+import { ScrollView, View, StyleSheet, useWindowDimensions,Image, TouchableOpacity, } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'; 
 import { useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
-import PageFlipper from '@/components/page-flipper';
+import PageFlipper from '@/components/reader/reader-flipper';
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const { width, height } = Dimensions.get('window');
-
-const PageFlipperScreen = ({ navigation }:any) => { 
+const ReaderFlipperScreen = ({ navigation }:any) => { 
   const { show, hidden } = useTabsScreen();
+  const {height, width} = useWindowDimensions()
 
   useEffect(()=> {
     hidden()
@@ -67,4 +66,4 @@ const PageFlipperScreen = ({ navigation }:any) => {
     },
   });
 
-  export default PageFlipperScreen;
+  export default ReaderFlipperScreen;

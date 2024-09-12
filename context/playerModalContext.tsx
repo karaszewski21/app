@@ -3,21 +3,29 @@ import { useStorageState } from '@/hooks/useStorageState';
 
 
 const PlayerModalContext = createContext<{
-  open: () => void;
+  openSmall: () => void;
+  openLarge: () => void;
   close: () => void;
-  isOpen: boolean;
+  setFile: (file:string) => void;
+  isOpenSmall: boolean;
+  isOpenLarge: boolean;
+  file: string;
 }>({
-    open: () => null,
+    openSmall: () => null,
+    openLarge: () => null,
     close: () => null,
-    isOpen: false 
+    setFile: () => null,
+    isOpenSmall: false, 
+    isOpenLarge: false,
+    file: ''
 });
 
 // This hook can be used to access the user info.
-export function useModal() {
+export function usePlayerModal() {
   const value = useContext(PlayerModalContext);
   if (process.env.NODE_ENV !== 'production') {
     if (!value) {
-      throw new Error('useSession must be wrapped in a <SessionProvider />');
+      throw new Error('useSession must be wrapped in a <PlayerModalProvider />');
     }
   }
 
@@ -25,18 +33,29 @@ export function useModal() {
 }
 
 export function PlayerModalProvider({ children }: PropsWithChildren) {
-  const [state, setSession] = useState(false)
+  const [openSmall, setOpenSmall] = useState(false);
+  const [openLarge, setOpenLarge] = useState(false)
+  const [file, setFile] = useState('')
 
   return (
     <PlayerModalContext.Provider
       value={{
-        open: () => {
-          setSession(true);
+        openSmall: () => {
+          setOpenSmall(true);
+        },
+        openLarge: () => {
+          setOpenLarge(true);
         },
         close: () => {
-          setSession(false);
+          setOpenSmall(false);
+          setOpenLarge(false);
         },
-        isOpen: state,
+        setFile: (file) => {
+          setFile(file)
+        },
+        isOpenSmall: openSmall,
+        isOpenLarge: openLarge,
+        file: file
       }}>  
       {children}
     </PlayerModalContext.Provider>

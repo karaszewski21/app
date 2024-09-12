@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useSession } from '@/context/authContext';
-import { useModal } from '@/context/playerModalContext';
+import { usePlayerModal } from '@/context/playerModalContext';
 import { useNotification } from '@/context/notificationContext';
 import { router } from "expo-router";
 
@@ -11,7 +11,7 @@ export default function ProfileScreen() {
   const [notificationsDisabled, setNotificationsDisabled] = useState(true);
   const [storiesDisabled, setStoriesDisabled] = useState(false);
   const { signOut } = useSession();
-  const { open, close } = useModal();
+  const { open, close } = usePlayerModal();
   const { logout } = useNotification()
 
   const handleLogout = async () => {
