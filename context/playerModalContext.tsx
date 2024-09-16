@@ -1,23 +1,17 @@
 import { useContext, createContext, type PropsWithChildren, useState } from 'react';
-import { useStorageState } from '@/hooks/useStorageState';
-
 
 const PlayerModalContext = createContext<{
-  openSmall: () => void;
-  openLarge: () => void;
-  close: () => void;
+  openPlayer: () => void;
+  closePlayer: () => void;
   setFile: (file:string) => void;
-  isOpenSmall: boolean;
-  isOpenLarge: boolean;
+  isOpenPlayer: boolean;
   file: string;
 }>({
-    openSmall: () => null,
-    openLarge: () => null,
-    close: () => null,
+    openPlayer: () => null,
+    closePlayer: () => null,
     setFile: () => null,
-    isOpenSmall: false, 
-    isOpenLarge: false,
-    file: ''
+    isOpenPlayer: false, 
+    file: '',
 });
 
 // This hook can be used to access the user info.
@@ -33,29 +27,23 @@ export function usePlayerModal() {
 }
 
 export function PlayerModalProvider({ children }: PropsWithChildren) {
-  const [openSmall, setOpenSmall] = useState(false);
-  const [openLarge, setOpenLarge] = useState(false)
-  const [file, setFile] = useState('')
+  const [openPlayer, setOpenPlayer] = useState(false);
+  const [file, setFile] = useState('');
 
   return (
     <PlayerModalContext.Provider
       value={{
-        openSmall: () => {
-          setOpenSmall(true);
+        openPlayer: () => {
+          setOpenPlayer(true);
         },
-        openLarge: () => {
-          setOpenLarge(true);
-        },
-        close: () => {
-          setOpenSmall(false);
-          setOpenLarge(false);
+        closePlayer: () => {
+          setOpenPlayer(false);
         },
         setFile: (file) => {
           setFile(file)
         },
-        isOpenSmall: openSmall,
-        isOpenLarge: openLarge,
-        file: file
+        isOpenPlayer: openPlayer,
+        file: file,
       }}>  
       {children}
     </PlayerModalContext.Provider>

@@ -6,12 +6,12 @@ import { useTabsScreen } from '@/context/tabContext';
 import ReaderText from '@/components/reader/reader-text/reader_text';
 
 const ReaderTextScreen = ({ navigation }:any) => { 
-  const { show, hidden } = useTabsScreen();
+  const { showTabs, hiddenTabs } = useTabsScreen();
   const { width, height } = useWindowDimensions();
 
   useEffect(()=> {
-    hidden()
-    return () => { show() }
+    hiddenTabs()
+    return () => { showTabs() }
   }, [])
   
   const pages = [

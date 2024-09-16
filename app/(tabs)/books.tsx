@@ -1,59 +1,71 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, TouchableOpacity, StyleSheet, Button, FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import BookScreen from '@/app/screens/book';
-import MediaPlayerScreen from '@/app/screens/media_player';
-import { usePlayerModal } from '@/context/playerModalContext';
+import ListItem from '@/components/common/ListItem';
 
 const BooksStack = createStackNavigator();
 
 export default function BooksStackScreen() {
+
   return (
     <BooksStack.Navigator>
       <BooksStack.Screen name="Books" component={BooksScreen} options={{headerShown: false}}/>
       <BooksStack.Screen name="Book" component={BookScreen} options={{headerShown: false}}/>
-      {/* <BooksStack.Screen name="Media" component={MediaPlayerScreen} options={{headerShown: false}}/> */}
     </BooksStack.Navigator>
   );
 }
 
 const BooksScreen = ({ navigation }:any) => {
-  const { openLarge, openSmall } = usePlayerModal();
 
   const books = [
-    { id: '1', title: 'Książka 1' },
-    { id: '2', title: 'Książka 2' },
-    { id: '3', title: 'Książka 3' },
-    { id: '4', title: 'Książka 4' },
-    { id: '5', title: 'Książka 5' },
+    {
+      id: '1',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł książki 1",
+      description: "Opis książki ",
+      isLock: false,
+    },
+    {
+      id: '2',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł książki 2",
+      description: "Opis książki ",
+      isLock: false,
+    }
   ];
 
-  const renderItem = ({ item }: any) => (
-    <TouchableOpacity 
-      style={styles.bookItem}
-      onPress={() => navigation.navigate('Book', { title: item.title})}
-    >
-      <Text style={styles.bookTitle}>{item.title}</Text>
-    </TouchableOpacity>
-  );
+  const popupRating = () => {
+
+  }
+  
+  const renderItem = ({ item }: any) => {
+     const { } = item; 
+    
+    
+    return(
+    <ListItem props={{
+        title: item.title,
+        imageUrl: item.gallery[0],
+        onRatingPress:popupRating,
+        onPress: () => navigation.navigate('Book', { book: item }),
+        rating: 4,
+        reviewCount: 4
+      }}
+    />) 
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <TouchableOpacity 
-            style={styles.bookItem}
-            onPress={() => openLarge()}
-          >
-            <Text style={styles.bookTitle}>Large</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-            style={styles.bookItem}
-            onPress={() => openSmall()}
-          >
-            <Text style={styles.bookTitle}>Small</Text>
-        </TouchableOpacity>
-      </View>
       <FlatList
           data={books}
           renderItem={renderItem}

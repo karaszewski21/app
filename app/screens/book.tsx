@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // Zakładam, że używasz Expo
-import AudiobookScreen from '@/app/screens/audiobook'
-import QuizScreen from '@/app/screens/quiz'
-import Header from '@/components/layout/header';
+import { Ionicons } from '@expo/vector-icons';
+import AudiobooksScreen from '@/app/screens/resources/audiobooks'
+import QuizesScreen from '@/app/screens/resources/quizes'
 import { SafeAreaView } from "react-native-safe-area-context";
+import BookWrapper from '@/components/common/BookWrapper';
+import SquareButton from '@/components/common/SquareButton';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Overlay from '@/components/Overlay';
+import FunnyButton from '@/components/common/FunnyButton';
 
 const BookStack = createStackNavigator();
 
@@ -18,62 +22,46 @@ export default function BookStackScreen({route}:any) {
         options={{headerShown: false}} 
         initialParams={route.params}
       />
-      <BookStack.Screen name="Quiz" component={QuizScreen} options={{headerShown: false}} />
-      <BookStack.Screen name="Audiobook" component={AudiobookScreen} options={{headerShown: false}}/>
+      <BookStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}} />
+      <BookStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
     </BookStack.Navigator>
   );
 }
 
 const BookScreen = ({ route, navigation }:any) => {
-  const { title } = route.params
+  const { book } = route.params;
 
-  const quiz = [
-    { id: '1', title: 'Quiz 1' },
-    { id: '2', title: 'Quiz 2'}
-  ];
 
-  const audiobook = [
-    { id: '1', title: 'Audio 1' },
-    { id: '2', title: 'Audio 2'}
-  ];
+  const height = useSharedValue(0);
 
-  const renderQuizItem = ({ item }: any) => (
-    <TouchableOpacity 
-      style={styles.quizItem}
-      onPress={() => navigation.navigate('Quiz', { id: item.id, title: item.title })}
-    >
-      <Text style={styles.quizTitle}>{item.title}</Text>
-      <Ionicons name="chevron-forward" size={24} color="#3498db" />
-    </TouchableOpacity>
-  );
+  useEffect(() => {
+    height.value = 0
+    height.value =  withSpring(200);
 
-  const renderAudiobookItem = ({ item }: any) => (
-    <TouchableOpacity 
-      style={styles.quizItem}
-      onPress={() => navigation.navigate('Audiobook', { id: item.id, title: item.title })}
-    >
-      <Text style={styles.quizTitle}>{item.title}</Text>
-      <Ionicons name="chevron-forward" size={24} color="#3498db" />
-    </TouchableOpacity>
-  );
+
+  }, []);
+
+  const buy = () => {
+    console.log('buy book')
+  }
+
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerSubtitle}>Dostępne quizy</Text>
-      </View>
-      <FlatList
-        data={quiz}
-        renderItem={renderQuizItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContent}
-      />
-       <FlatList
-        data={audiobook}
-        renderItem={renderAudiobookItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContent}
-      />
+      <BookWrapper props={book}>
+        <View style={styles.buttons}>
+          <SquareButton props={{title: 'Quiz', icon: 'text', bookId: '', navigate: () =>  navigation.navigate('Quizes') }}></SquareButton>
+          <SquareButton props={{title: 'AudioBooks', icon: 'add', bookId: '', navigate: () => navigation.navigate('AudioBooks')}}></SquareButton>
+        </View>
+      </BookWrapper>
+      {  book.isLock &&
+        <Animated.View  style={{...styles.overlayContainer,height}}>
+            <Overlay opacity={0.6} style={styles.overlay}>
+                <FunnyButton props={{title:'kup',onPress:buy, icon: ''}}></FunnyButton>
+                <FunnyButton props={{title:'odblokuj',onPress:buy, icon: ''}}></FunnyButton>
+            </Overlay> 
+        </Animated.View>
+      }
     </SafeAreaView>
   );
 }
@@ -83,48 +71,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
-  headerContainer: {
-    padding: 20,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  headerSubtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginTop: 5,
-  },
-  listContent: {
-    padding: 16,
-  },
-  quizItem: {
+  buttons: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 20,
+    justifyContent: 'space-around',
     marginBottom: 10,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
   },
-  quizTitle: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#333',
+  overlayContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+ 
   },
-  backButton: {
-    marginLeft: 15,
-  },
+  overlay: {
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+  }
 });

@@ -5,15 +5,14 @@ import TabBarButton from './TabBarButton';
 import { useTabsScreen } from '@/context/tabContext';
 import { SafeAreaView } from "react-native-safe-area-context";
 import VideoScreen from '@/components/player/VideoPlayer';
+import { StackActions, NavigationActions } from '@react-navigation/native';
 
 const TabBar = ({ state, descriptors, navigation }) => {
-    const { tab } = useTabsScreen();
-
     const primaryColor = '#0891b2';
     const greyColor = '#737373';
   return (
     <SafeAreaView>
-        <View style={{...styles.content,  display: tab ? 'flex' : 'none'}}>
+        <View style={{...styles.content}}>
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
             const label =
@@ -22,24 +21,28 @@ const TabBar = ({ state, descriptors, navigation }) => {
                 : options.title !== undefined
                 ? options.title
                 : route.name;
-            // if(['_sitemap', '+not-found'].includes(route.name)) return null;
+
             const isFocused = state.index === index;
+
             const onPress = () => {
               const event = navigation.emit({
                 type: 'tabPress',
                 target: route.key,
                 canPreventDefault: true,
               });
+
               if (!isFocused && !event.defaultPrevented) {
                 navigation.navigate(route.name, route.params);
               }
             };
+
             const onLongPress = () => {
               navigation.emit({
                 type: 'tabLongPress',
                 target: route.key,
               });
             };
+
             return (
               <TabBarButton 
                 key={route.name}

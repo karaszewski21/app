@@ -6,12 +6,12 @@ import PageFlipper from '@/components/reader/reader-flipper';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ReaderFlipperScreen = ({ navigation }:any) => { 
-  const { show, hidden } = useTabsScreen();
+  const { showTabs, hiddenTabs } = useTabsScreen();
   const {height, width} = useWindowDimensions()
 
   useEffect(()=> {
-    hidden()
-    return () => { show() }
+    hiddenTabs()
+    return () => { showTabs() }
   }, [])
   
   const pageUrls = [

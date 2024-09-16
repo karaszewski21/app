@@ -3,6 +3,7 @@ import { SessionProvider } from '@/context/authContext';
 import { PlayerModalProvider } from '@/context/playerModalContext';
 import { NotificationProvider } from '@/context/notificationContext';
 import { TabsScreenContextProvider } from '@/context/tabContext';
+import { GlobalModalProvider } from '@/context/globalModalContext';
 
 export default function Root() {
   return (
@@ -10,11 +11,13 @@ export default function Root() {
         <NotificationProvider>
           <TabsScreenContextProvider>
             <PlayerModalProvider>
-              <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-                <Stack.Screen name="index" options={{ headerShown: false }} />
-              </Stack>
+              <GlobalModalProvider>
+                <Stack>
+                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                  <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+                  <Stack.Screen name="index" options={{ headerShown: false }} />
+                </Stack>
+              </GlobalModalProvider>
             </PlayerModalProvider>
           </TabsScreenContextProvider>
         </NotificationProvider>

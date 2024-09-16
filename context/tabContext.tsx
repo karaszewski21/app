@@ -1,35 +1,26 @@
 import React, { createContext, useState, useContext } from 'react';
 
 const TabsScreenContext = createContext<{
-    show: () => void;
-    hidden: () => void;
-    tab: boolean;
+    showTabs: () => void;
+    hiddenTabs: () => void;
+    isTabs: boolean;
   }>({
-      show: () => null,
-      hidden: () => null,
-      tab: true
+    showTabs: () => null,
+    hiddenTabs: () => null,
+    isTabs: true
   });
 
 export const useTabsScreen= () => useContext(TabsScreenContext);
 
 export const TabsScreenContextProvider = ({ children }: any) => {
-    const [tab, setTab] = useState<boolean>(true);
-
-
-    const show = () => {
-        setTab(true)
-    };
-
-    const hidden = () => {
-        setTab(false)
-    };
+    const [isTabs, setTabs] = useState<boolean>(true);
 
     return (
         <TabsScreenContext.Provider 
         value={{
-            tab,
-            show,
-            hidden
+            isTabs,
+            showTabs: () => setTabs(true),
+            hiddenTabs: () => setTabs(false)
         }}
         >
         {children}

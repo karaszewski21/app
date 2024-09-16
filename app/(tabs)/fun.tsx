@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, StyleSheet, Button, FlatList, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
 import ReaderStackScreen from '@/app/screens/reader';
 import AudioPlayScreen from '@/app/screens/audio_play';
-import { LinearGradient } from 'expo-linear-gradient'; 
+import ListItem from '@/components/common/ListItem';
+import Overlay from '@/components/Overlay';
+import RatingView from '@/components/common/RatingView';
 
 const FunStack = createStackNavigator();
 
@@ -30,81 +32,140 @@ export default function FunStackScreen() {
   );
 }
 
-const FunScreen = ({ navigation }:any) => {
-  const [currentList, setCurrentList] = useState('audiobook');
+const FilterButtons = ({ activeFilter, onFilterChange }: any) => {
+  return (
+    <View style={styles.filterContainer}>
+      <TouchableOpacity
+        style={styles.filterButton}
+        onPress={() => onFilterChange('reader')}
+      >
+        <Text style={[styles.filterText,activeFilter === 'reader' && styles.activeFilter]}>Czytanki</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.filterButton}
+        onPress={() => onFilterChange('play')}
+      >
+        <Text style={[styles.filterText,activeFilter === 'play' && styles.activeFilter]}>Słuchowiska</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
-  const audiobook = [
-    { id: '1', title: 'Czytanka 1', author: 'Autor 1', image: 'https://via.placeholder.com/100' },
-    { id: '2', title: 'Czytanka 2', author: 'Autor 2', image: 'https://via.placeholder.com/100' },
-    // Dodaj więcej elementów według potrzeb
+const FunScreen = ({ navigation }:any) => {
+  const [activeFilter, setActiveFilter] = useState('reader');
+  const [ratingModal, setRatingModal]= useState(false);
+
+  const reader = [
+    {
+      id: '1',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł Czytanki 1",
+      description: "Opis Czytanki",
+      rating: 4, 
+      reviewCount: 120,
+    },
+    {
+      id: '2',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł książki 2",
+      description: "Opis książki ",
+      rating: 3.5, 
+      reviewCount: 85,
+    }
   ];
 
   const play = [
-    { id: '1', title: 'Słuchowisko 1', author: 'Autor 3', image: 'https://via.placeholder.com/100' },
-    { id: '2', title: 'Słuchowisko 2', author: 'Autor 4', image: 'https://via.placeholder.com/100' },
-    // Dodaj więcej elementów według potrzeb
+    {
+      id: '1',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł słuchowska 1",
+      description: "Opis słuchowska",
+      rating: 3.5, 
+      reviewCount: 85,
+    },
+    {
+      id: '2',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł słuchowska 2",
+      description: "Opis słuchowska ",
+      rating: 3.5, 
+      reviewCount: 85,
+    }
   ];
 
-  const renderReaderItem = ({ item }: any) => (
-    <TouchableOpacity 
-      style={styles.itemContainer}
-      onPress={() => navigation.navigate('ReaderDetails', { title: item.title })}
-    >
-      <Image source={{ uri: item.image }} style={styles.itemImage} />
-      <View style={styles.itemTextContainer}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemAuthor}>{item.author}</Text>
-      </View>
-      <Ionicons name="book-outline" size={24} color="#3498db" />
-    </TouchableOpacity>
-  );
 
-  const renderPlayItem = ({ item }: any) => (
-    <TouchableOpacity 
-      style={styles.itemContainer}
-      onPress={() => navigation.navigate('ReaderDetails', { title: item.title })}
-    >
-      <Image source={{ uri: item.image }} style={styles.itemImage} />
-      <View style={styles.itemTextContainer}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemAuthor}>{item.author}</Text>
-      </View>
-      <Ionicons name="headset-outline" size={24} color="#3498db" />
-    </TouchableOpacity>
-  );
+  const handleRatingPress = (bookId: number) => {
+    setRatingModal(false)
+    console.log(`Naciśnięto ocenę książki o id: ${bookId}`);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-       <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          onPress={() => setCurrentList('audiobook')}
-          style={styles.buttonWrapper}
-        >
-          <LinearGradient
-            colors={currentList === 'audiobook' ? ['#4c669f', '#3b5998', '#192f6a'] : ['#666666', '#444444', '#333333']}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>Czytanki</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => setCurrentList('play')}
-          style={styles.buttonWrapper}
-        >
-          <LinearGradient
-            colors={currentList === 'play' ? ['#4c669f', '#3b5998', '#192f6a'] : ['#666666', '#444444', '#333333']}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>Słuchowiska</Text>
-          </LinearGradient>
-        </TouchableOpacity>
+      <View style={styles.container}>
+          <FilterButtons activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+          <FlatList
+            data={activeFilter === 'reader' ? reader : play}
+            renderItem={({ item }) => (
+              <View style={styles.bookItemContainer}>
+                {
+                  activeFilter === 'reader' ? 
+                  <ListItem
+                  props={
+                    {
+                    ...item,
+                    imageUrl:item.gallery[0],
+                    onPress:() => navigation.navigate('ReaderDetails', { title: item.title }),
+                    onRatingPress:() =>  setRatingModal(true),
+                    }
+                  }
+                  />
+                   :
+                  <ListItem
+                    props={
+                      {
+                      ...item,
+                      imageUrl:item.gallery[0],
+                      onPress:() => navigation.navigate('AudioPlay', { title: item.title }),
+                      onRatingPress:() =>  setRatingModal(true),
+                      }
+                    }
+                  />
+                }
+              </View>
+            )}
+            keyExtractor={item => item.id}
+            horizontal={false}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.flatListContent}
+          />
+           {  ratingModal &&
+            // <Animated.View  style={{...styles.overlayContainer,height}}>
+                <Overlay opacity={0.3}>
+                  <RatingView 
+                      bookTitle='test' 
+                      onSubmit={(s,r) => handleRatingPress(s)}
+                      onClose={() => setRatingModal(false)}
+                      />
+                </Overlay> 
+            // </Animated.View>
+            }
       </View>
-      <FlatList
-        data={currentList === 'audiobook' ? audiobook : play}
-        renderItem={currentList === 'audiobook' ? renderReaderItem : renderPlayItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContent}
-      />
     </SafeAreaView>
   );
 }
@@ -114,82 +175,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
-  scrollView: {
-    padding: 10,
-  },
-  tile: {
-    backgroundColor: '#3498db',
-    padding: 15,
-    borderRadius: 25,
-    alignItems: 'center',
-    marginHorizontal: 5,
-    minWidth: 120,
-  },
-  activeTile: {
-    backgroundColor: '#2980b9',
-  },
-  tileText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  listContent: {
-    padding: 16,
-  },
-  itemContainer: {
+
+  filterContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    marginBottom: 10,
-    padding: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
+    justifyContent: 'space-around',
+    paddingVertical: 10,
+    backgroundColor: '#f0f0f0',
   },
-  itemImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 10,
+  filterButton: {
+    // paddingHorizontal: 20,
+    // paddingVertical: 10,
+    // borderRadius: 20,
+    // backgroundColor: '#e0e0e0',
   },
-  itemTextContainer: {
-    flex: 1,
+  activeFilter: {
+    color: '#3498db',
   },
-  itemTitle: {
-    fontSize: 16,
+  filterText: {
     fontWeight: 'bold',
-    color: '#333',
   },
-  itemAuthor: {
-    fontSize: 14,
-    color: '#666',
+  bookItemContainer: {
+    paddingHorizontal: 10,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
+  flatListContent: {
+    paddingVertical: 10,
   },
-  buttonWrapper: {
-    marginHorizontal: 10,
-    borderRadius: 25,
-    overflow: 'hidden',
-  },
-  button: {
-    paddingVertical: 12,
-    paddingHorizontal: 25,
-    borderRadius: 25,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
+  modal: {
+    height: 200,
+    width: 300,
+    backgroundColor: '#3498db'
+  }
 });

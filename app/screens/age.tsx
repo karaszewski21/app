@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Zakładam, że używasz Expo
-import AudiobookScreen from '@/app/screens/audiobook'
+import AudiobookScreen from '@/app/screens/resources/audiobooks'
 import QuizScreen from '@/app/screens/quiz'
 import Header from '@/components/layout/header';
 import ReaderStackScreen from '@/app/screens/reader';

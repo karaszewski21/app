@@ -73,17 +73,57 @@ const HomeScreen = ({ navigation }: any) => {
   ];
 
   const books = [
-    { id: '1', title: 'Książka 1', image: 'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png' },
-    { id: '2', title: 'Książka 2', image: 'https://goldfish.fra1.digitaloceanspaces.com/book_funny/Leonardo_Phoenix_Enchanting_company_logo_the_circular_design_e_1.jpg' },
-    { id: '3', title: 'Książka 3', image: 'https://goldfish.fra1.digitaloceanspaces.com/book1.jpg' },
-    { id: '4', title: 'Książka 4', image: 'https://via.placeholder.com/150' },
+    {
+      id: '1',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł książki 1",
+      description: "Opis książki ",
+      isLock: true,
+    },
+    {
+      id: '2',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł książki 2",
+      description: "Opis książki ",
+      isLock: true,
+    },
+    {
+      id: '3',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł książki 2",
+      description: "Opis książki ",
+      isLock: false,
+    },
+    {
+      id: '4',
+      gallery: [ 
+        'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
+        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
+      ],
+      title: "Tytuł książki 2",
+      description: "Opis książki ",
+      isLock: false,
+    }
   ];
 
   const readers = [
-    { id: '1', title: 'Czytaka 1', image: 'https://via.placeholder.com/150' },
-    { id: '2', title: 'Czytaka 2', image: 'https://via.placeholder.com/150' },
-    { id: '3', title: 'Czytaka 3', image: 'https://via.placeholder.com/150' },
-    { id: '4', title: 'Czytaka 4', image: 'https://via.placeholder.com/150' },
+    { id: '1', title: 'Czytaka 1', image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg' },
+    { id: '2', title: 'Czytaka 2', image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg' },
+    { id: '3', title: 'Czytaka 3', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg' },
+    { id: '4', title: 'Czytaka 4', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg' },
   ];
 
   const renderStoryItem = ({item}:any) => { 
@@ -112,9 +152,9 @@ const HomeScreen = ({ navigation }: any) => {
     <TouchableOpacity 
       key={book.id} 
       style={styles.bookItem}
-      onPress={() => navigation.navigate('BookDetails', { id: book.id, title: book.title })}
+      onPress={() => navigation.navigate('BookDetails', { book })}
     >
-      <Image source={{ uri: book.image }} style={styles.bookImage} />
+      <Image source={{ uri: book.gallery[0] }} style={styles.bookImage} />
     </TouchableOpacity>
   );
 

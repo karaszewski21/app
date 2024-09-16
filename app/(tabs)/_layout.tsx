@@ -1,22 +1,21 @@
 import { Redirect, Tabs } from 'expo-router';
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useSession } from '@/context/authContext';
-import { usePlayerModal } from '@/context/playerModalContext';
-import Player from '@/components/player/VideoPlayer';
 import TabBar  from '@/components/TabBar';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useEffect } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
+import { useGlobalModal } from '@/context/globalModalContext';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
+export const AppStack = createStackNavigator();
 
 export default function TabLayout() {
-  const { session, isLoading } = useSession();
-  const { isOpenLarge, isOpenSmall, close } = usePlayerModal();
-  const { width, height } = useWindowDimensions();
-  const heightModal = useSharedValue<number>(0);
+  const { session } = useSession();
   const translateY = useSharedValue<number>(0);
-  const { show, hidden } = useTabsScreen();
+  const { isTabs } = useTabsScreen();
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: withSpring(translateY.value)}],
@@ -24,24 +23,12 @@ export default function TabLayout() {
 
   useEffect(() => {
       translateY.value = 0;
-
-      if (isOpenLarge) {
-        heightModal.value = withSpring(height - 30);
-        hidden();
+      if (!isTabs) {
+        translateY.value = withSpring(60);
       }
 
-      if (isOpenSmall) {
-        heightModal.value = withSpring(60);
-        show();
-      }
+  }, [isTabs])
 
-  }, [isOpenLarge,isOpenSmall])
-
-
-  const closeModal = () => {
-      close();
-      show()
-  }
 
   if (!session) {
     return (
@@ -53,22 +40,42 @@ export default function TabLayout() {
     <>
       <Tabs  tabBar={ props => 
           <>
-              { isOpenLarge || isOpenSmall ?
-                <SafeAreaView>
-                  <Animated.View style={{...animatedStyles, height: heightModal}}>
-                      <View style={styles.modalContent}>
-                        <View style={{width: '100%'}}>
-                          <TouchableOpacity onPress={closeModal}>
-                                <Text>Close</Text>
-                            </TouchableOpacity>
-                            <Text>Modal</Text>
+              {/* { isOpenModal &&
+                  <SafeAreaView>
+                    <ScrollView>
+                      <Animated.View style={{...animatedStyles, height: heightModal}}>
+                
+                            <View style={styles.modalContent}>
+                              <View style={{width: '100%'}}>
+                                {data && <Quiz quizData={data} /> }
+                                <TouchableOpacity onPress={closeQuiz}>
+                                      <Text>Close</Text>
+                                  </TouchableOpacity>
+                              </View>
+                            </View>
+                      
+                      </Animated.View>
+                    </ScrollView>
+                  </SafeAreaView>
+              } */}
+
+              {/* { isOpenPlayer &&
+                  <SafeAreaView>
+                    <Animated.View style={{...animatedStyles, height: heightModal}}>
+                        <View style={styles.modalContent}>
+                          <View style={{width: '100%'}}>
+                            <TouchableOpacity onPress={closeModal}>
+                                  <Text>Close</Text>
+                              </TouchableOpacity>
+                              <Text>Modal</Text>
+                          </View>
                         </View>
-                      </View>
-                  </Animated.View>
-                </SafeAreaView>
-                : null
-                }
-                <TabBar {...props} />
+                    </Animated.View>
+                  </SafeAreaView>
+                } */}
+                 <Animated.View style={{...animatedStyles, transform: [{translateY: 0}]}}>
+                    <TabBar {...props} />
+                 </Animated.View>
             </>
             }
             screenOptions={{headerShown: false}}
@@ -77,30 +84,35 @@ export default function TabLayout() {
               name="index"
               options={{
                 title: 'Home',
+                unmountOnBlur: true
               }}
             />
             <Tabs.Screen
               name="books"
               options={{
                 title: 'Książki',
+                unmountOnBlur: true
               }}
             />
             <Tabs.Screen
               name="fave"
               options={{
                 title: 'Ulubione',
+                unmountOnBlur: true
               }}
             />
             <Tabs.Screen
               name="fun"
               options={{
                 title: 'Zabawy',
+                unmountOnBlur: true
               }}
             />
             <Tabs.Screen
               name="profile"
               options={{
                 title: 'Profil',
+                unmountOnBlur: true
               }}
             />
           </Tabs>
@@ -109,24 +121,24 @@ export default function TabLayout() {
   
 }
 
-const styles = StyleSheet.create({
-  modalContent: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    position: 'absolute', 
-    transform: [{translateY: 0}],
-    flexDirection: 'row',
-    backgroundColor: 'green',
-    marginHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 25,
-    borderCurve: 'continuous',
-    shadowColor: 'black',
-    shadowOffset: {width: 0, height: 10},
-    shadowRadius: 10,
-    shadowOpacity: 0.1,
-    zIndex: 10
-  }
-});
+// const styles = StyleSheet.create({
+//   modalContent: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     height: '100%',
+//     position: 'absolute', 
+//     transform: [{translateY: -10}],
+//     flexDirection: 'row',
+//     backgroundColor: 'green',
+//     marginHorizontal: 10,
+//     paddingVertical: 5,
+//     borderRadius: 25,
+//     borderCurve: 'continuous',
+//     shadowColor: 'black',
+//     shadowOffset: {width: 0, height: 10},
+//     shadowRadius: 10,
+//     shadowOpacity: 0.1,
+//     zIndex: 10
+//   }
+// });
