@@ -61,6 +61,7 @@ function Stories({ stories }: any) {
   }, [currentIndex, startProgress]);
 
   const panGesture = Gesture.Pan()
+    .runOnJS(true)
     .onStart(() => {
       cancelAnimation(progress);
       context.value = { x: translateX.value };
@@ -74,28 +75,30 @@ function Stories({ stories }: any) {
       translateX.value = withSpring(destination, { damping: 50 });
       const newIndex = Math.abs(Math.round(destination / STORY_WIDTH));
       if (newIndex !== currentIndex) {
-        runOnJS(setCurrentIndex)(newIndex);
+        setCurrentIndex(newIndex);
       } else {
-        runOnJS(startProgress)();
+        startProgress();
       }
     });
 
   const tapGesture = Gesture.Tap()
+    .runOnJS(true)
     .onStart((e) => {
-      if (e.x > SCREEN_WIDTH / 1) {
-        runOnJS(goToPrevStory)();
+      if (e.x < SCREEN_WIDTH / 2) {
+        goToPrevStory()
       } else {
-        runOnJS(goToNextStory)();
+        goToNextStory();
       }
-      runOnJS(startProgress)();
+      startProgress();
     });
 
   const longPress = Gesture.LongPress()
+    .runOnJS(true)
     .onBegin(() => {
-      runOnJS(togglePause)();
+      togglePause();
     })
     .onEnd(() => {
-      runOnJS(togglePause)();
+      togglePause();
     }); 
 
   const composedGestures = Gesture.Exclusive(panGesture, tapGesture, longPress);

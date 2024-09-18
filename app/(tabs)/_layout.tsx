@@ -56,14 +56,8 @@ export default function TabLayout() {
   }
   
   return (
-      <Tabs 
-        screenOptions={
-          {
-            headerShown: false,
-            tabBarBackground: () => false
-    
-          }
-        }
+      <Tabs
+        screenOptions={{headerShown: false}} 
         tabBar={props => 
           <>
             {  
@@ -72,9 +66,9 @@ export default function TabLayout() {
                 <VideoPlayer />
               </Animated.View>
             }
-              <Animated.View style={{...animatedTabsStyles, transform: [{translateY: 0}]}}>
-                  <TabBar {...props} />
-              </Animated.View>
+            <Animated.View style={{...animatedTabsStyles, transform: [{translateY: 0}]}}>
+                <TabBar {...props} /> 
+            </Animated.View>
           </>
           }
         >

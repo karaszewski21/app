@@ -20,7 +20,8 @@ export default function SquareStory({ stories }:any) {
       pageIndex.value = withTiming(Math.floor(pageIndex.value + 1), {
         duration: 500,
       });
-    }
+    } 
+
   }, [pageIndex]);
 
   const goToPrevStory = useCallback(() => {
@@ -33,13 +34,14 @@ export default function SquareStory({ stories }:any) {
   }, [pageIndex]);
 
   const tapGesture = Gesture.Tap()
-  .onStart((e) => {
-    if (e.x < SCREEN_WIDTH / 2) {
-      runOnJS(goToNextStory)();
-    } else {
-      runOnJS(goToPrevStory)();
-    }
-    });
+    .runOnJS(true)
+    .onStart((e) => {
+      if (e.x < SCREEN_WIDTH / 1.5) {
+        goToNextStory();
+      } else {
+        goToPrevStory();
+      }
+      });
 
     useEffect(() => {
       const currentStory = stories[currentIndex];

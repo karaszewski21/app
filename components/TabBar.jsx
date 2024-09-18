@@ -7,7 +7,6 @@ const TabBar = ({ state, descriptors, navigation }) => {
     const primaryColor = '#0891b2';
     const greyColor = '#737373';
   return (
-    <SafeAreaView>
         <View style={{...styles.content}}>
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
@@ -53,14 +52,13 @@ const TabBar = ({ state, descriptors, navigation }) => {
             )
           })}
         </View>
-    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
     content: {
         position: 'absolute', 
-        bottom: 5,
+        bottom: 2,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
