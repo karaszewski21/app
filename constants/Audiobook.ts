@@ -3,7 +3,7 @@ export const audiobook = {
     title: "Przykładowy Tytuł Audiobooka",
     author: "Jan Kowalski",
     description: "Fascynująca historia o przygodach w świecie wyobraźni...",
-    coverImage: "https://example.com/book-cover.jpg",
+    image: "https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg",
     language: "pl-PL",
     genres: ["Fantasy", "Przygodowe"],
     publishDate: "2024-03-15",
@@ -18,7 +18,7 @@ export const audiobook = {
         isAbridged: false,
         hasMusic: false,
         isDramatized: false,
-        audioFile: "test.mp3"
+        audioFile: "https://goldfish.fra1.digitaloceanspaces.com/POLUZJANCI%20-%20Trzy%20metry%20ponad%20ziemi%C4%85.mp4"
       },
       {
         id: "version-dramatized-ya",
@@ -29,7 +29,7 @@ export const audiobook = {
         isAbridged: false,
         hasMusic: true,
         isDramatized: true,
-        audioFile: "test.mp3"
+        audioFile: "https://goldfish.fra1.digitaloceanspaces.com/Dawid%20Podsiadlo%20-%20Ma%C5%82omiasteczkowy.mp4"
       },
       {
         id: "version-abridged",
@@ -40,7 +40,7 @@ export const audiobook = {
         isAbridged: true,
         hasMusic: false,
         isDramatized: false,
-        audioFile: "test.mp3"
+        audioFile: "https://goldfish.fra1.digitaloceanspaces.com/POLUZJANCI%20-%20Trzy%20metry%20ponad%20ziemi%C4%85.mp4"
       },
       {
         id: "version-commentary",
@@ -53,7 +53,7 @@ export const audiobook = {
         hasMusic: false,
         isDramatized: false,
         hasCommentary: true,
-        audioFile: "test.mp3"
+        audioFile: "https://goldfish.fra1.digitaloceanspaces.com/POLUZJANCI%20-%20Trzy%20metry%20ponad%20ziemi%C4%85.mp4"
       },
       {
         id: "version-accessibility",
@@ -65,7 +65,7 @@ export const audiobook = {
         hasMusic: false,
         isDramatized: false,
         accessibilityFeatures: ["descriptive-audio", "simplified-language"],
-        audioFile: "test.mp3"
+        audioFile: "https://goldfish.fra1.digitaloceanspaces.com/POLUZJANCI%20-%20Trzy%20metry%20ponad%20ziemi%C4%85.mp4"
       }
     ]
   };

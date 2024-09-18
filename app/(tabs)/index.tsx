@@ -24,10 +24,16 @@ export default function HomeScreenStack() {
         <HomeStack.Screen 
           name="News" 
           component={NewsScreen}
+          options={{
+            headerShown: false
+          }}
         />
         <HomeStack.Screen 
           name="Story" 
           component={StoryScreen}
+          options={{
+            headerShown: false
+          }}
         />
         <HomeStack.Screen 
           name="BookDetails" 

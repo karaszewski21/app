@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Dimensions} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import ReaderStackScreen from '@/app/screens/reader';
 import AudioPlayScreen from '@/app/screens/audio_play';
 import ListItem from '@/components/common/ListItem';
 import Overlay from '@/components/Overlay';
 import RatingView from '@/components/common/RatingView';
+import BookStackScreen from '@/app/screens/book';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, interpolate } from 'react-native-reanimated';
 
 const FunStack = createStackNavigator();
 
 export default function FunStackScreen() {
   return (
     <FunStack.Navigator>
-      <FunStack.Screen name="Fun" component={FunScreen} options={{headerShown: false}}/>
+      <FunStack.Screen name="FunDetails" component={AgeScreen} options={{headerShown: false}}/>
       <FunStack.Screen 
           name="ReaderDetails" 
           component={ReaderStackScreen}
@@ -51,9 +53,29 @@ const FilterButtons = ({ activeFilter, onFilterChange }: any) => {
   );
 }
 
-const FunScreen = ({ navigation }:any) => {
+const { width } = Dimensions.get('window');
+
+const AgeScreen = ({ navigation }:any) => {
   const [activeFilter, setActiveFilter] = useState('reader');
   const [ratingModal, setRatingModal]= useState(false);
+  const animatedValue = useSharedValue(0);
+
+
+  useEffect(() => {
+    animatedValue.value = withTiming(activeFilter === 'reader' ? 0 : 1,{ duration: 300 });
+  }, [activeFilter]);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    const translateX = interpolate(
+      animatedValue.value,
+      [0, 1, 2],
+      [0, -width, -width * 2]
+    );
+    return {
+      transform: [{ translateX }],
+    };
+  });
+
 
   const reader = [
     {
@@ -109,6 +131,28 @@ const FunScreen = ({ navigation }:any) => {
     }
   ];
 
+  const renderFlatList = useCallback((data: any, navigateTo: any) => (
+    <FlatList
+      data={data}
+      renderItem={({ item }) => (
+        <View style={styles.bookItemContainer}>
+          <ListItem
+            props={{
+              ...item,
+              imageUrl: item.gallery[0],
+              onPress: () => navigation.navigate(navigateTo),
+              onRatingPress: () => setRatingModal(true),
+            }}
+          />
+        </View>
+      )}
+      keyExtractor={item => item.id}
+      horizontal={false}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.flatListContent}
+    />
+  ), [navigation, setRatingModal]);
+
 
   const handleRatingPress = (bookId: number) => {
     setRatingModal(false)
@@ -119,42 +163,18 @@ const FunScreen = ({ navigation }:any) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
           <FilterButtons activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-          <FlatList
-            data={activeFilter === 'reader' ? reader : play}
-            renderItem={({ item }) => (
-              <View style={styles.bookItemContainer}>
-                {
-                  activeFilter === 'reader' ? 
-                  <ListItem
-                  props={
-                    {
-                    ...item,
-                    imageUrl:item.gallery[0],
-                    onPress:() => navigation.navigate('ReaderDetails', { title: item.title }),
-                    onRatingPress:() =>  setRatingModal(true),
-                    }
-                  }
-                  />
-                   :
-                  <ListItem
-                    props={
-                      {
-                      ...item,
-                      imageUrl:item.gallery[0],
-                      onPress:() => navigation.navigate('AudioPlay', { title: item.title }),
-                      onRatingPress:() =>  setRatingModal(true),
-                      }
-                    }
-                  />
-                }
-              </View>
-            )}
-            keyExtractor={item => item.id}
-            horizontal={false}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.flatListContent}
-          />
-           {  ratingModal &&
+          <Text>Select filter</Text>
+
+          <Animated.View style={[styles.animatedContainer, animatedStyle]}>
+            <View style={styles.flatListWrapper}>
+              {renderFlatList(reader, 'ReaderDetails')}
+            </View>
+            <View style={styles.flatListWrapper}>
+              {renderFlatList(play, 'AudioPlay')}
+            </View>
+          </Animated.View>
+
+            {  ratingModal &&
             // <Animated.View  style={{...styles.overlayContainer,height}}>
                 <Overlay opacity={0.3}>
                   <RatingView 
@@ -181,6 +201,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingVertical: 10,
     backgroundColor: '#f0f0f0',
+  },
+
+  animatedContainer: {
+    flexDirection: 'row',
+    width: width * 3,
+  },
+  flatListWrapper: {
+    width,
   },
   filterButton: {
     // paddingHorizontal: 20,

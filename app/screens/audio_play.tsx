@@ -25,7 +25,7 @@ export default function AudioPlayStackScreen({route}:any) {
 }
 
 const AudioPlayScreen = ({ route, navigation }:any) => {
-  const { title } = route.params
+  // const { title } = route.params
 
   const audiplay = {
     gallery: [ 

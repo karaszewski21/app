@@ -31,7 +31,7 @@ export default function ReaderStackScreen({route}:any) {
 }
 
 const ReaderScreen = ({ route, navigation }:any) => {
-  const { title } = route.params
+  // const { title } = route.params
 
   const reader = {
     gallery: [ 

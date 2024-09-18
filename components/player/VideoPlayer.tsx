@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function VideoScreen() {
   const video = useRef(null);
   const [status, setStatus] = useState({});
-  const { hidden, show } = useTabsScreen();
+  const { hiddenTabs, showTabs } = useTabsScreen();
   const [duration, setDuration] = useState(0);
   const [position, setPosition] = useState(0);
   const [full, setFull] = useState(0);
@@ -16,10 +16,10 @@ export default function VideoScreen() {
   const { width, height } = useWindowDimensions();
 
   useEffect(() => {
-    hidden();
+    hiddenTabs();
      //@ts-ignore
     video.current.playAsync()
-    return () => { show() }
+    return () => { showTabs() }
   }, [])
 
   const onLoad = (data: any) => {

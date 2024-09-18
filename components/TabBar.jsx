@@ -1,11 +1,7 @@
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
+import { View,StyleSheet} from 'react-native'
 import React from 'react'
-import { AntDesign, Feather } from '@expo/vector-icons';
 import TabBarButton from './TabBarButton';
-import { useTabsScreen } from '@/context/tabContext';
 import { SafeAreaView } from "react-native-safe-area-context";
-import VideoScreen from '@/components/player/VideoPlayer';
-import { StackActions, NavigationActions } from '@react-navigation/native';
 
 const TabBar = ({ state, descriptors, navigation }) => {
     const primaryColor = '#0891b2';
