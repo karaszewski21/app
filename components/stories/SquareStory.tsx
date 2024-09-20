@@ -4,8 +4,8 @@ import Animated, { cancelAnimation, Extrapolate, interpolate, runOnJS, useAnimat
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { Video, ResizeMode} from 'expo-av';
 
-const { width: SCREEN_WIDTH, height } = Dimensions.get('window');
-const WIDTH = SCREEN_WIDTH - 100
+const { width: WIDTH, height } = Dimensions.get('window');
+//const WIDTH = SCREEN_WIDTH - 100
 
 export default function SquareStory({ stories }:any) { 
   const [isPaused, setIsPaused] = useState(false);
@@ -18,7 +18,7 @@ export default function SquareStory({ stories }:any) {
     if (Math.floor(pageIndex.value) < stories.length - 1) {
       setCurrentIndex(prevIndex => prevIndex + 1);
       pageIndex.value = withTiming(Math.floor(pageIndex.value + 1), {
-        duration: 500,
+        duration: 300,
       });
     } 
 
@@ -35,8 +35,8 @@ export default function SquareStory({ stories }:any) {
 
   const tapGesture = Gesture.Tap()
     .runOnJS(true)
-    .onStart((e) => {
-      if (e.x < SCREEN_WIDTH / 1.5) {
+    .onBegin((e) => {
+      if (e.x < WIDTH / 1.5) {
         goToNextStory();
       } else {
         goToPrevStory();
@@ -62,33 +62,35 @@ export default function SquareStory({ stories }:any) {
     };
 
   return(
-      <GestureDetector gesture={tapGesture}>
-        <View style={styles.content}>
-          {stories.map((story: any, index: any) => (
-            <Stories key={index} pageColor={'black'} pageIndex={pageIndex} index={index}>
-              {story.type === 'image' ? (
-                <Image
-                  source={{ uri: story.url }}
-                  style={{ width: '100%', height: '100%' }}
-                  resizeMode={ResizeMode.COVER}
-                />
-              ) : (
-                <Video
-                  ref={(ref) => (videoRefs.current[index] = ref)}
-                  source={{ uri: story.url }}
-                  style={{ width: '100%', height: '100%' }}
-                  resizeMode={ResizeMode.COVER}
-                  shouldPlay={index === currentIndex}
-                  isLooping={false}
-                  isMuted={false}
-                  onPlaybackStatusUpdate={onPlaybackStatusUpdate(index)}
-                />
-              )}
-            </Stories>
-          ))}
-          <ProgressBar totalStories={stories.length} currentIndex={currentIndex} />
-        </View>
-      </GestureDetector>
+      <View style={styles.container}>
+        <GestureDetector gesture={tapGesture}>
+          <View style={styles.container}>
+            {stories.map((story: any, index: any) => (
+              <Stories key={index} pageColor={'black'} pageIndex={pageIndex} index={index}>
+                {story.type === 'image' ? (
+                  <Image
+                    source={{ uri: story.url }}
+                    style={{ width: '100%', height: '100%' }}
+                    resizeMode={ResizeMode.COVER}
+                  />
+                ) : (
+                  <Video
+                    ref={(ref) => (videoRefs.current[index] = ref)}
+                    source={{ uri: story.url }}
+                    style={{ width: '100%', height: '100%' }}
+                    resizeMode={ResizeMode.COVER}
+                    shouldPlay={index === currentIndex}
+                    isLooping={false}
+                    isMuted={false}
+                    onPlaybackStatusUpdate={onPlaybackStatusUpdate(index)}
+                  />
+                )}
+              </Stories>
+            ))}
+            {/* <ProgressBar totalStories={stories.length} currentIndex={currentIndex} /> */}
+          </View>
+        </GestureDetector>
+      </View>
     ) 
   }
 
@@ -108,11 +110,13 @@ export default function SquareStory({ stories }:any) {
     );
   };
 
+  const width = 200;
+
   const Stories = ({ pageColor, index, pageIndex, children } : any) => {
     const anim = useAnimatedStyle(() => ({
       transform: [
         {
-          perspective: SCREEN_WIDTH * 5.5,
+          perspective: width * 2.5,
         },
         {
           rotateY: `${interpolate(
@@ -128,7 +132,7 @@ export default function SquareStory({ stories }:any) {
         style={[
           {
             zIndex: 100 - index,
-            width: WIDTH,
+            width: 230,
             position: 'absolute',
             aspectRatio: 9 / 16,
             backgroundColor: pageColor,
@@ -151,6 +155,8 @@ export default function SquareStory({ stories }:any) {
       backgroundColor: 'yellow',
       alignItems: 'center',
       justifyContent: 'center',
+      height: '100%',
+      width: '90%',
     },
     content: {
       width: '100%',
@@ -164,7 +170,7 @@ export default function SquareStory({ stories }:any) {
       alignItems: 'center',
       padding: 10,
       position: 'absolute',
-      top: 0,
+      top: 30,
       left: 0,
       right: 0,
       zIndex: 10,

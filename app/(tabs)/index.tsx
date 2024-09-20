@@ -8,6 +8,7 @@ import NewsScreen from '@/app/screens/news';
 import StoryScreen from '@/app/screens/story';
 import ReaderStackScreen from '@/app/screens/reader';
 import AgeStackScreen from '@/app/screens/age';
+import StoryItem from '@/components/stories/StoryItem';
 
 const HomeStack = createStackNavigator();
 
@@ -63,12 +64,37 @@ export default function HomeScreenStack() {
 const HomeScreen = ({ navigation }: any) => {
 
   const stories = [
-    { id: '1', title: 'Historia 1', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg' },
-    { id: '2', title: 'Historia 2', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg' },
-    { id: '3', title: 'Historia 3', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Physical_AttributesMediumsized_goldfish_with_1.jpg' },
-    { id: '4', title: 'Historia 4', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_modern_vibrant_social_media_post_featuring_3.jpg' },
-    { id: '5', title: 'Historia 5', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_modern_vibrant_social_media_post_featuring_3.jpg' },
-    { id: '6', title: 'Historia 6', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg' },
+    { 
+      id: '5',
+      thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg',
+      videos: [
+        'https://goldfish.fra1.digitaloceanspaces.com/story2/video2.mp4',
+        'https://goldfish.fra1.digitaloceanspaces.com/story2/video3.mp4',
+        'https://goldfish.fra1.digitaloceanspaces.com/story2/video4.mp4',
+        'https://goldfish.fra1.digitaloceanspaces.com/story2/video5.mp4', 
+        'https://goldfish.fra1.digitaloceanspaces.com/story2/video1.mp4', 
+      ]
+    },
+    { 
+      id: '2',
+      thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg',
+      videos: [
+        'https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4',
+        'https://goldfish.fra1.digitaloceanspaces.com/videos/258e9cff-3c37-431a-9d58-e93881b0ee58.mp4',
+        'https://goldfish.fra1.digitaloceanspaces.com/videos/1120c8a1-084b-45ab-9bda-9e6ba72d9a27.mp4',
+        'https://goldfish.fra1.digitaloceanspaces.com/videos/6c588ee0-8c8c-408c-94e0-f8f2e3b5db86.mp4', 
+      ]
+    },
+    { 
+      id: '3',
+      thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg',
+      videos: [
+        'https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4',
+        'https://goldfish.fra1.digitaloceanspaces.com/videos/258e9cff-3c37-431a-9d58-e93881b0ee58.mp4',
+        'https://goldfish.fra1.digitaloceanspaces.com/videos/1120c8a1-084b-45ab-9bda-9e6ba72d9a27.mp4',
+        'https://goldfish.fra1.digitaloceanspaces.com/videos/6c588ee0-8c8c-408c-94e0-f8f2e3b5db86.mp4', 
+      ]
+    },
   ];
 
   const ages = [
@@ -133,14 +159,9 @@ const HomeScreen = ({ navigation }: any) => {
   ];
 
   const renderStoryItem = ({item}:any) => { 
+    const { id, videosCache } = item;
     return(
-      <TouchableOpacity 
-        key={item.id} 
-        style={styles.storyItem}
-        onPress={() => navigation.navigate('Story', { id: item.id, title: item.title })}  
-      >
-        <Image source={{ uri: item.image }} style={styles.storyImage} />
-      </TouchableOpacity>
+      <StoryItem props={{...item, onPress: () => { navigation.navigate('Story', { id, videosCache })}}}/>
     ) 
   }
 
