@@ -95,11 +95,13 @@ export const StoryListItem = ({
           current > prevCurrent &&
           content[current - 1].story_image == content[current].story_image
         ) {
+          console.log('--vvvv>')
           start();
         } else if (
           current < prevCurrent &&
           content[current + 1].story_image == content[current].story_image
         ) {
+          console.log('-->')
           start();
         }
       }
@@ -108,6 +110,8 @@ export const StoryListItem = ({
   }, [current]);
 
   function start() {
+    console.log('--->start')
+
     setLoad(false);
     progress.setValue(0);
     startAnimation();
@@ -120,6 +124,7 @@ export const StoryListItem = ({
       useNativeDriver: false,
     }).start(({ finished }) => {
       if (finished) {
+        console.log('--->finished')
         next();
       }
     });
@@ -145,6 +150,7 @@ export const StoryListItem = ({
 
   function next() {
     // check if the next content is not empty
+    console.log('--->next')
     setLoad(true);
     if (current !== content.length - 1) {
       let data = [...content];
@@ -160,6 +166,8 @@ export const StoryListItem = ({
 
   function previous() {
     // checking if the previous content is not empty
+
+  
     setLoad(true);
     if (current - 1 >= 0) {
       let data = [...content];
@@ -210,22 +218,24 @@ export const StoryListItem = ({
       <SafeAreaView>
         <View style={styles.backgroundContainer}>
 
-           { content[current].story_image &&  
+          { content[current].story_video &&  
+              <Video
+                source={{ uri: content[current].story_image ?? '' }}
+                resizeMode={ResizeMode.COVER}
+                shouldPlay={true}
+                isLooping={false}
+                onLoadStart={() => start()}
+                style={[styles.video]}
+              />
+          } 
+
+           { !content[current].story_video &&  
             <Image
               onLoadEnd={() => start()}
               source={{ uri: content[current].story_image }}
               style={[styles.image, storyImageStyle]}
             />
-            } 
-
-          { content[current].story_video &&  
-              <Video
-                source={{ uri: content[current].story_video }}
-                resizeMode={ResizeMode.COVER}
-                shouldPlay={true}
-                isLooping={false}
-              />
-          } 
+            }  
           {load && (
             <View style={styles.spinnerContainer}>
               <ActivityIndicator size="large" color={'white'} />
@@ -362,6 +372,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
+    width: width,
+    height: height,
+    resizeMode: 'cover',
+  },
+  video: {
     width: width,
     height: height,
     resizeMode: 'cover',

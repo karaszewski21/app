@@ -27,7 +27,7 @@ const data = [
       },
       {
         story_id: 2,
-        story_image: null,
+        story_image: 'https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4',
         story_video:'https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4',
       },
     ],
@@ -42,7 +42,7 @@ const data = [
         story_id: 1,
         story_image:
           'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg',
-        story_video: null,  
+        story_video: 'https://goldfish.fra1.digitaloceanspaces.com/videos/6c588ee0-8c8c-408c-94e0-f8f2e3b5db86.mp4',  
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 1 swiped'),
       },

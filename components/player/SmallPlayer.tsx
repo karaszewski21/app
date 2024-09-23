@@ -6,12 +6,13 @@ import { usePlayerModal } from '@/context/playerModalContext';
 import { Video, ResizeMode, AVPlaybackStatus } from 'expo-av';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import { useTabsScreen } from '@/context/tabContext';
 
 const VideoPlayer = () => {
   const video = useRef(null);
   const [status, setStatus] = useState({});
-  const [full, setFull] = useState(false);
-  const { record, closePlayer } = usePlayerModal();
+  const [showFull, setShowFull] = useState(false);
+  const [showMore, setShowMore] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [position, setPosition] = useState(0);
@@ -19,7 +20,26 @@ const VideoPlayer = () => {
   const [isSeeking, setIsSeeking] = useState(false);
   const [seekPosition, setSeekPosition] = useState(0);
 
+  const { record, closePlayer } = usePlayerModal();
+  const { showTabs, hiddenTabs } = useTabsScreen();
+
   const height = useSharedValue(0);
+
+  useEffect(() => {
+    console.log(showFull)
+
+    if (showFull) {
+      hiddenTabs();
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT)
+    } else {
+      showTabs()
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
+    }
+    return () => { 
+      showTabs() 
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
+    }
+  }, [showFull]);
 
   useEffect(() => {
     if (record) {
@@ -29,14 +49,24 @@ const VideoPlayer = () => {
     }
   }, [record]);
 
-  const handleUpPress = () => {
-    setFull(true);
+  const handleUpMore = () => {
+    setShowMore(true);
     height.value = withSpring(300);
   };
 
-  const handleDownPress = () => {
-    setFull(false);
+  const handleDownMore = () => {
+    setShowMore(false);
     height.value = withSpring(0);
+  };
+
+  const handleUpFull = () => {
+    setShowFull(true);
+    height.value = withSpring(500);
+  };
+
+  const handleDownFull = () => {
+    setShowFull(false);
+    height.value = withSpring(300);
   };
 
   const formatTime = (timeInSeconds: any) => {
@@ -58,7 +88,6 @@ const VideoPlayer = () => {
     }
   };
 
-  
   const onSlidingStart = () => {
     setIsSeeking(true);
   };
@@ -89,7 +118,7 @@ const VideoPlayer = () => {
   };
 
   async function changeScreenOrientation() {
-    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
+    //await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
   }
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -104,7 +133,7 @@ const VideoPlayer = () => {
         <View style={{position: 'relative'}}>
           <Video
             ref={video}
-            style={[styles.video, full ? { height: '100%'} : { height: 0}]}
+            style={[styles.video, showMore ? { height: '100%'} : { height: 0}]}
             source={{
               uri: record?.fileUrl ?? '',
             }}
@@ -114,12 +143,22 @@ const VideoPlayer = () => {
             onPlaybackStatusUpdate={onPlaybackStatusUpdate}
             onLoad={onLoad}
           />
-          <TouchableOpacity onPress={changeScreenOrientation} style={styles.fullscreenButton}>
-            <MaterialCommunityIcons name="fullscreen" size={24} color="#fff" />
-          </TouchableOpacity>
+
+          { !showFull && 
+            <TouchableOpacity onPress={handleUpFull} style={styles.fullscreenButton}>
+              <MaterialCommunityIcons name="fullscreen" size={24} color="#fff" />
+            </TouchableOpacity>
+          }
+
+          { showFull && 
+            <TouchableOpacity onPress={handleDownFull} style={styles.fullscreenButton}>
+              <MaterialCommunityIcons name="abacus" size={24} color="#fff" />
+            </TouchableOpacity>
+          }
+    
           <TouchableOpacity 
             style={styles.expandButton} 
-            onPress={handleDownPress}
+            onPress={handleDownMore}
           >
             <MaterialCommunityIcons 
               name={"chevron-down"} 
@@ -130,7 +169,9 @@ const VideoPlayer = () => {
         </View>
       </Animated.View>
       <View >
-      <TouchableOpacity style={styles.playerContainer} onPress={handleUpPress}>
+
+      { !showFull &&    
+      <TouchableOpacity style={styles.playerContainer} onPress={handleUpMore}>
           <Image source={{ uri: record?.imageUrl }} style={styles.image} />
           <View style={styles.contentContainer}>
             <Text style={styles.title} numberOfLines={1}>{record?.title}</Text>
@@ -161,6 +202,7 @@ const VideoPlayer = () => {
             <MaterialCommunityIcons name="close" size={24} color="#fff" />
           </TouchableOpacity>
         </TouchableOpacity>
+      }
       </View>
     </View>
   );
