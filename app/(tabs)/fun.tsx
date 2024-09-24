@@ -7,15 +7,17 @@ import AudioPlayScreen from '@/app/screens/audio_play';
 import ListItem from '@/components/common/ListItem';
 import Overlay from '@/components/Overlay';
 import RatingView from '@/components/common/RatingView';
-import BookStackScreen from '@/app/screens/book';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, interpolate } from 'react-native-reanimated';
+import useFavorite from '@/hooks/useFavorite';
+import { readers } from '@/constants/Readers';
+import { players } from '@/constants/Players';
 
 const FunStack = createStackNavigator();
 
 export default function FunStackScreen() {
   return (
     <FunStack.Navigator>
-      <FunStack.Screen name="FunDetails" component={AgeScreen} options={{headerShown: false}}/>
+      <FunStack.Screen name="FunDetails" component={FunScreen} options={{headerShown: false}}/>
       <FunStack.Screen 
           name="ReaderDetails" 
           component={ReaderStackScreen}
@@ -55,10 +57,11 @@ const FilterButtons = ({ activeFilter, onFilterChange }: any) => {
 
 const { width } = Dimensions.get('window');
 
-const AgeScreen = ({ navigation }:any) => {
+const FunScreen = ({ navigation }:any) => {
   const [activeFilter, setActiveFilter] = useState('reader');
   const [ratingModal, setRatingModal]= useState(false);
   const animatedValue = useSharedValue(0);
+  const { isFavorite, addFavorite, removeFavorite } = useFavorite();
 
 
   useEffect(() => {
@@ -76,62 +79,25 @@ const AgeScreen = ({ navigation }:any) => {
     };
   });
 
-
-  const reader = [
-    {
-      id: '1',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł Czytanki 1",
-      description: "Opis Czytanki",
-      rating: 4, 
-      reviewCount: 120,
-    },
-    {
-      id: '2',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł książki 2",
-      description: "Opis książki ",
-      rating: 3.5, 
-      reviewCount: 85,
+  const favoriteReaderPress = (id: string) => {
+    const isFav = isFavorite(id);
+    if (!isFav) {
+      addFavorite({id, type: 'reader'}) 
+    } else {
+      removeFavorite(id)
     }
-  ];
+  }
 
-  const play = [
-    {
-      id: '1',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł słuchowska 1",
-      description: "Opis słuchowska",
-      rating: 3.5, 
-      reviewCount: 85,
-    },
-    {
-      id: '2',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł słuchowska 2",
-      description: "Opis słuchowska ",
-      rating: 3.5, 
-      reviewCount: 85,
+  const favoritePlayerPress = (id: string) => {
+    const isFav = isFavorite(id);
+    if (!isFav) {
+      addFavorite({id, type: 'player'}) 
+    } else {
+      removeFavorite(id)
     }
-  ];
+  }
 
-  const renderFlatList = useCallback((data: any, navigateTo: any) => (
+  const renderFlatList = (data: any, navigateTo: any) => (
     <FlatList
       data={data}
       renderItem={({ item }) => (
@@ -142,6 +108,8 @@ const AgeScreen = ({ navigation }:any) => {
               imageUrl: item.gallery[0],
               onPress: () => navigation.navigate(navigateTo),
               onRatingPress: () => setRatingModal(true),
+              isFavorite: isFavorite(item.id),
+              onFavoritePress:() => navigateTo === 'ReaderDetails' ? favoriteReaderPress(item.id) : favoritePlayerPress(item.id) 
             }}
           />
         </View>
@@ -151,7 +119,7 @@ const AgeScreen = ({ navigation }:any) => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.flatListContent}
     />
-  ), [navigation, setRatingModal]);
+  );
 
 
   const handleRatingPress = (bookId: number) => {
@@ -167,10 +135,10 @@ const AgeScreen = ({ navigation }:any) => {
 
           <Animated.View style={[styles.animatedContainer, animatedStyle]}>
             <View style={styles.flatListWrapper}>
-              {renderFlatList(reader, 'ReaderDetails')}
+              {renderFlatList(readers, 'ReaderDetails')}
             </View>
             <View style={styles.flatListWrapper}>
-              {renderFlatList(play, 'AudioPlay')}
+              {renderFlatList(players, 'AudioPlay')}
             </View>
           </Animated.View>
 
@@ -193,7 +161,6 @@ const AgeScreen = ({ navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
 
   filterContainer: {

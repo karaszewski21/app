@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 
 interface ItemProps {
   props: {
@@ -10,6 +10,8 @@ interface ItemProps {
     reviewCount: number;
     onPress: () => void;
     onRatingPress: () => void;
+    onFavoritePress: () => void;
+    isFavorite: boolean
   }
 }
 
@@ -38,6 +40,16 @@ const ListItem: React.FC<ItemProps> = ({props}) => {
           {renderStars()}
           <Text style={styles.reviewCount}>({props.reviewCount})</Text>
         </TouchableOpacity>
+        <TouchableOpacity 
+        style={styles.favoriteButton} 
+        onPress={props.onFavoritePress}
+      >
+        <AntDesign
+          name={props.isFavorite ? 'heart' : 'hearto'}
+          size={24}
+          color={props.isFavorite ? '#FF6B6B' : '#BDC3C7'}
+        />
+      </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -80,6 +92,11 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 14,
     color: '#666',
+  },
+  favoriteButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 8,
   },
 });
 

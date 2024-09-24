@@ -11,7 +11,6 @@ export default function ProfileScreen() {
   const [notificationsDisabled, setNotificationsDisabled] = useState(true);
   const [storiesDisabled, setStoriesDisabled] = useState(false);
   const { signOut } = useSession();
-  const { open, close } = usePlayerModal();
   const { logout } = useNotification()
 
   const handleLogout = async () => {
@@ -67,7 +66,6 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
     padding: 20,

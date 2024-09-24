@@ -4,6 +4,8 @@ import { StyleSheet, FlatList } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import BookScreen from '@/app/screens/book';
 import ListItem from '@/components/common/ListItem';
+import useFavorite from '@/hooks/useFavorite';
+import { books } from '@/constants/Books';
 
 const BooksStack = createStackNavigator();
 
@@ -18,39 +20,23 @@ export default function BooksStackScreen() {
 }
 
 const BooksScreen = ({ navigation }:any) => {
-
-  const books = [
-    {
-      id: '1',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł książki 1",
-      description: "Opis książki ",
-      isLock: false,
-    },
-    {
-      id: '2',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł książki 2",
-      description: "Opis książki ",
-      isLock: false,
-    }
-  ];
+  const { isFavorite, addFavorite, removeFavorite } = useFavorite();
 
   const popupRating = () => {
 
   }
+
+  const favoriteBookPress = (id: string) => {
+    const isFav = isFavorite(id);
+    if (!isFav) {
+      addFavorite({id, type: 'book'}) 
+    } else {
+      removeFavorite(id)
+    }
+  }
   
   const renderItem = ({ item }: any) => {
-     const { } = item; 
-    
+     const { id } = item; 
     
     return(
     <ListItem props={{
@@ -59,7 +45,9 @@ const BooksScreen = ({ navigation }:any) => {
         onRatingPress:popupRating,
         onPress: () => navigation.navigate('Book', { book: item }),
         rating: 4,
-        reviewCount: 4
+        reviewCount: 4,
+        isFavorite: isFavorite(id),
+        onFavoritePress:() => favoriteBookPress(id)
       }}
     />) 
   }

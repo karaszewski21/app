@@ -1,16 +1,14 @@
 import { Redirect, Tabs } from 'expo-router';
-import { ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import { useSession } from '@/context/authContext';
 import TabBar  from '@/components/TabBar';
-import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
-import { useGlobalModal } from '@/context/globalModalContext';
 import { usePlayerModal } from '@/context/playerModalContext';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import VideoPlayer from '@/components/player/SmallPlayer'
+import { DefaultTheme, NavigationContainer, DarkTheme  } from '@react-navigation/native';
 
 export const AppStack = createStackNavigator();
 
@@ -19,7 +17,6 @@ export default function TabLayout() {
   const translateTabsY = useSharedValue<number>(0);
   const translateY = useSharedValue<number>(0);
   const { isTabs } = useTabsScreen();
- // const { isOpenModal, closeModal } = useGlobalModal();
   const { isOpenPlayer } = usePlayerModal();
 
   const animatedTabsStyles = useAnimatedStyle(() => ({
@@ -54,8 +51,19 @@ export default function TabLayout() {
       <Redirect href="/(auth)/preview" />
     );
   }
+
+  const globalTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+     // background: '#FFE082',
+     background: '#f4ede5'
+   //  background: '#75846f',
+    },
+  };
   
   return (
+    <NavigationContainer independent={true}  theme={globalTheme}>
       <Tabs
         screenOptions={{headerShown: false}} 
         tabBar={props => 
@@ -108,5 +116,6 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
+    </NavigationContainer>
   );
 }

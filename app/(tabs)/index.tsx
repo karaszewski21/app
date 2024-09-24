@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ImageBackground } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,6 +9,9 @@ import StoryScreen from '@/app/screens/story';
 import ReaderStackScreen from '@/app/screens/reader';
 import AgeStackScreen from '@/app/screens/age';
 import StoryItem from '@/components/stories/StoryItem';
+import { books } from '@/constants/Books';
+import { readers } from '@/constants/Readers';
+import { stories } from '@/constants/Stories';
 
 const HomeStack = createStackNavigator();
 
@@ -63,40 +66,6 @@ export default function HomeScreenStack() {
 
 const HomeScreen = ({ navigation }: any) => {
 
-  const stories = [
-    { 
-      id: '5',
-      thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg',
-      videos: [
-        'https://goldfish.fra1.digitaloceanspaces.com/story2/video2.mp4',
-        'https://goldfish.fra1.digitaloceanspaces.com/story2/video3.mp4',
-        'https://goldfish.fra1.digitaloceanspaces.com/story2/video4.mp4',
-        'https://goldfish.fra1.digitaloceanspaces.com/story2/video5.mp4', 
-        'https://goldfish.fra1.digitaloceanspaces.com/story2/video1.mp4', 
-      ]
-    },
-    { 
-      id: '2',
-      thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg',
-      videos: [
-        'https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4',
-        'https://goldfish.fra1.digitaloceanspaces.com/videos/258e9cff-3c37-431a-9d58-e93881b0ee58.mp4',
-        'https://goldfish.fra1.digitaloceanspaces.com/videos/1120c8a1-084b-45ab-9bda-9e6ba72d9a27.mp4',
-        'https://goldfish.fra1.digitaloceanspaces.com/videos/6c588ee0-8c8c-408c-94e0-f8f2e3b5db86.mp4', 
-      ]
-    },
-    { 
-      id: '3',
-      thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg',
-      videos: [
-        'https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4',
-        'https://goldfish.fra1.digitaloceanspaces.com/videos/258e9cff-3c37-431a-9d58-e93881b0ee58.mp4',
-        'https://goldfish.fra1.digitaloceanspaces.com/videos/1120c8a1-084b-45ab-9bda-9e6ba72d9a27.mp4',
-        'https://goldfish.fra1.digitaloceanspaces.com/videos/6c588ee0-8c8c-408c-94e0-f8f2e3b5db86.mp4', 
-      ]
-    },
-  ];
-
   const ages = [
     { id: '1', title: 'Mały bobek', image: 'https://via.placeholder.com/100' },
     { id: '2', title: 'Średnik bobke', image: 'https://via.placeholder.com/100' },
@@ -104,59 +73,6 @@ const HomeScreen = ({ navigation }: any) => {
     { id: '4', title: 'Szkolniak', image: 'https://via.placeholder.com/100' },
   ];
 
-  const books = [
-    {
-      id: '1',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł książki 1",
-      description: "Opis książki ",
-      isLock: true,
-    },
-    {
-      id: '2',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł książki 2",
-      description: "Opis książki ",
-      isLock: true,
-    },
-    {
-      id: '3',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł książki 2",
-      description: "Opis książki ",
-      isLock: false,
-    },
-    {
-      id: '4',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł książki 2",
-      description: "Opis książki ",
-      isLock: false,
-    }
-  ];
-
-  const readers = [
-    { id: '1', title: 'Czytaka 1', image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg' },
-    { id: '2', title: 'Czytaka 2', image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg' },
-    { id: '3', title: 'Czytaka 3', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg' },
-    { id: '4', title: 'Czytaka 4', image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg' },
-  ];
 
   const renderStoryItem = ({item}:any) => { 
     const { id, videosCache } = item;
@@ -191,14 +107,14 @@ const HomeScreen = ({ navigation }: any) => {
       style={styles.bookItem}
       onPress={() => navigation.navigate('ReaderDetails', { id: book.id, title: book.title })}
     >
-      <Image source={{ uri: book.image }} style={styles.bookImage} />
+      <Image source={{ uri: book.gallery[0] }} style={styles.bookImage} />
       <Text style={styles.bookTitle}>{book.title}</Text>
     </TouchableOpacity>
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.content}>
         <View style={styles.header}>
           <TouchableOpacity 
               style={styles.button}
@@ -212,7 +128,9 @@ const HomeScreen = ({ navigation }: any) => {
           <Text style={styles.sectionTitle}>Witaj Patryk Karaszewski</Text>
         </View>
 
-        <Text style={styles.sectionTitle}>Historie</Text>
+
+        <View style={styles.mainTile}>
+     
         <FlatList
           horizontal
           data={stories}
@@ -221,6 +139,7 @@ const HomeScreen = ({ navigation }: any) => {
           showsHorizontalScrollIndicator={false}
           style={styles.storyList}
         />
+        </View>
 
         <Text style={styles.sectionTitle}>Zacznij tutaj</Text>
         <FlatList
@@ -229,7 +148,7 @@ const HomeScreen = ({ navigation }: any) => {
           renderItem={renderFilterByAgeItem}
           keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
-          style={styles.storyList}
+          // style={styles.storyList}
         />
 
 
@@ -254,7 +173,6 @@ const HomeScreen = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
     display: 'flex',
@@ -263,6 +181,43 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10
   },
+  content: {
+    flex: 1,
+    padding: 10,
+  },
+  mainTile: {
+    backgroundColor: '#374f69',
+    borderRadius: 16,
+    padding: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+  },
+  mainTitle: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+ backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+    storyList: {
+    width: 250,
+    paddingTop: 16,
+    paddingBottom: 16
+  },
+
   button: {
     width: 60,
     height: 60,
@@ -288,9 +243,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     margin: 10,
   },
-  storyList: {
-    paddingLeft: 10,
-  },
+
   storyItem: {
     marginRight: 10,
     alignItems: 'center',
