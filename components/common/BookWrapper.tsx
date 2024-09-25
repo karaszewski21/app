@@ -59,7 +59,6 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   sliderContainer: {
     position: 'relative',
@@ -94,7 +93,6 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
-    backgroundColor: '#98FB98',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     marginTop: -30,

@@ -6,7 +6,6 @@ interface SquareButtonProps {
     props: {
         title: string;
         icon: string;
-        bookId: string;
         navigate: () => void;
       };  
 }

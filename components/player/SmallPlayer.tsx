@@ -217,10 +217,10 @@ const VideoPlayer = () => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-   // position: 'absolute',
-   // bottom: 0,
-   // left: 0,
-   // right: 0,
+    // position: 'absolute',
+    // bottom: 0,
+    // left: 0,
+    // right: 0,
     backgroundColor: '#63687b',
     borderRadius: 25,
     borderCurve: 'continuous',

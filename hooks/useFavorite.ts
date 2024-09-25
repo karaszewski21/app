@@ -13,7 +13,6 @@ const useFavorite = () => {
 
   useEffect(() => {
     loadFavorites();
-    console.log('-->favorites',favorites)
   }, []);
 
   const loadFavorites = async () => {

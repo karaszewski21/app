@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, StyleSheet} from 'react-native';
 import AudiobooksScreen from '@/app/screens/resources/audiobooks'
 import QuizesScreen from '@/app/screens/resources/quizes'
+import PrintoutsScreen from '@/app/screens/resources/printouts'
 import { SafeAreaView } from "react-native-safe-area-context";
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import Overlay from '@/components/Overlay';
 import FunnyButton from '@/components/common/FunnyButton';
 
 const BookStack = createStackNavigator();
@@ -24,6 +22,7 @@ export default function BookStackScreen({route}:any) {
       />
       <BookStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}} />
       <BookStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
+      <BookStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
     </BookStack.Navigator>
   );
 }
@@ -32,36 +31,18 @@ const BookScreen = ({ route, navigation }:any) => {
   const { book } = route.params;
 
 
-  const height = useSharedValue(0);
-
-  useEffect(() => {
-    height.value = 0
-    height.value =  withSpring(200);
-
-
-  }, []);
-
-  const buy = () => {
-    console.log('buy book')
-  }
-
-
   return (
     <SafeAreaView style={styles.container}>
       <BookWrapper props={book}>
+        <FunnyButton props={{title:'kup',onPress: () => console.log('--->buy'), icon: ''}}></FunnyButton>
+        <FunnyButton props={{title:'odblokuj',onPress: () => console.log('--->odblokuj'), icon: ''}}></FunnyButton>
         <View style={styles.buttons}>
-          <SquareButton props={{title: 'Quiz', icon: 'text', bookId: '', navigate: () =>  navigation.navigate('Quizes') }}></SquareButton>
-          <SquareButton props={{title: 'AudioBooks', icon: 'add', bookId: '', navigate: () => navigation.navigate('AudioBooks')}}></SquareButton>
+          <SquareButton props={{title: 'Quiz', icon: 'text', navigate: () =>  navigation.navigate('Quizes', { book }) }}></SquareButton>
+          <SquareButton props={{title: 'AudioBooks', icon: 'add', navigate: () => navigation.navigate('AudioBooks', { book }) }}></SquareButton>
+          <SquareButton props={{title: 'Wydruki', icon: 'print', navigate: () =>  navigation.navigate('Printouts', { book }) }}></SquareButton>
+          <SquareButton props={{title: 'Quize vise', icon: 'add', navigate: () => navigation.navigate('AudioBooks', { book }) }}></SquareButton>
         </View>
       </BookWrapper>
-      {  book.isLock &&
-        <Animated.View  style={{...styles.overlayContainer,height}}>
-            <Overlay opacity={0.6} style={styles.overlay}>
-                <FunnyButton props={{title:'kup',onPress:buy, icon: ''}}></FunnyButton>
-                <FunnyButton props={{title:'odblokuj',onPress:buy, icon: ''}}></FunnyButton>
-            </Overlay> 
-        </Animated.View>
-      }
     </SafeAreaView>
   );
 }
@@ -69,22 +50,11 @@ const BookScreen = ({ route, navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   buttons: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-around',
     marginBottom: 10,
   },
-  overlayContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
- 
-  },
-  overlay: {
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-  }
 });

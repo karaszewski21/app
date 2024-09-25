@@ -5,10 +5,10 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 import { useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
 import { usePlayerModal } from '@/context/playerModalContext';
-import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import VideoPlayer from '@/components/player/SmallPlayer'
 import { DefaultTheme, NavigationContainer, DarkTheme  } from '@react-navigation/native';
+import { ImageBackground, StyleSheet } from 'react-native';
 
 export const AppStack = createStackNavigator();
 
@@ -56,66 +56,78 @@ export default function TabLayout() {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-     // background: '#FFE082',
-    background: '#f4ede5'
-   //background: '#9ba485',
+    background: 'transparent',
     },
   };
   
   return (
-    <NavigationContainer independent={true}  theme={globalTheme}>
-      <Tabs
-        screenOptions={{headerShown: false}} 
-        tabBar={props => 
-          <>
-            {  
-              isOpenPlayer &&
-              <Animated.View style={{...animatedModalStyles, transform: [{translateY: 0}]}}>
-                <VideoPlayer />
+    <ImageBackground
+      source={require('@/assets/background.jpg')}
+      style={styles.rootContainer}
+      resizeMode='cover'
+    >
+      <NavigationContainer independent={true}  theme={globalTheme}>
+        <Tabs
+          screenOptions={{headerShown: false}} 
+          tabBar={props => 
+            <>
+              {  
+                isOpenPlayer &&
+                <Animated.View style={{...animatedModalStyles, transform: [{translateY: 0}]}}>
+                  <VideoPlayer />
+                </Animated.View>
+              }
+              <Animated.View style={{...animatedTabsStyles, transform: [{translateY: 0}]}}>
+                  <TabBar {...props} /> 
               </Animated.View>
+            </>
             }
-            <Animated.View style={{...animatedTabsStyles, transform: [{translateY: 0}]}}>
-                <TabBar {...props} /> 
-            </Animated.View>
-          </>
-          }
-        >
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: 'Home',
-            unmountOnBlur: true
-          }}
-        />
-        <Tabs.Screen
-          name="books"
-          options={{
-            title: 'Książki',
-            unmountOnBlur: true
-          }}
-        />
-        <Tabs.Screen
-          name="fave"
-          options={{
-            title: 'Ulubione',
-            unmountOnBlur: true
-          }}
-        />
-        <Tabs.Screen
-          name="fun"
-          options={{
-            title: 'Zabawy',
-            unmountOnBlur: true
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: 'Profil',
-            unmountOnBlur: true
-          }}
-        />
-      </Tabs>
-    </NavigationContainer>
+          >
+          <Tabs.Screen
+            name="index"
+            options={{
+              title: 'Home',
+              unmountOnBlur: true
+            }}
+          />
+          <Tabs.Screen
+            name="books"
+            options={{
+              title: 'Książki',
+              unmountOnBlur: true
+            }}
+          />
+          <Tabs.Screen
+            name="fave"
+            options={{
+              title: 'Ulubione',
+              unmountOnBlur: true
+            }}
+          />
+          <Tabs.Screen
+            name="fun"
+            options={{
+              title: 'Zabawy',
+              unmountOnBlur: true
+            }}
+          />
+          <Tabs.Screen
+            name="profile"
+            options={{
+              title: 'Profil',
+              unmountOnBlur: true
+            }}
+          />
+        </Tabs>
+        </NavigationContainer>
+      </ImageBackground>
   );
 }
+
+const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+  },
+});
