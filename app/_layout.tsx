@@ -11,21 +11,19 @@ export default function Root() {
   return (
  
         <SessionProvider>
-          <NotificationProvider>
+          {/* <NotificationProvider> */}
             <TabsScreenContextProvider>
               <PlayerModalProvider>
                 <GlobalModalProvider>
-        
                     <Stack>
                       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
                       <Stack.Screen name="index" options={{ headerShown: false }} />
                     </Stack>
-
                 </GlobalModalProvider>
               </PlayerModalProvider>
             </TabsScreenContextProvider>
-          </NotificationProvider>
+          {/* </NotificationProvider> */}
         </SessionProvider>
  
   );

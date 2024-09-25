@@ -40,7 +40,7 @@ export default function TabLayout() {
   useEffect(() => {
       translateY.value = 0;
       if (isOpenPlayer) {
-        translateY.value = withSpring(-40);
+        translateY.value = withSpring(-70);
       }
 
   }, [isOpenPlayer]);
@@ -57,8 +57,8 @@ export default function TabLayout() {
     colors: {
       ...DefaultTheme.colors,
      // background: '#FFE082',
-     background: '#f4ede5'
-   //  background: '#75846f',
+    background: '#f4ede5'
+   //background: '#9ba485',
     },
   };
   
