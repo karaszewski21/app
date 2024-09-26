@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, StyleSheet} from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import AudiobooksScreen from '@/app/screens/resources/audiobooks'
 import QuizesScreen from '@/app/screens/resources/quizes'
 import PrintoutsScreen from '@/app/screens/resources/printouts'
-import { SafeAreaView } from "react-native-safe-area-context";
+import VoiceQuizesScreen from '@/app/screens/resources/voice_quizes'
+
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
 import FunnyButton from '@/components/common/FunnyButton';
@@ -23,6 +26,7 @@ export default function BookStackScreen({route}:any) {
       <BookStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}} />
       <BookStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
       <BookStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
+      <BookStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
     </BookStack.Navigator>
   );
 }
@@ -40,7 +44,7 @@ const BookScreen = ({ route, navigation }:any) => {
           <SquareButton props={{title: 'Quiz', icon: 'text', navigate: () =>  navigation.navigate('Quizes', { book }) }}></SquareButton>
           <SquareButton props={{title: 'AudioBooks', icon: 'add', navigate: () => navigation.navigate('AudioBooks', { book }) }}></SquareButton>
           <SquareButton props={{title: 'Wydruki', icon: 'print', navigate: () =>  navigation.navigate('Printouts', { book }) }}></SquareButton>
-          <SquareButton props={{title: 'Quize vise', icon: 'add', navigate: () => navigation.navigate('AudioBooks', { book }) }}></SquareButton>
+          <SquareButton props={{title: 'Quiz głosowy', icon: 'add', navigate: () => navigation.navigate('VoiceQuizes', { book }) }}></SquareButton>
         </View>
       </BookWrapper>
     </SafeAreaView>
