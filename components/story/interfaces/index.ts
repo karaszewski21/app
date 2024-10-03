@@ -8,6 +8,16 @@ import {
 
 export type NextOrPrevious = 'next' | 'previous';
 
+interface Link {
+  url: string;
+  text: string;
+  size: number;
+  top: number;
+  right: number;
+  color: string;
+  backgroundColor: string;
+}
+
 export interface IUserStory<T = Record<string, any>> {
   user_id: number;
   user_image: string | undefined;
@@ -28,6 +38,7 @@ export interface IUserStoryItem<T = Record<string, any>> {
   customProps?: T;
   /** FOR INTERNAL USE ONLY */
   finish?: number;
+  link?: Link;
 }
 
 /** User with one story representing the current story on screen */
@@ -155,6 +166,17 @@ export interface StoryListItemProps {
   storyAvatarImageStyle?: ImageStyle;
   /** Custom styles for the main story item container */
   storyContainerStyle?: ViewStyle;
+}
+
+export interface StoryBasicProps {
+  index: number;
+  data: IUserStory;
+  /** Time in seconds */
+  duration: number;
+  /** Called when story item close button is pressed */
+  onClose?: (props?: IUserStory) => any;
+  /** Called when story item is loaded */
+  onStart?: (props?: IUserStory) => any;
 }
 
 export interface StoryProps {

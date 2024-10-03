@@ -1,17 +1,16 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ImageBackground } from 'react-native';
+import React, { useCallback } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ImageBackground, Dimensions } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import BookStackScreen from '@/app/screens/book';
 import NewsScreen from '@/app/screens/news';
 import StoryScreen from '@/app/screens/story';
 import ReaderStackScreen from '@/app/screens/reader';
 import AgeStackScreen from '@/app/screens/age';
-import StoryItem from '@/components/stories/StoryItem';
 import { books } from '@/constants/Books';
 import { readers } from '@/constants/Readers';
 import { stories } from '@/constants/Stories';
+import Story from '@/components/story/StoryBasic';
 
 const HomeStack = createStackNavigator();
 
@@ -64,6 +63,12 @@ export default function HomeScreenStack() {
   );
 }
 
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const STORY_WIDTH = 100; // Zakładana szerokość jednego Story
+const RIGHT_IMAGE_WIDTH = 120; // Szerokość obrazu po prawej stronie
+
+
 const HomeScreen = ({ navigation }: any) => {
 
   const ages = [
@@ -73,11 +78,46 @@ const HomeScreen = ({ navigation }: any) => {
     { id: '4', title: 'Szkolniak', image: 'https://via.placeholder.com/100' },
   ];
 
+  const renderItem = useCallback(({ item, index }: any) => (
+    <Story 
+      key={item.id} 
+      data={item} 
+      duration={item.duration} 
+      index={index}
+    />
+  ), []);
 
-  const renderStoryItem = ({item}:any) => { 
-    const { id, videosCache } = item;
-    return(
-      <StoryItem props={{...item, onPress: () => { navigation.navigate('Story', { id, videosCache })}}}/>
+  const keyExtractor = useCallback((item: any) => item.user_id.toString(), []);
+
+
+  const renderStory = () => { 
+    return ( 
+      <View style={styles.storyContainer}>
+        <FlatList
+          horizontal
+          data={stories}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          showsHorizontalScrollIndicator={false}
+          initialNumToRender={4}
+          maxToRenderPerBatch={2}
+          windowSize={5}
+          removeClippedSubviews={true}
+          getItemLayout={(data, index) => ({
+            length: STORY_WIDTH,
+            offset: STORY_WIDTH * index,
+            index,
+          })}
+          contentContainerStyle={styles.listContent}
+      />
+      <View style={styles.rightImageContainer}>
+        <Image 
+          source={require('@/assets/cos.png')}
+          style={styles.rightImage}
+          resizeMode="contain"
+        />
+      </View>
+    </View>
     ) 
   }
 
@@ -97,7 +137,7 @@ const HomeScreen = ({ navigation }: any) => {
       style={styles.bookItem}
       onPress={() => navigation.navigate('BookDetails', { book })}
     >
-      <Image source={{ uri: book.gallery[0] }} style={styles.bookImage} />
+      <Image source={{ uri: book.indexUrl }} style={styles.bookImage} />
     </TouchableOpacity>
   );
 
@@ -130,15 +170,7 @@ const HomeScreen = ({ navigation }: any) => {
 
 
         <View style={styles.mainTile}>
-     
-        <FlatList
-          horizontal
-          data={stories}
-          renderItem={renderStoryItem}
-          keyExtractor={item => item.id}
-          showsHorizontalScrollIndicator={false}
-          style={styles.storyList}
-        />
+            {renderStory()}
         </View>
 
         <Text style={styles.sectionTitle}>Zacznij tutaj</Text>
@@ -148,9 +180,7 @@ const HomeScreen = ({ navigation }: any) => {
           renderItem={renderFilterByAgeItem}
           keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
-          // style={styles.storyList}
         />
-
 
         <Text style={styles.sectionTitle}>Najnowsze książki</Text>
         <View style={styles.booksContainer}>
@@ -188,7 +218,9 @@ const styles = StyleSheet.create({
   mainTile: {
     backgroundColor: '#374f69',
     borderRadius: 16,
-    padding: 16,
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -197,6 +229,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
     elevation: 4,
+    width: 300
   },
   mainTitle: {
     color: 'white',
@@ -212,11 +245,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-    storyList: {
-    width: 250,
-    paddingTop: 16,
-    paddingBottom: 16
+
+  storyContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
+  listContent: {
+    paddingRight: RIGHT_IMAGE_WIDTH, // Zapewnia miejsce na prawy obraz
+  },
+  rightImageContainer: {
+    position: 'absolute',
+    right: -95,
+    height: '100%',
+    width: RIGHT_IMAGE_WIDTH,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rightImage: {
+    width: RIGHT_IMAGE_WIDTH,
+    height: RIGHT_IMAGE_WIDTH,
+  },
+
 
   button: {
     width: 60,

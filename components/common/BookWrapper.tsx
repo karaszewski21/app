@@ -10,14 +10,16 @@ interface BookWrapperProps {
   children?: React.ReactNode;
 }
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = 2 / 3;
+const IMAGE_WIDTH = width * 0.6;
+const IMAGE_HEIGHT = IMAGE_WIDTH / ASPECT_RATIO;
 
 const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.sliderContainer}>
         <ScrollView
           horizontal
           pagingEnabled
@@ -28,11 +30,13 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
           }}
         >
           {props.gallery.map((imageUrl, index) => (
-            <Image
-              key={index}
-              source={{ uri: imageUrl }}
-              style={styles.image}
-            />
+             <View key={index} style={styles.imageWrapper}>
+                <Image
+                  source={{ uri: imageUrl }}
+                  style={styles.image}
+                  resizeMode="cover"
+                />
+            </View>
           ))}
         </ScrollView>
         <View style={styles.paginationContainer}>
@@ -46,7 +50,6 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
             />
           ))}
         </View>
-      </View>
       <View style={styles.content}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.description}>{props.description}</Text>
@@ -60,22 +63,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  sliderContainer: {
-    position: 'relative',
+  imageWrapper: {
+    width: width,
+    height: height * 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
-    width: width,
-    height: 300,
-    resizeMode: 'cover',
+    width: IMAGE_WIDTH,
+    height: IMAGE_HEIGHT,
+    borderRadius: 10,
   },
   paginationContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: 10,
-    left: 0,
-    right: 0,
   },
   paginationDot: {
     width: 8,

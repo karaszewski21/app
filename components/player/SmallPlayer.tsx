@@ -1,24 +1,18 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { View, Image, TouchableOpacity, Text, StyleSheet, GestureResponderEvent } from 'react-native';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { View, Image, TouchableOpacity, Text, StyleSheet, GestureResponderEvent, ImageBackground } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import { usePlayerModal } from '@/context/playerModalContext';
 import { Video, ResizeMode, AVPlaybackStatus } from 'expo-av';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import * as ScreenOrientation from 'expo-screen-orientation';
 import { useTabsScreen } from '@/context/tabContext';
 
 const VideoPlayer = () => {
   const video = useRef(null);
-  const [status, setStatus] = useState({});
-  const [showFull, setShowFull] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [position, setPosition] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [isSeeking, setIsSeeking] = useState(false);
-  const [seekPosition, setSeekPosition] = useState(0);
 
   const { record, closePlayer } = usePlayerModal();
   const { showTabs, hiddenTabs } = useTabsScreen();
@@ -26,18 +20,10 @@ const VideoPlayer = () => {
   const height = useSharedValue(0);
 
   useEffect(() => {
-    if (showFull) {
-      hiddenTabs();
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT)
-    } else {
-      showTabs()
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
-    }
     return () => { 
       showTabs() 
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
     }
-  }, [showFull]);
+  }, []);
 
   useEffect(() => {
     if (record) {
@@ -70,35 +56,44 @@ const VideoPlayer = () => {
 
   const onPlaybackStatusUpdate = (status: AVPlaybackStatus) => {
     if (status.isLoaded) {
-      setStatus(status);
       setPosition(status.positionMillis);
       setIsPlaying(status.isPlaying);
+
+      if (status.didJustFinish) {
+          resetVideo()
+      }
     }
   };
 
-  const onSlidingStart = () => {
-    setIsSeeking(true);
-  };
+  const resetVideo = useCallback(async () => {
+    if (video.current) {
+      //@ts-ignore
+      await video.current.setPositionAsync(0);
+      //@ts-ignore
+      await video.current.pauseAsync();
+      setIsPlaying(true);
+    }
+  }, []);
 
   const onValueChange = (value: number) => {
-    setSeekPosition(value);
-    setCurrentTime(value / 1000);
     if (video.current) {
       //@ts-ignore
       video.current.setPositionAsync(value);
     }
   };
 
+  const time = useCallback(() => {
+    return formatTime(position / 1000)
+  }, [position])
+
   const onSlidingComplete = async (value: number) => {
-    setIsSeeking(false);
     if (video.current) {
       //@ts-ignore
       await video.current.setPositionAsync(value);
-      setCurrentTime(value / 1000);
     }
   };
 
-  const onPlayPause = async () => {
+  const onPlayPause = useCallback(async () => {
     if (video.current) {
       if (isPlaying) {
           //@ts-ignore
@@ -108,6 +103,26 @@ const VideoPlayer = () => {
         await video.current.playAsync();
       }
       setIsPlaying(!isPlaying);
+    }
+  }, [isPlaying])
+
+  const skipBackward = async () => {
+    if (video.current) {
+      //@ts-ignore
+      const status = await video.current.getStatusAsync();
+      const newPosition = Math.max(0, status.positionMillis - 15000);
+      //@ts-ignore
+      await video.current.setPositionAsync(newPosition);
+    }
+  };
+
+  const skipForward = async () => {
+    if (video.current) {
+      //@ts-ignore
+      const status = await video.current.getStatusAsync();
+      const newPosition = Math.min(duration, status.positionMillis + 15000);
+      //@ts-ignore
+      await video.current.setPositionAsync(newPosition);
     }
   };
 
@@ -119,22 +134,28 @@ const VideoPlayer = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <Animated.View style={[styles.videoContainer, animatedStyle]}>
-          { showMore && 
-            <View style={styles.videoHeaderContainer}>
-              <TouchableOpacity style={styles.expandButton} onPress={handleDownMore}>
-                <MaterialCommunityIcons 
-                  name={"chevron-down"} 
-                  size={24} 
-                  color="#fff" 
-                />
-              </TouchableOpacity>
+        <Animated.View style={[styles.videoContainer, animatedStyle]}>
+          <ImageBackground
+            source={require('@/assets/background.jpg')}
+            style={styles.bgVideo}
+            resizeMode='cover'
+            imageStyle={{ borderRadius: 25}}
+          >
+            { showMore && 
+              <View style={styles.videoHeaderContainer}>
+                <TouchableOpacity style={styles.expandButton} onPress={handleDownMore}>
+                  <MaterialCommunityIcons 
+                    name={"chevron-down"} 
+                    size={24} 
+                    color="#fff" 
+                  />
+                </TouchableOpacity>
 
-              <TouchableOpacity style={styles.closeVideo} onPress={closePlayer}>
-                <MaterialCommunityIcons name="close" size={24} color="#fff" />
-              </TouchableOpacity>
-            </View>
-          }
+                <TouchableOpacity style={styles.closeVideo} onPress={closePlayer}>
+                  <MaterialCommunityIcons name="close" size={24} color="#fff" />
+                </TouchableOpacity>
+              </View>
+            }
 
             <Video
               ref={video}
@@ -148,80 +169,96 @@ const VideoPlayer = () => {
               onPlaybackStatusUpdate={onPlaybackStatusUpdate}
               onLoad={onLoad}
             />
-          { showMore && 
-            <View style={styles.videoControlsContainer}>
-              <Text style={styles.titleVideo} numberOfLines={1}>{record?.title}</Text>
-              <TouchableOpacity style={styles.videoPlayButton} onPress={onPlayPause}>
+            { showMore && 
+              <View style={styles.videoControlsContainer}>
+                <Text style={styles.titleVideo} numberOfLines={1}>{record?.title}</Text>
+                <View style={styles.controlsRow}>
+                  <TouchableOpacity style={styles.skipButton} onPress={skipBackward}>
+                    <MaterialCommunityIcons 
+                      name="rewind-15" 
+                      size={25}
+                      color="#FFFFFF" 
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.videoPlayButton} onPress={onPlayPause}>
+                    <MaterialCommunityIcons 
+                      name={isPlaying ? 'pause' : 'play'} 
+                      size={36} 
+                      color="#FFFFFF" 
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.skipButton} onPress={skipForward}>
+                    <MaterialCommunityIcons 
+                      name="fast-forward-15" 
+                      size={25} 
+                      color="#FFFFFF" 
+                    />
+                  </TouchableOpacity>
+                </View>
+                <Slider
+                  style={styles.slider}
+                  minimumValue={0}
+                  maximumValue={duration}
+                  value={position}
+                  minimumTrackTintColor="#e5ae2f"
+                  maximumTrackTintColor="#fff"
+                  thumbTintColor="#e5ae2f"
+                  onValueChange={(value) => onValueChange(value)}
+                  onSlidingComplete={onSlidingComplete}
+                  />
+                <Text style={styles.timeText}>{time()} / {formatTime(duration / 1000)}</Text>
+              </View>
+            }
+          </ImageBackground>
+        </Animated.View>
+
+        { !showMore && 
+          <TouchableOpacity style={styles.playerContainer}  onPress={handleUpMore}>
+              <ImageBackground
+                source={require('@/assets/background.jpg')}
+                style={styles.bgVideo}
+                resizeMode='cover'
+                blurRadius={20}
+                imageStyle={{ borderRadius: 25}}
+              >
+              <View style={styles.headerPlayerContainer}>
+                  <Image source={{ uri: record?.imageUrl }} style={styles.image} />
+                  <View style={{width: '70%'}}>
+                    <Text style={styles.titlePlayer} numberOfLines={1}>{record?.title}</Text>
+                  </View>
+                  <TouchableOpacity style={styles.closePlayer} onPress={closePlayer}>
+                    <MaterialCommunityIcons name="close" size={24} color="#fff" />
+                  </TouchableOpacity>
+              </View>
+              <View style={styles.controlsPlayerContainer}>
+                <Slider
+                  style={styles.slider}
+                  minimumValue={0}
+                  maximumValue={duration}
+                  value={position}
+                  minimumTrackTintColor="#e5ae2f"
+                  maximumTrackTintColor="#fff"
+                  thumbTintColor="#e5ae2f"
+                  onValueChange={(value) => onValueChange(value)}
+                  onSlidingComplete={onSlidingComplete}
+                />
+              <TouchableOpacity style={styles.playButton} onPress={onPlayPause}>
                   <MaterialCommunityIcons 
                     name={isPlaying ? 'pause' : 'play'} 
-                    size={36} 
+                    size={24} 
                     color="#FFFFFF" 
                   />
               </TouchableOpacity>
-              <Slider
-                style={styles.slider}
-                minimumValue={0}
-                maximumValue={duration}
-                value={isSeeking ? seekPosition : position}
-                minimumTrackTintColor="#e5ae2f"
-                maximumTrackTintColor="#686e7d"
-                thumbTintColor="#e5ae2f"
-                onSlidingStart={onSlidingStart}
-                onValueChange={(value) => onValueChange(value)}
-                onSlidingComplete={onSlidingComplete}
-                />
-              <Text style={styles.timeText}>{formatTime(currentTime)} / {formatTime(duration / 1000)}</Text>
             </View>
-          }
-      </Animated.View>
-
-      <View>
-      { !showMore &&    
-        <TouchableOpacity style={styles.playerContainer}  onPress={handleUpMore}>
-          <View style={styles.headerPlayerContainer}>
-              <Image source={{ uri: record?.imageUrl }} style={styles.image} />
-              <View style={{width: '70%'}}>
-                <Text style={styles.titlePlayer} numberOfLines={1}>{record?.title}</Text>
-              </View>
-              <TouchableOpacity style={styles.closePlayer} onPress={closePlayer}>
-                <MaterialCommunityIcons name="close" size={24} color="#fff" />
-              </TouchableOpacity>
-          </View>
-            <View style={styles.controlsPlayerContainer}>
-              <Slider
-                style={styles.slider}
-                minimumValue={0}
-                maximumValue={duration}
-                value={isSeeking ? seekPosition : position}
-                minimumTrackTintColor="#e5ae2f"
-                maximumTrackTintColor="#686e7d"
-                thumbTintColor="#e5ae2f"
-                onSlidingStart={onSlidingStart}
-                onValueChange={(value) => onValueChange(value)}
-                onSlidingComplete={onSlidingComplete}
-              />
-            <TouchableOpacity style={styles.playButton} onPress={onPlayPause}>
-                <MaterialCommunityIcons 
-                  name={isPlaying ? 'pause' : 'play'} 
-                  size={24} 
-                  color="#FFFFFF" 
-                />
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      }
-      </View>
+            </ImageBackground>
+          </TouchableOpacity>
+        }
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   mainContainer: {
-    // position: 'absolute',
-    // bottom: 0,
-    // left: 0,
-    // right: 0,
-    backgroundColor: '#63687b',
     borderRadius: 25,
     borderCurve: 'continuous',
     shadowColor: 'black',
@@ -233,21 +270,28 @@ const styles = StyleSheet.create({
   },
 
   // PLAYER
-
   playerContainer: {
+    position: 'relative',
     flexDirection: 'column',
-    alignItems: 'center',
+    height: 110,
+    width: '100%',
   },
 
   headerPlayerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10
   },
 
   controlsPlayerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10
   },
 
   image: {
@@ -268,18 +312,25 @@ const styles = StyleSheet.create({
   },
 
   playButton: {
+    position: 'absolute',
+    right: 30,
+    top:  -10,
     backgroundColor: '#e5ae2f',
     borderRadius: 25,
     width: 40,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+  },
+
+  bgPlayer: {
+    flex: 1,
+    resizeMode: 'cover',
+    borderRadius: 25
   },
 
 
   // VIDEO
-
   videoContainer: {
     flexDirection: 'column',
     width: '100%',
@@ -289,7 +340,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    height: 40
+    height: 40,
+    padding: 10
   },
 
   videoControlsContainer: {
@@ -309,15 +361,32 @@ const styles = StyleSheet.create({
   videoPlayButton: {
     backgroundColor: '#e5ae2f',
     borderRadius: 25,
-    width: 300,
+    width: 200,
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
   },
 
   closeVideo: {
     paddingRight: 20,
+  },
+
+  bgVideo: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+
+  controlsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
+  skipButton: {
+    backgroundColor: '#e5ae2f',
+    borderRadius: 25,
+    padding: 10,
+    marginHorizontal: 20,
   },
 
   timeText: {

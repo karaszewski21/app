@@ -62,7 +62,8 @@ export default function TabLayout() {
   
   return (
     <ImageBackground
-      source={require('@/assets/background.jpg')}
+  //source={require('@/assets/dark.png')}
+// source={require('@/assets/light.png')}
       style={styles.rootContainer}
       resizeMode='cover'
     >
@@ -129,5 +130,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
+    backgroundColor: '#f2eee5'
   },
 });

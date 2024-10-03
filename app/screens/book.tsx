@@ -7,6 +7,7 @@ import AudiobooksScreen from '@/app/screens/resources/audiobooks'
 import QuizesScreen from '@/app/screens/resources/quizes'
 import PrintoutsScreen from '@/app/screens/resources/printouts'
 import VoiceQuizesScreen from '@/app/screens/resources/voice_quizes'
+import LangsStack from '@/app/screens/resources/langs'
 
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
@@ -27,6 +28,7 @@ export default function BookStackScreen({route}:any) {
       <BookStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
       <BookStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
       <BookStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
+      <BookStack.Screen name="Langs" component={LangsStack} options={{headerShown: false}}/>
     </BookStack.Navigator>
   );
 }
@@ -45,6 +47,7 @@ const BookScreen = ({ route, navigation }:any) => {
           <SquareButton props={{title: 'AudioBooks', icon: 'add', navigate: () => navigation.navigate('AudioBooks', { book }) }}></SquareButton>
           <SquareButton props={{title: 'Wydruki', icon: 'print', navigate: () =>  navigation.navigate('Printouts', { book }) }}></SquareButton>
           <SquareButton props={{title: 'Quiz głosowy', icon: 'add', navigate: () => navigation.navigate('VoiceQuizes', { book }) }}></SquareButton>
+          <SquareButton props={{title: 'Angalski', icon: 'flag', navigate: () => navigation.navigate('Langs', { book }) }}></SquareButton>
         </View>
       </BookWrapper>
     </SafeAreaView>
