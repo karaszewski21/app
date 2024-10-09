@@ -65,7 +65,7 @@ export const stories = [
     stories: [
       {
         story_id: 5,
-        story_image: 'https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4',
+        story_image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/promo.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 1 swiped'),
       },

@@ -1,7 +1,7 @@
 export const books = [
   {
     id: '1',
-    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png',
+    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/books/amp/cover.png', 
       'https://goldfish.fra1.digitaloceanspaces.com/books/amp/page1.png', 
@@ -14,7 +14,7 @@ export const books = [
   },
   {
     id: '2',
-    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/index.png',
+    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/cover.png', 
       'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/page1.png', 
@@ -28,6 +28,7 @@ export const books = [
   },
   {
     id: '3',
+    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg', 
       'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
@@ -39,6 +40,7 @@ export const books = [
   },
   {
     id: '4',
+    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
       'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 

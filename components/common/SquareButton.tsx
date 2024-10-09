@@ -6,11 +6,13 @@ interface SquareButtonProps {
     props: {
         title: string;
         icon: string;
+        backgroundColor?: string,
         navigate: () => void;
       };  
+      children?: any
 }
 
-const SquareButton: React.FC<SquareButtonProps> = ({ props }: SquareButtonProps) => {
+const SquareButton: React.FC<SquareButtonProps> = ({ props, children }: SquareButtonProps) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
 //   useEffect(() => {
@@ -36,14 +38,11 @@ const SquareButton: React.FC<SquareButtonProps> = ({ props }: SquareButtonProps)
   return (
     <Animated.View style={[styles.buttonContainer, { transform: [{ scale: scaleAnim }] }]}>
       <TouchableOpacity 
-        style={styles.button}
+        style={[styles.button, {backgroundColor: props.backgroundColor}]}
         //@ts-ignore
         onPress={() => props.navigate()}
       >
-       
-        <Ionicons 
-          //@ts-ignore
-        name={props.icon} size={40} color="#fff" />
+        {children}
         <Text style={styles.buttonTitle}>{props.title}</Text>
       </TouchableOpacity>
     </Animated.View>
@@ -52,13 +51,13 @@ const SquareButton: React.FC<SquareButtonProps> = ({ props }: SquareButtonProps)
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 120,
-    height: 120,
+    width: 150,
+    height: 150,
     margin: 10,
   },
   button: {
     flex: 1,
-    backgroundColor: '#3498db',
+  //  backgroundColor: '#3498db',
     borderRadius: 15,
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -35,7 +35,6 @@
       "expo-router",
       "expo-secure-store",
       "expo-video",
-      // "@react-native-google-signin/google-signin",
       [
         "expo-av",
         {
@@ -47,6 +46,12 @@
         "expo-screen-orientation",
         {
           "initialOrientation": "PORTRAIT_UP"
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Chewy-Regular.ttf"]
         }
       ]
     ],

@@ -7,6 +7,7 @@ import { usePlayerModal } from '@/context/playerModalContext';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import Overlay from '@/components/Overlay';
 import FunnyButton from '@/components/common/FunnyButton';
+import SquareButton from '@/components/common/SquareButton';
 
 const AudioBooksStack = createStackNavigator();
 
@@ -38,31 +39,17 @@ const AudiobooksScreen = ({route, navigation }:any) => {
       })
   }
 
-  const renderAudioBookItem = ({item}: any) => { 
-    return(
-    <TouchableOpacity 
-      style={styles.item}
-      onPress={() =>openAudioBookItem(item)}
-      disabled={params?.book && params.book.isLock ? true : false}
-    >
-      <Text style={styles.title}>{item.type}</Text>
-      <Ionicons name="chevron-forward" size={24} color="#3498db" />
-    </TouchableOpacity>
-    )
-  }
-
   return (
     <SafeAreaView style={styles.container}>
-        <View>
-          <Text>{audiobook.title}</Text>
-          <Image source={{ uri: audiobook.image }} style={styles.image}/>
-        </View>
-        <FlatList
-          data={versions}
-          renderItem={renderAudioBookItem}
-          keyExtractor={item => item.id}
-          contentContainerStyle={styles.listContent}
-        />
+      <View>
+        <Text>{audiobook.title}</Text>
+        <Image source={{ uri: audiobook.image }} style={styles.image}/>
+      </View>
+      <View style={styles.listContent}>
+        { versions.map((item, index) =>
+          <SquareButton key={index} props={{title: item.type, icon: 'text', backgroundColor: '#3498db', navigate: () => openAudioBookItem(item)}}/>)
+        }
+      </View>
       { params?.book && params.book.isLock &&
         <Animated.View  style={{...styles.overlayContainer,height}}>
           <Overlay opacity={0.6} style={styles.overlay}>
@@ -73,30 +60,11 @@ const AudiobooksScreen = ({route, navigation }:any) => {
       }
     </SafeAreaView>
   )
-
 }
-
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       height: '100%',
-    },
-    item: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      backgroundColor: '#fff',
-      padding: 20,
-      marginBottom: 10,
-      borderRadius: 10,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.23,
-      shadowRadius: 2.62,
-      elevation: 4,
     },
     title: {
       fontSize: 18,
@@ -104,7 +72,10 @@ const AudiobooksScreen = ({route, navigation }:any) => {
       color: '#333',
     },
     listContent: {
-      padding: 16,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      marginBottom: 10,
     },
     image: {
       width: 200,

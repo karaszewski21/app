@@ -2,35 +2,27 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const ReaderButton = ({ 
+const BookButton = ({ 
   title, 
   onPress, 
   leftIconName = 'checkbox-blank-circle-outline',
-  rightIconName = 'chevron-right',
   backgroundColor = '#3498db',
   textColor = '#ffffff',
-  subtitle,
   customStyles = {}
 }) => (
   <TouchableOpacity 
     style={[styles.item, { backgroundColor }, customStyles.container]}
     onPress={onPress}
   >
-    {/* <MaterialCommunityIcons 
-      name={leftIconName} 
-      size={24} 
-      color={textColor} 
-      style={[styles.leftIcon, customStyles.leftIcon]} 
-    /> */}
     <View style={styles.textContainer}>
       <Text style={[styles.title, { color: textColor }, customStyles.title]}>{title}</Text>
-      {subtitle && <Text style={[styles.subtitle, { color: textColor }, customStyles.subtitle]}>{subtitle}</Text>}
     </View>
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
   item: {
+    width: 200,
     flexDirection: 'row',
     borderRadius: 15,
     padding: 15,
@@ -63,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReaderButton;
+export default BookButton;

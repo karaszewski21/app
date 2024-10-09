@@ -10,7 +10,8 @@ import Animated, { ColorSpace, Easing, interpolateColor, runOnJS, useAnimatedSty
 import Overlay from '@/components/Overlay';
 import FunnyButton from '@/components/common/FunnyButton';
 import { Gesture, GestureDetector, GestureHandlerRootView, ComposedGesture } from 'react-native-gesture-handler';
-import { Audio } from 'expo-av';
+import { Audio,  AVPlaybackStatusSuccess } from 'expo-av';
+
 
 const LangsStack = createStackNavigator();
 
@@ -80,24 +81,51 @@ const LangsScreen = ({route, navigation }:any) => {
   const samplePhrases: Phrase[] = [
     { 
       id: 1,
-      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/english/imvacation.mp3'
+    //  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/english/imvacation.mp3'
+    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/english/testlong.mp3'
+    },
+    { 
+      id: 2,
+      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/english/ilikeplaysoccer.mp3'
     },
     { 
       id: 3,
-      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/english/ilikeplaysoccer.mp3'
-    }
+      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/english/park.mp3'
+    },
+    { 
+      id: 4,
+      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/english/childrn.mp3'
+    },
+    { 
+      id: 5,
+      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/english/pickin.mp3'
+    },
   ]
   const words: Word[] = [
         { text: 'I', audioUrl: '', phraseId: 1},
         { text: 'am', audioUrl: '', phraseId: 1},
         { text: 'on', audioUrl: '', phraseId: 1},
-        { text: 'vacation',audioUrl: '', phraseId: 1, translation: 'a period of time when someone does not go to work or school but is free to do what they want, such as travel or relax' },
+        { text: 'vacation.',audioUrl: '', phraseId: 1, translation: 'a period of time when someone does not go to work or school but is free to do what they want, such as travel or relax' },
   
-        { text: 'I',  audioUrl: '', phraseId: 3  },
-        { text: 'like', audioUrl: '', phraseId: 3},
-        { text: 'to',   audioUrl: '', phraseId: 3},
-        { text: 'play', audioUrl: '', phraseId: 3, translation: 'to engage in activity for enjoyment and recreation rather than a serious or practical purpose' },
-        { text: 'soccer.', audioUrl: '', phraseId: 3},
+        { text: 'I',  audioUrl: '', phraseId: 2},
+        { text: 'like', audioUrl: '', phraseId: 2},
+        { text: 'to play',   audioUrl: '', phraseId: 2, translation: 'to engage in activity for enjoyment and recreation rather than a serious or practical purpose' },
+        { text: 'soccer.', audioUrl: '', phraseId: 2},
+
+        { text: 'The park', audioUrl: '', phraseId: 3},
+        { text: 'is', audioUrl: '', phraseId: 3},
+        { text: 'busy ', audioUrl: '', phraseId: 3},
+        { text: 'today.',audioUrl: '', phraseId: 3},
+
+        { text: 'Children', audioUrl: '', phraseId: 4},
+        { text: 'play ', audioUrl: '', phraseId: 4},
+        { text: 'the swings.', audioUrl: '', phraseId: 4},
+
+        { text: 'A family', audioUrl: '', phraseId: 5},
+        { text: 'has', audioUrl: '', phraseId: 5},
+        { text: 'a picnic', audioUrl: '', phraseId: 5},
+        { text: 'on', audioUrl: '', phraseId: 5},
+        { text: 'on the grass.', audioUrl: '', phraseId: 5},
   ];
 
   const LangScreen = () => { 
@@ -107,7 +135,9 @@ const LangsScreen = ({route, navigation }:any) => {
     const containerRef = useRef<View>(null);
     const containerLayout = useRef<LayoutRectangle | null>(null);
     const soundsRef = useRef<{ [key: string]: Audio.Sound }>({});
-    const soundQueue = useRef<string[]>([]);
+    const soundQueue = useRef([]);
+    const isPlayingSound = useRef(false);
+    const [currendsound, setCurrentSoud] = useState<Audio.Sound>()
 
     useEffect(() => {
       const loadSounds = async () => {
@@ -116,7 +146,11 @@ const LangsScreen = ({route, navigation }:any) => {
           try {
             const { sound } = await Audio.Sound.createAsync(
               { uri: phrase.audioUrl },
-              { volume: 1.0, shouldPlay: false }
+              {  
+                progressUpdateIntervalMillis: 100,  
+                volume: 1.0,
+                shouldPlay: false 
+              }
             );
             loadedSounds[phrase.id] = sound;
           } catch (error) {
@@ -132,6 +166,15 @@ const LangsScreen = ({route, navigation }:any) => {
         Object.values(soundsRef.current).forEach(sound => sound.unloadAsync().catch(console.error));
       };
     }, []);
+
+    useEffect(() => {
+
+
+      console.log('currendsound,',currendsound)
+
+    }, 
+    [currendsound])
+
   
     const onLayoutWord = useCallback((event: LayoutRectangle, index: number, phraseId: number) => {
       setWordLayouts(prev => ({
@@ -143,8 +186,66 @@ const LangsScreen = ({route, navigation }:any) => {
     const onLayoutContainer = useCallback((event: LayoutRectangle) => {
       containerLayout.current = event;
     }, []);
-    
+
+    const playNextSound = async () => {
+      console.log('-->runplayNextSound')
+      if (soundQueue.current.length > 0 && !isPlayingSound.current) {
+    //    isPlayingSound.current = true;
+        const phraseId = soundQueue.current.shift();
+        //@ts-ignore
+        const sound = soundsRef.current[phraseId];
+
+        setCurrentSoud(sound)  
+
+        isPlayingSound.current = false;
+        if (sound) {
+          try {
+            await sound.setPositionAsync(0);
+            await sound.playAsync();
+            sound.setOnPlaybackStatusUpdate((status: AVPlaybackStatusSuccess) => {
+              console.log(status)
+            if (status.isLoaded) {
+             // console.log(status)
+              if (status.didJustFinish) {
+                isPlayingSound.current = false;
+                playNextSound();
+              }
+            }
+
+            });
+          } catch (error) {
+            console.error('Error playing sound:', error);
+            isPlayingSound.current = false;
+            playNextSound();
+          }
+        } else {
+          isPlayingSound.current = false;
+          playNextSound();
+        }
+      }
+    }
   
+    const queueSound = useCallback((phraseId: any) => {
+      //@ts-ignore
+      soundQueue.current.push(phraseId);
+      playNextSound();
+    }, []);
+
+
+    const debounce = (func: any, delay: number) => {
+      let timeoutId: any;
+    
+      return (...args: any) => {
+        clearTimeout(timeoutId);
+    
+        timeoutId = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      };
+    };
+  
+    const debouncedQueueSound = useMemo(() => debounce(queueSound, 50), [queueSound]);
+    
     const checkWordUnderTouch = useCallback(async (x: number, y: number) => {
       if (!containerLayout.current) return;
   
@@ -159,22 +260,23 @@ const LangsScreen = ({route, navigation }:any) => {
             relativeY <= layout.y + layout.height
         ) {
             activeIndex.value = Number(index);
-            const sound = soundsRef.current[layout.phraseId];
 
-            if (sound) {
-                try {
-                    const status = await sound.getStatusAsync();
-                    if (status.isLoaded) {
-                        if (status.isPlaying) {
-                            await sound.stopAsync();
-                        }
-                        await sound.setPositionAsync(0);
-                        await sound.playAsync();
-                    } 
-                } catch (error) {
-                    console.error('Error playing sound:', error);
-                }
-            }
+            debouncedQueueSound(layout.phraseId)
+         //   const sound = soundsRef.current[layout.phraseId];
+            // if (sound) {
+            //     try {
+            //         const status = await sound.getStatusAsync();
+            //         if (status.isLoaded) {
+            //             if (status.isPlaying) {
+            //                 await sound.stopAsync();
+            //             }
+            //             await sound.setPositionAsync(0);
+            //             await sound.playAsync();
+            //         } 
+            //     } catch (error) {
+            //         console.error('Error playing sound:', error);
+            //     }
+            // }
             
             return;
         }
@@ -265,7 +367,7 @@ const styles = StyleSheet.create({
     },
     word: {
       fontSize: 24,
-      marginRight: 4,
+      margin: 10,
     },
     overlayContainer: {
       position: 'absolute',

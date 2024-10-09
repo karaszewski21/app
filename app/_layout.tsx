@@ -5,27 +5,44 @@ import { NotificationProvider } from '@/context/notificationContext';
 import { TabsScreenContextProvider } from '@/context/tabContext';
 import { GlobalModalProvider } from '@/context/globalModalContext';
 import { ImageBackground, StyleSheet } from 'react-native';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
 
 export default function Root() {
-  const image = {uri: 'https://legacy.reactjs.org/logo-og.png'}
+    const [loaded, error] = useFonts({
+      'Chewy': require('@/assets/fonts/Chewy-Regular.ttf'),
+      'Dekko': require('@/assets/fonts/Dekko-Regular.ttf'),
+      'ShantellSans-SemiBold': require('@/assets/fonts/ShantellSans-SemiBold.ttf'),
+      'ShantellSans-SemiBoldItalic': require('@/assets/fonts/ShantellSans-SemiBoldItalic.ttf'),
+    });
+
+    useEffect(() => {
+      if (loaded || error) {
+        SplashScreen.hideAsync();
+      }
+    }, [loaded, error]);
+
+    if (!loaded && !error) {
+      return null;
+    }
+
   return (
- 
-        <SessionProvider>
-          {/* <NotificationProvider> */}
-            <TabsScreenContextProvider>
-              <PlayerModalProvider>
-                <GlobalModalProvider>
-                    <Stack>
-                      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-                      <Stack.Screen name="index" options={{ headerShown: false }} />
-                    </Stack>
-                </GlobalModalProvider>
-              </PlayerModalProvider>
-            </TabsScreenContextProvider>
-          {/* </NotificationProvider> */}
-        </SessionProvider>
- 
+    <SessionProvider>
+      {/* <NotificationProvider> */}
+        <TabsScreenContextProvider>
+          <PlayerModalProvider>
+            <GlobalModalProvider>
+                <Stack>
+                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                  <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+                  <Stack.Screen name="index" options={{ headerShown: false }} />
+                </Stack>
+            </GlobalModalProvider>
+          </PlayerModalProvider>
+        </TabsScreenContextProvider>
+      {/* </NotificationProvider> */}
+    </SessionProvider>
   );
 }
 

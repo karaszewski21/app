@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from "react-native-safe-area-context";
 import AudiobooksScreen from '@/app/screens/resources/audiobooks'
@@ -10,6 +10,8 @@ import ReaderTextScreen from '@/app/screens/reader_text'
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
 import ReaderButton from '@/components/buttons/ReaderButton';
+import PrintoutsScreen from '@/app/screens/resources/printouts'
+import VoiceQuizesScreen from '@/app/screens/resources/voice_quizes'
 
 const ReaderStack = createStackNavigator();
 
@@ -24,6 +26,8 @@ export default function ReaderStackScreen({route}:any) {
       />
       <ReaderStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}}/>
       <ReaderStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
+      <ReaderStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
+      <ReaderStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
       <ReaderStack.Screen name="ReaderFlipper" component={ReaderFlipperScreen} options={{headerShown: false}}/>
       <ReaderStack.Screen name="ReaderText" component={ReaderTextScreen} options={{headerShown: false}}/>
     </ReaderStack.Navigator>
@@ -31,8 +35,6 @@ export default function ReaderStackScreen({route}:any) {
 }
 
 const ReaderScreen = ({ route, navigation }:any) => {
-  // const { title } = route.params
-
   const reader = {
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
@@ -46,35 +48,55 @@ const ReaderScreen = ({ route, navigation }:any) => {
   return (
     <SafeAreaView style={styles.container}>
       <BookWrapper props={reader}>
-        <View>
           <ReaderButton 
-            title="Czytanka Text"
+            title="Zacznij czytać"
             subtitle="Czas czytania: 5 min"
             onPress={() => navigation.navigate('ReaderText')}
             leftIconName="book-open-page-variant"
-            backgroundColor="#4CAF50"
-            textColor="#FFF"
+            backgroundColor="#c3d5e1"
+            textColor="#000"
             customStyles={{
-              container: { borderWidth: 1, borderColor: '#2E7D32' },
+              container: { borderWidth: 1, borderColor: '#c3d5e1' },
               title: { fontSize: 20 },
               }}
             />
           <ReaderButton 
-            title="Czytanka Image"
+            title="Zacznij czytać"
             subtitle="Czas czytania: 5 min"
             onPress={() => navigation.navigate('ReaderFlipper')}
             leftIconName="image"
-            backgroundColor="#4CAF50"
-            textColor="#FFF"
+            backgroundColor="#f5d066"
+            textColor="#000"
             customStyles={{
-              container: { borderWidth: 1, borderColor: '#2E7D32' },
+              container: { borderWidth: 1, borderColor: '#f5d066' },
               title: { fontSize: 20 },
               }}
             />
-        </View>
+          <ReaderButton 
+            title="Zacznij czytać"
+            subtitle="Czas czytania: 5 min"
+            onPress={() => navigation.navigate('ReaderFlipper')}
+            leftIconName="flag"
+            backgroundColor="#fefefe"
+            textColor="#000"
+            customStyles={{
+              container: { borderWidth: 1, borderColor: '#fefefe' },
+              title: { fontSize: 20 },
+              }}
+          />
         <View style={styles.buttons}>
-          <SquareButton props={{title: 'Quiz', icon: 'text', bookId: '', navigate: () =>  navigation.navigate('Quizes') }}></SquareButton>
-          <SquareButton props={{title: 'AudioBooks', icon: 'add', bookId: '', navigate: () => navigation.navigate('AudioBooks')}}></SquareButton>
+          <SquareButton props={{title: 'quizy', icon: 'quiz', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Quizes', { book: '' }) }}>
+            <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+          </SquareButton>
+          <SquareButton props={{title: 'audiobooki', icon: 'audiobooki', backgroundColor: '#55b1be', navigate: () => navigation.navigate('AudioBooks', { book: '' }) }}>
+            <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+          </SquareButton>
+          <SquareButton props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', navigate: () =>  navigation.navigate('Printouts', { book: '' }) }}>
+            <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+          </SquareButton>
+          <SquareButton props={{title: 'english', icon: 'english', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Langs', { book: '' }) }}>
+            <Image source={require('@/assets/icons/eng.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+          </SquareButton>
         </View>
       </BookWrapper>
     </SafeAreaView>
@@ -84,88 +106,12 @@ const ReaderScreen = ({ route, navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    paddingBottom: 50
   },
   buttons: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-around',
     marginBottom: 10,
-  },
-
-  headerContainer: {
-    padding: 20,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  headerSubtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginTop: 5,
-  },
-  listContent: {
-    padding: 16,
-  },
-  quizItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 20,
-    marginBottom: 10,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
-  },
-  quizTitle: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#333',
-  },
-  backButton: {
-    marginLeft: 15,
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  closeButton: {
-    padding: 5,
-  },
-  modalContent: {
-    flex: 1,
-    padding: 20,
-  },
-  modalText: {
-    fontSize: 16,
-    lineHeight: 24,
-  },
-  imageContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

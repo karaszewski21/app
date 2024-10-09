@@ -53,7 +53,9 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
       <View style={styles.content}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.description}>{props.description}</Text>
-        {children}
+        <View style={styles.contentButtons}>
+          {children}
+        </View>
       </View>
     </ScrollView>
   );
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
   image: {
     width: IMAGE_WIDTH,
     height: IMAGE_HEIGHT,
-    borderRadius: 10,
+    borderRadius: 15,
   },
   paginationContainer: {
     flexDirection: 'row',
@@ -100,13 +102,20 @@ const styles = StyleSheet.create({
     marginTop: -30,
 
   },
+  contentButtons: {
+    flex: 1,
+    alignItems: 'center',
+  },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'ShantellSans-SemiBoldItalic',
+    textAlign: 'center',
     marginBottom: 10,
   },
   description: {
     fontSize: 16,
+    fontFamily: 'ShantellSans-SemiBoldItalic',
+    textAlign: 'justify',
     color: '#333',
     marginBottom: 20,
   },

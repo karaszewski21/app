@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ImageBackground, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ImageBackground, Dimensions, Platform } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from '@react-navigation/stack';
 import BookStackScreen from '@/app/screens/book';
@@ -11,6 +11,7 @@ import { books } from '@/constants/Books';
 import { readers } from '@/constants/Readers';
 import { stories } from '@/constants/Stories';
 import Story from '@/components/story/StoryBasic';
+import { Video, ResizeMode, AVPlaybackStatus } from 'expo-av';
 
 const HomeStack = createStackNavigator();
 
@@ -63,12 +64,6 @@ export default function HomeScreenStack() {
   );
 }
 
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const STORY_WIDTH = 100; // Zakładana szerokość jednego Story
-const RIGHT_IMAGE_WIDTH = 120; // Szerokość obrazu po prawej stronie
-
-
 const HomeScreen = ({ navigation }: any) => {
 
   const ages = [
@@ -89,10 +84,8 @@ const HomeScreen = ({ navigation }: any) => {
 
   const keyExtractor = useCallback((item: any) => item.user_id.toString(), []);
 
-
   const renderStory = () => { 
     return ( 
-      <View style={styles.storyContainer}>
         <FlatList
           horizontal
           data={stories}
@@ -103,28 +96,14 @@ const HomeScreen = ({ navigation }: any) => {
           maxToRenderPerBatch={2}
           windowSize={5}
           removeClippedSubviews={true}
-          getItemLayout={(data, index) => ({
-            length: STORY_WIDTH,
-            offset: STORY_WIDTH * index,
-            index,
-          })}
-          contentContainerStyle={styles.listContent}
       />
-      <View style={styles.rightImageContainer}>
-        <Image 
-          source={require('@/assets/cos.png')}
-          style={styles.rightImage}
-          resizeMode="contain"
-        />
-      </View>
-    </View>
     ) 
   }
 
   const renderFilterByAgeItem = ({ item } :any) => (
     <TouchableOpacity 
         key={item.id} 
-        style={styles.storyItem}
+        style={{marginRight: 10}}
         onPress={() => navigation.navigate('Age', { id: item.id, title: item.title })}  
       >
         <Image source={{ uri: item.image }} style={styles.ageImage} />
@@ -134,21 +113,44 @@ const HomeScreen = ({ navigation }: any) => {
   const renderBookItem = (book: any) => (
     <TouchableOpacity 
       key={book.id} 
-      style={styles.bookItem}
+      style={[
+        styles.tileItem, 
+        {
+          backgroundColor: book.id === '3' ? '#f5d066' : book.id === '2' ? '#c3d5e1' : '#f5d066'
+        }
+      ]}
       onPress={() => navigation.navigate('BookDetails', { book })}
     >
-      <Image source={{ uri: book.indexUrl }} style={styles.bookImage} />
+      <Video
+        key={book.id}
+        source={{ uri: book.indexUrl ?? '' }}
+        resizeMode={ResizeMode.COVER}
+        shouldPlay={true}
+        isLooping={false}
+        style={styles.indexUrl}
+      />
     </TouchableOpacity>
   );
 
-  const renderReaderItem = (book: any) => (
+  const renderReaderItem = (reader: any) => (
     <TouchableOpacity 
-      key={book.id} 
-      style={styles.bookItem}
-      onPress={() => navigation.navigate('ReaderDetails', { id: book.id, title: book.title })}
+      key={reader.id} 
+      style={[
+        styles.tileItem, 
+        {
+          backgroundColor: reader.id === '32' ? '#a5ccba' : reader.id === '44' ? '#c3d5e1' : '#f5d066'
+        }
+      ]}
+      onPress={() => navigation.navigate('ReaderDetails', { id: reader.id, title: reader.title })}
     >
-      <Image source={{ uri: book.gallery[0] }} style={styles.bookImage} />
-      <Text style={styles.bookTitle}>{book.title}</Text>
+      <Video
+        key={reader.id}
+        source={{ uri: reader.indexUrl ?? '' }}
+        resizeMode={ResizeMode.COVER}
+        shouldPlay={true}
+        isLooping={false}
+        style={styles.indexUrl}
+      />
     </TouchableOpacity>
   );
 
@@ -157,22 +159,21 @@ const HomeScreen = ({ navigation }: any) => {
       <ScrollView style={styles.content}>
         <View style={styles.header}>
           <TouchableOpacity 
-              style={styles.button}
+              style={{width: 60, height: 60}}
               onPress={() => navigation.navigate('News')}
             >
               <Image 
                 source={{uri: 'https://goldfish.fra1.digitaloceanspaces.com/goldfish-logo.png'}} 
-                style={styles.logo}
+                style={{width: '100%', height: '100%', borderRadius: 30}}
               />
           </TouchableOpacity>
-          <Text style={styles.sectionTitle}>Witaj Patryk Karaszewski</Text>
+          <Text style={[styles.sectionTitle, { fontSize: 18, fontFamily: 'ShantellSans-SemiBoldItalic'}]}>Witaj Patryk Karaszewski</Text>
         </View>
 
 
-        <View style={styles.mainTile}>
+        <View>
             {renderStory()}
         </View>
-
         <Text style={styles.sectionTitle}>Zacznij tutaj</Text>
         <FlatList
           horizontal
@@ -181,24 +182,30 @@ const HomeScreen = ({ navigation }: any) => {
           keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
         />
-
         <Text style={styles.sectionTitle}>Najnowsze książki</Text>
-        <View style={styles.booksContainer}>
+        <View style={styles.tilesContainer}>
           {books.map(book => (
             renderBookItem(book)
           ))}
         </View>
 
         <Text style={styles.sectionTitle}>Najnowsze Czytanki</Text>
-        <View style={styles.booksContainer}>
-          {readers.map(book => (
-            renderReaderItem(book)
+        <View style={styles.tilesContainer}>
+          {readers.map(reader => (
+            renderReaderItem(reader)
           ))}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+// Kolory kafli
+// #596744 - zielny
+// #c3d5e1 - błekit
+// #fefefe - crem
+// #f5d066 - zółty
+// #a5ccba - mięta jasna
 
 const styles = StyleSheet.create({
   container: {
@@ -215,120 +222,42 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
-  mainTile: {
-    backgroundColor: '#374f69',
-    borderRadius: 16,
-    paddingTop: 16,
-    paddingBottom: 16,
-    paddingLeft: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
-    width: 300
-  },
-  mainTitle: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
- backgroundImage: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-
   storyContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  listContent: {
-    paddingRight: RIGHT_IMAGE_WIDTH, // Zapewnia miejsce na prawy obraz
-  },
-  rightImageContainer: {
-    position: 'absolute',
-    right: -95,
-    height: '100%',
-    width: RIGHT_IMAGE_WIDTH,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  rightImage: {
-    width: RIGHT_IMAGE_WIDTH,
-    height: RIGHT_IMAGE_WIDTH,
-  },
-
-
-  button: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#4CAF50', // Możesz dostosować kolor tła
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 3, // Dla cienia na Androidzie
-    shadowColor: '#000', // Dla cienia na iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    overflow: 'hidden', // Zapewnia, że logo nie wyjdzie poza okrągły kształt przycisku
-  },
-  logo: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 30, // Ten sam borderRadius co przycisk
-    resizeMode: 'cover', // Zmienione z 'contain' na 'cover' dla lepszego efektu
-  },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 24,
     margin: 10,
-  },
-
-  storyItem: {
-    marginRight: 10,
-    alignItems: 'center',
-  },
-  storyImage: {
-    width: 100,
-    height: 160,
-    borderRadius: 15,
-  },
-  storyTitle: {
-    marginTop: 5,
-    fontSize: 12,
+    fontFamily: 'ShantellSans-SemiBoldItalic'
   },
   ageImage: {
     width: 100,
     height: 100,
     borderRadius: 50,
   },
-  booksContainer: {
+  tilesContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    padding: 10,
   },
-  bookItem: {
-    width: '48%',
+  tileItem: {
+    width: 170, 
+    height: 170,
+    borderRadius: 15,
     marginBottom: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5, // To jest potrzebne dla Androida
   },
-  bookImage: {
-    width: '100%',
-    height: 150,
-    borderRadius: 10,
-  },
-  bookTitle: {
-    marginTop: 5,
-    fontSize: 14,
-    textAlign: 'center',
+  indexUrl: {
+    width: 170, 
+    height: 170,
+    borderRadius: 15,
   },
 });

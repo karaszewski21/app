@@ -11,6 +11,7 @@ import Overlay from '@/components/Overlay';
 import FunnyButton from '@/components/common/FunnyButton';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import SquareButton from '@/components/common/SquareButton';
 
 const VoiceQuizesStack = createStackNavigator();
 
@@ -48,12 +49,12 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={quizList}
-        renderItem={renderVoiceQuizItem}
-        keyExtractor={item => item.id}
-      />
+    <SafeAreaView>
+      <View style={styles.listContent}>
+        { quizList.map((item, index) =>
+          <SquareButton key={index} props={{title: item.title, icon: 'text', backgroundColor: '#3498db', navigate: () => navigation.navigate('VoiceQuiz', {quiz: item.quiz})}}/>)
+        }
+      </View>
       { params?.book && params.book.isLock &&
         <Animated.View  style={{...styles.overlayContainer,height}}>
           <Overlay opacity={0.6} style={styles.overlay}>
@@ -70,6 +71,8 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
     const { hiddenTabs, showTabs} = useTabsScreen();
     const [recording, setRecording] = useState<Audio.Recording>();
     const [permissionResponse, requestPermission] = Audio.usePermissions();
+
+    const volume = useSharedValue(0);
     const scale = useSharedValue(1);
 
     useEffect(() => {
@@ -98,7 +101,20 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
           playsInSilentModeIOS: true,
         });
 
-        const { recording } = await Audio.Recording.createAsync();
+        const { recording } = await Audio.Recording.createAsync(
+          Audio.RecordingOptionsPresets.HIGH_QUALITY,
+          (status) => {
+            if (status.metering !== undefined) {
+              // Normalizujemy wartość metering do zakresu 0-1
+              console.log('--->')
+              volume.value = withTiming(Math.min(Math.max(status.metering / -160 + 1, 0), 1), {
+                duration: 100,
+                easing: Easing.inOut(Easing.ease),
+              });
+            }
+          },
+          100
+        );
         setRecording(recording);
 
       } catch (err) {
@@ -143,17 +159,33 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
   
     return (
       <SafeAreaView style={styles.container}>
-         <Animated.View style={[styles.waveCircle, animatedStyles]} />
-          <TouchableOpacity style={styles.micButton} onPress={toggleRecording}>
+
+        { recording && 
+          <>
+            <Animated.View style={[styles.waveCircle, animatedStyles]} />
+            <TouchableOpacity style={styles.micButton} onPress={stopRecording}>
             <MaterialCommunityIcons 
-              name={"microphone"} 
+              name={"stop"} 
               size={50} 
               color="#FFFFFF" 
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.speakerButton}>
-            <MaterialCommunityIcons name="speaker" size={30} color="#FFFFFF" />
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </>
+        }
+        { !recording && 
+          <>
+            <TouchableOpacity style={styles.micButton} onPress={startRecording}>
+            <MaterialCommunityIcons 
+              name={"play"} 
+              size={50} 
+              color="#FFFFFF" 
+            />
+            </TouchableOpacity>
+          </>
+        }
+        <TouchableOpacity style={styles.speakerButton}>
+          <MaterialCommunityIcons name="speaker" size={30} color="#FFFFFF" />
+        </TouchableOpacity>
       </SafeAreaView>  
     )
   }
@@ -164,6 +196,12 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
       height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    listContent: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      marginBottom: 10,
     },
     waveCircle: {
       position: 'absolute',

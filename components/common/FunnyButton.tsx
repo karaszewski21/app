@@ -30,7 +30,7 @@ const FunnyButton: React.FC<FunnyButtonProps> = ({props}) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    borderRadius: 25,
+    borderRadius: 15,
     overflow: 'hidden',
     elevation: 5,
     shadowColor: '#000',

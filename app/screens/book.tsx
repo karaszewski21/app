@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, StyleSheet} from 'react-native';
+import { View, StyleSheet, Image} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import AudiobooksScreen from '@/app/screens/resources/audiobooks'
@@ -11,7 +11,7 @@ import LangsStack from '@/app/screens/resources/langs'
 
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
-import FunnyButton from '@/components/common/FunnyButton';
+import BookButton from '@/components/buttons/BookButton';
 
 const BookStack = createStackNavigator();
 
@@ -36,18 +36,47 @@ export default function BookStackScreen({route}:any) {
 const BookScreen = ({ route, navigation }:any) => {
   const { book } = route.params;
 
-
   return (
     <SafeAreaView style={styles.container}>
       <BookWrapper props={book}>
-        <FunnyButton props={{title:'kup',onPress: () => console.log('--->buy'), icon: ''}}></FunnyButton>
-        <FunnyButton props={{title:'odblokuj',onPress: () => console.log('--->odblokuj'), icon: ''}}></FunnyButton>
+        <BookButton 
+          title="Kup teraz"
+          onPress={() => navigation.navigate('ReaderText')}
+          leftIconName="book-open-page-variant"
+          backgroundColor="#c45c48"
+          textColor="#fff"
+          customStyles={{
+            container: { borderWidth: 1, borderColor: '#c83c45' },
+            title: { fontSize: 20 },
+            }}
+          />
+        <BookButton 
+          title="Odblokuj książkę"
+          onPress={() => navigation.navigate('ReaderFlipper')}
+          leftIconName="image"
+          backgroundColor="#f5d066"
+          textColor="#000"
+          customStyles={{
+            container: { borderWidth: 1, borderColor: '#f5d066' },
+            title: { fontSize: 20 },
+            }}
+          />
         <View style={styles.buttons}>
-          <SquareButton props={{title: 'Quiz', icon: 'text', navigate: () =>  navigation.navigate('Quizes', { book }) }}></SquareButton>
-          <SquareButton props={{title: 'AudioBooks', icon: 'add', navigate: () => navigation.navigate('AudioBooks', { book }) }}></SquareButton>
-          <SquareButton props={{title: 'Wydruki', icon: 'print', navigate: () =>  navigation.navigate('Printouts', { book }) }}></SquareButton>
-          <SquareButton props={{title: 'Quiz głosowy', icon: 'add', navigate: () => navigation.navigate('VoiceQuizes', { book }) }}></SquareButton>
-          <SquareButton props={{title: 'Angalski', icon: 'flag', navigate: () => navigation.navigate('Langs', { book }) }}></SquareButton>
+          <SquareButton props={{title: 'quizy', icon: 'text', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Quizes', { book }) }}>
+            <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+          </SquareButton>
+          <SquareButton props={{title: 'audiobooki', icon: 'add', backgroundColor: '#55b1be', navigate: () => navigation.navigate('AudioBooks', { book }) }}>
+            <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+          </SquareButton>
+          <SquareButton props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', navigate: () =>  navigation.navigate('Printouts', { book }) }}>
+            <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+          </SquareButton>
+          <SquareButton props={{title: 'quiz głosowy', icon: 'add',  backgroundColor: '#55b1be', navigate: () => navigation.navigate('VoiceQuizes', { book }) }}>
+            <Image source={require('@/assets/quizvoice.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+          </SquareButton>
+          <SquareButton props={{title: 'english', icon: 'flag', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Langs', { book }) }}>
+            <Image source={require('@/assets/icons/eng.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+          </SquareButton>
         </View>
       </BookWrapper>
     </SafeAreaView>
@@ -57,6 +86,7 @@ const BookScreen = ({ route, navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 50
   },
   buttons: {
     flexDirection: 'row',
