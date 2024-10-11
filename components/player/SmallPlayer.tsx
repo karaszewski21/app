@@ -139,7 +139,7 @@ const VideoPlayer = () => {
             source={require('@/assets/background.jpg')}
             style={styles.bgVideo}
             resizeMode='cover'
-            imageStyle={{ borderRadius: 25}}
+            imageStyle={{ borderRadius: 15}}
           >
             { showMore && 
               <View style={styles.videoHeaderContainer}>
@@ -219,7 +219,7 @@ const VideoPlayer = () => {
                 style={styles.bgVideo}
                 resizeMode='cover'
                 blurRadius={20}
-                imageStyle={{ borderRadius: 25}}
+                imageStyle={{ borderRadius: 15}}
               >
               <View style={styles.headerPlayerContainer}>
                   <Image source={{ uri: record?.imageUrl }} style={styles.image} />
@@ -259,7 +259,7 @@ const VideoPlayer = () => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    borderRadius: 25,
+    borderRadius: 15,
     borderCurve: 'continuous',
     shadowColor: 'black',
     shadowOffset: {width: 0, height: 10},
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
   bgPlayer: {
     flex: 1,
     resizeMode: 'cover',
-    borderRadius: 25
+    borderRadius: 15
   },
 
 
@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
 
   videoPlayButton: {
     backgroundColor: '#e5ae2f',
-    borderRadius: 25,
+    borderRadius: 15,
     width: 200,
     height: 50,
     justifyContent: 'center',

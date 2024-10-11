@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, ScrollView, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from "react-native-safe-area-context";
 import AudiobooksScreen from '@/app/screens/resources/audiobooks'
@@ -47,58 +47,57 @@ const ReaderScreen = ({ route, navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <BookWrapper props={reader}>
-          <ReaderButton 
-            title="Zacznij czytać"
-            subtitle="Czas czytania: 5 min"
-            onPress={() => navigation.navigate('ReaderText')}
-            leftIconName="book-open-page-variant"
-            backgroundColor="#c3d5e1"
-            textColor="#000"
-            customStyles={{
-              container: { borderWidth: 1, borderColor: '#c3d5e1' },
-              title: { fontSize: 20 },
-              }}
-            />
-          <ReaderButton 
-            title="Zacznij czytać"
-            subtitle="Czas czytania: 5 min"
-            onPress={() => navigation.navigate('ReaderFlipper')}
-            leftIconName="image"
-            backgroundColor="#f5d066"
-            textColor="#000"
-            customStyles={{
-              container: { borderWidth: 1, borderColor: '#f5d066' },
-              title: { fontSize: 20 },
-              }}
-            />
-          <ReaderButton 
-            title="Zacznij czytać"
-            subtitle="Czas czytania: 5 min"
-            onPress={() => navigation.navigate('ReaderFlipper')}
-            leftIconName="flag"
-            backgroundColor="#fefefe"
-            textColor="#000"
-            customStyles={{
-              container: { borderWidth: 1, borderColor: '#fefefe' },
-              title: { fontSize: 20 },
-              }}
-          />
-        <View style={styles.buttons}>
-          <SquareButton props={{title: 'quizy', icon: 'quiz', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Quizes', { book: '' }) }}>
-            <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-          </SquareButton>
-          <SquareButton props={{title: 'audiobooki', icon: 'audiobooki', backgroundColor: '#55b1be', navigate: () => navigation.navigate('AudioBooks', { book: '' }) }}>
-            <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-          </SquareButton>
-          <SquareButton props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', navigate: () =>  navigation.navigate('Printouts', { book: '' }) }}>
-            <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-          </SquareButton>
-          <SquareButton props={{title: 'english', icon: 'english', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Langs', { book: '' }) }}>
-            <Image source={require('@/assets/icons/eng.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-          </SquareButton>
-        </View>
-      </BookWrapper>
+      <ScrollView>
+        <BookWrapper props={reader}>
+            <ReaderButton 
+               props={{
+                title:"Zacznij czytać",
+                subtitle:"Czas czytania: 5 min", 
+                onPress:() => navigation.navigate('ReaderText'),
+                backgroundColor:"#c3d5e1",
+                textColor:"#000"
+             }}
+            >
+              <Image source={require('@/assets/icons/book.png')} style={{width: 50, height: 50}} resizeMode='contain'/> 
+            </ReaderButton>
+            <ReaderButton 
+               props={{
+                title:"Zacznij czytać",
+                subtitle:"Czas czytania: 5 min", 
+                onPress:() =>navigation.navigate('ReaderFlipper'),
+                backgroundColor:"#f5d066",
+                textColor:"#000"
+             }}
+            >
+              <Image source={require('@/assets/icons/book-image.png')} style={{width: 50, height: 50}} resizeMode='contain'/> 
+            </ReaderButton>
+            <ReaderButton 
+               props={{
+                title:"Zacznij czytać",
+                subtitle:"Czas czytania: 5 min", 
+                onPress:() => navigation.navigate('ReaderFlipper'),
+                backgroundColor:"#a5ccba",
+                textColor:"#000"
+             }}
+            >
+              <Image source={require('@/assets/icons/uk.png')} style={{width: 50, height: 50}} resizeMode='contain'/> 
+            </ReaderButton>
+          <View style={styles.buttons}>
+            <SquareButton props={{title: 'quizy', icon: 'quiz', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Quizes', { book: '' }) }}>
+              <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+            </SquareButton>
+            <SquareButton props={{title: 'audiobooki', icon: 'audiobooki', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('AudioBooks', { book: '' }) }}>
+              <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+            </SquareButton>
+            <SquareButton props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', color: '#fff', navigate: () =>  navigation.navigate('Printouts', { book: '' }) }}>
+              <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+            </SquareButton>
+            {/* <SquareButton props={{title: 'english', icon: 'english', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Langs', { book: '' }) }}>
+              <Image source={require('@/assets/icons/eng.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+            </SquareButton> */}
+          </View>
+        </BookWrapper>
+      </ScrollView>
     </SafeAreaView>
   );
 }

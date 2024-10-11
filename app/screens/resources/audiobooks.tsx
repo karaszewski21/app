@@ -1,4 +1,5 @@
-import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
 import { audiobook } from '@/constants/Audiobook';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect, useState } from 'react';
@@ -41,23 +42,55 @@ const AudiobooksScreen = ({route, navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Text>{audiobook.title}</Text>
-        <Image source={{ uri: audiobook.image }} style={styles.image}/>
-      </View>
-      <View style={styles.listContent}>
-        { versions.map((item, index) =>
-          <SquareButton key={index} props={{title: item.type, icon: 'text', backgroundColor: '#3498db', navigate: () => openAudioBookItem(item)}}/>)
+      <ScrollView>
+        <View style={styles.bookDetailsContainer}>
+          <Text style={styles.title}>Audiobooki</Text>
+          <Image style={styles.image} source={{ uri: audiobook.image }}></Image>
+        </View>
+        <View style={styles.listContent}>
+          { versions.map((item, index) =>
+            <SquareButton key={index} props={{title: '', icon: 'text', backgroundColor: '#55b1be', navigate: () => openAudioBookItem(item)}}>
+              { item.type === 'pl' && 
+                <View style={{flex: 1, alignItems: 'center'}}>
+                  <Text style={styles.tileTitle}>{item.name}</Text>
+                  <Image source={require('@/assets/icons/pl.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
+                  <View style={styles.tilePlayContent}>
+                    <Text style={{...styles.tileTitle, marginRight: 5, color: '#fff'}}>słuchaj</Text>
+                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} resizeMode='contain'/> 
+                  </View> 
+                </View>
+              }
+              { item.type === 'uk' && 
+                <View style={{flex: 1, alignItems: 'center'}}>
+                  <Text style={styles.tileTitle}>{item.name}</Text>
+                  <Image source={require('@/assets/icons/uk.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
+                  <View style={styles.tilePlayContent}>
+                    <Text style={{...styles.tileTitle, marginRight: 5, color: '#fff'}}>słuchaj</Text>
+                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} resizeMode='contain'/> 
+                  </View> 
+                </View>}
+              { item.type === 'pl-uk' && 
+                <View style={{flex: 1, alignItems: 'center'}}>
+                  <Text style={styles.tileTitle}>{item.name}</Text>
+                  <Image source={require('@/assets/icons/pl-uk.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
+                  <View style={styles.tilePlayContent}>
+                    <Text style={{...styles.tileTitle, marginRight: 5, color: '#fff'}}>słuchaj</Text>
+                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} resizeMode='contain'/> 
+                  </View> 
+                </View>
+              }
+            </SquareButton>)
+          }
+        </View>
+        { params?.book && params.book.isLock &&
+          <Animated.View  style={{...styles.overlayContainer,height}}>
+            <Overlay opacity={0.6} style={styles.overlay}>
+              <FunnyButton props={{title:'kup', onPress:()=> {console.log('--->buy')}, icon: ''}}></FunnyButton>
+              <FunnyButton props={{title:'odblokuj', onPress:()=> {console.log('--->loout')}, icon: ''}}></FunnyButton>
+            </Overlay> 
+          </Animated.View>
         }
-      </View>
-      { params?.book && params.book.isLock &&
-        <Animated.View  style={{...styles.overlayContainer,height}}>
-          <Overlay opacity={0.6} style={styles.overlay}>
-            <FunnyButton props={{title:'kup', onPress:()=> {console.log('--->buy')}, icon: ''}}></FunnyButton>
-            <FunnyButton props={{title:'odblokuj', onPress:()=> {console.log('--->loout')}, icon: ''}}></FunnyButton>
-          </Overlay> 
-        </Animated.View>
-      }
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -65,11 +98,25 @@ const AudiobooksScreen = ({route, navigation }:any) => {
     container: {
       flex: 1,
       height: '100%',
+      paddingBottom: 50
+    },
+    bookDetailsContainer: {
+      margin: 10,
     },
     title: {
-      fontSize: 18,
-      fontWeight: '500',
-      color: '#333',
+      fontSize: 28,
+      textAlign: 'center',
+      fontFamily: 'ShantellSans-SemiBoldItalic'
+    },
+    tileTitle: {
+      fontSize: 16,
+      textAlign: 'center',
+      fontFamily: 'ShantellSans-SemiBoldItalic'
+    },
+    tilePlayContent: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     listContent: {
       flexDirection: 'row',
@@ -78,8 +125,8 @@ const AudiobooksScreen = ({route, navigation }:any) => {
       marginBottom: 10,
     },
     image: {
-      width: 200,
       height: 200,
+      width: '100%',
       borderRadius: 15,
       shadowColor: "#000",
       shadowOffset: {

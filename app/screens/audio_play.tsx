@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Image, TouchableOpacity, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { usePlayerModal } from '@/context/playerModalContext';
 import { SafeAreaView } from "react-native-safe-area-context";
-import AudiobooksScreen from '@/app/screens/resources/audiobooks'
+import PrintoutsScreen from '@/app/screens/resources/printouts'
 import QuizesScreen from '@/app/screens/resources/quizes'
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
+import PlayButton from '@/components/buttons/PlayButton';
 
 const AudioPlayStack = createStackNavigator();
 
@@ -20,12 +21,13 @@ export default function AudioPlayStackScreen({route}:any) {
         initialParams={route.params}
       />
       <AudioPlayStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}}/>
+      <AudioPlayStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
     </AudioPlayStack.Navigator>
   );
 }
 
 const AudioPlayScreen = ({ route, navigation }:any) => {
-  // const { title } = route.params
+  const { openPlayer } = usePlayerModal()
 
   const audiplay = {
     gallery: [ 
@@ -34,17 +36,91 @@ const AudioPlayScreen = ({ route, navigation }:any) => {
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg'
     ],
     title: "Tytuł Słuchowska",
-    description: "Opis Słuchowska"
+    description: "Opis Słuchowska",
+    versions: [
+      {
+        type: "pl",
+        name: 'Wiosna',
+        ageGroup: "adult",
+        narrator: "Anna Nowak",
+        duration: 36000, // w sekundach
+        isAbridged: false,
+        hasMusic: false,
+        isDramatized: false,
+        audioFile: "https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4"
+      },
+      {
+        type: "uk",
+        name: 'Wiosna',
+        ageGroup: "young-adult",
+        cast: ["Piotr Nowak", "Maria Kowalska", "Jan Wiśniewski"],
+        duration: 40000,
+        isAbridged: false,
+        hasMusic: true,
+        isDramatized: true,
+        audioFile: "https://goldfish.fra1.digitaloceanspaces.com/Dawid%20Podsiadlo%20-%20Ma%C5%82omiasteczkowy.mp4"
+      },
+    ]
   }
+
+  const versions = audiplay.versions;
+
+  const openAudio = (version: any) => {
+    openPlayer({
+      title: version.type,
+      fileUrl: version.audioFile,
+      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_modern_vibrant_social_media_post_featuring_3.jpg'
+    })
+}
 
   return (
     <SafeAreaView style={styles.container}>
-      <BookWrapper props={audiplay}>
-        <Text>Play słuchowsko</Text>
-        <View style={styles.buttons}>
-          <SquareButton props={{title: 'Quiz', icon: 'text', bookId: '', navigate: () =>  navigation.navigate('Quizes') }}></SquareButton>
-        </View>
-      </BookWrapper>
+      <ScrollView>
+        <BookWrapper props={audiplay}>
+          {
+            versions.map((item, index) => 
+              <>
+                { item.type === 'pl' &&  
+                  <PlayButton 
+                      key={index}
+                      props={{
+                      title:"Zacznij słuchać",
+                      subtitle:"Czas słuchowiska: 5 min", 
+                      onPress:() => openAudio(item),
+                      backgroundColor:"#c3d5e1",
+                      textColor:"#000"
+                    }}
+                  >
+                    <Image source={require('@/assets/icons/pl.png')} style={{width: 30, height: 30}} resizeMode='contain'/> 
+                  </PlayButton>
+                }
+              { item.type === 'uk' &&
+                  <PlayButton 
+                    key={index}
+                    props={{
+                      title:"Zacznij słuchać",
+                      subtitle:"Czas słuchowiska: 5 min", 
+                      onPress:() => openAudio(item),
+                      backgroundColor:"#f5d066",
+                      textColor:"#000"
+                    }}
+                  >
+                    <Image source={require('@/assets/icons/uk.png')} style={{width: 30, height: 30}} resizeMode='contain'/> 
+                  </PlayButton>
+                }
+              </>
+            )
+          }
+          <View style={styles.buttons}>
+            <SquareButton props={{title: 'quizy', icon: 'quiz', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Quizes', { book: '' })}}>
+              <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+            </SquareButton>
+            <SquareButton props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', color: '#fff', navigate: () =>  navigation.navigate('Printouts', { book: '' }) }}>
+              <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+            </SquareButton>
+          </View>
+        </BookWrapper>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -52,7 +128,7 @@ const AudioPlayScreen = ({ route, navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    paddingBottom: 50
   },
   buttons: {
     flexDirection: 'row',

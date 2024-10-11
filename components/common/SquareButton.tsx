@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-
 interface SquareButtonProps {
     props: {
         title: string;
         icon: string;
+        color?: string,
         backgroundColor?: string,
         navigate: () => void;
       };  
@@ -15,26 +14,6 @@ interface SquareButtonProps {
 const SquareButton: React.FC<SquareButtonProps> = ({ props, children }: SquareButtonProps) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
-//   useEffect(() => {
-//     const oscillate = Animated.loop(
-//       Animated.sequence([
-//         Animated.timing(scaleAnim, {
-//           toValue: 1.05,
-//           duration: 2000,
-//           useNativeDriver: true,
-//         }),
-//         Animated.timing(scaleAnim, {
-//           toValue: 1,
-//           duration: 2000,
-//           useNativeDriver: true,
-//         }),
-//       ])
-//     );
-//     oscillate.start();
-
-//     return () => oscillate.stop();
-//   }, [scaleAnim]);
-
   return (
     <Animated.View style={[styles.buttonContainer, { transform: [{ scale: scaleAnim }] }]}>
       <TouchableOpacity 
@@ -43,7 +22,7 @@ const SquareButton: React.FC<SquareButtonProps> = ({ props, children }: SquareBu
         onPress={() => props.navigate()}
       >
         {children}
-        <Text style={styles.buttonTitle}>{props.title}</Text>
+        <Text style={[styles.buttonTitle, {color: props.color}]}>{props.title}</Text>
       </TouchableOpacity>
     </Animated.View>
   );
@@ -57,7 +36,6 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-  //  backgroundColor: '#3498db',
     borderRadius: 15,
     justifyContent: 'space-between',
     alignItems: 'center',

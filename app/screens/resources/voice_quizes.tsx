@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, TouchableOpacity, StyleSheet,FlatList } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Quiz from '@/components/quiz/Quiz'
 import { quiz, quiz2 } from '@/constants/Quiz';
@@ -12,6 +12,7 @@ import FunnyButton from '@/components/common/FunnyButton';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import SquareButton from '@/components/common/SquareButton';
+import ListWrapper from '@/components/common/ListWrapper';
 
 const VoiceQuizesStack = createStackNavigator();
 
@@ -29,8 +30,7 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
   const height = useSharedValue(0);
 
   const quizList = [
-    { id: '1', title: 'Quiz głosowy 1', quiz: quiz},
-    { id: '2', title: 'Quiz głosowy 2', quiz: quiz2}
+    { id: '1', title: 'Zagraj', quiz: quiz}
   ];
 
   useEffect(() => {
@@ -50,10 +50,25 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
 
   return (
     <SafeAreaView>
+      <View style={styles.quizVoiceDetailsContainer}>
+      <Text style={styles.title}>Słuchaj i odpowiadaj</Text>
+        <Image style={styles.image} source={{uri: 'https://goldfish.fra1.digitaloceanspaces.com/goldfish-logo.png'}}></Image>
+      </View>
       <View style={styles.listContent}>
         { quizList.map((item, index) =>
-          <SquareButton key={index} props={{title: item.title, icon: 'text', backgroundColor: '#3498db', navigate: () => navigation.navigate('VoiceQuiz', {quiz: item.quiz})}}/>)
+          <SquareButton key={index} props={{title: item.title, icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: ()=>navigation.navigate('VoiceQuiz', {quiz: item.quiz})}}>
+            <Image source={require('@/assets/icons/play.png')} style={{width: 80, height: 80}} resizeMode='contain'/>
+          </SquareButton>)
         }
+      </View>
+      <View style={styles.rankingContainer}>
+        <ListWrapper props={{title: 'Jak zacząć?'}}>
+          <View style={styles.stepContainer}>
+            <Text style={styles.step}>1. Wybierz nagranie</Text>
+            <Text style={styles.step}>2. Słuchaj uważnie pytania</Text>
+            <Text style={styles.step}>3. Odpowiedz pomiędzy</Text>
+          </View>
+        </ListWrapper>
       </View>
       { params?.book && params.book.isLock &&
         <Animated.View  style={{...styles.overlayContainer,height}}>
@@ -197,6 +212,40 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
       justifyContent: 'center',
       alignItems: 'center',
     },
+    tileTitle: {
+      fontSize: 16,
+      textAlign: 'center',
+      fontFamily: 'ShantellSans-SemiBoldItalic'
+    },
+    quizVoiceDetailsContainer: {
+      margin: 10,
+    },
+    title: {
+      fontSize: 28,
+      textAlign: 'center',
+      fontFamily: 'ShantellSans-SemiBoldItalic'
+    },
+    image: {
+      height: 200,
+      width: '100%',
+      borderRadius: 15,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 5,
+      },
+      shadowOpacity: 0.34,
+      shadowRadius: 6.27,
+      elevation: 10,
+    },
+    rankingContainer: {
+      padding: 20,
+    },
+    ranking: {
+      fontSize: 24,
+      textAlign: 'center',
+      fontFamily: 'ShantellSans-SemiBoldItalic'
+    },
     listContent: {
       flexDirection: 'row',
       flexWrap: 'wrap',
@@ -226,6 +275,14 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
       backgroundColor: '#768570',
       padding: 10,
       borderRadius: 25,
+    },
+    stepContainer: {
+      marginTop: 5,
+    },
+    step: {
+      fontSize: 14,
+      color: '#333',
+      marginBottom: 5,
     },
     overlayContainer: {
       position: 'absolute',

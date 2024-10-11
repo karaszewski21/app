@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList, NativeScrollPoint } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import BookScreen from '@/app/screens/book';
 import ListItem from '@/components/common/ListItem';
 import useFavorite from '@/hooks/useFavorite';
 import { books } from '@/constants/Books';
+import Banner from '@/components/common/Banner';
+import Filter from '@/components/common/Filter';
+import { BANNER_HEIGHT } from '@/constants/Common';
 
 const BooksStack = createStackNavigator();
 
@@ -21,6 +24,15 @@ export default function BooksStackScreen() {
 
 const BooksScreen = ({ navigation }:any) => {
   const { isFavorite, addFavorite, removeFavorite } = useFavorite();
+  const [ hiddenBanner, setHiddenBanner] = useState<boolean>(false)
+
+  const scrollList = ({x, y}: NativeScrollPoint) => {
+    if (y >= BANNER_HEIGHT) {
+      setHiddenBanner(true)
+    } else {
+      setHiddenBanner(false)
+    }
+  }
 
   const popupRating = () => {
 
@@ -54,11 +66,14 @@ const BooksScreen = ({ navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
+      <Filter hidden={hiddenBanner}/>
       <FlatList
           data={books}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           contentContainerStyle={styles.listContent}
+          onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
         />
     </SafeAreaView>
   );
@@ -67,58 +82,11 @@ const BooksScreen = ({ navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 50
   },
   listContent: {
-    padding: 16,
-  },
-  scrollView: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  close: {
-    backgroundColor: '#3498db',
-    padding: 5,
-    borderRadius: 10,
-    marginBottom: 20,
-    alignItems: 'center',
-  },
-  tile: {
-    backgroundColor: '#3498db',
-    padding: 20,
-    borderRadius: 10,
-    marginBottom: 20,
-    alignItems: 'center',
-  },
-  tileText: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  screenContainer: {
-    flex: 1,
-  },
-  contentContainer: {
-    padding: 20,
-  },
-  closeButton: {
-    padding: 10,
-    marginRight: 10,
-  },
-  closeButtonText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-
-  bookItem: {
-    padding: 16,
-    backgroundColor: '#f0f0f0',
-    marginBottom: 8,
-    borderRadius: 8,
-  },
-  bookTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: BANNER_HEIGHT,
   },
 });

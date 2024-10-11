@@ -62,19 +62,19 @@ const BookScreen = ({ route, navigation }:any) => {
             }}
           />
         <View style={styles.buttons}>
-          <SquareButton props={{title: 'quizy', icon: 'text', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Quizes', { book }) }}>
+          <SquareButton props={{title: 'quizy', icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Quizes', { book }) }}>
             <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
           </SquareButton>
-          <SquareButton props={{title: 'audiobooki', icon: 'add', backgroundColor: '#55b1be', navigate: () => navigation.navigate('AudioBooks', { book }) }}>
+          <SquareButton props={{title: 'audiobooki', icon: 'add', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('AudioBooks', { book }) }}>
             <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
           </SquareButton>
-          <SquareButton props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', navigate: () =>  navigation.navigate('Printouts', { book }) }}>
+          <SquareButton props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', color: '#fff', navigate: () =>  navigation.navigate('Printouts', { book }) }}>
             <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
           </SquareButton>
-          <SquareButton props={{title: 'quiz głosowy', icon: 'add',  backgroundColor: '#55b1be', navigate: () => navigation.navigate('VoiceQuizes', { book }) }}>
+          <SquareButton props={{title: 'słuchaj i odpowiadaj', icon: 'add',  backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('VoiceQuizes', { book }) }}>
             <Image source={require('@/assets/quizvoice.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
           </SquareButton>
-          <SquareButton props={{title: 'english', icon: 'flag', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Langs', { book }) }}>
+          <SquareButton props={{title: 'angielski', icon: 'flag', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Langs', { book }) }}>
             <Image source={require('@/assets/icons/eng.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
           </SquareButton>
         </View>
