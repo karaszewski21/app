@@ -41,7 +41,6 @@ const TabBar = ({ state, descriptors, navigation }) => {
             return (
               <TabBarButton 
                 key={route.name}
-                style={styles.tabbarItem}
                 onPress={onPress}
                 onLongPress={onLongPress}
                 isFocused={isFocused}
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 10},
         shadowRadius: 10,
         shadowOpacity: 0.1,
-    }
+    } 
 })
 
 export default TabBar

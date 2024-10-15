@@ -8,6 +8,7 @@ import QuizesScreen from '@/app/screens/resources/quizes'
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
 import PlayButton from '@/components/buttons/PlayButton';
+import { AudioPlay } from '@/model';
 
 const AudioPlayStack = createStackNavigator();
 
@@ -26,44 +27,11 @@ export default function AudioPlayStackScreen({route}:any) {
   );
 }
 
-const AudioPlayScreen = ({ route, navigation }:any) => {
-  const { openPlayer } = usePlayerModal()
+const AudioPlayScreen = ({ route, navigation } : any) => {
+  const audioplay = route.params.audioplay as AudioPlay;
+  const { openPlayer } = usePlayerModal();
+  const versions = audioplay.versions;
 
-  const audiplay = {
-    gallery: [ 
-      'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
-      'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
-      'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg'
-    ],
-    title: "Tytuł Słuchowska",
-    description: "Opis Słuchowska",
-    versions: [
-      {
-        type: "pl",
-        name: 'Wiosna',
-        ageGroup: "adult",
-        narrator: "Anna Nowak",
-        duration: 36000, // w sekundach
-        isAbridged: false,
-        hasMusic: false,
-        isDramatized: false,
-        audioFile: "https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4"
-      },
-      {
-        type: "uk",
-        name: 'Wiosna',
-        ageGroup: "young-adult",
-        cast: ["Piotr Nowak", "Maria Kowalska", "Jan Wiśniewski"],
-        duration: 40000,
-        isAbridged: false,
-        hasMusic: true,
-        isDramatized: true,
-        audioFile: "https://goldfish.fra1.digitaloceanspaces.com/Dawid%20Podsiadlo%20-%20Ma%C5%82omiasteczkowy.mp4"
-      },
-    ]
-  }
-
-  const versions = audiplay.versions;
 
   const openAudio = (version: any) => {
     openPlayer({
@@ -71,12 +39,12 @@ const AudioPlayScreen = ({ route, navigation }:any) => {
       fileUrl: version.audioFile,
       imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_modern_vibrant_social_media_post_featuring_3.jpg'
     })
-}
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <BookWrapper props={audiplay}>
+        <BookWrapper props={audioplay}>
           {
             versions.map((item, index) => 
               <>
@@ -94,7 +62,7 @@ const AudioPlayScreen = ({ route, navigation }:any) => {
                     <Image source={require('@/assets/icons/pl.png')} style={{width: 30, height: 30}} resizeMode='contain'/> 
                   </PlayButton>
                 }
-              { item.type === 'uk' &&
+              { item.type === 'eng' &&
                   <PlayButton 
                     key={index}
                     props={{

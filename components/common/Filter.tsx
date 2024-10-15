@@ -6,8 +6,6 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
 } from 'react-native-reanimated';
-import { BANNER_HEIGHT } from '@/constants/Common';
-
 interface FilterProps {
   filter?: () => any;
   hidden: boolean
@@ -32,10 +30,10 @@ const Filter: React.FC<FilterProps> = ({ filter, hidden }) => {
         <View style={styles.searchContainer}>
           <View style={styles.searchInputContainer}>
             <MaterialCommunityIcons 
-                        name={"book-search-outline"} 
-                        size={24} 
-                        color="#000" 
-                      />
+                name={"book-search-outline"} 
+                size={24} 
+                color="#000" 
+              />
             <TextInput
               style={styles.searchInput}
               placeholder="Szukaj..."
@@ -44,10 +42,10 @@ const Filter: React.FC<FilterProps> = ({ filter, hidden }) => {
           </View>
           <TouchableOpacity style={styles.filterButton}>
             <MaterialCommunityIcons 
-                        name={"menu"} 
-                        size={24} 
-                        color="#fff" 
-                      />
+                name={"menu"} 
+                size={24} 
+                color="#fff" 
+              />
           </TouchableOpacity>
         </View>
       </View>
@@ -64,7 +62,7 @@ const styles = StyleSheet.create({
       top: 130,
       left: 0,
       right: 0,
-      height: BANNER_HEIGHT,
+      height: 50,
       zIndex: 1,
     },
     searchContainer: {

@@ -6,9 +6,11 @@ import { useSession } from '@/context/authContext';
 import { usePlayerModal } from '@/context/playerModalContext';
 import { useNotification } from '@/context/notificationContext';
 import { router } from "expo-router";
+import useFavorite from '@/hooks/useFavorite';
 
 export default function ProfileScreen() {
   const [notificationsDisabled, setNotificationsDisabled] = useState(true);
+  const { removeAllFavorites } = useFavorite();
   const [storiesDisabled, setStoriesDisabled] = useState(false);
   const { signOut } = useSession();
   const { logout } = useNotification()
@@ -54,10 +56,13 @@ export default function ProfileScreen() {
           />
         </View>
       </View>
-
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Ionicons name="log-out-outline" size={24} color="white" />
         <Text style={styles.logoutText}>Wyloguj się</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.logoutButton} onPress={() => removeAllFavorites()}>
+        <Ionicons name="log-out-outline" size={24} color="white" />
+        <Text style={styles.logoutText}>Remove all</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

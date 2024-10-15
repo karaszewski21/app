@@ -116,7 +116,7 @@ export interface StoryCircleListItemProps extends SharedCircleListProps {
 export interface StoryListItemProps {
   /** Index of story  */
   index: number;
-  key: number;
+  key2: number;
   /** ID of the user - IUserStory.user_id */
   userId: number;
   /** Name of the user - IUserStory.user_name */

@@ -35,15 +35,7 @@ export default function ReaderStackScreen({route}:any) {
 }
 
 const ReaderScreen = ({ route, navigation }:any) => {
-  const reader = {
-    gallery: [ 
-      'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
-      'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
-      'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg'
-    ],
-    title: "Tytuł Czytanki",
-    description: "Opis Czytanki"
-  }
+  const { reader } = route.params;
 
   return (
     <SafeAreaView style={styles.container}>

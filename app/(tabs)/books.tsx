@@ -9,6 +9,7 @@ import { books } from '@/constants/Books';
 import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
 import { BANNER_HEIGHT } from '@/constants/Common';
+import { Book } from '@/model';
 
 const BooksStack = createStackNavigator();
 
@@ -38,12 +39,12 @@ const BooksScreen = ({ navigation }:any) => {
 
   }
 
-  const favoriteBookPress = (id: string) => {
-    const isFav = isFavorite(id);
+  const favoriteBookPress = (item: Book) => {
+    const isFav = isFavorite(item.id);
     if (!isFav) {
-      addFavorite({id, type: 'book'}) 
+      addFavorite(item) 
     } else {
-      removeFavorite(id)
+      removeFavorite(item.id)
     }
   }
   
@@ -51,7 +52,7 @@ const BooksScreen = ({ navigation }:any) => {
      const { id } = item; 
     
     return(
-    <ListItem props={{
+      <ListItem props={{
         title: item.title,
         imageUrl: item.gallery[0],
         onRatingPress:popupRating,
@@ -59,9 +60,9 @@ const BooksScreen = ({ navigation }:any) => {
         rating: 4,
         reviewCount: 4,
         isFavorite: isFavorite(id),
-        onFavoritePress:() => favoriteBookPress(id)
+        onFavoritePress:() => favoriteBookPress(item)
       }}
-    />) 
+      />) 
   }
 
   return (
@@ -87,6 +88,6 @@ const styles = StyleSheet.create({
   listContent: {
     paddingLeft: 15,
     paddingRight: 15,
-    paddingTop: BANNER_HEIGHT,
+    marginTop: BANNER_HEIGHT
   },
 });

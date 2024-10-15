@@ -10,12 +10,11 @@ interface ItemProps {
     reviewCount: number;
     onPress: () => void;
     onRatingPress: () => void;
-    onFavoritePress: () => void;
-    isFavorite: boolean
+    onRemovePress: () => void;
   }
 }
 
-const ListItem: React.FC<ItemProps> = ({props}) => {
+const ListFaveItem: React.FC<ItemProps> = ({props}) => {
   const renderStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -41,11 +40,10 @@ const ListItem: React.FC<ItemProps> = ({props}) => {
           <Text style={styles.reviewCount}>({props.reviewCount})</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={props.onFavoritePress} style={styles.favoriteButton}>
+      <TouchableOpacity onPress={props.onRemovePress} style={styles.favoriteButton}>
           <AntDesign
-            name={props.isFavorite ? 'heart' : 'hearto'}
+            name={'close'}
             size={24}
-            color={props.isFavorite ? '#FF6B6B' : '#BDC3C7'}
           />
       </TouchableOpacity>
     </TouchableOpacity>
@@ -103,4 +101,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default ListItem;
+export default ListFaveItem;

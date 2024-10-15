@@ -1,6 +1,9 @@
+import { ResourceType } from "@/model";
+
 export const readers = [
     {
-      id: '22',
+      id: 'aa839df8-2ce5-4b42-87ec-46f9b35e4da9',
+      type: 'reader' as ResourceType,
       indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
       gallery: [ 
         'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
@@ -13,7 +16,8 @@ export const readers = [
       reviewCount: 120,
     },
     {
-      id: '32',
+      id: '5fa869da-166d-45cc-a57d-36dda0a181b3',
+      type: 'reader' as ResourceType,
       indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
       gallery: [ 
         'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
@@ -26,7 +30,8 @@ export const readers = [
       reviewCount: 85,
     },
     {
-      id: '44',
+      id: '5edd9000-3681-4ef8-b49b-f9caff040de2',
+      type: 'reader' as ResourceType,
       indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
       gallery: [ 
         'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
@@ -39,7 +44,8 @@ export const readers = [
       reviewCount: 85,
     },
     {
-      id: '37',
+      id: 'ef675ec5-6a84-4493-91e1-a68881043f93',
+      type: 'reader' as ResourceType,
       indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
       gallery: [ 
         'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
@@ -52,7 +58,8 @@ export const readers = [
       reviewCount: 85,
     },
     {
-      id: '38',
+      id: 'c8e30e75-63ec-4b74-965b-447fe64db0ec',
+      type: 'reader' as ResourceType,
       indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
       gallery: [ 
         'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
@@ -65,7 +72,8 @@ export const readers = [
       reviewCount: 85,
     },
     {
-      id: '39',
+      id: '94ca2590-7416-4c3d-b641-7d9a438832a3',
+      type: 'reader' as ResourceType,
       indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
       gallery: [ 
         'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
@@ -78,7 +86,8 @@ export const readers = [
       reviewCount: 85,
     },
     {
-      id: '41',
+      id: '9ea01438-5cb6-48e2-878b-26f9d0bd1b2d',
+      type: 'reader' as ResourceType,
       indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
       gallery: [ 
         'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
@@ -91,7 +100,8 @@ export const readers = [
       reviewCount: 85,
     },
     {
-      id: '42',
+      id: 'c91c4005-6175-45be-8089-803c62166348',
+      type: 'reader' as ResourceType,
       indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
       gallery: [ 
         'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
@@ -102,5 +112,5 @@ export const readers = [
       description: "Opis książki ",
       rating: 3.5, 
       reviewCount: 85,
-    }
+    },
   ];

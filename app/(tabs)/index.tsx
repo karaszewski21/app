@@ -1,17 +1,15 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ImageBackground, Dimensions, Platform } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from '@react-navigation/stack';
 import BookStackScreen from '@/app/screens/book';
 import NewsScreen from '@/app/screens/news';
-import StoryScreen from '@/app/screens/story';
 import ReaderStackScreen from '@/app/screens/reader';
 import AgeStackScreen from '@/app/screens/age';
-import { books } from '@/constants/Books';
-import { readers } from '@/constants/Readers';
-import { stories } from '@/constants/Stories';
+import { index } from '@/constants/Index';
 import Story from '@/components/story/StoryBasic';
 import { Video, ResizeMode, AVPlaybackStatus } from 'expo-av';
+import { Book, Reader } from '@/model';
 
 const HomeStack = createStackNavigator();
 
@@ -28,13 +26,6 @@ export default function HomeScreenStack() {
         <HomeStack.Screen 
           name="News" 
           component={NewsScreen}
-          options={{
-            headerShown: false
-          }}
-        />
-        <HomeStack.Screen 
-          name="Story" 
-          component={StoryScreen}
           options={{
             headerShown: false
           }}
@@ -65,32 +56,29 @@ export default function HomeScreenStack() {
 }
 
 const HomeScreen = ({ navigation }: any) => {
-
-  const ages = [
-    { id: '1', title: 'Mały bobek', image: 'https://via.placeholder.com/100' },
-    { id: '2', title: 'Średnik bobke', image: 'https://via.placeholder.com/100' },
-    { id: '3', title: 'Duży bobke', image: 'https://via.placeholder.com/100' },
-    { id: '4', title: 'Szkolniak', image: 'https://via.placeholder.com/100' },
-  ];
-
-  const renderItem = useCallback(({ item, index }: any) => (
-    <Story 
-      key={item.id} 
-      data={item} 
-      duration={item.duration} 
-      index={index}
-    />
-  ), []);
-
-  const keyExtractor = useCallback((item: any) => item.user_id.toString(), []);
-
+  const [ageGroupsIcon, setAgeGroups] = useState([
+    require('@/assets/icons/child-06.png'),
+    require('@/assets/icons/child-612.png'),
+    require('@/assets/icons/child-12.png'),
+    require('@/assets/icons/child-23.png'),
+    require('@/assets/icons/child-45.png'),
+    require('@/assets/icons/child-6.png'),
+  ]);
+  
   const renderStory = () => { 
     return ( 
         <FlatList
           horizontal
-          data={stories}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
+          data={index.stories}
+          renderItem={({ item, index }: any) => (
+            <Story 
+              key={index} 
+              data={item} 
+              duration={item.duration} 
+              index={index}
+            />
+          )}
+          keyExtractor={(item: any) => item.user_id.toString()}
           showsHorizontalScrollIndicator={false}
           initialNumToRender={4}
           maxToRenderPerBatch={2}
@@ -100,17 +88,28 @@ const HomeScreen = ({ navigation }: any) => {
     ) 
   }
 
-  const renderFilterByAgeItem = ({ item } :any) => (
-    <TouchableOpacity 
-        key={item.id} 
-        style={{marginRight: 10}}
-        onPress={() => navigation.navigate('Age', { id: item.id, title: item.title })}  
-      >
-        <Image source={{ uri: item.image }} style={styles.ageImage} />
-      </TouchableOpacity>
-  );
+  const reanderAgeGroup = () => {
+    return (
+      <FlatList
+        horizontal
+        data={index.ageGroups}
+        renderItem={({ item } : any) => (
+          <TouchableOpacity 
+              key={item.id} 
+              style={styles.ageGroup}
+              onPress={() => navigation.navigate('Age', { id: item.id, title: item.title })}  
+            >
+            <Image source={ageGroupsIcon[item.id]} style={styles.ageImage} />
+            <Text style={styles.ageGroupsText}>{item.title}</Text>
+          </TouchableOpacity>
+        )}
+        keyExtractor={item => item.title}
+        showsHorizontalScrollIndicator={false}
+      />
+    )
+  }
 
-  const renderBookItem = (book: any) => (
+  const renderBookItem = (book: Book) => (
     <TouchableOpacity 
       key={book.id} 
       style={[
@@ -121,18 +120,18 @@ const HomeScreen = ({ navigation }: any) => {
       ]}
       onPress={() => navigation.navigate('BookDetails', { book })}
     >
-      <Video
+      {/* <Video
         key={book.id}
         source={{ uri: book.indexUrl ?? '' }}
         resizeMode={ResizeMode.COVER}
         shouldPlay={true}
         isLooping={false}
         style={styles.indexUrl}
-      />
+      /> */}
     </TouchableOpacity>
   );
 
-  const renderReaderItem = (reader: any) => (
+  const renderReaderItem = (reader: Reader) => (
     <TouchableOpacity 
       key={reader.id} 
       style={[
@@ -143,14 +142,14 @@ const HomeScreen = ({ navigation }: any) => {
       ]}
       onPress={() => navigation.navigate('ReaderDetails', { id: reader.id, title: reader.title })}
     >
-      <Video
+      {/* <Video
         key={reader.id}
         source={{ uri: reader.indexUrl ?? '' }}
         resizeMode={ResizeMode.COVER}
         shouldPlay={true}
         isLooping={false}
         style={styles.indexUrl}
-      />
+      /> */}
     </TouchableOpacity>
   );
 
@@ -169,29 +168,23 @@ const HomeScreen = ({ navigation }: any) => {
           </TouchableOpacity>
           <Text style={[styles.sectionTitle, { fontSize: 18, fontFamily: 'ShantellSans-SemiBoldItalic'}]}>Witaj Patryk Karaszewski</Text>
         </View>
-
-
         <View>
             {renderStory()}
         </View>
         <Text style={styles.sectionTitle}>Zacznij tutaj</Text>
-        <FlatList
-          horizontal
-          data={ages}
-          renderItem={renderFilterByAgeItem}
-          keyExtractor={item => item.id}
-          showsHorizontalScrollIndicator={false}
-        />
+        <View>
+            {reanderAgeGroup()}
+        </View>
         <Text style={styles.sectionTitle}>Najnowsze książki</Text>
         <View style={styles.tilesContainer}>
-          {books.map(book => (
+          {index.indexBooks.map(book => (
             renderBookItem(book)
           ))}
         </View>
 
         <Text style={styles.sectionTitle}>Najnowsze Czytanki</Text>
         <View style={styles.tilesContainer}>
-          {readers.map(reader => (
+          {index.indexReaders.map(reader => (
             renderReaderItem(reader)
           ))}
         </View>
@@ -231,11 +224,7 @@ const styles = StyleSheet.create({
     margin: 10,
     fontFamily: 'ShantellSans-SemiBoldItalic'
   },
-  ageImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-  },
+ 
   tilesContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -259,5 +248,29 @@ const styles = StyleSheet.create({
     width: 170, 
     height: 170,
     borderRadius: 15,
+  },
+  ageGroup: {
+    flexDirection: 'column',
+    marginRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ageGroupsText: {
+    fontSize: 12,
+    fontFamily: 'ShantellSans-SemiBoldItalic'
+  },
+  ageImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#c3d5e1',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5, // To jest potrzebne dla Androida
   },
 });

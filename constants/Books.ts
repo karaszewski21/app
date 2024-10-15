@@ -1,6 +1,9 @@
+import { ResourceType } from "@/model";
+
 export const books = [
   {
-    id: '1',
+    id: '362d5de4-691d-4cc5-9d0b-52195009d988',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/books/amp/cover.png', 
@@ -13,7 +16,8 @@ export const books = [
     isLock: false,
   },
   {
-    id: '2',
+    id: '37a179c4-df70-4b14-84b5-e78580b97166',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/cover.png', 
@@ -27,7 +31,8 @@ export const books = [
     isLock: true,
   },
   {
-    id: '3',
+    id: '7fb7fe03-fcf3-4dc7-a093-ef45d60e985b',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg', 
@@ -39,7 +44,8 @@ export const books = [
     isLock: false,
   },
   {
-    id: '4',
+    id: 'a3118f6e-a4b6-426f-88b7-f934b63a29b4',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
@@ -51,7 +57,8 @@ export const books = [
     isLock: false,
   },
   {
-    id: '5',
+    id: 'd8e2f118-7621-4ac9-8720-92d67560b515',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
@@ -63,7 +70,8 @@ export const books = [
     isLock: false,
   },
   {
-    id: '7',
+    id: '1a4f652b-5752-4373-8f8d-7d44ba7f85b9',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
@@ -75,7 +83,8 @@ export const books = [
     isLock: false,
   },
   {
-    id: '8',
+    id: '960a641f-8a7b-4464-b77f-2f0595496758',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
@@ -87,7 +96,8 @@ export const books = [
     isLock: false,
   },
   {
-    id: '9',
+    id: '1dfc2be8-590b-4294-af3c-eb5b151e80bd',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
@@ -99,7 +109,8 @@ export const books = [
     isLock: false,
   },
   {
-    id: '10',
+    id: '58eda3e7-5bcc-4f1d-aa10-338c3059c463',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
@@ -111,7 +122,8 @@ export const books = [
     isLock: false,
   },
   {
-    id: '11',
+    id: '3a79aec4-dff4-482f-8197-8f9d4455ffd8',
+    type: 'book' as ResourceType,
     indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 

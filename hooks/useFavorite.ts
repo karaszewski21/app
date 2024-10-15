@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AudioPlay, Book, Reader } from '@/model';
 
-type Type = 'reader' | 'book' | 'player'
-
-interface Favorite {
-    id: string;
-    type: Type;
-}
+type Favorite = Book | Reader | AudioPlay;
 
 const useFavorite = () => {
   const [favorites, setFavorites] = useState<Favorite[]>([]);
@@ -60,11 +56,21 @@ const useFavorite = () => {
     return favorites.some(fav => fav.id === id);
   };
 
+  const removeAllFavorites = async () => {
+    try {
+      await AsyncStorage.setItem('favorite', '');
+      setFavorites([]);
+    } catch (error) {
+      console.error('Error saving favorites:', error);
+    }
+  };
+
   return {
     favorites,
     addFavorite,
     removeFavorite,
-    isFavorite
+    isFavorite,
+    removeAllFavorites
   };
 };
 

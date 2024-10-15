@@ -1,16 +1,22 @@
-import { Redirect, Tabs } from 'expo-router';
+import { Redirect } from 'expo-router';
 import { useSession } from '@/context/authContext';
 import TabBar  from '@/components/TabBar';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
 import { usePlayerModal } from '@/context/playerModalContext';
 import { createStackNavigator } from '@react-navigation/stack';
 import VideoPlayer from '@/components/player/SmallPlayer'
 import { DefaultTheme, NavigationContainer, DarkTheme  } from '@react-navigation/native';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ActivityIndicator, ImageBackground, StyleSheet, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './index';
+import BooksScreen from './books';
+import FavoritesScreen from './fave';
+import FunScreen from './fun';
+import ProfileScreen from './profile';
 
-export const AppStack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function TabLayout() {
   const { session } = useSession();
@@ -27,7 +33,6 @@ export default function TabLayout() {
     transform: [{ translateY: withSpring(translateY.value)}],
   }));
 
-
   useEffect(() => {
     translateTabsY.value = 0;
       if (!isTabs) {
@@ -35,7 +40,6 @@ export default function TabLayout() {
       }
 
   }, [isTabs]);
-
 
   useEffect(() => {
       translateY.value = 0;
@@ -45,12 +49,17 @@ export default function TabLayout() {
 
   }, [isOpenPlayer]);
 
-
   if (!session) {
     return (
       <Redirect href="/(auth)/preview" />
     );
   }
+
+  const Loader = () => (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="#0000ff" />
+    </View>
+  );
 
   const globalTheme = {
     ...DefaultTheme,
@@ -68,7 +77,7 @@ export default function TabLayout() {
       resizeMode='cover'
     >
       <NavigationContainer independent={true}  theme={globalTheme}>
-        <Tabs
+        <Tab.Navigator
           screenOptions={{headerShown: false}} 
           tabBar={props => 
             <>
@@ -84,44 +93,50 @@ export default function TabLayout() {
             </>
             }
           >
-          <Tabs.Screen
+          <Tab.Screen
             name="index"
+            component={HomeScreen}
             options={{
               title: 'Home',
-              unmountOnBlur: true
+              unmountOnBlur: true,
             }}
           />
-          <Tabs.Screen
+          <Tab.Screen
             name="books"
+            component={BooksScreen}
             options={{
               title: 'Książki',
-              unmountOnBlur: true
+              unmountOnBlur: true,
             }}
+
           />
-          <Tabs.Screen
+          <Tab.Screen
             name="fave"
+            component={FavoritesScreen}
             options={{
               title: 'Ulubione',
-              unmountOnBlur: true
+              unmountOnBlur: true,
             }}
           />
-          <Tabs.Screen
+          <Tab.Screen
             name="fun"
+            component={FunScreen}
             options={{
-              title: 'Zabawy',
-              unmountOnBlur: true
+              title: 'Czytanki',
+              unmountOnBlur: true,
             }}
           />
-          <Tabs.Screen
+          <Tab.Screen
+            component={ProfileScreen}
             name="profile"
             options={{
               title: 'Profil',
-              unmountOnBlur: true
+              unmountOnBlur: true,
             }}
           />
-        </Tabs>
-        </NavigationContainer>
-      </ImageBackground>
+         </Tab.Navigator>
+      </NavigationContainer>
+    </ImageBackground>
   );
 }
 

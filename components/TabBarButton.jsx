@@ -58,7 +58,8 @@ const TabBarButton = (props) => {
         
         <Animated.Text style={[{ 
             color,
-            fontSize: 11
+            fontSize: 11,
+            fontFamily: 'ShantellSans-SemiBoldItalic'
         }, animatedTextStyle]}>
             {label}
         </Animated.Text>

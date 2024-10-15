@@ -27,14 +27,14 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, hidden }) => {
 
   return (
     <Animated.View style={[styles.bannerContainer, bannerAnimatedStyle, {transform: [{translateY: 0}]}]}>
-        <View style={styles.container}>
-            <View style={styles.imageContainer}>
-            <Image
-                source={{ uri: imageUrl }}
-                style={styles.headerImage}
-            />
-            </View>
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+        <Image
+            source={{ uri: imageUrl }}
+            style={styles.headerImage}
+        />
         </View>
+      </View>
     </Animated.View>
   );
 };
@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
       padding: 15,
     },
     bannerContainer: {
-        position: 'absolute',
-        top: 20,
-        left: 0,
-        right: 0,
-        height: BANNER_HEIGHT,
-        zIndex: 1,
+      position: 'absolute',
+      top: 20,
+      left: 0,
+      right: 0,
+      height: BANNER_HEIGHT,
+      zIndex: 1,
     },
     imageContainer: {
       height: 100,

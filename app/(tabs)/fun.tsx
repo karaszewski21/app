@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Dimensions, NativeScrollPoint} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,6 +14,7 @@ import { players } from '@/constants/Players';
 import { BANNER_HEIGHT } from '@/constants/Common';
 import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
+import { AudioPlay, Reader } from '@/model';
 
 const FunStack = createStackNavigator();
 const { width } = Dimensions.get('window');
@@ -76,7 +77,10 @@ const FunScreen = ({ navigation }:any) => {
   const [ratingModal, setRatingModal]= useState(false);
   const animatedValue = useSharedValue(0);
   const { isFavorite, addFavorite, removeFavorite } = useFavorite();
-  const [ hiddenBanner, setHiddenBanner] = useState<boolean>(false)
+  const [ hiddenBanner, setHiddenBanner] = useState<boolean>(false);
+
+   const readerListRef = useRef<FlatList>(null);
+   const playerListRef = useRef<FlatList>(null);
 
   useEffect(() => {
     animatedValue.value = withTiming(activeFilter === 'reader' ? 0 : 1,{ duration: 300 });
@@ -93,44 +97,41 @@ const FunScreen = ({ navigation }:any) => {
     };
   });
 
-  const favoriteReaderPress = (id: string) => {
-    const isFav = isFavorite(id);
+  const favoriteReaderPress = (item: Reader) => {
+    const isFav = isFavorite(item.id);
     if (!isFav) {
-      addFavorite({id, type: 'reader'}) 
+      addFavorite(item) 
     } else {
-      removeFavorite(id)
+      removeFavorite(item.id)
     }
   }
 
-  const favoritePlayerPress = (id: string) => {
-    const isFav = isFavorite(id);
+  const favoritePlayerPress = (item: AudioPlay) => {
+    const isFav = isFavorite(item.id);
     if (!isFav) {
-      addFavorite({id, type: 'player'}) 
+      addFavorite(item) 
     } else {
-      removeFavorite(id)
+      removeFavorite(item.id)
     }
   }
 
-  const scrollList =  useCallback(({x, y}: NativeScrollPoint) => {
-    if (y >= BANNER_HEIGHT) {
-      setHiddenBanner(true)
-    } else {
-      setHiddenBanner(false)
-    }
+  const scrollList = useCallback(({x, y}: NativeScrollPoint) => {
+      setHiddenBanner(y >= BANNER_HEIGHT)
   }, [])
 
-  const renderFlatList = useCallback((data: any, navigateTo: any) => (
+  const renderFlatList = (data: any, navigateTo: any, listRef: React.RefObject<FlatList>) => (
     <FlatList
+      ref={listRef}
       data={data}
       renderItem={({ item }) => (
         <ListItem
           props={{
             ...item,
             imageUrl: item.gallery[0],
-            onPress: () => navigation.navigate(navigateTo),
+            onPress: () => navigateTo === 'ReaderDetails' ? navigation.navigate('ReaderDetails', { reader: item }) : navigation.navigate('AudioPlay', { audioplay: item }),
             onRatingPress: () => setRatingModal(true),
             isFavorite: isFavorite(item.id),
-            onFavoritePress:() => navigateTo === 'ReaderDetails' ? favoriteReaderPress(item.id) : favoritePlayerPress(item.id) 
+            onFavoritePress:() => navigateTo === 'ReaderDetails' ? favoriteReaderPress(item) : favoritePlayerPress(item) 
           }}
         />
       )}
@@ -140,7 +141,7 @@ const FunScreen = ({ navigation }:any) => {
       contentContainerStyle={styles.listContent}
       onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
     />
-  ),[hiddenBanner])
+  )
 
   const handleRatingPress = (bookId: number) => {
     setRatingModal(false)
@@ -148,8 +149,15 @@ const FunScreen = ({ navigation }:any) => {
   };
 
   const onFilterChange = (filter: string) => {
+    setActiveFilter(filter);
     setHiddenBanner(false)
-    setActiveFilter(filter)
+
+    setTimeout(() => {
+      const currentListRef = filter === 'reader' ? readerListRef : playerListRef;
+      if (currentListRef.current) {
+        currentListRef.current.scrollToOffset({ offset: 0, animated: true });
+      }
+    }, 1000);
   };
 
   return (
@@ -159,10 +167,10 @@ const FunScreen = ({ navigation }:any) => {
       <FilterButtons activeFilter={activeFilter} onFilterChange={onFilterChange} hidden={hiddenBanner}/>
       <Animated.View style={[styles.animatedContainer, animatedStyle]}>
         <View style={styles.flatListWrapper}>
-          {renderFlatList(readers, 'ReaderDetails')}
+          {renderFlatList(readers, 'ReaderDetails',readerListRef)}
         </View>
         <View style={styles.flatListWrapper}>
-          {renderFlatList(players, 'AudioPlay')}
+          {renderFlatList(players, 'AudioPlay', playerListRef)}
         </View>
       </Animated.View>
       {  ratingModal &&
@@ -189,41 +197,42 @@ const styles = StyleSheet.create({
     top: 180,
     left: 0,
     right: 0,
-    height: BANNER_HEIGHT,
+    height: 50,
     zIndex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 10,
+    marginTop: 20,
   },
 
   buttonsContainer: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-around',
-    paddingVertical: 10,
   },
 
   animatedContainer: {
     flexDirection: 'row',
     width: width * 3,
   },
-  flatListWrapper: {
-    width,
-  },
+
   activeFilter: {
     color: '#3498db',
   },
+
   filterText: {
     fontWeight: 'bold',
   },
-  bookItemContainer: {
-    paddingHorizontal: 10,
+  
+  flatListWrapper: {
+    width,
   },
+
   listContent: {
     paddingLeft: 15,
     paddingRight: 15,
-    paddingTop: BANNER_HEIGHT + 40,
+    marginTop: BANNER_HEIGHT + 40
   },
+
   modal: {
     height: 200,
     width: 300,
