@@ -1,7 +1,7 @@
 import { ScrollView, View, Text, StyleSheet, Image} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Quiz from '@/components/quiz/Quiz'
-import { quiz, quiz2 } from '@/constants/Quiz';
+import { quizes } from '@/constants/quizes';
 import { useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
 import { Ionicons } from '@expo/vector-icons';
@@ -24,15 +24,11 @@ export default function QuizesStackScreen({route}:any) {
 }
 
 const QuizesScreen = ({route, navigation }:any) => { 
-  const params = route.params;
+  const book = route.params.book
+  const { ids, bannerUrl } = route.params.resource;
   const height = useSharedValue(0);
 
-  const quizList = [
-    { id: '1', title: 'Nowy', quiz: quiz, type: 'child'},
-    { id: '2', title: 'Nowy', quiz: quiz2, type: 'parent'},
-    { id: '3', title: 'Nowy', quiz: quiz, type: 'helpchild'},
-    { id: '4', title: 'Nowy', quiz: quiz2, type: 'child'},
-  ];
+  const quizList = quizes.filter(element => ids.includes(element.id))
 
   useEffect(() => {
     height.value = 0
@@ -44,15 +40,15 @@ const QuizesScreen = ({route, navigation }:any) => {
       <ScrollView>
         <View style={styles.bookDetailsContainer}>
         <Text style={styles.title}>Quizy</Text>
-          <Image style={styles.image} source={{uri: 'https://goldfish.fra1.digitaloceanspaces.com/goldfish-logo.png'}}></Image>
+          <Image style={styles.image} source={{uri: bannerUrl}}></Image>
         </View>
         <View style={styles.listContent}>
           { quizList.map((item, index) =>
-            <SquareButton key={index} props={{title: item.title, icon: 'text', backgroundColor: '#55b1be', color: 'green',  navigate: ()=>navigation.navigate('Quiz', {quiz: item.quiz})}}>
-              <Text style={styles.tileTitle}>Wiosna</Text>
-                { item.type === 'child' &&  <Image source={require('@/assets/icons/child.png')} style={{width: 70, height: 70}} resizeMode='contain'/> }
+            <SquareButton key={index} props={{title: '', icon: 'text', backgroundColor: '#55b1be', color: 'green',  navigate: ()=>navigation.navigate('Quiz', {quiz: item})}}>
+              <Text style={styles.tileTitle}>{item.title}</Text>
+                {/* { item.type === 'child' &&  <Image source={require('@/assets/icons/child.png')} style={{width: 70, height: 70}} resizeMode='contain'/> }
                 { item.type === 'parent' &&  <Image source={require('@/assets/icons/parent.png')} style={{width: 70, height: 70}} resizeMode='contain'/> }
-                { item.type === 'helpchild' &&  <Image source={require('@/assets/icons/helpchild.png')} style={{width: 70, height: 70}} resizeMode='contain'/> }
+                { item.type === 'helpchild' &&  <Image source={require('@/assets/icons/helpchild.png')} style={{width: 70, height: 70}} resizeMode='contain'/> } */}
             </SquareButton>)
           }
         </View>
@@ -65,7 +61,7 @@ const QuizesScreen = ({route, navigation }:any) => {
             </View>
           </ListWrapper>
         </View>
-        { params?.book && params.book.isLock &&
+        { book && book.isLock &&
           <Animated.View  style={{...styles.overlayContainer,height}}>
             <Overlay opacity={0.6} style={styles.overlay}>
               <FunnyButton props={{title:'kup', onPress:()=> {console.log('--->buy')}, icon: ''}}></FunnyButton>

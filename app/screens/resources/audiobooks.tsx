@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import { audiobook } from '@/constants/Audiobook';
+import { audiobooks } from '@/constants/audiobooks';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,8 +20,9 @@ export default function AudioBooksStackScreen({route}:any) {
   );
 }
 
-const AudiobooksScreen = ({route, navigation }:any) => { 
-  const params = route.params;
+const AudiobooksScreen = ({ route, navigation }:any) => { 
+  const book = route.params.book
+  const { ids, bannerUrl } = route.params.resource;
   const height = useSharedValue(0);
   const { openPlayer } = usePlayerModal()
 
@@ -30,13 +31,13 @@ const AudiobooksScreen = ({route, navigation }:any) => {
     height.value =  withSpring(400);
   }, []);
 
-  const versions = audiobook.versions
+  const versions = audiobooks.filter(element => ids.includes(element.id))
   
   const openAudioBookItem = (version: any) => {
       openPlayer({
         title: version.type,
         fileUrl: version.audioFile,
-        imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_modern_vibrant_social_media_post_featuring_3.jpg'
+        imageUrl: version.imageUrl
       })
   }
 
@@ -45,7 +46,7 @@ const AudiobooksScreen = ({route, navigation }:any) => {
       <ScrollView>
         <View style={styles.bookDetailsContainer}>
           <Text style={styles.title}>Audiobooki</Text>
-          <Image style={styles.image} source={{ uri: audiobook.image }}></Image>
+          <Image style={styles.image} source={{ uri: bannerUrl }}></Image>
         </View>
         <View style={styles.listContent}>
           { versions.map((item, index) =>
@@ -60,19 +61,19 @@ const AudiobooksScreen = ({route, navigation }:any) => {
                   </View> 
                 </View>
               }
-              { item.type === 'uk' && 
+              { item.type === 'eng' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
                   <Text style={styles.tileTitle}>{item.name}</Text>
-                  <Image source={require('@/assets/icons/uk.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
+                  <Image source={require('@/assets/icons/eng-flag.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
                   <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: '#fff'}}>słuchaj</Text>
                     <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} resizeMode='contain'/> 
                   </View> 
                 </View>}
-              { item.type === 'pl-uk' && 
+              { item.type === 'pl-eng' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
                   <Text style={styles.tileTitle}>{item.name}</Text>
-                  <Image source={require('@/assets/icons/pl-uk.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
+                  <Image source={require('@/assets/icons/pl-eng.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
                   <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: '#fff'}}>słuchaj</Text>
                     <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} resizeMode='contain'/> 
@@ -82,7 +83,7 @@ const AudiobooksScreen = ({route, navigation }:any) => {
             </SquareButton>)
           }
         </View>
-        { params?.book && params.book.isLock &&
+        { book && book.isLock &&
           <Animated.View  style={{...styles.overlayContainer,height}}>
             <Overlay opacity={0.6} style={styles.overlay}>
               <FunnyButton props={{title:'kup', onPress:()=> {console.log('--->buy')}, icon: ''}}></FunnyButton>

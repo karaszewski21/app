@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, FlatList, NativeScrollPoint } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,7 +9,7 @@ import { books } from '@/constants/Books';
 import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
 import { BANNER_HEIGHT } from '@/constants/Common';
-import { Book } from '@/model';
+import { AgeGroup, Book } from '@/model';
 
 const BooksStack = createStackNavigator();
 
@@ -25,7 +25,17 @@ export default function BooksStackScreen() {
 
 const BooksScreen = ({ navigation }:any) => {
   const { isFavorite, addFavorite, removeFavorite } = useFavorite();
-  const [ hiddenBanner, setHiddenBanner] = useState<boolean>(false)
+  const [hiddenBanner, setHiddenBanner] = useState<boolean>(false);
+  const [selectedAgeGroup, setAgeGroup] = useState<AgeGroup>();
+  const [bookList, setBooks] = useState<Book[]>();
+
+  useEffect(() => {
+    if (selectedAgeGroup) {
+      setBooks(books.filter(book => book.ageGroupId === selectedAgeGroup.id))
+    } else {
+      setBooks(books);
+    }
+  }, [selectedAgeGroup])
 
   const scrollList = ({x, y}: NativeScrollPoint) => {
     if (y >= BANNER_HEIGHT) {
@@ -68,9 +78,9 @@ const BooksScreen = ({ navigation }:any) => {
   return (
     <SafeAreaView style={styles.container}>
       <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
-      <Filter hidden={hiddenBanner}/>
+      <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup}/>
       <FlatList
-          data={books}
+          data={bookList}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           contentContainerStyle={styles.listContent}

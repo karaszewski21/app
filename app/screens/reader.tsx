@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, ScrollView, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,6 +12,7 @@ import SquareButton from '@/components/common/SquareButton';
 import ReaderButton from '@/components/buttons/ReaderButton';
 import PrintoutsScreen from '@/app/screens/resources/printouts'
 import VoiceQuizesScreen from '@/app/screens/resources/voice_quizes'
+import { Resource } from '@/model';
 
 const ReaderStack = createStackNavigator();
 
@@ -36,6 +37,7 @@ export default function ReaderStackScreen({route}:any) {
 
 const ReaderScreen = ({ route, navigation }:any) => {
   const { reader } = route.params;
+  const resources = reader.resource as Resource[];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -72,21 +74,32 @@ const ReaderScreen = ({ route, navigation }:any) => {
                 textColor:"#000"
              }}
             >
-              <Image source={require('@/assets/icons/uk.png')} style={{width: 50, height: 50}} resizeMode='contain'/> 
+              <Image source={require('@/assets/icons/eng-flag.png')} style={{width: 50, height: 50}} resizeMode='contain'/> 
             </ReaderButton>
           <View style={styles.buttons}>
-            <SquareButton props={{title: 'quizy', icon: 'quiz', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Quizes', { book: '' }) }}>
-              <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-            </SquareButton>
-            <SquareButton props={{title: 'audiobooki', icon: 'audiobooki', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('AudioBooks', { book: '' }) }}>
-              <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-            </SquareButton>
-            <SquareButton props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', color: '#fff', navigate: () =>  navigation.navigate('Printouts', { book: '' }) }}>
-              <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-            </SquareButton>
-            {/* <SquareButton props={{title: 'english', icon: 'english', backgroundColor: '#55b1be', navigate: () => navigation.navigate('Langs', { book: '' }) }}>
-              <Image source={require('@/assets/icons/eng.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-            </SquareButton> */}
+            {
+              resources.map((element, index) => 
+              <Fragment key={index}>
+                { element.type === 'quiz' &&  
+                  <SquareButton key={element.type} props={{title: 'quizy', icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Quizes', { book:reader, resource: element}) }}>
+                    <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+                  </SquareButton>
+                }
+                
+                { element.type === 'audiobook' &&
+                  <SquareButton  key={element.type} props={{title: 'audiobooki', icon: 'add', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('AudioBooks', {book:reader, resource: element}) }}>
+                    <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+                  </SquareButton>
+                }
+
+                { element.type === 'printouts' && 
+                  <SquareButton  key={element.type} props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', color: '#fff', navigate: () =>  navigation.navigate('Printouts', {book:reader, resource: element}) }}>
+                    <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+                  </SquareButton>
+                }
+              </Fragment>
+              )
+            }
           </View>
         </BookWrapper>
       </ScrollView>

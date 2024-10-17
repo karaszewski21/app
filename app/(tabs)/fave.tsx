@@ -62,7 +62,7 @@ const FaveScreen = ({ navigation }:any) => {
         navigation.navigate('ReaderDetails', { reader: item })
       break;
       case 'audio_play':
-        navigation.navigate('AudioPlay')
+        navigation.navigate('AudioPlay', { audioplay: item })
       break;
       default:
         break;
@@ -102,5 +102,6 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: 16,
+    marginTop: BANNER_HEIGHT - 60
   }
 });

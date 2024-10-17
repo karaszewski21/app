@@ -1,12 +1,9 @@
 import { View, Text, TouchableOpacity, StyleSheet,FlatList, LayoutRectangle, Alert, Modal, ScrollView, Image } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import Quiz from '@/components/quiz/Quiz'
-import { quiz, quiz2 } from '@/constants/Quiz';
-import { createRef, memo, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import { useTabsScreen } from '@/context/tabContext';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import {  memo, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import { Ionicons, } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
-import Animated, { ColorSpace, Easing, interpolateColor, runOnJS, useAnimatedStyle, useSharedValue, withRepeat, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue,withSpring, } from 'react-native-reanimated';
 import Overlay from '@/components/Overlay';
 import FunnyButton from '@/components/common/FunnyButton';
 import { Gesture, GestureDetector, GestureHandlerRootView, ComposedGesture } from 'react-native-gesture-handler';
@@ -29,7 +26,7 @@ const LangsScreen = ({route, navigation }:any) => {
   const height = useSharedValue(0);
 
   const quizList = [
-    { id: '1', title: 'Angielski', quiz: quiz},
+    { id: '1', title: 'Angielski'},
   ];
 
   useEffect(() => {

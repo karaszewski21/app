@@ -14,7 +14,7 @@ import { players } from '@/constants/Players';
 import { BANNER_HEIGHT } from '@/constants/Common';
 import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
-import { AudioPlay, Reader } from '@/model';
+import { AgeGroup, AudioPlay, Reader } from '@/model';
 
 const FunStack = createStackNavigator();
 const { width } = Dimensions.get('window');
@@ -78,9 +78,23 @@ const FunScreen = ({ navigation }:any) => {
   const animatedValue = useSharedValue(0);
   const { isFavorite, addFavorite, removeFavorite } = useFavorite();
   const [ hiddenBanner, setHiddenBanner] = useState<boolean>(false);
+  const [selectedAgeGroup, setAgeGroup] = useState<AgeGroup>();
+  const [readerList, setReaders] = useState<Reader[]>();
+  const [audiPlayList, setAudioPlays] = useState<AudioPlay[]>();
 
-   const readerListRef = useRef<FlatList>(null);
-   const playerListRef = useRef<FlatList>(null);
+  const readerListRef = useRef<FlatList>(null);
+  const playerListRef = useRef<FlatList>(null);
+
+
+  useEffect(() => {
+    if (selectedAgeGroup) {
+      setReaders(readers.filter(reader => reader.ageGroupId === selectedAgeGroup.id));
+      setAudioPlays(players.filter(player => player.ageGroupId === selectedAgeGroup.id))
+    } else {
+      setReaders(readers);
+      setAudioPlays(players)
+    }
+  }, [selectedAgeGroup]) 
 
   useEffect(() => {
     animatedValue.value = withTiming(activeFilter === 'reader' ? 0 : 1,{ duration: 300 });
@@ -98,6 +112,7 @@ const FunScreen = ({ navigation }:any) => {
   });
 
   const favoriteReaderPress = (item: Reader) => {
+    console.log('-->item',item)
     const isFav = isFavorite(item.id);
     if (!isFav) {
       addFavorite(item) 
@@ -107,6 +122,8 @@ const FunScreen = ({ navigation }:any) => {
   }
 
   const favoritePlayerPress = (item: AudioPlay) => {
+
+    console.log('-->item',item)
     const isFav = isFavorite(item.id);
     if (!isFav) {
       addFavorite(item) 
@@ -163,14 +180,14 @@ const FunScreen = ({ navigation }:any) => {
   return (
     <SafeAreaView style={styles.container}>
       <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
-      <Filter hidden={hiddenBanner}/>
+      <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup}/>
       <FilterButtons activeFilter={activeFilter} onFilterChange={onFilterChange} hidden={hiddenBanner}/>
       <Animated.View style={[styles.animatedContainer, animatedStyle]}>
         <View style={styles.flatListWrapper}>
-          {renderFlatList(readers, 'ReaderDetails',readerListRef)}
+          {renderFlatList(readerList, 'ReaderDetails',readerListRef)}
         </View>
         <View style={styles.flatListWrapper}>
-          {renderFlatList(players, 'AudioPlay', playerListRef)}
+          {renderFlatList(audiPlayList, 'AudioPlay', playerListRef)}
         </View>
       </Animated.View>
       {  ratingModal &&

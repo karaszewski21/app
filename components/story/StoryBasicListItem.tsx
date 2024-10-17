@@ -28,7 +28,6 @@ const { width, height } = Dimensions.get('window');
 
 export const StoryBasicListItem = ({
   index,
-  key,
   userId,
   profileImage,
   profileName,
@@ -234,7 +233,6 @@ export const StoryBasicListItem = ({
 
   return (
     <GestureRecognizer
-      key={key}
       onSwipeUp={onSwipeUp}
       onSwipeDown={onSwipeDown}
       config={config}

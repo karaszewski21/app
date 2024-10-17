@@ -10,6 +10,7 @@ import { index } from '@/constants/Index';
 import Story from '@/components/story/StoryBasic';
 import { Video, ResizeMode, AVPlaybackStatus } from 'expo-av';
 import { Book, Reader } from '@/model';
+import useAgeGroupsIcon from '@/hooks/useAgeGroupsIcon';
 
 const HomeStack = createStackNavigator();
 
@@ -56,14 +57,7 @@ export default function HomeScreenStack() {
 }
 
 const HomeScreen = ({ navigation }: any) => {
-  const [ageGroupsIcon, setAgeGroups] = useState([
-    require('@/assets/icons/child-06.png'),
-    require('@/assets/icons/child-612.png'),
-    require('@/assets/icons/child-12.png'),
-    require('@/assets/icons/child-23.png'),
-    require('@/assets/icons/child-45.png'),
-    require('@/assets/icons/child-6.png'),
-  ]);
+  const { ageGroupsIcon } = useAgeGroupsIcon();
   
   const renderStory = () => { 
     return ( 
@@ -97,7 +91,7 @@ const HomeScreen = ({ navigation }: any) => {
           <TouchableOpacity 
               key={item.id} 
               style={styles.ageGroup}
-              onPress={() => navigation.navigate('Age', { id: item.id, title: item.title })}  
+              onPress={() => navigation.navigate('Age', { ageGroup: item })}  
             >
             <Image source={ageGroupsIcon[item.id]} style={styles.ageImage} />
             <Text style={styles.ageGroupsText}>{item.title}</Text>
@@ -140,7 +134,7 @@ const HomeScreen = ({ navigation }: any) => {
           backgroundColor: reader.id === '32' ? '#a5ccba' : reader.id === '44' ? '#c3d5e1' : '#f5d066'
         }
       ]}
-      onPress={() => navigation.navigate('ReaderDetails', { id: reader.id, title: reader.title })}
+      onPress={() => navigation.navigate('ReaderDetails', { reader })}
     >
       {/* <Video
         key={reader.id}
@@ -177,14 +171,14 @@ const HomeScreen = ({ navigation }: any) => {
         </View>
         <Text style={styles.sectionTitle}>Najnowsze książki</Text>
         <View style={styles.tilesContainer}>
-          {index.indexBooks.map(book => (
+          {index.books.map(book => (
             renderBookItem(book)
           ))}
         </View>
 
         <Text style={styles.sectionTitle}>Najnowsze Czytanki</Text>
         <View style={styles.tilesContainer}>
-          {index.indexReaders.map(reader => (
+          {index.readers.map(reader => (
             renderReaderItem(reader)
           ))}
         </View>

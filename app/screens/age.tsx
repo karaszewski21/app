@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Dimensions, NativeScrollPoint} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,13 +14,22 @@ import { books } from '@/constants/Books';
 import { readers } from '@/constants/Readers';
 import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
+import { players } from '@/constants/Players';
+import { Book, Reader, AudioPlay, AgeGroup } from '@/model';
 
 const AgeStack = createStackNavigator();
 
-export default function AgeStackScreen() {
+export default function AgeStackScreen({route}:any) {
   return (
     <AgeStack.Navigator>
-      <AgeStack.Screen name="AgeDetails" component={AgeScreen} options={{headerShown: false}}/>
+      <AgeStack.Screen 
+          name="AgeDetails" 
+          component={AgeScreen} 
+          options={{
+            headerShown: false
+            }}
+          initialParams={route.params}
+        />
       <AgeStack.Screen 
           name="BookDetails" 
           component={BookStackScreen}
@@ -84,8 +93,12 @@ const FilterButtons = ({ activeFilter, onFilterChange, hidden }: any) => {
 
 const { width } = Dimensions.get('window');
 
-const AgeScreen = ({ navigation }:any) => {
+const AgeScreen = ({ route, navigation }:any) => {
+  const ageGroup = route.params.ageGroup;
+
   const [activeFilter, setActiveFilter] = useState('book');
+  const [selectedAgeGroup, setAgeGroup] = useState<AgeGroup>(ageGroup);
+
   const [ratingModal, setRatingModal]= useState(false);
   const animatedValue = useSharedValue(0);
   const [ hiddenBanner, setHiddenBanner] = useState<boolean>(false);
@@ -93,6 +106,10 @@ const AgeScreen = ({ navigation }:any) => {
   const bookListRef = useRef<FlatList>(null);
   const readerListRef = useRef<FlatList>(null);
   const playerListRef = useRef<FlatList>(null);
+
+  const filteredBooks = useMemo(() => books.filter(book => book.ageGroupId === selectedAgeGroup.id), [selectedAgeGroup]);
+  const filteredReaders = useMemo(() => readers.filter(reader => reader.ageGroupId === selectedAgeGroup.id), [selectedAgeGroup]);
+  const filteredPlayers = useMemo(() => players.filter(player => player.ageGroupId === selectedAgeGroup.id), [selectedAgeGroup]);
 
   useEffect(() => {
     animatedValue.value = withTiming(
@@ -112,61 +129,54 @@ const AgeScreen = ({ navigation }:any) => {
     };
   });
 
-  const play = [
-    {
-      id: '1',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł słuchowska 1",
-      description: "Opis słuchowska",
-      rating: 3.5, 
-      reviewCount: 85,
-    },
-    {
-      id: '2',
-      gallery: [ 
-        'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
-        'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png'
-      ],
-      title: "Tytuł słuchowska 2",
-      description: "Opis słuchowska ",
-      rating: 3.5, 
-      reviewCount: 85,
-    }
-  ];
-
   const scrollList = useCallback(({x, y}: NativeScrollPoint) => {
     setHiddenBanner(y >= BANNER_HEIGHT)
   }, [])
 
-  const renderFlatList = (data: any, navigateTo: any, listRef: React.RefObject<FlatList>) => (
-    <FlatList
-      ref={listRef}
-      data={data}
-      renderItem={({ item }) => (
-        <ListItem
-          props={{
-            ...item,
-            imageUrl: item.gallery[0],
-            onPress: () => navigation.navigate(navigateTo, { 
-              [navigateTo === 'BookDetails' ? 'book' : 'title']: 
-              navigateTo === 'BookDetails' ? item : item.title 
-            }),
-            onRatingPress: () => setRatingModal(true),
-          }}
-        />
-      )}
-      keyExtractor={item => item.id}
-      horizontal={false}
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.listContent}
-      onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
-    />
-  );
+  const renderFlatList = (data: Book[] | Reader[] | AudioPlay[], type: string, listRef: React.RefObject<FlatList>) => {
+    return(
+      <FlatList
+        ref={listRef}
+        data={data}
+        renderItem={({ item }) => { 
+          let navigateTo = '';
+          let params = {}
+     
+          switch (type) {
+            case 'book':
+              navigateTo = 'BookDetails';
+              params = { book: item };
+              break;
+            case 'reader':
+               navigateTo = 'ReaderDetails';
+               params = { reader: item }
+              break;
+            case 'audio_play':
+               navigateTo = 'AudioPlay';
+               params = { audioplay: item }
+              break;
+            default:
+              break;
+          }
+        
+          return(
+          <ListItem
+            props={{
+              ...item,
+              imageUrl: item.gallery[0],
+              onPress: () => navigation.navigate(navigateTo, params),
+              onRatingPress: () => setRatingModal(true),
+            }}
+          />
+        )}}
+        keyExtractor={item => item.id}
+        horizontal={false}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContent}
+        onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
+      />
+    );
+  }
 
   const handleRatingPress = (bookId: number) => {
     setRatingModal(false)
@@ -187,18 +197,18 @@ const AgeScreen = ({ navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
-      <Filter hidden={hiddenBanner}/>
+      <Banner imageUrl={selectedAgeGroup.imageUrl} hidden={hiddenBanner}/>
+      <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup}/>
       <FilterButtons activeFilter={activeFilter} onFilterChange={onFilterChange} hidden={hiddenBanner}/>
       <Animated.View style={[styles.animatedContainer, animatedStyle]}>
         <View style={styles.flatListWrapper}>
-          {renderFlatList(books, 'BookDetails', bookListRef)}
+          {renderFlatList(filteredBooks, 'book', bookListRef)}
         </View>
         <View style={styles.flatListWrapper}>
-          {renderFlatList(readers, 'ReaderDetails', readerListRef)}
+          {renderFlatList(filteredReaders, 'reader', readerListRef)}
         </View>
         <View style={styles.flatListWrapper}>
-          {renderFlatList(play, 'AudioPlay', playerListRef)}
+          {renderFlatList(filteredPlayers, 'audio_play', playerListRef)}
         </View>
       </Animated.View>
         {  ratingModal &&

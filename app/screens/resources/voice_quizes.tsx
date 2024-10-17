@@ -13,6 +13,7 @@ import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import SquareButton from '@/components/common/SquareButton';
 import ListWrapper from '@/components/common/ListWrapper';
+import { voice_play } from '@/constants/voice_play/wamp';
 
 const VoiceQuizesStack = createStackNavigator();
 
@@ -26,37 +27,26 @@ export default function VoiceQuizesStackScreen({route}:any) {
 }
 
 const VoiceQuizesScreen = ({route, navigation }:any) => { 
-  const params = route.params;
+  const book = route.params.book
+  const { ids, bannerUrl } = route.params.resource;
   const height = useSharedValue(0);
 
-  const quizList = [
-    { id: '1', title: 'Zagraj', quiz: quiz}
-  ];
+  const quizList = voice_play.filter(element => ids.includes(element.id))
 
   useEffect(() => {
     height.value = 0
     height.value =  withSpring(400);
   }, []);
 
-  const renderVoiceQuizItem = ({ item }: any) => (
-    <TouchableOpacity 
-      onPress={() => navigation.navigate('VoiceQuiz', {quiz: item.quiz})}
-      disabled={params?.book && params.book.isLock ? true : false}
-    >
-      <Text>{item.title}</Text>
-      <Ionicons name="chevron-forward" size={24} color="#3498db" />
-    </TouchableOpacity>
-  );
-
   return (
     <SafeAreaView>
       <View style={styles.quizVoiceDetailsContainer}>
       <Text style={styles.title}>Słuchaj i odpowiadaj</Text>
-        <Image style={styles.image} source={{uri: 'https://goldfish.fra1.digitaloceanspaces.com/goldfish-logo.png'}}></Image>
+        <Image style={styles.image} source={{uri: bannerUrl}}></Image>
       </View>
       <View style={styles.listContent}>
         { quizList.map((item, index) =>
-          <SquareButton key={index} props={{title: item.title, icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: ()=>navigation.navigate('VoiceQuiz', {quiz: item.quiz})}}>
+          <SquareButton key={index} props={{title: item.title, icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: ()=>navigation.navigate('VoiceQuiz', {audio_quiz: item})}}>
             <Image source={require('@/assets/icons/play.png')} style={{width: 80, height: 80}} resizeMode='contain'/>
           </SquareButton>)
         }
@@ -70,7 +60,7 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
           </View>
         </ListWrapper>
       </View>
-      { params?.book && params.book.isLock &&
+      { book && book.isLock &&
         <Animated.View  style={{...styles.overlayContainer,height}}>
           <Overlay opacity={0.6} style={styles.overlay}>
             <FunnyButton props={{title:'kup', onPress:()=> {console.log('--->buy')}, icon: ''}}></FunnyButton>
@@ -83,6 +73,8 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
   }
 
   const VoiceQuizScreen = ({route, navigation }:any) => { 
+    const audio_quiz = route.params.audio_quiz
+    console.log('-->audio_quiz',audio_quiz)
     const { hiddenTabs, showTabs} = useTabsScreen();
     const [recording, setRecording] = useState<Audio.Recording>();
     const [permissionResponse, requestPermission] = Audio.usePermissions();

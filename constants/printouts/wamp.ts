@@ -1,11 +1,11 @@
-export const prints = [
+export const wamp = [
     { 
-        id: '5',
+        id: 'f564c212-e491-40f9-b197-88eb6a45b4de',
         name: 'print1',
         fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg'
     },
     { 
-        id: '6',
+        id: 'd5935d8f-aa77-4c0d-a32f-b9bb5a2b1fb7',
         name: 'print2',
         fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg'
     },

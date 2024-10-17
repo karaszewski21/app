@@ -64,19 +64,19 @@ export const stories = [
     duration: 6,
     stories: [
       {
-        story_id: 5,
+        story_id: 7,
         story_image: 'https://goldfish.fra1.digitaloceanspaces.com/stories/promo.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 1 swiped'),
       },
       {
-        story_id: 6,
+        story_id: 8,
         story_image:'https://goldfish.fra1.digitaloceanspaces.com/story2/video5.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 2 swiped'),
       },
       {
-        story_id: 7,
+        story_id: 9,
         story_image:'https://goldfish.fra1.digitaloceanspaces.com/videos/6c588ee0-8c8c-408c-94e0-f8f2e3b5db86.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 3 swiped'),
@@ -91,19 +91,19 @@ export const stories = [
     duration: 6,
     stories: [
       {
-        story_id: 1,
+        story_id: 10,
         story_image: 'https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 1 swiped'),
       },
       {
-        story_id: 2,
+        story_id: 11,
         story_image:'https://goldfish.fra1.digitaloceanspaces.com/story2/video5.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 2 swiped'),
       },
       {
-        story_id: 3,
+        story_id: 12,
         story_image:'https://goldfish.fra1.digitaloceanspaces.com/videos/6c588ee0-8c8c-408c-94e0-f8f2e3b5db86.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 3 swiped'),
@@ -118,19 +118,19 @@ export const stories = [
     duration: 6,
     stories: [
       {
-        story_id: 1,
+        story_id: 13,
         story_image: 'https://goldfish.fra1.digitaloceanspaces.com/videos/09ed1e5e-24c9-4b3e-84b5-c6775f86837f.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 1 swiped'),
       },
       {
-        story_id: 2,
+        story_id: 14,
         story_image:'https://goldfish.fra1.digitaloceanspaces.com/story2/video5.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 2 swiped'),
       },
       {
-        story_id: 3,
+        story_id: 15,
         story_image:'https://goldfish.fra1.digitaloceanspaces.com/videos/6c588ee0-8c8c-408c-94e0-f8f2e3b5db86.mp4',
         swipeText: 'Custom swipe text for this story',
         onPress: () => console.log('story 3 swiped'),

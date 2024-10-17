@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Image, TouchableOpacity, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { usePlayerModal } from '@/context/playerModalContext';
@@ -8,7 +8,7 @@ import QuizesScreen from '@/app/screens/resources/quizes'
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
 import PlayButton from '@/components/buttons/PlayButton';
-import { AudioPlay } from '@/model';
+import { AudioPlay, Resource, Version } from '@/model';
 
 const AudioPlayStack = createStackNavigator();
 
@@ -28,16 +28,17 @@ export default function AudioPlayStackScreen({route}:any) {
 }
 
 const AudioPlayScreen = ({ route, navigation } : any) => {
-  const audioplay = route.params.audioplay as AudioPlay;
-  const { openPlayer } = usePlayerModal();
-  const versions = audioplay.versions;
+  const { audioplay } = route.params;
+  const resources = audioplay.resource as Resource[];
+  const versions = audioplay.versions as Version[];
 
+  const { openPlayer } = usePlayerModal();
 
   const openAudio = (version: any) => {
     openPlayer({
       title: version.type,
       fileUrl: version.audioFile,
-      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_modern_vibrant_social_media_post_featuring_3.jpg'
+      imageUrl: version.imageUrl
     })
   }
 
@@ -73,19 +74,30 @@ const AudioPlayScreen = ({ route, navigation } : any) => {
                       textColor:"#000"
                     }}
                   >
-                    <Image source={require('@/assets/icons/uk.png')} style={{width: 30, height: 30}} resizeMode='contain'/> 
+                    <Image source={require('@/assets/icons/eng-flag.png')} style={{width: 30, height: 30}} resizeMode='contain'/> 
                   </PlayButton>
                 }
               </>
             )
           }
           <View style={styles.buttons}>
-            <SquareButton props={{title: 'quizy', icon: 'quiz', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Quizes', { book: '' })}}>
-              <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-            </SquareButton>
-            <SquareButton props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', color: '#fff', navigate: () =>  navigation.navigate('Printouts', { book: '' }) }}>
-              <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
-            </SquareButton>
+          {
+              resources.map((element, index) => 
+              <Fragment key={index}>
+                { element.type === 'quiz' &&  
+                  <SquareButton key={element.type} props={{title: 'quizy', icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Quizes', { book:audioplay, resource: element}) }}>
+                    <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+                  </SquareButton>
+                }
+
+                { element.type === 'printouts' && 
+                  <SquareButton  key={element.type} props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', color: '#fff', navigate: () =>  navigation.navigate('Printouts', {book:audioplay, resource: element}) }}>
+                    <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+                  </SquareButton>
+                }
+              </Fragment>
+              )
+            }
           </View>
         </BookWrapper>
       </ScrollView>

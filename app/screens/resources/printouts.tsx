@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, Button, Plat
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect, useState } from 'react';
-import { prints } from '@/constants/Print';
+import { printouts } from '@/constants/printouts';
 import * as Print from 'expo-print';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import Overlay from '@/components/Overlay';
@@ -29,9 +29,12 @@ interface Printer {
 }
 
 const PrintoutsScreen = ({route, navigation }:any) => { 
-  const params = route.params;
+  const book = route.params.book
+  const { ids, bannerUrl } = route.params.resource;
   const [selectedPrinter, setSelectedPrinter] = useState<Printer | null>(null);
   const height = useSharedValue(0);
+
+  const printoutsList = printouts.filter(element => ids.includes(element.id))
 
   useEffect(() => {
     height.value = 0
@@ -76,7 +79,7 @@ const PrintoutsScreen = ({route, navigation }:any) => {
     <TouchableOpacity 
       style={styles.item}
       onPress={() =>print(item)}
-      disabled={params?.book && params.book.isLock ? true : false}
+      disabled={book && book.isLock ? true : false}
     >
       <Text style={styles.title}>{item.name}</Text>
       <Image source={{ uri: item.fileUrl }} style={styles.image}/>
@@ -97,12 +100,12 @@ const PrintoutsScreen = ({route, navigation }:any) => {
          </>
        ) }
       <FlatList
-        data={prints}
+        data={printoutsList}
         renderItem={renderFileItem}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContent}
       />
-       { params?.book && params.book.isLock &&
+       { book && book.isLock &&
         <Animated.View  style={{...styles.overlayContainer,height}}>
           <Overlay opacity={0.6} style={styles.overlay}>
             <FunnyButton props={{title:'kup', onPress:()=> {console.log('--->buy')}, icon: ''}}></FunnyButton>
