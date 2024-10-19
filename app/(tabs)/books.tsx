@@ -8,7 +8,7 @@ import useFavorite from '@/hooks/useFavorite';
 import { books } from '@/constants/Books';
 import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
-import { BANNER_HEIGHT } from '@/constants/Common';
+import { BANNER_HEIGHT, FILTER_HEIGHT } from '@/constants/Common';
 import { AgeGroup, Book } from '@/model';
 
 const BooksStack = createStackNavigator();
@@ -60,9 +60,9 @@ const BooksScreen = ({ navigation }:any) => {
   
   const renderItem = ({ item }: any) => {
      const { id } = item; 
-    
     return(
       <ListItem props={{
+        ...item,
         title: item.title,
         imageUrl: item.gallery[0],
         onRatingPress:popupRating,
@@ -93,11 +93,13 @@ const BooksScreen = ({ navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 50
+    paddingBottom: 60
   },
+  
   listContent: {
     paddingLeft: 15,
     paddingRight: 15,
-    marginTop: BANNER_HEIGHT
+    paddingTop: BANNER_HEIGHT + FILTER_HEIGHT,
+    zIndex: 2
   },
 });

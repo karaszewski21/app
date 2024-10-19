@@ -6,7 +6,8 @@ interface SquareButtonProps {
         icon: string;
         color?: string,
         backgroundColor?: string,
-        navigate: () => void;
+        navigate: () => void,
+        disabled?: boolean,
       };  
       children?: any
 }
@@ -20,6 +21,7 @@ const SquareButton: React.FC<SquareButtonProps> = ({ props, children }: SquareBu
         style={[styles.button, {backgroundColor: props.backgroundColor}]}
         //@ts-ignore
         onPress={() => props.navigate()}
+        disabled={props.disabled}
       >
         {children}
         <Text style={[styles.buttonTitle, {color: props.color}]}>{props.title}</Text>

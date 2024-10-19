@@ -87,8 +87,6 @@ const FaveScreen = ({ navigation }:any) => {
           }
         }
         keyExtractor={item => item.id}
-        horizontal={false}
-        showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
         onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
       />
@@ -99,9 +97,10 @@ const FaveScreen = ({ navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 60
   },
   listContent: {
     padding: 16,
-    marginTop: BANNER_HEIGHT - 60
+    paddingTop: BANNER_HEIGHT
   }
 });

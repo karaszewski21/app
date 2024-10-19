@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, Dimensions } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { audiobooks } from '@/constants/audiobooks';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,8 +9,10 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 import Overlay from '@/components/Overlay';
 import FunnyButton from '@/components/common/FunnyButton';
 import SquareButton from '@/components/common/SquareButton';
+import BookButton from '@/components/buttons/BookButton';
 
 const AudioBooksStack = createStackNavigator();
+const { height: HEIGHT_SCREEN } = Dimensions.get('window');
 
 export default function AudioBooksStackScreen({route}:any) {
   return (
@@ -23,12 +25,14 @@ export default function AudioBooksStackScreen({route}:any) {
 const AudiobooksScreen = ({ route, navigation }:any) => { 
   const book = route.params.book
   const { ids, bannerUrl } = route.params.resource;
+
+  const isLock = book && book.isLock;
   const height = useSharedValue(0);
   const { openPlayer } = usePlayerModal()
 
   useEffect(() => {
     height.value = 0
-    height.value =  withSpring(400);
+    height.value =  withSpring(HEIGHT_SCREEN);
   }, []);
 
   const versions = audiobooks.filter(element => ids.includes(element.id))
@@ -50,7 +54,7 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
         </View>
         <View style={styles.listContent}>
           { versions.map((item, index) =>
-            <SquareButton key={index} props={{title: '', icon: 'text', backgroundColor: '#55b1be', navigate: () => openAudioBookItem(item)}}>
+            <SquareButton key={index} props={{title: '', disabled: isLock, icon: 'text', backgroundColor: '#55b1be', navigate: () => openAudioBookItem(item)}}>
               { item.type === 'pl' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
                   <Text style={styles.tileTitle}>{item.name}</Text>
@@ -83,11 +87,31 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
             </SquareButton>)
           }
         </View>
-        { book && book.isLock &&
+        { isLock &&
           <Animated.View  style={{...styles.overlayContainer,height}}>
-            <Overlay opacity={0.6} style={styles.overlay}>
-              <FunnyButton props={{title:'kup', onPress:()=> {console.log('--->buy')}, icon: ''}}></FunnyButton>
-              <FunnyButton props={{title:'odblokuj', onPress:()=> {console.log('--->loout')}, icon: ''}}></FunnyButton>
+            <Overlay opacity={0.3} style={styles.overlay}>
+              <BookButton 
+                  title="Kup teraz"
+                  onPress={() => console.log}
+                  leftIconName="book-open-page-variant"
+                  backgroundColor="#c45c48"
+                  textColor="#fff"
+                  customStyles={{
+                    container: { borderWidth: 1, borderColor: '#c83c45' },
+                    title: { fontSize: 20 },
+                    }}
+                  />
+                <BookButton 
+                  title="Odblokuj książkę"
+                  onPress={() => console.log}
+                  leftIconName="image"
+                  backgroundColor="#f5d066"
+                  textColor="#000"
+                  customStyles={{
+                    container: { borderWidth: 1, borderColor: '#f5d066' },
+                    title: { fontSize: 20 },
+                    }}
+                  />
             </Overlay> 
           </Animated.View>
         }
@@ -142,10 +166,10 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
       position: 'absolute',
       left: 0,
       right: 0,
-      bottom: 0,
+      top: 0,
     },
     overlay: {
-      borderTopLeftRadius: 25,
-      borderTopRightRadius: 25,
+      borderBottomLeftRadius: 15,
+      borderBottomRightRadius: 15,
     }
   });

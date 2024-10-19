@@ -10,6 +10,7 @@ import Animated, {
 import { ageGroups } from '@/constants/AgeGroups';
 import useAgeGroupsIcon from '@/hooks/useAgeGroupsIcon';
 import { AgeGroup } from '@/model';
+import { FILTER_HEIGHT } from '@/constants/Common';
 interface FilterProps {
   filter?: () => any;
   hidden: boolean;
@@ -101,8 +102,8 @@ const styles = StyleSheet.create({
       top: 130,
       left: 0,
       right: 0,
-      height: 50,
-      zIndex: 10,
+      height: FILTER_HEIGHT,
+      zIndex: 3,
     },
     searchContainer: {
       flexDirection: 'row',

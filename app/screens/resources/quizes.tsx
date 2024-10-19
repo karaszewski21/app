@@ -1,18 +1,18 @@
-import { ScrollView, View, Text, StyleSheet, Image} from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Quiz from '@/components/quiz/Quiz'
 import { quizes } from '@/constants/quizes';
 import { useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
-import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import Overlay from '@/components/Overlay';
-import FunnyButton from '@/components/common/FunnyButton';
 import SquareButton from '@/components/common/SquareButton';
 import ListWrapper from '@/components/common/ListWrapper';
+import BookButton from '@/components/buttons/BookButton';
 
 const QuizesStack = createStackNavigator();
+const { height: HEIGHT_SCREEN } = Dimensions.get('window');
 
 export default function QuizesStackScreen({route}:any) {
   return (
@@ -26,13 +26,14 @@ export default function QuizesStackScreen({route}:any) {
 const QuizesScreen = ({route, navigation }:any) => { 
   const book = route.params.book
   const { ids, bannerUrl } = route.params.resource;
-  const height = useSharedValue(0);
 
+  const isLock = book && book.isLock;
+  const height = useSharedValue(0);
   const quizList = quizes.filter(element => ids.includes(element.id))
 
   useEffect(() => {
     height.value = 0
-    height.value =  withSpring(400);
+    height.value =  withSpring(HEIGHT_SCREEN);
   }, []);
 
   return (
@@ -44,7 +45,7 @@ const QuizesScreen = ({route, navigation }:any) => {
         </View>
         <View style={styles.listContent}>
           { quizList.map((item, index) =>
-            <SquareButton key={index} props={{title: '', icon: 'text', backgroundColor: '#55b1be', color: 'green',  navigate: ()=>navigation.navigate('Quiz', {quiz: item})}}>
+            <SquareButton key={index} props={{title: '', disabled: isLock, icon: 'text', backgroundColor: '#55b1be', color: 'green', navigate: () => navigation.navigate('Quiz', {quiz: item})}}>
               <Text style={styles.tileTitle}>{item.title}</Text>
                 {/* { item.type === 'child' &&  <Image source={require('@/assets/icons/child.png')} style={{width: 70, height: 70}} resizeMode='contain'/> }
                 { item.type === 'parent' &&  <Image source={require('@/assets/icons/parent.png')} style={{width: 70, height: 70}} resizeMode='contain'/> }
@@ -61,11 +62,31 @@ const QuizesScreen = ({route, navigation }:any) => {
             </View>
           </ListWrapper>
         </View>
-        { book && book.isLock &&
+        { isLock &&
           <Animated.View  style={{...styles.overlayContainer,height}}>
-            <Overlay opacity={0.6} style={styles.overlay}>
-              <FunnyButton props={{title:'kup', onPress:()=> {console.log('--->buy')}, icon: ''}}></FunnyButton>
-              <FunnyButton props={{title:'odblokuj', onPress:()=> {console.log('--->loout')}, icon: ''}}></FunnyButton>
+            <Overlay opacity={0.3} style={styles.overlay}>
+              <BookButton 
+                title="Kup teraz"
+                onPress={() => console.log}
+                leftIconName="book-open-page-variant"
+                backgroundColor="#c45c48"
+                textColor="#fff"
+                customStyles={{
+                  container: { borderWidth: 1, borderColor: '#c83c45' },
+                  title: { fontSize: 20 },
+                  }}
+                />
+              <BookButton 
+                title="Odblokuj książkę"
+                onPress={() => console.log}
+                leftIconName="image"
+                backgroundColor="#f5d066"
+                textColor="#000"
+                customStyles={{
+                  container: { borderWidth: 1, borderColor: '#f5d066' },
+                  title: { fontSize: 20 },
+                  }}
+                />
             </Overlay> 
           </Animated.View>
         }
@@ -98,8 +119,6 @@ const QuizesScreen = ({route, navigation }:any) => {
     container: {
       flex: 1,
       paddingBottom: 50
-   //   height: '100%',
-   //   position: 'relative'
     },
     bookDetailsContainer: {
       margin: 10,
@@ -153,10 +172,10 @@ const QuizesScreen = ({route, navigation }:any) => {
       position: 'absolute',
       left: 0,
       right: 0,
-      bottom: 0,
+      top: 0,
     },
     overlay: {
-      borderTopLeftRadius: 25,
-      borderTopRightRadius: 25,
+      borderBottomLeftRadius: 15,
+      borderBottomRightRadius: 15,
     }
   });

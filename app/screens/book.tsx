@@ -12,7 +12,7 @@ import LangsStack from '@/app/screens/resources/langs'
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
 import BookButton from '@/components/buttons/BookButton';
-import { Resource } from '@/model';
+import { Book, Resource } from '@/model';
 
 const BookStack = createStackNavigator();
 
@@ -35,15 +35,24 @@ export default function BookStackScreen({route}:any) {
 }
 
 const BookScreen = ({ route, navigation }:any) => {
-  const { book } = route.params;
+  const book = route.params.book as Book; 
   const resources = book.resource as Resource[];
+
+
+  const buyNowModal = () => {
+
+  }
+
+  const lockoutBookModal = () => {
+
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <BookWrapper props={book}>
         <BookButton 
           title="Kup teraz"
-          onPress={() => navigation.navigate('ReaderText')}
+          onPress={() => buyNowModal}
           leftIconName="book-open-page-variant"
           backgroundColor="#c45c48"
           textColor="#fff"
@@ -54,7 +63,7 @@ const BookScreen = ({ route, navigation }:any) => {
           />
         <BookButton 
           title="Odblokuj książkę"
-          onPress={() => navigation.navigate('ReaderFlipper')}
+          onPress={() => lockoutBookModal}
           leftIconName="image"
           backgroundColor="#f5d066"
           textColor="#000"

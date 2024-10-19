@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { View, Image, StyleSheet, ScrollView, Text, Dimensions } from 'react-native';
+import AgeRange from './AgeRange';
 
 interface BookWrapperProps {
   props: {
+    ageGroupId: number,
     gallery: string[];
     title: string;
     description: string;
@@ -53,6 +55,7 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
       <View style={styles.content}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.description}>{props.description}</Text>
+        <AgeRange ageRangeId={props.ageGroupId} />
         <View style={styles.contentButtons}>
           {children}
         </View>

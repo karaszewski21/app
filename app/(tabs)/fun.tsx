@@ -11,7 +11,7 @@ import Animated, { useSharedValue, useAnimatedStyle, withTiming, interpolate, wi
 import useFavorite from '@/hooks/useFavorite';
 import { readers } from '@/constants/Readers';
 import { players } from '@/constants/Players';
-import { BANNER_HEIGHT } from '@/constants/Common';
+import { BANNER_HEIGHT, FILTER_HEIGHT } from '@/constants/Common';
 import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
 import { AgeGroup, AudioPlay, Reader } from '@/model';
@@ -153,8 +153,6 @@ const FunScreen = ({ navigation }:any) => {
         />
       )}
       keyExtractor={item => item.id}
-      horizontal={false}
-      showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.listContent}
       onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
     />
@@ -179,26 +177,26 @@ const FunScreen = ({ navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
-      <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup}/>
-      <FilterButtons activeFilter={activeFilter} onFilterChange={onFilterChange} hidden={hiddenBanner}/>
-      <Animated.View style={[styles.animatedContainer, animatedStyle]}>
-        <View style={styles.flatListWrapper}>
-          {renderFlatList(readerList, 'ReaderDetails',readerListRef)}
-        </View>
-        <View style={styles.flatListWrapper}>
-          {renderFlatList(audiPlayList, 'AudioPlay', playerListRef)}
-        </View>
-      </Animated.View>
-      {  ratingModal &&
-          <Overlay opacity={0.3}>
-            <RatingView 
-                bookTitle='test' 
-                onSubmit={(s,r) => handleRatingPress(s)}
-                onClose={() => setRatingModal(false)}
-                />
-          </Overlay> 
-      }
+        <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
+        <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup}/>
+        <FilterButtons activeFilter={activeFilter} onFilterChange={onFilterChange} hidden={hiddenBanner}/>
+        <Animated.View style={[styles.animatedContainer, animatedStyle]}>
+          <View style={styles.flatListWrapper}>
+            {renderFlatList(readerList, 'ReaderDetails',readerListRef)}
+          </View>
+          <View style={styles.flatListWrapper}>
+            {renderFlatList(audiPlayList, 'AudioPlay', playerListRef)}
+          </View>
+        </Animated.View>
+        {  ratingModal &&
+            <Overlay opacity={0.3}>
+              <RatingView 
+                  bookTitle='test' 
+                  onSubmit={(s,r) => handleRatingPress(s)}
+                  onClose={() => setRatingModal(false)}
+                  />
+            </Overlay> 
+        }
     </SafeAreaView>
   );
 }
@@ -206,7 +204,7 @@ const FunScreen = ({ navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 50
+    paddingBottom: 60
   },
 
   filterContainer: {
@@ -215,7 +213,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 50,
-    zIndex: 1,
+    zIndex: 2,
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 20,
@@ -229,7 +227,8 @@ const styles = StyleSheet.create({
 
   animatedContainer: {
     flexDirection: 'row',
-    width: width * 3,
+    width: width * 2,
+    zIndex: 1,
   },
 
   activeFilter: {
@@ -241,13 +240,13 @@ const styles = StyleSheet.create({
   },
   
   flatListWrapper: {
-    width,
+     width,
   },
 
   listContent: {
     paddingLeft: 15,
     paddingRight: 15,
-    marginTop: BANNER_HEIGHT + 40
+    paddingTop: BANNER_HEIGHT + FILTER_HEIGHT + 40
   },
 
   modal: {

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, Button, Platform, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, Button, Platform, Alert, Dimensions } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect, useState } from 'react';
@@ -6,9 +6,10 @@ import { printouts } from '@/constants/printouts';
 import * as Print from 'expo-print';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import Overlay from '@/components/Overlay';
-import FunnyButton from '@/components/common/FunnyButton';
+import BookButton from '@/components/buttons/BookButton';
 
 const PrintoutsStack = createStackNavigator();
+const { height: HEIGHT_SCREEN } = Dimensions.get('window');
 
 export default function PrintoutsStackScreen({route}:any) {
   return (
@@ -31,6 +32,8 @@ interface Printer {
 const PrintoutsScreen = ({route, navigation }:any) => { 
   const book = route.params.book
   const { ids, bannerUrl } = route.params.resource;
+
+  const isLock = book && book.isLock;
   const [selectedPrinter, setSelectedPrinter] = useState<Printer | null>(null);
   const height = useSharedValue(0);
 
@@ -38,7 +41,7 @@ const PrintoutsScreen = ({route, navigation }:any) => {
 
   useEffect(() => {
     height.value = 0
-    height.value =  withSpring(400);
+    height.value =  withSpring(HEIGHT_SCREEN);
   }, []);
 
   const selectPrinter = async () => {
@@ -79,7 +82,7 @@ const PrintoutsScreen = ({route, navigation }:any) => {
     <TouchableOpacity 
       style={styles.item}
       onPress={() =>print(item)}
-      disabled={book && book.isLock ? true : false}
+      disabled={isLock}
     >
       <Text style={styles.title}>{item.name}</Text>
       <Image source={{ uri: item.fileUrl }} style={styles.image}/>
@@ -108,8 +111,28 @@ const PrintoutsScreen = ({route, navigation }:any) => {
        { book && book.isLock &&
         <Animated.View  style={{...styles.overlayContainer,height}}>
           <Overlay opacity={0.6} style={styles.overlay}>
-            <FunnyButton props={{title:'kup', onPress:()=> {console.log('--->buy')}, icon: ''}}></FunnyButton>
-            <FunnyButton props={{title:'odblokuj', onPress:()=> {console.log('--->loout')}, icon: ''}}></FunnyButton>
+            <BookButton 
+                title="Kup teraz"
+                onPress={() => console.log}
+                leftIconName="book-open-page-variant"
+                backgroundColor="#c45c48"
+                textColor="#fff"
+                customStyles={{
+                  container: { borderWidth: 1, borderColor: '#c83c45' },
+                  title: { fontSize: 20 },
+                  }}
+                />
+              <BookButton 
+                title="Odblokuj książkę"
+                onPress={() => console.log}
+                leftIconName="image"
+                backgroundColor="#f5d066"
+                textColor="#000"
+                customStyles={{
+                  container: { borderWidth: 1, borderColor: '#f5d066' },
+                  title: { fontSize: 20 },
+                  }}
+                />
           </Overlay> 
         </Animated.View>
       }
@@ -173,10 +196,10 @@ const PrintoutsScreen = ({route, navigation }:any) => {
       position: 'absolute',
       left: 0,
       right: 0,
-      bottom: 0,
+      top: 0,
     },
     overlay: {
-      borderTopLeftRadius: 25,
-      borderTopRightRadius: 25,
+      borderBottomLeftRadius: 15,
+      borderBottomRightRadius: 15,
     }
   });

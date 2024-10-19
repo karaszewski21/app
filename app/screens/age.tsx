@@ -9,13 +9,14 @@ import Overlay from '@/components/Overlay';
 import RatingView from '@/components/common/RatingView';
 import BookStackScreen from '@/app/screens/book';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, interpolate, withSpring } from 'react-native-reanimated';
-import { BANNER_HEIGHT } from '@/constants/Common';
+import { BANNER_HEIGHT, FILTER_HEIGHT } from '@/constants/Common';
 import { books } from '@/constants/Books';
 import { readers } from '@/constants/Readers';
 import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
 import { players } from '@/constants/Players';
 import { Book, Reader, AudioPlay, AgeGroup } from '@/model';
+import useFavorite from '@/hooks/useFavorite';
 
 const AgeStack = createStackNavigator();
 
@@ -98,6 +99,7 @@ const AgeScreen = ({ route, navigation }:any) => {
 
   const [activeFilter, setActiveFilter] = useState('book');
   const [selectedAgeGroup, setAgeGroup] = useState<AgeGroup>(ageGroup);
+  const { isFavorite, addFavorite, removeFavorite } = useFavorite();
 
   const [ratingModal, setRatingModal]= useState(false);
   const animatedValue = useSharedValue(0);
@@ -133,6 +135,16 @@ const AgeScreen = ({ route, navigation }:any) => {
     setHiddenBanner(y >= BANNER_HEIGHT)
   }, [])
 
+  const favoriteBookPress = (item: Book) => {
+    const isFav = isFavorite(item.id);
+    if (!isFav) {
+      addFavorite(item) 
+    } else {
+      removeFavorite(item.id)
+    }
+  }
+  
+
   const renderFlatList = (data: Book[] | Reader[] | AudioPlay[], type: string, listRef: React.RefObject<FlatList>) => {
     return(
       <FlatList
@@ -166,12 +178,12 @@ const AgeScreen = ({ route, navigation }:any) => {
               imageUrl: item.gallery[0],
               onPress: () => navigation.navigate(navigateTo, params),
               onRatingPress: () => setRatingModal(true),
+              isFavorite: isFavorite(item.id),
+              onFavoritePress:() => favoriteBookPress(item)
             }}
           />
         )}}
         keyExtractor={item => item.id}
-        horizontal={false}
-        showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
         onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
       />
@@ -227,7 +239,7 @@ const AgeScreen = ({ route, navigation }:any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 50
+    paddingBottom: 60
   },
 
   filterContainer: {
@@ -236,7 +248,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 50,
-    zIndex: 1,
+    zIndex: 2,
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 20,
@@ -251,6 +263,7 @@ const styles = StyleSheet.create({
   animatedContainer: {
     flexDirection: 'row',
     width: width * 3,
+    zIndex: 1,
   },
 
   activeFilter: {
@@ -268,7 +281,7 @@ const styles = StyleSheet.create({
   listContent: {
     paddingLeft: 15,
     paddingRight: 15,
-    marginTop: BANNER_HEIGHT + 40
+    paddingTop: BANNER_HEIGHT + FILTER_HEIGHT + 40
   },
 
   modal: {

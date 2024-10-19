@@ -9,7 +9,8 @@ export const index = {
         {
             id: '362d5de4-691d-4cc5-9d0b-52195009d988',
             type: 'book' as ProductType,
-            ageGroupId: 6,
+            ageGroupId: 5,
+            indexType: 'video',
             indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
             gallery: [ 
               'https://goldfish.fra1.digitaloceanspaces.com/books/amp/cover.png', 
@@ -48,7 +49,8 @@ export const index = {
         {
             id: '37a179c4-df70-4b14-84b5-e78580b97166',
             type: 'book' as ProductType,
-            ageGroupId: 6,
+            ageGroupId: 5,
+            indexType: 'video',
             indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
             gallery: [ 
               'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/cover.png', 
@@ -89,7 +91,8 @@ export const index = {
             id: '7fb7fe03-fcf3-4dc7-a093-ef45d60e985b',
             type: 'book' as ProductType,
             ageGroupId: 1,
-            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
+            indexType: 'image',
+            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg',
             gallery: [ 
               'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_2.jpg', 
               'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
@@ -97,7 +100,7 @@ export const index = {
             ],
             title: "Tytuł książki 3",
             description: "Opis książki ",
-            isLock: false,
+            isLock: true,
             rating: 3.5, 
             reviewCount: 85,
             resource: [
@@ -127,7 +130,8 @@ export const index = {
             id: 'a3118f6e-a4b6-426f-88b7-f934b63a29b4',
             type: 'book' as ProductType,
             ageGroupId: 1,
-            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
+            indexType: 'image',
+            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg',
             gallery: [ 
               'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish_text/Leonardo_Phoenix_A_serene_beauty_landscape_featuring_a_stunnin_1.jpg', 
               'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
@@ -135,7 +139,7 @@ export const index = {
             ],
             title: "Tytuł książki 5",
             description: "Opis książki ",
-            isLock: false,
+            isLock: true,
             rating: 3.5, 
             reviewCount: 85,
             resource: [
@@ -167,6 +171,7 @@ export const index = {
             id: 'aa839df8-2ce5-4b42-87ec-46f9b35e4da9',
             type: 'reader' as ProductType,
             ageGroupId: 1,
+            indexType: 'video',
             indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
             gallery: [ 
               'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
@@ -199,7 +204,8 @@ export const index = {
             id: '5fa869da-166d-45cc-a57d-36dda0a181b3',
             type: 'reader' as ProductType,
             ageGroupId: 1,
-            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
+            indexType: 'image',
+            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg',
             gallery: [ 
               'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
               'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
@@ -231,7 +237,8 @@ export const index = {
             id: '5edd9000-3681-4ef8-b49b-f9caff040de2',
             type: 'reader' as ProductType,
             ageGroupId: 1,
-            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/amp/indexpromo.mp4',
+            indexType: 'image',
+            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png',
             gallery: [ 
               'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
               'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 
@@ -263,7 +270,8 @@ export const index = {
             id: 'ef675ec5-6a84-4493-91e1-a68881043f93',
             type: 'reader' as ProductType,
             ageGroupId: 1,
-            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/einstainindexpromo.mp4',
+            indexType: 'image',
+            indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg',
             gallery: [ 
               'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg', 
               'https://goldfish.fra1.digitaloceanspaces.com/atlas_ma%C5%82ych_przyjemnosci/cover.png', 

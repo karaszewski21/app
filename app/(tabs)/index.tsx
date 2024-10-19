@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ImageBackground, Dimensions, Platform } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,9 +8,9 @@ import ReaderStackScreen from '@/app/screens/reader';
 import AgeStackScreen from '@/app/screens/age';
 import { index } from '@/constants/Index';
 import Story from '@/components/story/StoryBasic';
-import { Video, ResizeMode, AVPlaybackStatus } from 'expo-av';
 import { Book, Reader } from '@/model';
 import useAgeGroupsIcon from '@/hooks/useAgeGroupsIcon';
+import IndexVideo from '@/components/common/IndexVideo';
 
 const HomeStack = createStackNavigator();
 
@@ -21,35 +21,41 @@ export default function HomeScreenStack() {
           name="Home" 
           component={HomeScreen} 
           options={{
-            headerShown: false
+            headerShown: false,
+            detachPreviousScreen: false
           }}
         />
         <HomeStack.Screen 
           name="News" 
           component={NewsScreen}
           options={{
-            headerShown: false
+            headerShown: false,
+            detachPreviousScreen: false
           }}
+
         />
         <HomeStack.Screen 
           name="BookDetails" 
           component={BookStackScreen}
           options={{
-            headerShown: false
+            headerShown: false,
+            detachPreviousScreen: false
           }}
         />
         <HomeStack.Screen 
           name="ReaderDetails" 
           component={ReaderStackScreen}
           options={{
-            headerShown: false
+            headerShown: false,
+            detachPreviousScreen: false
           }}
         />
         <HomeStack.Screen 
           name="Age" 
           component={AgeStackScreen}
           options={{
-            headerShown: false
+            headerShown: false,
+            detachPreviousScreen: false
           }}
         />
       </HomeStack.Navigator>
@@ -58,7 +64,14 @@ export default function HomeScreenStack() {
 
 const HomeScreen = ({ navigation }: any) => {
   const { ageGroupsIcon } = useAgeGroupsIcon();
-  
+
+
+  useEffect(() => {
+    console.log('-->HomeScreen');
+
+    return () => console.log('-->HomeScreen unmounted');
+  }, [])
+
   const renderStory = () => { 
     return ( 
         <FlatList
@@ -103,7 +116,7 @@ const HomeScreen = ({ navigation }: any) => {
     )
   }
 
-  const renderBookItem = (book: Book) => (
+  const renderBookItem = useCallback((book: Book) => (
     <TouchableOpacity 
       key={book.id} 
       style={[
@@ -114,18 +127,17 @@ const HomeScreen = ({ navigation }: any) => {
       ]}
       onPress={() => navigation.navigate('BookDetails', { book })}
     >
-      {/* <Video
-        key={book.id}
-        source={{ uri: book.indexUrl ?? '' }}
-        resizeMode={ResizeMode.COVER}
-        shouldPlay={true}
+      <IndexVideo
+        key={`${book.id}-${book.indexUrl}`}
+        type={book.indexType ?? ''}
         isLooping={false}
+        source={book.indexUrl}
         style={styles.indexUrl}
-      /> */}
+      />
     </TouchableOpacity>
-  );
+  ),[]);
 
-  const renderReaderItem = (reader: Reader) => (
+  const renderReaderItem = useCallback((reader: Reader) => (
     <TouchableOpacity 
       key={reader.id} 
       style={[
@@ -136,16 +148,14 @@ const HomeScreen = ({ navigation }: any) => {
       ]}
       onPress={() => navigation.navigate('ReaderDetails', { reader })}
     >
-      {/* <Video
+     <IndexVideo
         key={reader.id}
-        source={{ uri: reader.indexUrl ?? '' }}
-        resizeMode={ResizeMode.COVER}
-        shouldPlay={true}
-        isLooping={false}
+        type={reader.indexType ?? ''}
+        source={reader.indexUrl}
         style={styles.indexUrl}
-      /> */}
+      />
     </TouchableOpacity>
-  );
+  ),[]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -177,7 +187,7 @@ const HomeScreen = ({ navigation }: any) => {
         </View>
 
         <Text style={styles.sectionTitle}>Najnowsze Czytanki</Text>
-        <View style={styles.tilesContainer}>
+        <View style={[styles.tilesContainer, {paddingBottom: 80}]}>
           {index.readers.map(reader => (
             renderReaderItem(reader)
           ))}
@@ -197,6 +207,7 @@ const HomeScreen = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+   // paddingBottom: 80
   },
   header: {
     display: 'flex',

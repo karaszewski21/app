@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
+import AgeRange from './AgeRange';
 
 interface ItemProps {
   props: {
+    ageGroupId: number,
     imageUrl: string;
     title: string;
     rating: number;
@@ -48,6 +50,9 @@ const ListItem: React.FC<ItemProps> = ({props}) => {
             color={props.isFavorite ? '#FF6B6B' : '#BDC3C7'}
           />
       </TouchableOpacity>
+      <View style={styles.ageInfoIcon}>
+        <AgeRange ageRangeId={props.ageGroupId} showText={false} />
+      </View>
     </TouchableOpacity>
   );
 };
@@ -65,6 +70,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    zIndex: 20
   },
 
   image: {
@@ -100,7 +106,13 @@ const styles = StyleSheet.create({
     top: 10,
     right: 10,
   },
-  
+
+  ageInfoIcon: {
+    position: 'absolute',
+    top: 50,
+    right: -5,
+  }
+
 });
 
 export default ListItem;

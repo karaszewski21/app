@@ -5,6 +5,7 @@ export type LangType = 'pl' | 'eng';
 export interface Book {
     id: string,
     ageGroupId: number,
+    indexType?: string,
     indexUrl: string,
     gallery: string[],
     title: string,
@@ -19,6 +20,7 @@ export interface Book {
 export interface Reader {
     id: string,
     ageGroupId: number,
+    indexType?: string,
     indexUrl: string,
     gallery: string[],
     title: string,

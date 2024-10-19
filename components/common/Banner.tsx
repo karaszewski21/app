@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
       left: 0,
       right: 0,
       height: BANNER_HEIGHT,
-      zIndex: 1,
+      zIndex: 3,
     },
     imageContainer: {
       height: 100,

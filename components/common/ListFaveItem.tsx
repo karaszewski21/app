@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
+import AgeRange from './AgeRange';
 
 interface ItemProps {
   props: {
+    ageGroupId: number;
     imageUrl: string;
     title: string;
     rating: number;
@@ -40,12 +42,15 @@ const ListFaveItem: React.FC<ItemProps> = ({props}) => {
           <Text style={styles.reviewCount}>({props.reviewCount})</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={props.onRemovePress} style={styles.favoriteButton}>
+      <TouchableOpacity onPress={props.onRemovePress} style={styles.closeButton}>
           <AntDesign
             name={'close'}
             size={24}
           />
       </TouchableOpacity>
+      <View style={styles.ageInfoIcon}>
+        <AgeRange ageRangeId={props.ageGroupId} showText={false} />
+      </View>
     </TouchableOpacity>
   );
 };
@@ -63,6 +68,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    zIndex: 20
   },
 
   image: {
@@ -93,11 +99,17 @@ const styles = StyleSheet.create({
     color: '#666',
   },
 
-  favoriteButton: {
+  closeButton: {
     position: 'absolute',
     top: 10,
     right: 10,
   },
+
+  ageInfoIcon: {
+    position: 'absolute',
+    top: 50,
+    right: -5,
+  }
   
 });
 
