@@ -16,7 +16,7 @@ export const books = [
     description: "O pięknych, darmowych przyjemnostkach dnia codziennego. Czyli o rzeczach, których czasem nie doceniamy lub o których zapomnieliśmy, że możemy się nimi cieszyć tak po prostu…",
     isLock: false,
     rating: 3.5, 
-    reviewCount: 85,
+    reviewCount: 34,
     resource: [
       {
         type: 'quiz',

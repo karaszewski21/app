@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Animated, {
@@ -15,9 +15,10 @@ interface FilterProps {
   filter?: () => any;
   hidden: boolean;
   onOptionSelect: (item: AgeGroup) => void;
+  reset?: boolean;
 }
 
-const Filter: React.FC<FilterProps> = ({ filter, hidden, onOptionSelect }) => {
+const Filter: React.FC<FilterProps> = ({ filter, hidden, onOptionSelect, reset }) => {
   const { ageGroupsIcon } = useAgeGroupsIcon();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const filterTranslateY = useSharedValue<number>(0);
@@ -36,15 +37,16 @@ const Filter: React.FC<FilterProps> = ({ filter, hidden, onOptionSelect }) => {
     filterTranslateY.value = withSpring(-100);
   } else {
     filterTranslateY.value = withSpring(0);
-  }   
-
-
+  }
+    
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
-    dropdownHeight.value = withTiming(isDropdownVisible ? 0 : 300, { duration: 300 });
+    dropdownHeight.value = withTiming(isDropdownVisible ? 0 : reset ? 350 : 300, { duration: 300 });
   };
 
-  const renderOption = ({ item } : any) => (
+  const renderOption = ({ item } : any) => {
+
+    return(
     <TouchableOpacity
       style={styles.optionItem}
       onPress={() => {
@@ -52,10 +54,11 @@ const Filter: React.FC<FilterProps> = ({ filter, hidden, onOptionSelect }) => {
         toggleDropdown();
       }}
     >
-      <Image source={ageGroupsIcon[item.id]} style={styles.optionImage} />
-      <Text style={styles.optionText}>{item.title}</Text>
+        <Image source={ageGroupsIcon[item.id]} style={styles.optionImage} />
+        <Text style={styles.optionText}>{item.title}</Text>
     </TouchableOpacity>
-  );
+    );
+  }
 
   return (
     <Animated.View style={[styles.filterContainer, filterAnimatedStyle, {transform: [{translateY: 0}]}]}>

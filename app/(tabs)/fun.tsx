@@ -15,6 +15,7 @@ import { BANNER_HEIGHT, FILTER_HEIGHT } from '@/constants/Common';
 import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
 import { AgeGroup, AudioPlay, Reader } from '@/model';
+import useRating from '@/hooks/useRating';
 
 const FunStack = createStackNavigator();
 const { width } = Dimensions.get('window');
@@ -74,9 +75,9 @@ const FilterButtons = ({ activeFilter, onFilterChange, hidden }: any) => {
 
 const FunScreen = ({ navigation }:any) => {
   const [activeFilter, setActiveFilter] = useState('reader');
-  const [ratingModal, setRatingModal]= useState(false);
-  const animatedValue = useSharedValue(0);
   const { isFavorite, addFavorite, removeFavorite } = useFavorite();
+  const {ratingModal, product, setRatingModal, onRatingPress, onSelectProductPress } = useRating();
+  const animatedValue = useSharedValue(0);
   const [ hiddenBanner, setHiddenBanner] = useState<boolean>(false);
   const [selectedAgeGroup, setAgeGroup] = useState<AgeGroup>();
   const [readerList, setReaders] = useState<Reader[]>();
@@ -87,12 +88,12 @@ const FunScreen = ({ navigation }:any) => {
 
 
   useEffect(() => {
-    if (selectedAgeGroup) {
+    if (selectedAgeGroup && selectedAgeGroup.id !== 6) {
       setReaders(readers.filter(reader => reader.ageGroupId === selectedAgeGroup.id));
       setAudioPlays(players.filter(player => player.ageGroupId === selectedAgeGroup.id))
     } else {
       setReaders(readers);
-      setAudioPlays(players)
+      setAudioPlays(players);
     }
   }, [selectedAgeGroup]) 
 
@@ -112,7 +113,6 @@ const FunScreen = ({ navigation }:any) => {
   });
 
   const favoriteReaderPress = (item: Reader) => {
-    console.log('-->item',item)
     const isFav = isFavorite(item.id);
     if (!isFav) {
       addFavorite(item) 
@@ -122,8 +122,6 @@ const FunScreen = ({ navigation }:any) => {
   }
 
   const favoritePlayerPress = (item: AudioPlay) => {
-
-    console.log('-->item',item)
     const isFav = isFavorite(item.id);
     if (!isFav) {
       addFavorite(item) 
@@ -146,7 +144,7 @@ const FunScreen = ({ navigation }:any) => {
             ...item,
             imageUrl: item.gallery[0],
             onPress: () => navigateTo === 'ReaderDetails' ? navigation.navigate('ReaderDetails', { reader: item }) : navigation.navigate('AudioPlay', { audioplay: item }),
-            onRatingPress: () => setRatingModal(true),
+            onRatingPress: () => onSelectProductPress(item),
             isFavorite: isFavorite(item.id),
             onFavoritePress:() => navigateTo === 'ReaderDetails' ? favoriteReaderPress(item) : favoritePlayerPress(item) 
           }}
@@ -157,11 +155,6 @@ const FunScreen = ({ navigation }:any) => {
       onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
     />
   )
-
-  const handleRatingPress = (bookId: number) => {
-    setRatingModal(false)
-    console.log(`Naciśnięto ocenę książki o id: ${bookId}`);
-  };
 
   const onFilterChange = (filter: string) => {
     setActiveFilter(filter);
@@ -178,7 +171,7 @@ const FunScreen = ({ navigation }:any) => {
   return (
     <SafeAreaView style={styles.container}>
         <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
-        <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup}/>
+        <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup} reset={true}/>
         <FilterButtons activeFilter={activeFilter} onFilterChange={onFilterChange} hidden={hiddenBanner}/>
         <Animated.View style={[styles.animatedContainer, animatedStyle]}>
           <View style={styles.flatListWrapper}>
@@ -190,9 +183,10 @@ const FunScreen = ({ navigation }:any) => {
         </Animated.View>
         {  ratingModal &&
             <Overlay opacity={0.3}>
-              <RatingView 
-                  bookTitle='test' 
-                  onSubmit={(s,r) => handleRatingPress(s)}
+              <RatingView
+                  title={activeFilter === 'reader' ? 'Oceń czytankę' : 'Oceń słuchowisko'}
+                  subTitle={product?.title ?? ''}
+                  onSubmit={(s,r) => onRatingPress(s)}
                   onClose={() => setRatingModal(false)}
                   />
             </Overlay> 

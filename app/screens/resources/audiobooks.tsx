@@ -1,15 +1,18 @@
-import { View, Text, StyleSheet, Image, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { audiobooks } from '@/constants/audiobooks';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect, useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { usePlayerModal } from '@/context/playerModalContext';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import Overlay from '@/components/Overlay';
 import FunnyButton from '@/components/common/FunnyButton';
 import SquareButton from '@/components/common/SquareButton';
 import BookButton from '@/components/buttons/BookButton';
+import useBuyBook from '@/hooks/useBuyBook';
+import BuyBookView from '@/components/common/BuyBookView';
+import BarcodeScanned from '@/components/common/BarcodeScanned';
 
 const AudioBooksStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -28,7 +31,9 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
 
   const isLock = book && book.isLock;
   const height = useSharedValue(0);
-  const { openPlayer } = usePlayerModal()
+  const { openPlayer } = usePlayerModal();
+  const { buyBookModal, selectedBook, onSelectBookPress, setBuyBookModal, buyBookPress } = useBuyBook(book);
+  const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     height.value = 0
@@ -92,7 +97,7 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
             <Overlay opacity={0.3} style={styles.overlay}>
               <BookButton 
                   title="Kup teraz"
-                  onPress={() => console.log}
+                  onPress={() => onSelectBookPress(book)}
                   leftIconName="book-open-page-variant"
                   backgroundColor="#c45c48"
                   textColor="#fff"
@@ -101,19 +106,17 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
                     title: { fontSize: 20 },
                     }}
                   />
-                <BookButton 
-                  title="Odblokuj książkę"
-                  onPress={() => console.log}
-                  leftIconName="image"
-                  backgroundColor="#f5d066"
-                  textColor="#000"
-                  customStyles={{
-                    container: { borderWidth: 1, borderColor: '#f5d066' },
-                    title: { fontSize: 20 },
-                    }}
-                  />
             </Overlay> 
           </Animated.View>
+        }
+        { buyBookModal &&
+          <Overlay opacity={0.3}>
+            <BuyBookView 
+              book={selectedBook}
+              onSubmit={(s) => buyBookPress(s)}
+              onClose={() => setBuyBookModal(false)}
+              />
+           </Overlay> 
         }
       </ScrollView>
     </SafeAreaView>
@@ -161,6 +164,15 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
       shadowOpacity: 0.34,
       shadowRadius: 6.27,
       elevation: 10,
+    },
+    scannerContainer: {
+      height: '80%'
+    },
+    closeButton: {
+      position: 'absolute',
+      top: 10,
+      right: 10,
+      zIndex: 1
     },
     overlayContainer: {
       position: 'absolute',

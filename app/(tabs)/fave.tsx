@@ -11,6 +11,9 @@ import ReaderStackScreen from '@/app/screens/reader';
 import AudioPlayScreen from '@/app/screens/audio_play';
 import BookStackScreen from '@/app/screens/book';
 import { AudioPlay, Book, Reader } from '@/model';
+import useRating from '@/hooks/useRating';
+import Overlay from '@/components/Overlay';
+import RatingView from '@/components/common/RatingView';
 
 const FaveStack = createStackNavigator();
 
@@ -43,11 +46,10 @@ export default function FunStackScreen() {
   );
 }
 
-
 const FaveScreen = ({ navigation }:any) => {
   const [hiddenBanner, setHiddenBanner] = useState<boolean>(false);
-  const [ratingModal, setRatingModal]= useState(false);
-  const {favorites, isFavorite, addFavorite, removeFavorite } = useFavorite();
+  const {ratingModal, product, setRatingModal, onRatingPress, onSelectProductPress } = useRating();
+  const {favorites, removeFavorite } = useFavorite();
 
   const scrollList = useCallback(({x, y}: NativeScrollPoint) => {
     setHiddenBanner(y >= BANNER_HEIGHT)
@@ -80,7 +82,7 @@ const FaveScreen = ({ navigation }:any) => {
               ...item,
               imageUrl: item.gallery[0],
               onPress: () => onNavigate(item),
-              onRatingPress: () => setRatingModal(true),
+              onRatingPress: () => onSelectProductPress(item),
               onRemovePress: () => removeFavorite(item.id),
             }}
           />
@@ -90,6 +92,16 @@ const FaveScreen = ({ navigation }:any) => {
         contentContainerStyle={styles.listContent}
         onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
       />
+      {  ratingModal &&
+          <Overlay opacity={0.3}>
+            <RatingView 
+              title=''
+              subTitle={product?.title ?? ''}
+              onSubmit={(s,r) => onRatingPress(s)}
+              onClose={() => setRatingModal(false)}
+              />
+           </Overlay> 
+      }
     </SafeAreaView>
   );
 }

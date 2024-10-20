@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
@@ -12,6 +12,8 @@ import SquareButton from '@/components/common/SquareButton';
 import ListWrapper from '@/components/common/ListWrapper';
 import { voice_play } from '@/constants/voice_play/wamp';
 import BookButton from '@/components/buttons/BookButton';
+import useBuyBook from '@/hooks/useBuyBook';
+import BuyBookView from '@/components/common/BuyBookView';
 
 const VoiceQuizesStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -28,6 +30,7 @@ export default function VoiceQuizesStackScreen({route}:any) {
 const VoiceQuizesScreen = ({route, navigation }:any) => { 
   const book = route.params.book
   const { ids, bannerUrl } = route.params.resource;
+  const { buyBookModal, selectedBook, onSelectBookPress, setBuyBookModal, buyBookPress } = useBuyBook(book)
 
   const isLock = book && book.isLock;
   const height = useSharedValue(0);
@@ -40,54 +43,54 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
 
   return (
     <SafeAreaView>
-      <View style={styles.quizVoiceDetailsContainer}>
-      <Text style={styles.title}>Słuchaj i odpowiadaj</Text>
-        <Image style={styles.image} source={{uri: bannerUrl}}></Image>
-      </View>
-      <View style={styles.listContent}>
-        { quizList.map((item, index) =>
-          <SquareButton key={index} props={{title: item.title, disabled: isLock, icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: ()=>navigation.navigate('VoiceQuiz', {audio_quiz: item})}}>
-            <Image source={require('@/assets/icons/play.png')} style={{width: 80, height: 80}} resizeMode='contain'/>
-          </SquareButton>)
+      <ScrollView>
+        <View style={styles.quizVoiceDetailsContainer}>
+        <Text style={styles.title}>Słuchaj i odpowiadaj</Text>
+          <Image style={styles.image} source={{uri: bannerUrl}}></Image>
+        </View>
+        <View style={styles.listContent}>
+          { quizList.map((item, index) =>
+            <SquareButton key={index} props={{title: item.title, disabled: isLock, icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: ()=>navigation.navigate('VoiceQuiz', {audio_quiz: item})}}>
+              <Image source={require('@/assets/icons/play.png')} style={{width: 80, height: 80}} resizeMode='contain'/>
+            </SquareButton>)
+          }
+        </View>
+        <View style={styles.rankingContainer}>
+          <ListWrapper props={{title: 'Jak zacząć?'}}>
+            <View style={styles.stepContainer}>
+              <Text style={styles.step}>1. Wybierz nagranie</Text>
+              <Text style={styles.step}>2. Słuchaj uważnie pytania</Text>
+              <Text style={styles.step}>3. Odpowiedz pomiędzy</Text>
+            </View>
+          </ListWrapper>
+        </View>
+        { isLock &&
+          <Animated.View  style={{...styles.overlayContainer,height}}>
+            <Overlay opacity={0.3} style={styles.overlay}>
+              <BookButton 
+                title="Kup teraz"
+                onPress={() => onSelectBookPress(book)}
+                leftIconName="book-open-page-variant"
+                backgroundColor="#c45c48"
+                textColor="#fff"
+                customStyles={{
+                  container: { borderWidth: 1, borderColor: '#c83c45' },
+                  title: { fontSize: 20 },
+                  }}
+                />
+            </Overlay> 
+          </Animated.View>
         }
-      </View>
-      <View style={styles.rankingContainer}>
-        <ListWrapper props={{title: 'Jak zacząć?'}}>
-          <View style={styles.stepContainer}>
-            <Text style={styles.step}>1. Wybierz nagranie</Text>
-            <Text style={styles.step}>2. Słuchaj uważnie pytania</Text>
-            <Text style={styles.step}>3. Odpowiedz pomiędzy</Text>
-          </View>
-        </ListWrapper>
-      </View>
-      { isLock &&
-        <Animated.View  style={{...styles.overlayContainer,height}}>
-          <Overlay opacity={0.3} style={styles.overlay}>
-            <BookButton 
-              title="Kup teraz"
-              onPress={() => console.log}
-              leftIconName="book-open-page-variant"
-              backgroundColor="#c45c48"
-              textColor="#fff"
-              customStyles={{
-                container: { borderWidth: 1, borderColor: '#c83c45' },
-                title: { fontSize: 20 },
-                }}
-              />
-            <BookButton 
-              title="Odblokuj książkę"
-              onPress={() => console.log}
-              leftIconName="image"
-              backgroundColor="#f5d066"
-              textColor="#000"
-              customStyles={{
-                container: { borderWidth: 1, borderColor: '#f5d066' },
-                title: { fontSize: 20 },
-                }}
-              />
-          </Overlay> 
-        </Animated.View>
-      }
+        { buyBookModal &&
+            <Overlay opacity={0.3} style={{top: 0}}>
+              <BuyBookView 
+                book={selectedBook}
+                onSubmit={(s) => buyBookPress(s)}
+                onClose={() => setBuyBookModal(false)}
+                />
+            </Overlay> 
+        }
+      </ScrollView>
     </SafeAreaView>
     )
   }

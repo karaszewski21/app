@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ImageBackground, Dimensions, Platform } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from '@react-navigation/stack';
 import BookStackScreen from '@/app/screens/book';
@@ -166,11 +166,11 @@ const HomeScreen = ({ navigation }: any) => {
               onPress={() => navigation.navigate('News')}
             >
               <Image 
-                source={{uri: 'https://goldfish.fra1.digitaloceanspaces.com/goldfish-logo.png'}} 
+                source={require('@/assets/icons/goldfish-logo.png')} 
                 style={{width: '100%', height: '100%', borderRadius: 30}}
               />
           </TouchableOpacity>
-          <Text style={[styles.sectionTitle, { fontSize: 18, fontFamily: 'ShantellSans-SemiBoldItalic'}]}>Witaj Patryk Karaszewski</Text>
+          <Text style={[styles.sectionTitle, { fontSize: 18, fontFamily: 'ShantellSans-SemiBoldItalic'}]}>Witaj Imię Nazwisko</Text>
         </View>
         <View>
             {renderStory()}

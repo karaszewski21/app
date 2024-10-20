@@ -10,6 +10,9 @@ import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
 import { BANNER_HEIGHT, FILTER_HEIGHT } from '@/constants/Common';
 import { AgeGroup, Book } from '@/model';
+import RatingView from '@/components/common/RatingView';
+import Overlay from '@/components/Overlay';
+import useRating from '@/hooks/useRating';
 
 const BooksStack = createStackNavigator();
 
@@ -25,12 +28,13 @@ export default function BooksStackScreen() {
 
 const BooksScreen = ({ navigation }:any) => {
   const { isFavorite, addFavorite, removeFavorite } = useFavorite();
+  const {ratingModal, product, setRatingModal, onRatingPress, onSelectProductPress } = useRating();
   const [hiddenBanner, setHiddenBanner] = useState<boolean>(false);
   const [selectedAgeGroup, setAgeGroup] = useState<AgeGroup>();
   const [bookList, setBooks] = useState<Book[]>();
 
   useEffect(() => {
-    if (selectedAgeGroup) {
+    if (selectedAgeGroup && selectedAgeGroup.id !== 6) {
       setBooks(books.filter(book => book.ageGroupId === selectedAgeGroup.id))
     } else {
       setBooks(books);
@@ -43,10 +47,6 @@ const BooksScreen = ({ navigation }:any) => {
     } else {
       setHiddenBanner(false)
     }
-  }
-
-  const popupRating = () => {
-
   }
 
   const favoriteBookPress = (item: Book) => {
@@ -65,11 +65,9 @@ const BooksScreen = ({ navigation }:any) => {
         ...item,
         title: item.title,
         imageUrl: item.gallery[0],
-        onRatingPress:popupRating,
-        onPress: () => navigation.navigate('Book', { book: item }),
-        rating: 4,
-        reviewCount: 4,
         isFavorite: isFavorite(id),
+        onRatingPress: () => onSelectProductPress(item),
+        onPress: () => navigation.navigate('Book', { book: item }),
         onFavoritePress:() => favoriteBookPress(item)
       }}
       />) 
@@ -78,7 +76,7 @@ const BooksScreen = ({ navigation }:any) => {
   return (
     <SafeAreaView style={styles.container}>
       <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
-      <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup}/>
+      <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup} reset={true}/>
       <FlatList
           data={bookList}
           renderItem={renderItem}
@@ -86,6 +84,16 @@ const BooksScreen = ({ navigation }:any) => {
           contentContainerStyle={styles.listContent}
           onScroll={({nativeEvent: {contentOffset}}) => scrollList(contentOffset)}
         />
+      {  ratingModal &&
+          <Overlay opacity={0.3}>
+            <RatingView 
+              title='Oceń książkę'
+              subTitle={product?.title ?? ''}
+              onSubmit={(s,r) => onRatingPress(s)}
+              onClose={() => setRatingModal(false)}
+              />
+           </Overlay> 
+      }
     </SafeAreaView>
   );
 }

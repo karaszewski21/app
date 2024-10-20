@@ -7,6 +7,8 @@ import * as Print from 'expo-print';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import Overlay from '@/components/Overlay';
 import BookButton from '@/components/buttons/BookButton';
+import useBuyBook from '@/hooks/useBuyBook';
+import BuyBookView from '@/components/common/BuyBookView';
 
 const PrintoutsStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -31,8 +33,8 @@ interface Printer {
 
 const PrintoutsScreen = ({route, navigation }:any) => { 
   const book = route.params.book
-  const { ids, bannerUrl } = route.params.resource;
-
+  const { ids } = route.params.resource;
+  const { buyBookModal, selectedBook, onSelectBookPress, setBuyBookModal, buyBookPress } = useBuyBook(book)
   const isLock = book && book.isLock;
   const [selectedPrinter, setSelectedPrinter] = useState<Printer | null>(null);
   const height = useSharedValue(0);
@@ -113,7 +115,7 @@ const PrintoutsScreen = ({route, navigation }:any) => {
           <Overlay opacity={0.6} style={styles.overlay}>
             <BookButton 
                 title="Kup teraz"
-                onPress={() => console.log}
+                onPress={() => onSelectBookPress(book)}
                 leftIconName="book-open-page-variant"
                 backgroundColor="#c45c48"
                 textColor="#fff"
@@ -122,19 +124,17 @@ const PrintoutsScreen = ({route, navigation }:any) => {
                   title: { fontSize: 20 },
                   }}
                 />
-              <BookButton 
-                title="Odblokuj książkę"
-                onPress={() => console.log}
-                leftIconName="image"
-                backgroundColor="#f5d066"
-                textColor="#000"
-                customStyles={{
-                  container: { borderWidth: 1, borderColor: '#f5d066' },
-                  title: { fontSize: 20 },
-                  }}
-                />
           </Overlay> 
         </Animated.View>
+      }
+      { buyBookModal &&
+          <Overlay opacity={0.3} style={{top: 0}}>
+            <BuyBookView 
+                book={selectedBook}
+                onSubmit={(s) => buyBookPress(s)}
+                onClose={() => setBuyBookModal(false)}
+                />
+          </Overlay> 
       }
     </SafeAreaView>
     )

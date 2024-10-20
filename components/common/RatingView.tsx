@@ -4,12 +4,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 interface RatingViewProps {
-  bookTitle: string;
+  title: string;
+  subTitle: string;
   onSubmit: (rating: number, review: string) => void;
   onClose: () => void;
 }
 
-const RatingView: React.FC<RatingViewProps> = ({ bookTitle, onSubmit, onClose }) => {
+const RatingView: React.FC<RatingViewProps> = ({title, subTitle, onSubmit, onClose }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
 
@@ -28,19 +29,25 @@ const RatingView: React.FC<RatingViewProps> = ({ bookTitle, onSubmit, onClose })
   return (
     <TouchableOpacity onPress={handleClose}>
         <LinearGradient
-            colors={['#4c669f', '#3b5998', '#192f6a']}
+            colors={['#0891b2', '#0891b2', '#0891b2']}
             style={styles.container}
         >
-        <Text style={styles.title}>x</Text>
-        <Text style={styles.title}>Oceń książkę</Text>
-        <Text style={styles.bookTitle}>{bookTitle}</Text>
+        <View style={styles.closeButton}>
+          <Ionicons
+                name={'close-circle'}
+                size={30}
+                color="#f5d066"
+          />
+        </View>  
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.bookTitle}>{subTitle}</Text>
         <View style={styles.starsContainer}>
             {[1, 2, 3, 4, 5].map((star) => (
             <TouchableOpacity key={star} onPress={() => handleStarPress(star)}>
                 <Ionicons
                 name={star <= rating ? 'star' : 'star-outline'}
                 size={40}
-                color="#FFD700"
+                color="#f5d066"
                 />
             </TouchableOpacity>
             ))}
@@ -48,7 +55,7 @@ const RatingView: React.FC<RatingViewProps> = ({ bookTitle, onSubmit, onClose })
         <TextInput
             style={styles.reviewInput}
             placeholder="Napisz swoją recenzję (opcjonalnie)"
-            placeholderTextColor="#A0A0A0"
+            placeholderTextColor="#f5d066"
             multiline
             numberOfLines={4}
             value={review}
@@ -68,7 +75,7 @@ const RatingView: React.FC<RatingViewProps> = ({ bookTitle, onSubmit, onClose })
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 15,
     borderRadius: 15,
     alignItems: 'center',
     shadowColor: "#000",
@@ -79,16 +86,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    width: 300,
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontFamily: 'ShantellSans-SemiBoldItalic',
     color: 'white',
     marginBottom: 10,
   },
   bookTitle: {
     fontSize: 18,
     color: '#E0E0E0',
+    fontFamily: 'ShantellSans-SemiBoldItalic',
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -106,9 +115,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'white',
     verticalAlign: 'top',
+    fontSize: 12,
+    fontFamily: 'ShantellSans-SemiBoldItalic',
   },
   submitButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#f5d066',
     padding: 15,
     borderRadius: 25,
     width: '100%',
@@ -117,8 +128,13 @@ const styles = StyleSheet.create({
   submitButtonText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'ShantellSans-SemiBoldItalic',
   },
+  closeButton: {
+    position: 'absolute',
+    top: 5,
+    right: 5
+  }
 });
 
 export default RatingView;

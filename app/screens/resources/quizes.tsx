@@ -10,6 +10,8 @@ import Overlay from '@/components/Overlay';
 import SquareButton from '@/components/common/SquareButton';
 import ListWrapper from '@/components/common/ListWrapper';
 import BookButton from '@/components/buttons/BookButton';
+import BuyBookView from '@/components/common/BuyBookView';
+import useBuyBook from '@/hooks/useBuyBook';
 
 const QuizesStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -26,6 +28,7 @@ export default function QuizesStackScreen({route}:any) {
 const QuizesScreen = ({route, navigation }:any) => { 
   const book = route.params.book
   const { ids, bannerUrl } = route.params.resource;
+  const { buyBookModal, selectedBook, onSelectBookPress, setBuyBookModal, buyBookPress } = useBuyBook(book)
 
   const isLock = book && book.isLock;
   const height = useSharedValue(0);
@@ -67,7 +70,7 @@ const QuizesScreen = ({route, navigation }:any) => {
             <Overlay opacity={0.3} style={styles.overlay}>
               <BookButton 
                 title="Kup teraz"
-                onPress={() => console.log}
+                onPress={() => onSelectBookPress(book)}
                 leftIconName="book-open-page-variant"
                 backgroundColor="#c45c48"
                 textColor="#fff"
@@ -76,19 +79,17 @@ const QuizesScreen = ({route, navigation }:any) => {
                   title: { fontSize: 20 },
                   }}
                 />
-              <BookButton 
-                title="Odblokuj książkę"
-                onPress={() => console.log}
-                leftIconName="image"
-                backgroundColor="#f5d066"
-                textColor="#000"
-                customStyles={{
-                  container: { borderWidth: 1, borderColor: '#f5d066' },
-                  title: { fontSize: 20 },
-                  }}
-                />
             </Overlay> 
           </Animated.View>
+        }
+        { buyBookModal &&
+          <Overlay opacity={0.3} style={{top: 0}}>
+            <BuyBookView 
+              book={selectedBook}
+              onSubmit={(s) => buyBookPress(s)}
+              onClose={() => setBuyBookModal(false)}
+              />
+           </Overlay> 
         }
       </ScrollView>
     </SafeAreaView>

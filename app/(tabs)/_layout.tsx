@@ -5,9 +5,8 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 import { Suspense, useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
 import { usePlayerModal } from '@/context/playerModalContext';
-import { createStackNavigator } from '@react-navigation/stack';
 import VideoPlayer from '@/components/player/SmallPlayer'
-import { DefaultTheme, NavigationContainer, DarkTheme  } from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { ActivityIndicator, ImageBackground, StyleSheet, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './index';
@@ -15,6 +14,7 @@ import BooksScreen from './books';
 import FavoritesScreen from './fave';
 import FunScreen from './fun';
 import ProfileScreen from './profile';
+import { globalTheme } from '@/constants/Colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -61,22 +61,13 @@ export default function TabLayout() {
     </View>
   );
 
-  const globalTheme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-    background: 'transparent',
-    },
-  };
-  
   return (
     <ImageBackground
-      //source={require('@/assets/dark.png')}
       source={require('@/assets/bg3.png')}
       style={styles.rootContainer}
       resizeMode='cover'
     >
-      <NavigationContainer independent={true}  theme={globalTheme}>
+      <NavigationContainer independent={true} theme={globalTheme}>
         <Tab.Navigator
           screenOptions={{headerShown: false}} 
           tabBar={props => 
@@ -132,6 +123,7 @@ export default function TabLayout() {
             options={{
               title: 'Profil',
               unmountOnBlur: true,
+              headerShown: false
             }}
           />
          </Tab.Navigator>
@@ -145,8 +137,5 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
-   // backgroundColor: '#f3dfbe'
-   // backgroundColor: '#f2eee5'
-    //backgroundColor :'#7b7b5f'
   },
 });

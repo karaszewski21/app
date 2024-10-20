@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, StyleSheet, Image} from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import AudiobooksScreen from '@/app/screens/resources/audiobooks'
@@ -13,6 +13,12 @@ import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
 import BookButton from '@/components/buttons/BookButton';
 import { Book, Resource } from '@/model';
+import useBuyBook from '@/hooks/useBuyBook';
+import Overlay from '@/components/Overlay';
+import BuyBookView from '@/components/common/BuyBookView';
+import BarcodeScanned from '@/components/common/BarcodeScanned';
+import { AntDesign } from '@expo/vector-icons';
+
 
 const BookStack = createStackNavigator();
 
@@ -38,21 +44,15 @@ const BookScreen = ({ route, navigation }:any) => {
   const book = route.params.book as Book; 
   const resources = book.resource as Resource[];
 
-
-  const buyNowModal = () => {
-
-  }
-
-  const lockoutBookModal = () => {
-
-  }
+  const { buyBookModal, selectedBook, onSelectBookPress, setBuyBookModal, buyBookPress } = useBuyBook(book);
+  const [scanned, setScanned] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
       <BookWrapper props={book}>
         <BookButton 
           title="Kup teraz"
-          onPress={() => buyNowModal}
+          onPress={() => onSelectBookPress(book)}
           leftIconName="book-open-page-variant"
           backgroundColor="#c45c48"
           textColor="#fff"
@@ -62,8 +62,8 @@ const BookScreen = ({ route, navigation }:any) => {
             }}
           />
         <BookButton 
-          title="Odblokuj książkę"
-          onPress={() => lockoutBookModal}
+          title="Skanuj kod"
+          onPress={() => setScanned(true)}
           leftIconName="image"
           backgroundColor="#f5d066"
           textColor="#000"
@@ -110,6 +110,27 @@ const BookScreen = ({ route, navigation }:any) => {
             }
         </View>
       </BookWrapper>
+      {  buyBookModal &&
+          <Overlay opacity={0.3}>
+            <BuyBookView 
+              book={selectedBook}
+              onSubmit={(s) => buyBookPress(s)}
+              onClose={() => setBuyBookModal(false)}
+              />
+          </Overlay> 
+      }
+
+      { scanned &&
+          <View style={styles.scannerContainer}>
+           <TouchableOpacity onPress={() => setScanned(false)} style={styles.closeButton}>
+            <AntDesign
+              name={'closecircle'}
+              size={24}
+            />
+            </TouchableOpacity>
+            <BarcodeScanned onLockoutBook={() => setScanned(false)}/>
+          </View>
+      }
     </SafeAreaView>
   );
 }
@@ -124,5 +145,14 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     marginBottom: 10,
+  },
+  scannerContainer: {
+    height: '80%'
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    zIndex: 1
   },
 });

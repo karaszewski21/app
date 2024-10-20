@@ -8,6 +8,7 @@ const useAgeGroupsIcon = () => {
         require('@/assets/icons/child-23.png'),
         require('@/assets/icons/child-45.png'),
         require('@/assets/icons/child-6.png'),
+        require('@/assets/icons/reset.png'),
     ]);
       
   return {

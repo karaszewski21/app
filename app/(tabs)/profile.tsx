@@ -32,9 +32,6 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Profil</Text>
-      </View>
       <View style={styles.content}>
         <View style={styles.settingItem}>
           <Text style={styles.settingText}>{notificationsDisabled ? 'Wyłącz' : 'Włącz'} powiadomienia</Text>
@@ -60,10 +57,10 @@ export default function ProfileScreen() {
         <Ionicons name="log-out-outline" size={24} color="white" />
         <Text style={styles.logoutText}>Wyloguj się</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.logoutButton} onPress={() => removeAllFavorites()}>
+      {/* <TouchableOpacity style={styles.logoutButton} onPress={() => removeAllFavorites()}>
         <Ionicons name="log-out-outline" size={24} color="white" />
         <Text style={styles.logoutText}>Remove all</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </SafeAreaView>
   );
 };

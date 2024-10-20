@@ -17,6 +17,7 @@ import Filter from '@/components/common/Filter';
 import { players } from '@/constants/Players';
 import { Book, Reader, AudioPlay, AgeGroup } from '@/model';
 import useFavorite from '@/hooks/useFavorite';
+import useRating from '@/hooks/useRating';
 
 const AgeStack = createStackNavigator();
 
@@ -100,8 +101,8 @@ const AgeScreen = ({ route, navigation }:any) => {
   const [activeFilter, setActiveFilter] = useState('book');
   const [selectedAgeGroup, setAgeGroup] = useState<AgeGroup>(ageGroup);
   const { isFavorite, addFavorite, removeFavorite } = useFavorite();
-
-  const [ratingModal, setRatingModal]= useState(false);
+  const {ratingModal, product, setRatingModal, onRatingPress, onSelectProductPress } = useRating();
+  
   const animatedValue = useSharedValue(0);
   const [ hiddenBanner, setHiddenBanner] = useState<boolean>(false);
 
@@ -177,7 +178,7 @@ const AgeScreen = ({ route, navigation }:any) => {
               ...item,
               imageUrl: item.gallery[0],
               onPress: () => navigation.navigate(navigateTo, params),
-              onRatingPress: () => setRatingModal(true),
+              onRatingPress: () => onSelectProductPress(item),
               isFavorite: isFavorite(item.id),
               onFavoritePress:() => favoriteBookPress(item)
             }}
@@ -189,11 +190,6 @@ const AgeScreen = ({ route, navigation }:any) => {
       />
     );
   }
-
-  const handleRatingPress = (bookId: number) => {
-    setRatingModal(false)
-    console.log(`Naciśnięto ocenę książki o id: ${bookId}`);
-  };
 
   const onFilterChange = (filter: string) => {
     setActiveFilter(filter);
@@ -226,8 +222,9 @@ const AgeScreen = ({ route, navigation }:any) => {
         {  ratingModal &&
           <Overlay opacity={0.3}>
             <RatingView 
-                bookTitle='test' 
-                onSubmit={(s,r) => handleRatingPress(s)}
+                title=''
+                subTitle={product?.title ?? ''}
+                onSubmit={(s,r) => onRatingPress(s)}
                 onClose={() => setRatingModal(false)}
                 />
           </Overlay> 
