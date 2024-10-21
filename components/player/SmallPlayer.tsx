@@ -136,23 +136,23 @@ const VideoPlayer = () => {
     <View style={styles.mainContainer}>
         <Animated.View style={[styles.videoContainer, animatedStyle]}>
           <ImageBackground
-            source={require('@/assets/background.jpg')}
+            source={require('@/assets/player-bg.png')}
             style={styles.bgVideo}
             resizeMode='cover'
             imageStyle={{ borderRadius: 15}}
           >
             { showMore && 
               <View style={styles.videoHeaderContainer}>
-                <TouchableOpacity style={styles.expandButton} onPress={handleDownMore}>
+                <TouchableOpacity onPress={handleDownMore}>
                   <MaterialCommunityIcons 
-                    name={"chevron-down"} 
-                    size={24} 
+                    name={"chevron-down-circle"} 
+                    size={25} 
                     color="#fff" 
                   />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.closeVideo} onPress={closePlayer}>
-                  <MaterialCommunityIcons name="close" size={24} color="#fff" />
+                <TouchableOpacity onPress={closePlayer}>
+                  <MaterialCommunityIcons name="close-circle" size={25} color="#fff" />
                 </TouchableOpacity>
               </View>
             }
@@ -200,9 +200,9 @@ const VideoPlayer = () => {
                   minimumValue={0}
                   maximumValue={duration}
                   value={position}
-                  minimumTrackTintColor="#e5ae2f"
+                  minimumTrackTintColor="#b17c08"
                   maximumTrackTintColor="#fff"
-                  thumbTintColor="#e5ae2f"
+                  thumbTintColor="#b17c08"
                   onValueChange={(value) => onValueChange(value)}
                   onSlidingComplete={onSlidingComplete}
                   />
@@ -213,12 +213,11 @@ const VideoPlayer = () => {
         </Animated.View>
 
         { !showMore && 
-          <TouchableOpacity style={styles.playerContainer}  onPress={handleUpMore}>
+          <TouchableOpacity style={styles.playerContainer} onPress={handleUpMore}>
               <ImageBackground
-                source={require('@/assets/background.jpg')}
+                source={require('@/assets/smallplayer-bg.png')}
                 style={styles.bgVideo}
                 resizeMode='cover'
-                blurRadius={20}
                 imageStyle={{ borderRadius: 15}}
               >
               <View style={styles.headerPlayerContainer}>
@@ -226,8 +225,11 @@ const VideoPlayer = () => {
                   <View style={{width: '70%'}}>
                     <Text style={styles.titlePlayer} numberOfLines={1}>{record?.title}</Text>
                   </View>
+                  <TouchableOpacity style={styles.upPlayer} onPress={handleUpMore}>
+                    <MaterialCommunityIcons name={"chevron-up-circle"} size={25} color="#fff" />
+                  </TouchableOpacity>
                   <TouchableOpacity style={styles.closePlayer} onPress={closePlayer}>
-                    <MaterialCommunityIcons name="close" size={24} color="#fff" />
+                    <MaterialCommunityIcons name="close-circle" size={25} color="#fff" />
                   </TouchableOpacity>
               </View>
               <View style={styles.controlsPlayerContainer}>
@@ -236,9 +238,9 @@ const VideoPlayer = () => {
                   minimumValue={0}
                   maximumValue={duration}
                   value={position}
-                  minimumTrackTintColor="#e5ae2f"
+                  minimumTrackTintColor="#b17c08"
                   maximumTrackTintColor="#fff"
-                  thumbTintColor="#e5ae2f"
+                  thumbTintColor="#b17c08"
                   onValueChange={(value) => onValueChange(value)}
                   onSlidingComplete={onSlidingComplete}
                 />
@@ -307,15 +309,23 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
+  upPlayer: {
+    position: 'absolute',
+    right: 35,
+    top: 5
+  },
+
   closePlayer: {
-    paddingBottom: 20,
+    position: 'absolute',
+    right: 5,
+    top: 5
   },
 
   playButton: {
     position: 'absolute',
     right: 30,
     top:  -10,
-    backgroundColor: '#e5ae2f',
+    backgroundColor: '#b17c08',
     borderRadius: 25,
     width: 40,
     height: 40,
@@ -340,7 +350,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    height: 40,
+    height: 45,
     padding: 10
   },
 
@@ -359,7 +369,7 @@ const styles = StyleSheet.create({
   },
 
   videoPlayButton: {
-    backgroundColor: '#e5ae2f',
+    backgroundColor: '#b17c08',
     borderRadius: 15,
     width: 200,
     height: 50,
@@ -367,13 +377,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  closeVideo: {
-    paddingRight: 20,
-  },
-
   bgVideo: {
     flex: 1,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
 
   controlsRow: {
@@ -383,7 +389,7 @@ const styles = StyleSheet.create({
   },
 
   skipButton: {
-    backgroundColor: '#e5ae2f',
+    backgroundColor: '#b17c08',
     borderRadius: 25,
     padding: 10,
     marginHorizontal: 20,
@@ -392,10 +398,6 @@ const styles = StyleSheet.create({
   timeText: {
     fontSize: 12,
     color: '#bdc3c7',
-  },
-
-  expandButton: {
-    paddingLeft: 20,
   },
 
   video: {
