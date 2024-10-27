@@ -8,6 +8,7 @@ interface BookWrapperProps {
     gallery: string[];
     title: string;
     description: string;
+    textColor?: string,
   };
   children?: React.ReactNode;
 }
@@ -53,8 +54,8 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
           ))}
         </View>
       <View style={styles.content}>
-        <Text style={styles.title}>{props.title}</Text>
-        <Text style={styles.description}>{props.description}</Text>
+        <Text style={[styles.title, {color: props.textColor}]}>{props.title}</Text>
+        <Text style={[styles.description, {color: props.textColor}]}>{props.description}</Text>
         <AgeRange ageRangeId={props.ageGroupId} />
         <View style={styles.contentButtons}>
           {children}

@@ -1,3 +1,5 @@
+import { OptionsReader, ReaderPage } from "./reader";
+
 export type ProductType = 'book' | 'reader' | 'audio_play';
 export type ResourceType = 'quiz' | 'audiobook' | 'english' | 'printouts';
 export type LangType = 'pl' | 'eng';
@@ -28,7 +30,15 @@ export interface Reader {
     rating: number, 
     reviewCount: number,
     type: ProductType,
+    content?: ReaderContent,
     resource: Resource[]
+}
+
+export interface ReaderContent {
+    options: OptionsReader,
+    text: ReaderPage[],
+    image?: string[],
+    english?: string[]
 }
 
 export interface AudioPlay {

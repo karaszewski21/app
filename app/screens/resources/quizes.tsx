@@ -12,6 +12,7 @@ import ListWrapper from '@/components/common/ListWrapper';
 import BookButton from '@/components/buttons/BookButton';
 import BuyBookView from '@/components/common/BuyBookView';
 import useBuyBook from '@/hooks/useBuyBook';
+import { index } from '@/constants/Index';
 
 const QuizesStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -43,25 +44,31 @@ const QuizesScreen = ({route, navigation }:any) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.bookDetailsContainer}>
-        <Text style={styles.title}>Quizy</Text>
           <Image style={styles.image} source={{uri: bannerUrl}}></Image>
         </View>
         <View style={styles.listContent}>
-          { quizList.map((item, index) =>
-            <SquareButton key={index} props={{title: '', disabled: isLock, icon: 'text', backgroundColor: '#55b1be', color: 'green', navigate: () => navigation.navigate('Quiz', {quiz: item})}}>
-              <Text style={styles.tileTitle}>{item.title}</Text>
-                {/* { item.type === 'child' &&  <Image source={require('@/assets/icons/child.png')} style={{width: 70, height: 70}} resizeMode='contain'/> }
-                { item.type === 'parent' &&  <Image source={require('@/assets/icons/parent.png')} style={{width: 70, height: 70}} resizeMode='contain'/> }
-                { item.type === 'helpchild' &&  <Image source={require('@/assets/icons/helpchild.png')} style={{width: 70, height: 70}} resizeMode='contain'/> } */}
-            </SquareButton>)
+          { quizList.map((item: any, index) =>
+              <SquareButton 
+                key={index} 
+                props={
+                  { title: item.title, 
+                    disabled: isLock, 
+                    icon: 'text', 
+                    backgroundColor: item.options.backgroundColor, 
+                    color: item.options.textColor, 
+                    navigate: () => navigation.navigate('Quiz', {quiz: item})}} 
+              />
+            )
           }
         </View>
         <View style={styles.rankingContainer}>
           <ListWrapper props={{title: 'Ranking quizów'}}>
             <View style={styles.stepContainer}>
-              <Text style={styles.step}>1. Anna K. - 280 pkt</Text>
-              <Text style={styles.step}>2. Jan N. - 260 pkt</Text>
-              <Text style={styles.step}>3. Ty - 230 pkt</Text>
+              {
+                ['1. Anna K. - 260 pkt','2. Jan N. - 260 pkt', '3. Ty - 230 pkt'].map((name, index) => (
+                  <Text key={index}  style={styles.step}>{name}</Text>
+                ))
+              }
             </View>
           </ListWrapper>
         </View>
@@ -109,8 +116,8 @@ const QuizesScreen = ({route, navigation }:any) => {
   
     return (
       <SafeAreaView>
-        <ScrollView>
-          <Quiz quizData={quiz} />
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          <Quiz quizData={quiz} theme={quiz.theme}/>
         </ScrollView>
       </SafeAreaView>  
     )
@@ -121,13 +128,14 @@ const QuizesScreen = ({route, navigation }:any) => {
       flex: 1,
       paddingBottom: 50
     },
+    scrollViewContent: {
+      flexGrow: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100%',
+    },
     bookDetailsContainer: {
       margin: 10,
-    },
-    title: {
-      fontSize: 28,
-      textAlign: 'center',
-      fontFamily: 'ShantellSans-SemiBoldItalic'
     },
     image: {
       height: 200,

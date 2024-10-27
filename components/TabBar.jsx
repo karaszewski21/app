@@ -1,7 +1,6 @@
 import { View,StyleSheet} from 'react-native'
 import React from 'react'
 import TabBarButton from './TabBarButton';
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const TabBar = ({ state, descriptors, navigation }) => {
     const primaryColor = '#b17c08';

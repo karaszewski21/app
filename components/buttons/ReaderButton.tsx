@@ -4,11 +4,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface ReaderButtonProps {
   props: {
-    title: string,
+    title?: string,
     onPress: () => void,
-    backgroundColor: string
-    subtitle: string,
-    textColor: string
+    backgroundColor?: string
+    subtitle?: string,
+    textColor?: string
   };
   children?: React.ReactNode;
 }

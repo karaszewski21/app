@@ -8,6 +8,11 @@ export const quizWamp = {
     timer: false,
     duration: 30, // 10 minut
     previousButton: true,
+    options: {
+      textColor: '#000',
+      backgroundColor: '#c3d5e1',
+      progressBarColor: "#9de1f6",
+    },
     questions: [
       {
         id: 1,
@@ -119,6 +124,11 @@ export const quizWamp = {
     timer: true,
     duration: 30, // 10 minut
     previousButton: true,
+    options: {
+      textColor: '#000',
+      backgroundColor: '#c3d5e1',
+      progressBarColor: "#9de1f6",
+    },
     questions: [
       {
         id: 1,

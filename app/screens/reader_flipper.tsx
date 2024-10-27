@@ -1,31 +1,24 @@
-import { ScrollView, View, StyleSheet, useWindowDimensions,Image, TouchableOpacity, } from 'react-native';
+import { ScrollView, View, StyleSheet, useWindowDimensions,Image, TouchableOpacity, Dimensions, } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
 import PageFlipper from '@/components/reader/reader-flipper';
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const ReaderFlipperScreen = ({ navigation }:any) => { 
+const { width, height } = Dimensions.get('window');
+
+const ReaderFlipperScreen = ({route, navigation }:any) => { 
   const { showTabs, hiddenTabs } = useTabsScreen();
-  const {height, width} = useWindowDimensions()
+  const {content: pages} = route.params;
 
   useEffect(()=> {
     hiddenTabs()
     return () => { showTabs() }
   }, [])
   
-  const pageUrls = [
-    'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_3.jpg',
-    'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish/Leonardo_Phoenix_Book_Cover_The_Happy_Goldfish_AdventuresBackg_0.jpg',
-    'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish/Leonardo_Phoenix_Physical_AttributesMediumsized_goldfish_with_1.jpg',
-    'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish/Leonardo_Phoenix_Physical_AttributesMediumsized_goldfish_with_0.jpg',
-    'https://goldfish.fra1.digitaloceanspaces.com/readers/goldfish/Leonardo_Phoenix_Physical_AttributesMediumsized_goldfish_with_2.jpg',
-  ];
-
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={{width,height}}>
+      <View  style={{ flex: 1 }}>
         <TouchableOpacity 
             style={styles.closeButton} 
             onPress={() => navigation.navigate('Details')}
@@ -33,16 +26,27 @@ const ReaderFlipperScreen = ({ navigation }:any) => {
             <Ionicons name="close" size={24} color="#000" />
           </TouchableOpacity>
           <PageFlipper
-              data={pageUrls}
+              data={pages}
               pageSize={{
                 height: height, // the size of the images I plan to render (used simply to calculate ratio)
                 width: width,
               }}
               portrait={true}
-              renderPage={(data) => <Image source={{ uri: data }} style={{ height: '100%', width: '100%' }} />}
+              renderPage={(data) => 
+              <View style={{ flex: 1, width: '100%', height: height}}>
+                <Image 
+                  source={{ uri: data }} 
+                  style={{ 
+                    flex: 1,
+                    width: width,
+                    height: height,
+                    backgroundColor: 'black'
+                  }} 
+                  resizeMode='stretch'
+                />
+            </View>}
           />
         </View>
-      </ScrollView>
     </SafeAreaView>
     )
   }

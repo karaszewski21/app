@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, ImageBackground} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import AudiobooksScreen from '@/app/screens/resources/audiobooks'
@@ -24,19 +24,21 @@ const BookStack = createStackNavigator();
 
 export default function BookStackScreen({route}:any) {
   return (
-    <BookStack.Navigator>
-      <BookStack.Screen 
-        name="Details" 
-        component={BookScreen} 
-        options={{headerShown: false}} 
-        initialParams={route.params}
-      />
-      <BookStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}} />
-      <BookStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
-      <BookStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
-      <BookStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
-      <BookStack.Screen name="Langs" component={LangsStack} options={{headerShown: false}}/>
-    </BookStack.Navigator>
+    <ImageBackground style={styles.rootContainer} resizeMode='cover'>
+      <BookStack.Navigator>
+        <BookStack.Screen 
+          name="Details" 
+          component={BookScreen} 
+          options={{headerShown: false}} 
+          initialParams={route.params}
+        />
+        <BookStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}} />
+        <BookStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
+        <BookStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
+        <BookStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
+        <BookStack.Screen name="Langs" component={LangsStack} options={{headerShown: false}}/>
+      </BookStack.Navigator>
+    </ImageBackground>
   );
 }
 
@@ -136,6 +138,12 @@ const BookScreen = ({ route, navigation }:any) => {
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'green'
+  },
   container: {
     flex: 1,
     paddingBottom: 50

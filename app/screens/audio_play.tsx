@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Image, TouchableOpacity, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, Image, TouchableOpacity, StyleSheet, FlatList, ScrollView, ImageBackground } from 'react-native';
 import { usePlayerModal } from '@/context/playerModalContext';
 import { SafeAreaView } from "react-native-safe-area-context";
 import PrintoutsScreen from '@/app/screens/resources/printouts'
@@ -14,16 +14,18 @@ const AudioPlayStack = createStackNavigator();
 
 export default function AudioPlayStackScreen({route}:any) {
   return (
-    <AudioPlayStack.Navigator>
-      <AudioPlayStack.Screen 
-        name="Details" 
-        component={AudioPlayScreen}
-        options={{headerShown: false}}
-        initialParams={route.params}
-      />
-      <AudioPlayStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}}/>
-      <AudioPlayStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
-    </AudioPlayStack.Navigator>
+    <ImageBackground style={styles.rootContainer} resizeMode='cover'>
+      <AudioPlayStack.Navigator>
+        <AudioPlayStack.Screen 
+          name="Details" 
+          component={AudioPlayScreen}
+          options={{headerShown: false}}
+          initialParams={route.params}
+        />
+        <AudioPlayStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}}/>
+        <AudioPlayStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
+      </AudioPlayStack.Navigator>
+    </ImageBackground>
   );
 }
 
@@ -106,6 +108,12 @@ const AudioPlayScreen = ({ route, navigation } : any) => {
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'red'
+  },
   container: {
     flex: 1,
     paddingBottom: 50

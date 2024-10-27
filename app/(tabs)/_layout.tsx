@@ -36,7 +36,7 @@ export default function TabLayout() {
   useEffect(() => {
     translateTabsY.value = 0;
       if (!isTabs) {
-        translateTabsY.value = withSpring(60);
+        translateTabsY.value = withSpring(70);
       }
 
   }, [isTabs]);
