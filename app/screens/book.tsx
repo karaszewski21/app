@@ -12,19 +12,22 @@ import LangsStack from '@/app/screens/resources/langs'
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
 import BookButton from '@/components/buttons/BookButton';
-import { Book, Resource } from '@/model';
+import { Book, BookContent, Resource } from '@/model';
 import useBuyBook from '@/hooks/useBuyBook';
 import Overlay from '@/components/Overlay';
 import BuyBookView from '@/components/common/BuyBookView';
 import BarcodeScanned from '@/components/common/BarcodeScanned';
 import { AntDesign } from '@expo/vector-icons';
+import { OptionsBook } from '@/model/book';
 
 
 const BookStack = createStackNavigator();
 
 export default function BookStackScreen({route}:any) {
+  const { book } = route.params;
+  const options = book.content.options as OptionsBook;
   return (
-    <ImageBackground style={styles.rootContainer} resizeMode='cover'>
+    <ImageBackground source={{uri:options.backgroundUrl}}  style={styles.rootContainer} resizeMode='cover'>
       <BookStack.Navigator>
         <BookStack.Screen 
           name="Details" 
@@ -45,13 +48,15 @@ export default function BookStackScreen({route}:any) {
 const BookScreen = ({ route, navigation }:any) => {
   const book = route.params.book as Book; 
   const resources = book.resource as Resource[];
+  const content = book.content as BookContent;
+  const options = book.content.options as OptionsBook;
 
   const { buyBookModal, selectedBook, onSelectBookPress, setBuyBookModal, buyBookPress } = useBuyBook(book);
   const [scanned, setScanned] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
-      <BookWrapper props={book}>
+      <BookWrapper props={{...book, textColor: options.textColor}}>
         <BookButton 
           title="Kup teraz"
           onPress={() => onSelectBookPress(book)}
@@ -79,31 +84,31 @@ const BookScreen = ({ route, navigation }:any) => {
               resources.map((element, index) => 
               <Fragment key={index}>
                 { element.type === 'quiz' &&  
-                  <SquareButton key={element.type} props={{title: 'quizy', icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Quizes', {book, resource: element}) }}>
+                  <SquareButton key={element.type} props={{title: 'quizy', icon: 'text', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('Quizes', {book, resource: element}) }}>
                     <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
                   </SquareButton>
                 }
                 
                 { element.type === 'audiobook' &&
-                  <SquareButton  key={element.type} props={{title: 'audiobooki', icon: 'add', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('AudioBooks', {book, resource: element}) }}>
+                  <SquareButton  key={element.type} props={{title: 'audiobooki', icon: 'add', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('AudioBooks', {book, resource: element}) }}>
                     <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
                   </SquareButton>
                 }
 
                 { element.type === 'printouts' && 
-                  <SquareButton  key={element.type} props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', color: '#fff', navigate: () =>  navigation.navigate('Printouts', {book, resource: element}) }}>
+                  <SquareButton  key={element.type} props={{title: 'drukowanki', icon: 'print', backgroundColor: options.tileColor, color: '#fff', navigate: () =>  navigation.navigate('Printouts', {book, resource: element}) }}>
                     <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
                   </SquareButton>
                 }
 
                 { element.type === 'voice_quiz' && 
-                  <SquareButton  key={element.type} props={{title: 'słuchaj i odpowiadaj', icon: 'add',  backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('VoiceQuizes', {book, resource: element}) }}>
+                  <SquareButton  key={element.type} props={{title: 'słuchaj i odpowiadaj', icon: 'add', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('VoiceQuizes', {book, resource: element}) }}>
                     <Image source={require('@/assets/quizvoice.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
                   </SquareButton>
                 }
 
                 { element.type === 'english' && 
-                  <SquareButton  key={element.type} props={{title: 'angielski', icon: 'flag', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Langs', {book, resource: element}) }}>
+                  <SquareButton  key={element.type} props={{title: 'angielski', icon: 'flag', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('Langs', {book, resource: element}) }}>
                     <Image source={require('@/assets/icons/eng.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
                   </SquareButton>
                 }
@@ -116,6 +121,9 @@ const BookScreen = ({ route, navigation }:any) => {
           <Overlay opacity={0.3}>
             <BuyBookView 
               book={selectedBook}
+              textColor={options.textColor}
+              backgroundColor={options.backgroundColor}
+              bgColorButton={options.bgColorButton}
               onSubmit={(s) => buyBookPress(s)}
               onClose={() => setBuyBookModal(false)}
               />

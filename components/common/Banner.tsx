@@ -32,6 +32,7 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, hidden }) => {
         <Image
             source={{ uri: imageUrl }}
             style={styles.headerImage}
+            
         />
         </View>
       </View>

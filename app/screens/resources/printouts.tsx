@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, FlatList, Button, Platform, Alert, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Button, Platform, Alert, Dimensions } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect, useState } from 'react';
@@ -9,6 +9,7 @@ import Overlay from '@/components/Overlay';
 import BookButton from '@/components/buttons/BookButton';
 import useBuyBook from '@/hooks/useBuyBook';
 import BuyBookView from '@/components/common/BuyBookView';
+import { OptionsBook } from '@/model/book';
 
 const PrintoutsStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -34,6 +35,7 @@ interface Printer {
 const PrintoutsScreen = ({route, navigation }:any) => { 
   const book = route.params.book
   const { ids } = route.params.resource;
+  const options = book.content.options as OptionsBook;
   const { buyBookModal, selectedBook, onSelectBookPress, setBuyBookModal, buyBookPress } = useBuyBook(book)
   const isLock = book && book.isLock;
   const [selectedPrinter, setSelectedPrinter] = useState<Printer | null>(null);
@@ -79,15 +81,15 @@ const PrintoutsScreen = ({route, navigation }:any) => {
       `
   }
 
-  const renderFileItem = ({item}: any) => { 
+  const renderFileItem = (item:any) => { 
     return(
     <TouchableOpacity 
-      style={styles.item}
-      onPress={() =>print(item)}
+      key={item.name}  
+      onPress={() =>print(item)}  
       disabled={isLock}
-    >
-      <Text style={styles.title}>{item.name}</Text>
-      <Image source={{ uri: item.fileUrl }} style={styles.image}/>
+      style={styles.tileItem}
+      >
+        <Image source={{ uri: item.fileUrl }} style={styles.image} resizeMode="cover"/>
     </TouchableOpacity>
     )
   }
@@ -104,12 +106,13 @@ const PrintoutsScreen = ({route, navigation }:any) => {
            ) : undefined}
          </>
        ) }
-      <FlatList
-        data={printoutsList}
-        renderItem={renderFileItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContent}
-      />
+      <ScrollView>
+        <View style={styles.tilesContainer}>
+            {printoutsList.map(book => (
+              renderFileItem(book)
+            ))}
+        </View>
+      </ScrollView>
        { book && book.isLock &&
         <Animated.View  style={{...styles.overlayContainer,height}}>
           <Overlay opacity={0.6} style={styles.overlay}>
@@ -131,6 +134,9 @@ const PrintoutsScreen = ({route, navigation }:any) => {
           <Overlay opacity={0.3} style={{top: 0}}>
             <BuyBookView 
                 book={selectedBook}
+                textColor={options.textColor}
+                backgroundColor={options.backgroundColor}
+                bgColorButton={options.bgColorButton}
                 onSubmit={(s) => buyBookPress(s)}
                 onClose={() => setBuyBookModal(false)}
                 />
@@ -144,47 +150,31 @@ const PrintoutsScreen = ({route, navigation }:any) => {
     container: {
       flex: 1,
       height: '100%',
+      padding: 10,
+      paddingBottom: 50
     },
-    contentContainer: {
-      padding: 20,
-    },
-    item: {
+    tilesContainer: {
       flexDirection: 'row',
+      flexWrap: 'wrap',
       justifyContent: 'space-between',
-      alignItems: 'center',
-      backgroundColor: '#fff',
-      padding: 20,
-      marginBottom: 10,
-      borderRadius: 10,
+    },
+    tileItem: {
+      width: 170, 
+      height: 250,
+      borderRadius: 15,
+      marginBottom: 15,
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
         height: 2,
       },
-      shadowOpacity: 0.23,
-      shadowRadius: 2.62,
-      elevation: 4,
-    },
-    title: {
-      fontSize: 18,
-      fontWeight: '500',
-      color: '#333',
-    },
-    listContent: {
-      padding: 16,
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5, // To jest potrzebne dla Androida
     },
     image: {
-      width: 200,
-      height: 200,
-      borderRadius: 15,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 5,
-      },
-      shadowOpacity: 0.34,
-      shadowRadius: 6.27,
-      elevation: 10,
+      width: '100%',
+      height: '100%',
     },
     spacer: {
       height: 8,

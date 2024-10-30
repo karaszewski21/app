@@ -6,11 +6,14 @@ import { Book } from '@/model';
 
 interface BuyBookViewProps {
   book: Book;
+  backgroundColor: string; 
+  textColor: string; 
+  bgColorButton: string; 
   onSubmit: (email: string) => void;
   onClose: () => void;
 }
 
-const BuyBookView: React.FC<BuyBookViewProps> = ({ book, onSubmit, onClose }) => {
+const BuyBookView: React.FC<BuyBookViewProps> = ({ book, backgroundColor, textColor, bgColorButton, onSubmit, onClose }) => {
   const [email, setEmail] = useState('');
 
   const handleSubmit = () => {
@@ -20,7 +23,7 @@ const BuyBookView: React.FC<BuyBookViewProps> = ({ book, onSubmit, onClose }) =>
   return (
     <TouchableOpacity activeOpacity={1} onPress={onClose}>
       <LinearGradient
-        colors={['#0891b2', '#0891b2', '#0891b2']}
+        colors={[backgroundColor,backgroundColor,backgroundColor]}
         style={styles.container}
       >
         <View style={styles.closeButton}>
@@ -31,9 +34,9 @@ const BuyBookView: React.FC<BuyBookViewProps> = ({ book, onSubmit, onClose }) =>
             onPress={onClose}
           />
         </View>
-        <Text style={styles.title}>{book.title}</Text>
+        <Text style={[styles.title, {color: textColor}]}>{book.title}</Text>
         <Image source={{ uri: book.gallery[0] }} style={styles.bookImage} />
-        <Text style={styles.description}>
+        <Text style={[styles.description, {color: textColor}]}>
           Niestety, ta książka jest obecnie niedostępna. Podaj swój adres e-mail,
           a powiadomimy Cię, gdy książka będzie znów dostępna!
         </Text>
@@ -46,11 +49,11 @@ const BuyBookView: React.FC<BuyBookViewProps> = ({ book, onSubmit, onClose }) =>
           keyboardType="email-address"
         />
         <TouchableOpacity 
-          style={styles.submitButton} 
+          style={[styles.submitButton, { backgroundColor: bgColorButton }]} 
           onPress={handleSubmit}
           disabled={!email}
         >
-          <Text style={styles.submitButtonText}>Powiadom mnie</Text>
+          <Text style={[styles.submitButtonText,{color: textColor}]}>Powiadom mnie</Text>
         </TouchableOpacity>
       </LinearGradient>
     </TouchableOpacity>

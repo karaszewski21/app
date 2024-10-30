@@ -1,4 +1,4 @@
-import { ScrollView, View, StyleSheet, useWindowDimensions,Image, TouchableOpacity, Dimensions, } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, Dimensions, } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { useEffect, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
@@ -23,7 +23,7 @@ const ReaderFlipperScreen = ({route, navigation }:any) => {
             style={styles.closeButton} 
             onPress={() => navigation.navigate('Details')}
           >
-            <Ionicons name="close" size={24} color="#000" />
+            <Ionicons name="close" size={18} color="#000" />
           </TouchableOpacity>
           <PageFlipper
               data={pages}
@@ -50,7 +50,6 @@ const ReaderFlipperScreen = ({route, navigation }:any) => {
     </SafeAreaView>
     )
   }
-
 
   const styles = StyleSheet.create({
     container: {

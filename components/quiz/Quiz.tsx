@@ -222,7 +222,7 @@ const Quiz = ({ quizData, theme = {}}: any) => {
           onPress={() => handleOptionSelect(index)}
           disabled={answerChecked[currentQuestionIndex]}
         >
-          <Image source={{ uri: option }} style={styles.optionImage} />
+          <Image source={{ uri: option }} style={styles.optionImage}  resizeMode='contain'/>
           <TouchableOpacity 
             style={styles.zoomButton}
             onPress={() => handleImagePress(option)}
@@ -270,7 +270,7 @@ const renderQuestion = () => {
           </Text>
           {currentQuestion.image && (
             <View>
-              <Image source={{ uri: currentQuestion.image }} style={styles.questionImage} />
+              <Image source={{ uri: currentQuestion.image }} style={styles.questionImage} resizeMode='contain'/>
               <TouchableOpacity 
                 style={styles.zoomButton}
                 onPress={() => handleImagePress(currentQuestion.image)}
@@ -292,6 +292,7 @@ const renderQuestion = () => {
           <View style={styles.optionsContainer}>
             {currentQuestion.options.map((option: string, index: number) => renderOption(option, index))}
           </View>
+          
         </ScrollView>
         <View style={styles.navigationContainer}>
             {  quizData.previousButton && 

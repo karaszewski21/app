@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
       marginLeft: 10,
     },
     filterButton: {
-      backgroundColor: '#4a90e2',
+      backgroundColor: '#eccc63',
       width: 40,
       height: 40,
       borderRadius: 20,

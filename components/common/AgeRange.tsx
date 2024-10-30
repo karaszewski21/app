@@ -7,15 +7,16 @@ import useAgeGroupsIcon from '@/hooks/useAgeGroupsIcon';
 interface AgeRangeComponentProps {
   ageRangeId: number;
   showText?: boolean;
+  textColor?: string
 }
 
-const AgeRange: React.FC<AgeRangeComponentProps> = ({ ageRangeId ,showText = true }) => {
+const AgeRange: React.FC<AgeRangeComponentProps> = ({ ageRangeId ,showText = true, textColor }) => {
     const { ageGroupsIcon } = useAgeGroupsIcon();
     const { id, title, imageUrl } = ageGroups[ageRangeId];
     return (
         <View style={styles.container}>
             <Image source={ageGroupsIcon[ageRangeId]} style={styles.image} />
-            <Text style={styles.text}>{ showText && title}</Text>
+            <Text style={[styles.text, {color: textColor}]}>{ showText && title}</Text>
         </View>
     );
 };

@@ -35,7 +35,7 @@ const ListItem: React.FC<ItemProps> = ({props}) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={props.onPress}>
-      <Image source={{ uri: props.imageUrl }} style={styles.image} />
+      <Image source={{ uri: props.imageUrl }} style={styles.image} resizeMode='cover'/>
       <View style={styles.infoContainer}>
         <Text style={styles.title} numberOfLines={2}>{props.title}</Text>
         <TouchableOpacity onPress={props.onRatingPress} style={styles.ratingContainer}>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFF7D6',
+    backgroundColor: '#eccc63',
     borderRadius: 15,
     padding: 10,
     marginVertical: 5,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 60,
+    width: 53,
     height: 80,
     borderRadius: 5,
   },

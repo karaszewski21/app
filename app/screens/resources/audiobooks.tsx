@@ -13,6 +13,7 @@ import BookButton from '@/components/buttons/BookButton';
 import useBuyBook from '@/hooks/useBuyBook';
 import BuyBookView from '@/components/common/BuyBookView';
 import BarcodeScanned from '@/components/common/BarcodeScanned';
+import { OptionsBook } from '@/model/book';
 
 const AudioBooksStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -28,7 +29,7 @@ export default function AudioBooksStackScreen({route}:any) {
 const AudiobooksScreen = ({ route, navigation }:any) => { 
   const book = route.params.book
   const { ids, bannerUrl } = route.params.resource;
-
+  const options = book.content.options as OptionsBook;
   const isLock = book && book.isLock;
   const height = useSharedValue(0);
   const { openPlayer } = usePlayerModal();
@@ -91,7 +92,8 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
             </SquareButton>)
           }
         </View>
-        { isLock &&
+      </ScrollView>
+      { isLock &&
           <Animated.View  style={{...styles.overlayContainer,height}}>
             <Overlay opacity={0.3} style={styles.overlay}>
               <BookButton 
@@ -112,12 +114,14 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
           <Overlay opacity={0.3}>
             <BuyBookView 
               book={selectedBook}
+              textColor={options.textColor}
+              backgroundColor={options.backgroundColor}
+              bgColorButton={options.bgColorButton}
               onSubmit={(s) => buyBookPress(s)}
               onClose={() => setBuyBookModal(false)}
               />
            </Overlay> 
         }
-      </ScrollView>
     </SafeAreaView>
   )
 }

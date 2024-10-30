@@ -1,3 +1,4 @@
+import { OptionsBook } from "./book";
 import { OptionsReader, ReaderPage } from "./reader";
 
 export type ProductType = 'book' | 'reader' | 'audio_play';
@@ -16,7 +17,12 @@ export interface Book {
     rating: number, 
     reviewCount: number,
     type: ProductType,
+    content: BookContent,
     resource: Resource[]
+}
+
+export interface BookContent {
+    options: OptionsBook,
 }
 
 export interface Reader {

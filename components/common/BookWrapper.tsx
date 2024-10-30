@@ -14,9 +14,9 @@ interface BookWrapperProps {
 }
 
 const { width, height } = Dimensions.get('window');
-const ASPECT_RATIO = 2 / 3;
+const ASPECT_RATIO =  2 / 3;
 const IMAGE_WIDTH = width * 0.6;
-const IMAGE_HEIGHT = IMAGE_WIDTH / ASPECT_RATIO;
+const IMAGE_HEIGHT = 200 / ASPECT_RATIO;
 
 const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -34,11 +34,13 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
         >
           {props.gallery.map((imageUrl, index) => (
              <View key={index} style={styles.imageWrapper}>
-                <Image
-                  source={{ uri: imageUrl }}
-                  style={styles.image}
-                  resizeMode="cover"
-                />
+                <View style={styles.imageContainer}>
+                  <Image
+                    source={{ uri: imageUrl }}
+                    style={styles.image}
+                    resizeMode="contain"
+                  />
+                </View>
             </View>
           ))}
         </ScrollView>
@@ -56,7 +58,7 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
       <View style={styles.content}>
         <Text style={[styles.title, {color: props.textColor}]}>{props.title}</Text>
         <Text style={[styles.description, {color: props.textColor}]}>{props.description}</Text>
-        <AgeRange ageRangeId={props.ageGroupId} />
+        <AgeRange ageRangeId={props.ageGroupId} textColor={props.textColor}/>
         <View style={styles.contentButtons}>
           {children}
         </View>
@@ -71,14 +73,20 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     width: width,
-    height: height * 0.5,
+    height: height * 0.42,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  image: {
+  imageContainer: {
     width: IMAGE_WIDTH,
     height: IMAGE_HEIGHT,
     borderRadius: 15,
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 15
   },
   paginationContainer: {
     flexDirection: 'row',
@@ -121,7 +129,6 @@ const styles = StyleSheet.create({
     fontFamily: 'ShantellSans-SemiBoldItalic',
     textAlign: 'justify',
     color: '#333',
-    marginBottom: 20,
   },
 });
 
