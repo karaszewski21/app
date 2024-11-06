@@ -132,8 +132,6 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     height: '100%',
-    width: '100%',
-    backgroundColor: 'black'
   },
   container: {
     flex: 1,

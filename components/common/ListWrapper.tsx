@@ -4,6 +4,8 @@ import { View, Image, StyleSheet, ScrollView, Text, Dimensions } from 'react-nat
 interface ListWrapperProps {
   props: {
     title: string
+    textColor: string
+    backgroundColor: string
   };
   children?: React.ReactNode;
 }
@@ -12,8 +14,8 @@ const ListWrapper: React.FC<ListWrapperProps> = ({ props, children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
-    <ScrollView style={styles.container}>
-        <Text style={styles.title}>{props.title}</Text>
+    <ScrollView style={[styles.container, {backgroundColor: props.backgroundColor}]}>
+        <Text style={[styles.title, {color: props.textColor}]}>{props.title}</Text>
         {children}
     </ScrollView>
   );

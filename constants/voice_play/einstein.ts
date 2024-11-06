@@ -1,15 +1,15 @@
-export const voice_play1 = [
+export const voice_play2 = [
     { 
-        id: 'a40bcbb9-871a-43db-ba87-622sds59199fc9f', 
+        id: 'axxx40bcbb9-871a-43db-ba87-622sds59199fc9f', 
         title: 'Zagraj', 
         audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_v3.mp4",
         audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
         options: {
             textColor: '#000',
-            backgroundColor: '#91654d',
+            backgroundColor: '#fff',
             progressBackgroundColor: '#91654d',
         },
-        total: '01:12',
+        total: '01:33',
         manifest: [
             {
               id: 1,
@@ -38,16 +38,16 @@ export const voice_play1 = [
           ]
     },
     { 
-        id: 'a40bcbb9-871a-43db-ba87-622sdsfdf59199fc9f', 
+        id: 'a40bxxcbb9-871a-43db-ba87-622sdsfdf59199fc9f', 
         title: 'Zagraj', 
         audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_v3.mp4",
         audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
         options: {
             textColor: '#000',
-            backgroundColor: '#91654d',
+            backgroundColor: '#fff',
             progressBackgroundColor: '#91654d',
         },
-        total: '01:12',
+        total: '01:54',
         manifest: [
             {
               id: 1,
@@ -76,13 +76,13 @@ export const voice_play1 = [
           ]
     },
     { 
-        id: 'a40bcbb9-871a-43db-ba87-622fdfsds59199fc9f', 
+        id: 'a40bcbbxxx9-871a-43db-ba87-622fdfsds59199fc9f', 
         title: 'Zagraj', 
         audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_v3.mp4",
         audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
         options: {
             textColor: '#000',
-            backgroundColor: '#91654d',
+            backgroundColor: '#fff',
             progressBackgroundColor: '#91654d',
         },
         total: '01:12',

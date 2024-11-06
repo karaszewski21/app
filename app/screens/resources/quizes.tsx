@@ -32,8 +32,6 @@ const QuizesScreen = ({route, navigation }:any) => {
   const options = book.content.options as OptionsBook;
   const { buyBookModal, selectedBook, onSelectBookPress, setBuyBookModal, buyBookPress } = useBuyBook(book);
 
-  console.log(options)
-
   const isLock = book && book.isLock;
   const height = useSharedValue(0);
   const quizList = quizes.filter(element => ids.includes(element.id))
