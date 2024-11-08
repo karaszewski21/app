@@ -1,7 +1,7 @@
 import { stories } from '@/constants/Stories';
 import { ageGroups } from '@/constants/AgeGroups';
 import { BookContent, ProductType, ReaderContent } from '@/model';
-import { ReaderPage } from '@/model/reader';
+import { LangReaderPage, ReaderPage } from '@/model/reader';
 
 export const index = {
     stories: stories,
@@ -357,7 +357,6 @@ export const index = {
               subtitle: 'Brawo! Świetnie ci poszło!'
             }
           ] as ReaderPage[],
-  
           image: [
             'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/3.png',
             'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/4.png',
@@ -367,8 +366,104 @@ export const index = {
             'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/8.png',
             'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/9.png',
           ],
-  
-          english: {}
+          english: [
+            {
+              type: 'cover',
+              title: '',
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/index.png'
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                {
+                  type: 'text',
+                  text: `As I looked out the window this morning, I couldn't help but notice that the weather is absolutely beautiful today, with clear blue skies and a gentle breeze.`,
+                  translation: 'Gdy spojrzałem przez okno tego ranka, nie mogłem nie zauważyć, że pogoda jest dziś absolutnie piękna, z bezchmurnym niebem i delikatną bryzą.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+                  vocabulary: [
+                    {
+                      word: 'looked out',
+                      translation: 'spojrzeć na zewnątrz',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
+                    },
+                    {
+                      word: 'notice',
+                      translation: 'zauważyć',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
+                    },
+                    {
+                      word: 'weather',
+                      translation: 'zauważyć',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
+                    },
+                    {
+                      word: 'gentle breeze',
+                      translation: 'zauważyć',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
+                    }
+                  ]     
+                },
+                {
+                  type: 'text',
+                  text: `I've always been passionate about learning new languages because it not only broadens my horizons but also helps me understand different cultures and connect with people from around the world.`,
+                  translation: 'Zawsze byłem pasjonatem uczenia się nowych języków, ponieważ nie tylko poszerza to moje horyzonty, ale także pomaga mi zrozumieć różne kultury i nawiązywać kontakty z ludźmi z całego świata.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'     
+                },
+                {
+                  type: 'text',
+                  text: `I've always been passionate about learning new languages because it not only broadens my horizons but also helps me understand different cultures and connect with people from around the world.`,
+                  translation: 'Zawsze byłem pasjonatem uczenia się nowych języków, ponieważ nie tylko poszerza to moje horyzonty, ale także pomaga mi zrozumieć różne kultury i nawiązywać kontakty z ludźmi z całego świata.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'     
+                },
+                {
+                  type: 'text',
+                  text: `I've always been passionate about learning new languages because it not only broadens my horizons but also helps me understand different cultures and connect with people from around the world.`,
+                  translation: 'Zawsze byłem pasjonatem uczenia się nowych języków, ponieważ nie tylko poszerza to moje horyzonty, ale także pomaga mi zrozumieć różne kultury i nawiązywać kontakty z ludźmi z całego świata.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'     
+                },
+                {
+                  type: 'text',
+                  text: `I've always been passionate about learning new languages because it not only broadens my horizons but also helps me understand different cultures and connect with people from around the world.`,
+                  translation: 'Zawsze byłem pasjonatem uczenia się nowych języków, ponieważ nie tylko poszerza to moje horyzonty, ale także pomaga mi zrozumieć różne kultury i nawiązywać kontakty z ludźmi z całego świata.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'     
+                },
+                {
+                  type: 'text',
+                  text: `I apologize, but I didn't quite catch what you just said - could you please repeat that more slowly and clearly so I can better understand your explanation?`,
+                  translation: 'Przepraszam, ale nie do końca zrozumiałem, co właśnie powiedziałeś - czy mógłbyś powtórzyć to wolniej i wyraźniej, żebym mógł lepiej zrozumieć twoje wyjaśnienie?',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'     
+                }
+              ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `The weather is beautiful today.`,
+                    translation: 'Pogoda jest dziś piękna.',
+                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'     
+                  },
+                  {
+                    type: 'text',
+                    text: `I like learning new languages.`,
+                    translation: 'Lubię uczyć się nowych języków.',
+                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'     
+                  },
+                  {
+                    type: 'text',
+                    text: `Could you please repeat that?`,
+                    translation: 'Czy możesz to powtórzyć?',
+                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'     
+                  }
+                ]
+            },
+            {
+              type: 'end',
+              title: 'Dobranoc!',
+              subtitle: 'Brawo! Świetnie ci poszło!'
+            }
+          ] as LangReaderPage[]
         } as ReaderContent,
         resource: [
           {

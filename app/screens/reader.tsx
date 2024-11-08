@@ -14,6 +14,7 @@ import PrintoutsScreen from '@/app/screens/resources/printouts'
 import VoiceQuizesScreen from '@/app/screens/resources/voice_quizes'
 import { ReaderContent, Resource } from '@/model';
 import { OptionsReader } from '@/model/reader';
+import ReaderLangScreen from '@/app/screens/reader_lang';
 
 const ReaderStack = createStackNavigator();
 
@@ -35,6 +36,7 @@ export default function ReaderStackScreen({route}:any) {
         <ReaderStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
         <ReaderStack.Screen name="ReaderFlipper" component={ReaderFlipperScreen} options={{headerShown: false}}/>
         <ReaderStack.Screen name="ReaderText" component={ReaderTextScreen} options={{headerShown: false}}/>
+        <ReaderStack.Screen name="ReaderLang" component={ReaderLangScreen} options={{headerShown: false}}/>
       </ReaderStack.Navigator>
     </ImageBackground>
   );
@@ -90,7 +92,7 @@ const ReaderScreen = ({ route, navigation }:any) => {
                props={{
                 title: options.english.title,
                 subtitle: options.english.subTitle,
-                onPress:() => navigation.navigate('ReaderFlipper'),
+                onPress:() => navigation.navigate('ReaderLang',  { content: content.english}),
                 backgroundColor: options.english.backgroundColor,
                 textColor: options.english.textColor
              }}

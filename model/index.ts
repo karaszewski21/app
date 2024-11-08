@@ -1,5 +1,5 @@
 import { OptionsBook } from "./book";
-import { OptionsReader, ReaderPage } from "./reader";
+import { LangReaderPage, OptionsReader, ReaderPage } from "./reader";
 
 export type ProductType = 'book' | 'reader' | 'audio_play';
 export type ResourceType = 'quiz' | 'audiobook' | 'english' | 'printouts';
@@ -44,7 +44,7 @@ export interface ReaderContent {
     options: OptionsReader,
     text: ReaderPage[],
     image?: string[],
-    english?: string[]
+    english?: LangReaderPage[]
 }
 
 export interface AudioPlay {

@@ -5,6 +5,13 @@ interface Paragraph {
   text: string;
 }
 
+interface LangParagraph {
+  type: ParagraphType;
+  text: string;
+  translation: string;
+  audioUrl: string;
+}
+
 interface CoverReaderPage {
     type: 'cover';
     title: string;
@@ -21,6 +28,24 @@ interface EndReaderPage {
     type: 'end';
     title: string;
     subtitle: string;
+}
+
+interface CoverReaderLangPage {
+  type: 'cover';
+  title: string;
+  subtitle: string;
+  image: string;
+}
+
+interface ContentReaderLangPage {
+  type: 'content';
+  paragraphs: LangParagraph[];
+}
+
+interface EndReaderLangPage {
+  type: 'end';
+  title: string;
+  subtitle: string;
 }
 
 export interface OptionsReader {
@@ -48,3 +73,5 @@ export interface OptionsReader {
 }
 
 export type ReaderPage = CoverReaderPage | ContentReaderPage | EndReaderPage;
+
+export type LangReaderPage = CoverReaderLangPage | ContentReaderLangPage | EndReaderLangPage;
