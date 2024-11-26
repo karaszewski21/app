@@ -56,6 +56,11 @@ export const index = {
                 ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9f', 'a40bcbb9-871a-43db-ba87-622sdsfdf59199fc9f', 'a40bcbb9-871a-43db-ba87-622fdfsds59199fc9f'],
                 bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/index.png',
               },
+              {
+                type: 'english',
+                ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9fxxx', 'a40bcbb9-871a-43db-ba87-622sds59199fgfgff', 'a40bcbb9-871a-43db-ba87-622sds59199fc9fzzz', 'a40bcbb9-871a-43db-ba87-622sds59199fc9fccc'],
+                bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/index.png',
+              },
             ]
         },
         {
@@ -105,6 +110,11 @@ export const index = {
               {
                 type: 'voice_quiz',
                 ids: ['a40bxxcbb9-871a-43db-ba87-622sdsfdf59199fc9f', 'a40bcbbxxx9-871a-43db-ba87-622fdfsds59199fc9f', 'axxx40bcbb9-871a-43db-ba87-622sds59199fc9f'],
+                bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/index.png',
+              },
+              {
+                type: 'english',
+                ids: ['a40bcbb9-871a-43db-ba87-622sds5919', 'a40bcbb9-871a-43db-ba87-622sds5919', 'a40bcbb9-871a-43db-ba87-777', 'a40bcbb9-871a-43db-ba87-622sds591'],
                 bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/index.png',
               },
             ]
@@ -158,6 +168,11 @@ export const index = {
               ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9f', 'a40bcbb9-871a-43db-ba87-622sdsfdf59199fc9f', 'a40bcbb9-871a-43db-ba87-622fdfsds59199fc9f'],
               bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/index.png',
             },
+            {
+              type: 'english',
+              ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9fxxx', 'a40bcbb9-871a-43db-ba87-622sds59199fgfgff', 'a40bcbb9-871a-43db-ba87-622sds59199fc9fzzz', 'a40bcbb9-871a-43db-ba87-622sds59199fc9fccc'],
+              bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/index.png',
+            },
           ]
         },
         {
@@ -208,6 +223,11 @@ export const index = {
               type: 'voice_quiz',
               ids: ['a40bxxcbb9-871a-43db-ba87-622sdsfdf59199fc9f', 'a40bcbbxxx9-871a-43db-ba87-622fdfsds59199fc9f', 'axxx40bcbb9-871a-43db-ba87-622sds59199fc9f'],
               bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/index.png',
+            },
+            {
+              type: 'english',
+              ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9fxxx', 'a40bcbb9-871a-43db-ba87-622sds59199fgfgff', 'a40bcbb9-871a-43db-ba87-622sds59199fc9fzzz', 'a40bcbb9-871a-43db-ba87-622sds59199fc9fccc'],
+              bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/index.png',
             },
           ]
         },
@@ -485,13 +505,13 @@ export const index = {
       {
         id: '5fa869da-166d-45cc-a57d-36dda0a181bdf56',
         type: 'reader' as ProductType,
-        ageGroupId: 3,
-        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/index3.png',
+        ageGroupId: 4,
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.png',
         gallery: [ 
-          'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/gallery/1.png',
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/gallery/2.png',
         ],
-        title: "Stary dąb",
-        description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
+        title: "Ciuchcia",
+        description: "W świecie, gdzie wszystko musi być szybkie i nowoczesne, poznajemy uroczą Ciuchcię, która powoli podróżuje malowniczą trasą przez góry. Gdy zostaje zastąpiona przez szybsze pociągi, wydaje się, że jej dni dobiegły końca. Jednak pewnego dnia burza pokazuje wszystkim, że czasem to właśnie stare, sprawdzone rozwiązania są najlepsze!",
         rating: 4, 
         reviewCount: 120,
         content: {
@@ -521,42 +541,41 @@ export const index = {
           text: [
             {
               type: 'cover',
-              title: '',
-              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/index.png'
+              title: 'Przeczytaj o małej lokomotywie z wielkim sercem!',
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.png'
             },
             {
               type: 'content',
               paragraphs: [
                   {
                     type: 'text',
-                    text: `W ciemnym gęstym lesie rósł sobie pewien naprawdę stary dąb. Nikt nie wie dokładnie, 
-                          jak długo tam był, przeżył jednak wiele pokoleń i pamiętał naprawdę sporo. 
-                          Często wspominał wszystko, co działo się wokół niego przez
-                          ten bardzo długi czas.`
+                    text: `Na krótkiej trasie, między górskimi wioskami, jeździła sobie kiedyś pewna
+                          Ciuchcia. Była bardzo wolna, ponieważ w dawnych czasach nie musiała być
+                          wcale szybka. Pociągami jeździły wtedy przede wszystkim rodziny na górskie
+                          wycieczki.`
                   },
                   {
                     type: 'text',
-                    text: `Jego potężna korona tworzyła bowiem doskonałe
-                          schronienie przed deszczem, który padał na jego ogromne liście. Jego
-                          gałęzie przypominały szeroko otwarte ramiona, przygarniające z miłością
-                          wszystkich małych mieszkańców lasu.`
+                    text: `Podczas niespiesznej jazdy wszyscy podziwiali przepiękne widoki.
+                          Szczególnie dzieci, które chętnie wyglądały przez okna i obserwowały
+                          urzekające krajobrazy. A im wyżej pociąg wjeżdżał w góry, tym więcej piękna
+                          widziały. Pasące się na łąkach krówki, jeziorka pełne ryb tuż obok trasy,
+                          ruiny zamku, w którym kiedyś mieszkał podobno sam król. Czasami widać
+                          też było stado saren. Taka przejażdżka zapewniała wspaniałe wrażenia.`
                   },
                   {
                     type: 'text',
-                    text: `W bujnej koronie dębu zamieszkała rodzina turkawek. Swym pięknym
-                          śpiewem tworzą przyjacielską atmosferę i żyją w prawdziwej harmonii ze
-                          starym dębem. Informują przy okazji wszystkich wokół, że stary dąb jest
-                          bezpieczną przystanią, w której panuje błogość i spokój. Dla małych
-                          turkawek stał się on swego rodzaju oazą, w której mogą bez obaw złożyć jaja
-                          w małym gniazdku i przymknąć oczy, by nabrać nowych sił.`
+                    text: `Czasy jednak się zmieniły – teraz wszyscy żyją szybciej. Coraz częściej
+                            korzystają z pociągów pospiesznych, które wożą ludzi z miejsca na miejsce
+                            tak szybko, że ci nie mają nawet okazji, by nacieszyć się jazdą. Przy takiej
+                            prędkości krajobrazy za oknem szybko znikają, zlewając się w jeden
+                            rozmazany obraz. I tak Ciuchcia jeździła coraz rzadziej i rzadziej, aż w końcu
+                            zupełnie przestała wyjeżdżać na szlak.`
                   },
                   {
                     type: 'text',
-                    text: `Na pewno będą
-                          tam mieć piękne sny o tym, jak pewnego dnia ich małe turkaweczki rozłożą
-                          wreszcie skrzydła i polecą w górę ze swoimi rodzicami. Wzlecą ponad
-                          chmury i wyruszą w pełną przygód drogę tam, gdzie kończy się ziemia, a
-                          zaczyna morze, które delikatnie uderza falami o skalisty brzeg.`
+                    text: `– Co zrobimy z tą starą niepotrzebną ciuchcią? – zapytał ktoś.
+                           – Do zajezdni z nią! – zdecydowali o jej losie niewdzięczni zawiadowcy.`
                   }
                 ]
             },
@@ -565,29 +584,39 @@ export const index = {
               paragraphs: [
                   {
                     type: 'text',
-                    text: `W bujnej koronie dębu zamieszkała rodzina turkawek. Swym pięknym
-                          śpiewem tworzą przyjacielską atmosferę i żyją w prawdziwej harmonii ze
-                          starym dębem. Informują przy okazji wszystkich wokół, że stary dąb jest
-                          bezpieczną przystanią, w której panuje błogość i spokój.`
+                    text: `Gdybyście, drogie dzieci, nie wiedziały – zajezdnia, to takie miejsce, gdzie
+                            odpoczywają pociągi. Tam dbają o nie mechanicy, abyśmy mogli nimi
+                            bezpiecznie jeździć. Ciuchcia wylądowała w najciemniejszym kącie zajezdni,
+                            ponieważ nie była już zupełnie nikomu potrzebna. Stamtąd obserwowała po
+                            cichutku pędzące pociągi.`
                   },
                   {
                     type: 'text',
-                    text: `Dla małych turkawek stał się on swego rodzaju oazą, w której mogą bez obaw złożyć jaja
-                          w małym gniazdku i przymknąć oczy, by nabrać nowych sił. Na pewno będą
-                          tam mieć piękne sny o tym, jak pewnego dnia ich małe turkaweczki rozłożą
-                          wreszcie skrzydła i polecą w górę ze swoimi rodzicami.`
+                    text: `– Po co cię tu postawili?! Zabierasz tylko miejsce. Mieli cię rozmontować, a z
+                            twoich elementów zrobić nowy pociąg pospieszny.`
                   },
                   {
                     type: 'text',
-                    text: `Wzlecą ponad chmury i wyruszą w pełną przygód drogę tam, gdzie kończy się ziemia, a
-                          zaczyna morze, które delikatnie uderza falami o skalisty brzeg.`
+                    text: `– Nowy pociąg pospieszny? A po co? Z niej nie chciałbym nawet jednej śrubki!`
                   },
                   {
                     type: 'text',
-                    text: `Na dole, przy pniu dębu, urzędują zaś dwa młode niedźwiedzie, które na
-                          chwilę zniknęły mamie z oczu. Dąb obserwuje w milczeniu małe,
-                          niegramotne niedźwiadki i przypatruje się, jak beztrosko pożywiają się
-                          świeżymi owocami lasu.`
+                    text: `– Tak, tak, jesteś całkowicie niepotrzebna. Zawadzasz tu tylko wszystkim –
+                          wyśmiewały się z Ciuchci supernowoczesne pociągi.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Ciuchcia coraz bardziej chowała się w kąt, by nikt jej nie widział i by nikomu
+                          nie przeszkadzała. Na szczęście znalazł się ktoś, kto stanął w jej obronie.
+                          Ktoś, komu jej los nie był obojętny.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Przecież ja cię znam! – powiedział pewien stary mechanik, który zajmował
+                          się pociągami w tej zajezdni. – Gdy byłem mały, moi rodzice często jeździli ze
+                          mną w góry. To były cudowne wycieczki. A ty zawsze nas tam woziłaś. I za to
+                          ci dziękuję! – mechanik poklepał Ciuchcię po starej blasze. – Wiesz co?
+                          Troszkę cię oporządzę – zdecydował stary mechanik i poszedł po olej.`
                   }
                 ]
             },
@@ -596,27 +625,112 @@ export const index = {
               paragraphs: [
                   {
                     type: 'text',
-                    text: `Ich delikatna woń powoli wznosi się pomiędzy liście
-                          i nawet stary dąb, gdyby mógł, wciągnąłby głęboko ich zapach. Jego liście
-                          cichutko szumią i w końcu nawet ono samo, potężne drzewo, delikatnie
-                          przymyka oczy. Wietrzyk smaga czule rozgałęzioną koronę, która przechyla
-                          się z boku na bok jak łódka na szerokim morzu, a wraz z nią powoli huśtają
-                          się wszyscy mieszkańcy drzewa.`
+                    text: `– Po co to robisz? To tylko strata czasu – śmiali się z niego koledzy, widząc,
+                          jak zajmuje się nieczynnym pociągiem. – Przecież on już nigdy nigdzie nie
+                          pojedzie.`
                   },
                   {
                     type: 'text',
-                    text: `A gdy wokół już zupełnie się ściemniło, usnęły również małe misie, które od
-                          dawna odpoczywały ze swoją mamą w ciepłej i bezpiecznej jamie. Wtedy
-                          znów spadł ulewny deszcz. Pomaga on usnąć wszystkim leśnym
-                          zwierzątkom, by rano zbudziły się wypoczęte i pełne energii.`
+                    text: `– Może nie, ale były czasy, gdy sprawiał ludziom radość. Zasługuje na mój
+                            szacunek, bo dzięki niemu przeżyłem piękne chwile – bronił się stary
+                            mechanik i oliwił rdzewiejące elementy ciuchci.`
                   },
                   {
                     type: 'text',
-                    text: `Jeszcze tylko
-                          chwila i wszyscy mieszkańcy lasu pójdą spać spokojnym snem. Dąb jest
-                          wdzięczny za każdy kolejny dzień, w trakcie którego mógł być schronieniem
-                          dla leśnych stworzeń. On sam też jest już zmęczony, cieszy się więc, że może
-                          w końcu odpocząć`
+                    text: `Ale koledzy mechanicy już go nie słuchali. Woleli ścigać się, który z nich
+                          lepiej i szybciej przygotuje do drogi swój ekspres.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Tak mijały dni, a Ciuchcia nie czuła się już tak bardzo opuszczona, ponieważ
+                          stary mechanik odwiedzał ją regularnie każdego popołudnia po pracy i
+                          opowiadał jej różne historie z czasów, gdy kiedyś nią jeździł. Ciuchcia
+                          słuchając tego wszystkiego chętnie wspominała piękne miejsca, które w
+                          ciągu swojego życia tyle razy odwiedziła.`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `Pewnego dnia zerwała się wyjątkowo mocna burza. Wiatr łamał drzewa,
+                          które spadały na drogi. Samochody i autobusy były zablokowane, ludzie nie
+                          mogli pojechać do pracy, a dzieci do szkół.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Trzeba dojechać koleją do miejsc, które są nieprzejezdne i pomóc
+                            odblokować drogi – powiedzieli mechanicy.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Ale ciężkie i wysokie drzewa zerwały swoimi konarami również przewody
+                          elektryczne. I okazało się, że superszybkie pociągi nie były w stanie wyjechać
+                          z zajezdni.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Wpadłem na pewien pomysł – podrapał się po brodzie stary mechanik. Na
+                          górce między dolinami, w pobliżu zajezdni, jest zakład elektryczny. –
+                          Skoczymy z Ciuchcią po specjalistów elektryków. Oni naprawią przewody,
+                          dzięki czemu pociągi będą mogły pojechać i pomóc ludziom – zapoznał ich
+                          ze swoim planem.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– To znakomity pomysł! – uznali pozostali koledzy. Nawet pociągi
+                          ekspresowe musiały się z tym zgodzić!`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `I tak po długiej przerwie, Ciuchcia znowu wyjechała na tory. A ponieważ
+                          stary mechanik odpowiednio o nią zadbał, pociąg był w dobrym stanie i
+                          droga przebiegła bez problemów. Gdy gdzieś na trasie leżały połamane
+                          gałęzie albo zwalone drzewo, Ciuchcia bez większego wysiłku spychała je z
+                          drogi.`
+                  },
+                  {
+                    type: 'text',
+                    text: `W końcu wtoczyła się na górkę, elektrycy wsiedli do pociągu i po powrocie do
+                          zajezdni zabrali się za naprawę przewodów elektrycznych. Pociągi
+                          pospieszne mogły wyruszyć, by pomóc rozwozić ludzi i dzieci w czasie, gdy
+                          ciężkie maszyny usuwały drzewa, które zwaliły się na drogi.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Dziękujemy ci, Ciuchcio! Bardzo nam pomogłaś. Bez ciebie by się nie udało
+                          – przyznały pociągi, gdy wreszcie wróciły do zajezdni po pracowitym dniu. –
+                          Już nigdy nie będziemy się z ciebie śmiać.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Nie ma za co, musimy sobie przecież pomagać – uśmiechnęła się skromnie Ciuchcia.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Ale momencik… Taki wyjątkowy pociąg nie powinien chyba stać w ciemnym
+                          kącie zajezdni, prawda?`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `– W każdy weekend zaprosimy rodziny do wspólnej jazdy starą trasą z naszą
+                          bohaterską Ciuchcią – zdecydowali wszyscy pracownicy kolei.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Zgadnijcie, kto wybrał się na tę przejażdżkę jako pierwszy? Oczywiście – stary mechanik.`
                   }
                 ]
             },
@@ -628,13 +742,14 @@ export const index = {
           ] as ReaderPage[],
   
           image: [
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/3.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/4.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/5.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/6.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/7.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/8.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/9.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/1.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/2.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/3.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/4.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/5.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/6.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/7.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/8.png',
           ],
   
           english: {}
@@ -660,11 +775,11 @@ export const index = {
         id: '5fa869da-166d-45cc-a57d-36ddfda181b56',
         type: 'reader' as ProductType,
         ageGroupId: 3,
-        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/index3.png',
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.png',
         gallery: [ 
-          'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/gallery/1.png',
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/gallery/cover.png',
         ],
-        title: "Stary dąb",
+        title: "Natalia i smok",
         description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
         rating: 4, 
         reviewCount: 120,
@@ -681,7 +796,7 @@ export const index = {
             },
             image: {
               title: 'Zacznij czytać',
-              subTitle: 'Czas czytania: 5 min',
+              subTitle: 'Czas czytania: 3-4 minuty',
               textColor: '#000',
               backgroundColor: '#8e7f67',
             },
@@ -802,13 +917,13 @@ export const index = {
           ] as ReaderPage[],
   
           image: [
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/3.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/4.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/5.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/6.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/7.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/8.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/9.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/1.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/2.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/3.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/4.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/5.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/6.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/7.png',
           ],
   
           english: {}
@@ -834,11 +949,11 @@ export const index = {
         id: '5fa869da-166d-45ccfd-d57d-36dda0a181b56',
         type: 'reader' as ProductType,
         ageGroupId: 3,
-        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/index3.png',
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/index.png',
         gallery: [ 
-          'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/gallery/1.png',
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/gallery/cover.png',
         ],
-        title: "Stary dąb",
+        title: "Zosia i wielki strach",
         description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
         rating: 4, 
         reviewCount: 120,
@@ -976,13 +1091,14 @@ export const index = {
           ] as ReaderPage[],
   
           image: [
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/3.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/4.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/5.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/6.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/7.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/8.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/9.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/1.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/2.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/3.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/4.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/5.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/6.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/7.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/8.png',
           ],
   
           english: {}
@@ -1000,7 +1116,7 @@ export const index = {
           },
           {
             type: 'printouts',
-            ids: ['16271817-907d-4896-8882-060bc61d5418', 'd5935d8f-aa77-4c0d-a32f-b9bb5a2b1fb7'],
+            ids: ['16271817-907d-4896-8882-zzzz', 'f978f1cb-c6d7-4c56-8e84-22b54f36sdsd'],
           },
         ]
       },

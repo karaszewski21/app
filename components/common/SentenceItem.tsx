@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import Animated, { 
     useAnimatedStyle, 
@@ -8,21 +8,22 @@ import Animated, {
     useSharedValue, 
     interpolate,
     Easing,
+    FadeInUp,
   } from 'react-native-reanimated';
-  import { Audio, AVPlaybackStatus, AVPlaybackStatusSuccess, Video } from 'expo-av';
+  import { Audio } from 'expo-av';
 import { VocabularyModal } from './VocabularyModal';
-
-
 interface VideoPlayerProps {
     text: string;
     translation: string
     audioUrl: string;
     vocabulary: any[]
-  }
+    getTranslationHeightView?: (height: number) => void;
+}
 
 type AudioSentenceContextType = {
     currentSound: Audio.Sound | null;
     playAudio: (audioUrl: string) => Promise<void>;
+    // getTranslationHeightView: (height: number) => number;
     stopAndUnloadSound: () => Promise<void>;
 };
   
@@ -79,22 +80,37 @@ export const useAudioSentence = () => {
   return context;
 };
 
-
 interface Word {
   word: string;
   translation: string;
   audioUrl: string;
 }
 
-
-const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl, vocabulary }) => {
+const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl, vocabulary, getTranslationHeightView }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { playAudio} = useAudioSentence();
   const rotation = useSharedValue(0);
   const height = useSharedValue(0);
+  const [translationHeight, setTranslationHeight] = useState(0);
 
+
+  useEffect(() => {
+
+    if (!isExpanded) {
+      if (getTranslationHeightView) getTranslationHeightView(0)
+    }
+
+  }, [isExpanded])
+
+  const onTranslationLayout = useCallback((event: any) => {
+    const { height } = event.nativeEvent.layout;
+    setTranslationHeight(height);
+
+    if (getTranslationHeightView) getTranslationHeightView(height)
+
+  }, [height.value]);
 
   const handleWordPress = (word: Word) => {
     setSelectedWord(word);
@@ -163,7 +179,11 @@ const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl,
 
   const containerStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(height.value, [0, 1], [0, 200]),
+      maxHeight: interpolate
+      ( height.value, 
+        [0, 1], 
+        [0, translationHeight + 20] // +20 dla paddingu
+      ),
       opacity: height.value,
     };
   });
@@ -191,11 +211,17 @@ const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl,
             </Animated.View>
           </TouchableOpacity>
         </View>
-         
-        <Animated.View style={[containerStyle]}>
-              <Text style={styles.translation}>{translation}</Text>
-        </Animated.View>
         
+        <Animated.View entering={FadeInUp.duration(1000)}>
+          {isExpanded && (
+            <>
+              <Animated.Text onLayout={onTranslationLayout} style={styles.translation}>
+                {translation}
+              </Animated.Text>
+            </>
+          )}
+        </Animated.View>
+
       <VocabularyModal
         word={selectedWord ?? {} as any}
         isVisible={isModalVisible}
@@ -238,6 +264,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     marginHorizontal: 10,
   },
+  translationContainer: {
+   // overflow: 'hidden',
+  },
   translation: {
     fontSize: 20,
     color: '#fff',
@@ -245,6 +274,8 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     letterSpacing: 0.5,
     marginHorizontal: 20,
+    marginVertical: 10,
+    flexWrap: 'wrap'
   }
 });
 

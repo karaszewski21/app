@@ -19,11 +19,11 @@ const ReaderFlipperScreen = ({route, navigation }:any) => {
   return (
     <SafeAreaView style={styles.container}>
       <View  style={{ flex: 1 }}>
-        <TouchableOpacity 
+          <TouchableOpacity 
             style={styles.closeButton} 
             onPress={() => navigation.navigate('Details')}
           >
-            <Ionicons name="close" size={18} color="#000" />
+            <Ionicons name="close-circle" size={24} color="#fff" />
           </TouchableOpacity>
           <PageFlipper
               data={pages}
@@ -42,7 +42,7 @@ const ReaderFlipperScreen = ({route, navigation }:any) => {
                     height: height,
                     backgroundColor: 'black'
                   }} 
-                  resizeMode='stretch'
+                  resizeMode='contain'
                 />
             </View>}
           />
@@ -60,11 +60,10 @@ const ReaderFlipperScreen = ({route, navigation }:any) => {
     },
     closeButton: {
       position: 'absolute',
-      top: 10,
-      right: 10,
+      top: 1,
+      right: 1,
       zIndex: 1,
       padding: 10,
-      backgroundColor: 'rgba(255, 255, 255, 0.7)',
       borderRadius: 20,
     },
   });

@@ -8,6 +8,8 @@ import { ImageBackground, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { DefaultTheme, NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { globalTheme } from '@/constants/Colors';
 
 export default function Root() {
     const [loaded, error] = useFonts({
@@ -33,11 +35,11 @@ export default function Root() {
         <TabsScreenContextProvider>
           <PlayerModalProvider>
             <GlobalModalProvider>
-                <Stack>
-                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                  <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-                  <Stack.Screen name="index" options={{ headerShown: false }} />
-                </Stack>
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+                <Stack.Screen name="index" options={{ headerShown: false }} />
+              </Stack>
             </GlobalModalProvider>
           </PlayerModalProvider>
         </TabsScreenContextProvider>

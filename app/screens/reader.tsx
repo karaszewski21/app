@@ -15,30 +15,37 @@ import VoiceQuizesScreen from '@/app/screens/resources/voice_quizes'
 import { ReaderContent, Resource } from '@/model';
 import { OptionsReader } from '@/model/reader';
 import ReaderLangScreen from '@/app/screens/reader_lang';
+import { globalTheme } from '@/constants/Colors';
+import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
 
 const ReaderStack = createStackNavigator();
 
 export default function ReaderStackScreen({route}:any) {
   const { reader } = route.params;
   const options = reader.content.options as OptionsReader;
+  console.log(options.backgroundUrl)
   return (
     <ImageBackground source={{uri:options.backgroundUrl}}  style={styles.rootContainer} resizeMode='cover'>
-      <ReaderStack.Navigator>
-        <ReaderStack.Screen 
-          name="Details" 
-          component={ReaderScreen}
-          options={{headerShown: false}}
-          initialParams={route.params}
-        />
-        <ReaderStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}}/>
-        <ReaderStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
-        <ReaderStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
-        <ReaderStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
-        <ReaderStack.Screen name="ReaderFlipper" component={ReaderFlipperScreen} options={{headerShown: false}}/>
-        <ReaderStack.Screen name="ReaderText" component={ReaderTextScreen} options={{headerShown: false}}/>
-        <ReaderStack.Screen name="ReaderLang" component={ReaderLangScreen} options={{headerShown: false}}/>
-      </ReaderStack.Navigator>
-    </ImageBackground>
+      <NavigationIndependentTree>
+        <NavigationContainer theme={globalTheme}>
+          <ReaderStack.Navigator  screenOptions={{cardStyle: { backgroundColor: 'transparent' }}}>
+            <ReaderStack.Screen 
+              name="Details" 
+              component={ReaderScreen}
+              options={{headerShown: false}}
+              initialParams={route.params}
+            />
+            <ReaderStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}}/>
+            <ReaderStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
+            <ReaderStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
+            <ReaderStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
+            <ReaderStack.Screen name="ReaderFlipper" component={ReaderFlipperScreen} options={{headerShown: false}}/>
+            <ReaderStack.Screen name="ReaderText" component={ReaderTextScreen} options={{headerShown: false}}/>
+            <ReaderStack.Screen name="ReaderLang" component={ReaderLangScreen} options={{headerShown: false}}/>
+          </ReaderStack.Navigator>
+        </NavigationContainer>
+      </NavigationIndependentTree>
+   </ImageBackground>
   );
 }
 

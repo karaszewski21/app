@@ -67,7 +67,6 @@ export default function TabLayout() {
       style={styles.rootContainer}
       resizeMode='cover'
     >
-      <NavigationContainer independent={true} theme={globalTheme}>
         <Tab.Navigator
           screenOptions={{headerShown: false}} 
           tabBar={props => 
@@ -89,7 +88,7 @@ export default function TabLayout() {
             component={HomeScreen}
             options={{
               title: 'Home',
-              unmountOnBlur: true,
+              popToTopOnBlur: true,
             }}
           />
           <Tab.Screen
@@ -97,7 +96,7 @@ export default function TabLayout() {
             component={BooksScreen}
             options={{
               title: 'Książki',
-              unmountOnBlur: true,
+              popToTopOnBlur: true,
             }}
 
           />
@@ -106,7 +105,7 @@ export default function TabLayout() {
             component={FavoritesScreen}
             options={{
               title: 'Ulubione',
-              unmountOnBlur: true,
+              popToTopOnBlur: true,
             }}
           />
           <Tab.Screen
@@ -114,7 +113,7 @@ export default function TabLayout() {
             component={FunScreen}
             options={{
               title: 'Czytanki',
-              unmountOnBlur: true,
+              popToTopOnBlur: true,
             }}
           />
           <Tab.Screen
@@ -122,12 +121,11 @@ export default function TabLayout() {
             name="profile"
             options={{
               title: 'Profil',
-              unmountOnBlur: true,
+              popToTopOnBlur: true,
               headerShown: false
             }}
           />
          </Tab.Navigator>
-      </NavigationContainer>
     </ImageBackground>
   );
 }

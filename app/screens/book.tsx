@@ -19,6 +19,8 @@ import BuyBookView from '@/components/common/BuyBookView';
 import BarcodeScanned from '@/components/common/BarcodeScanned';
 import { AntDesign } from '@expo/vector-icons';
 import { OptionsBook } from '@/model/book';
+import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
+import { globalTheme } from '@/constants/Colors';
 
 
 const BookStack = createStackNavigator();
@@ -28,19 +30,23 @@ export default function BookStackScreen({route}:any) {
   const options = book.content.options as OptionsBook;
   return (
     <ImageBackground source={{uri:options.backgroundUrl}}  style={styles.rootContainer} resizeMode='cover'>
-      <BookStack.Navigator>
-        <BookStack.Screen 
-          name="Details" 
-          component={BookScreen} 
-          options={{headerShown: false}} 
-          initialParams={route.params}
-        />
-        <BookStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}} />
-        <BookStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
-        <BookStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
-        <BookStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
-        <BookStack.Screen name="Langs" component={LangsStack} options={{headerShown: false}}/>
-      </BookStack.Navigator>
+      <NavigationIndependentTree>
+        <NavigationContainer theme={globalTheme}>
+          <BookStack.Navigator screenOptions={{cardStyle: { backgroundColor: 'transparent' }}}>
+            <BookStack.Screen 
+              name="Details" 
+              component={BookScreen} 
+              options={{headerShown: false}} 
+              initialParams={route.params}
+            />
+            <BookStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}} />
+            <BookStack.Screen name="AudioBooks" component={AudiobooksScreen} options={{headerShown: false}}/>
+            <BookStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
+            <BookStack.Screen name="VoiceQuizes" component={VoiceQuizesScreen} options={{headerShown: false}}/>
+            <BookStack.Screen name="Langs" component={LangsStack} options={{headerShown: false}}/>
+          </BookStack.Navigator>
+        </NavigationContainer>
+      </NavigationIndependentTree>
     </ImageBackground>
   );
 }
@@ -150,6 +156,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
+  //  backgroundColor: 'red'
   },
   container: {
     flex: 1,
@@ -159,7 +166,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    marginBottom: 10,
+  //  marginBottom: 10,
   },
   scannerContainer: {
     height: '80%'

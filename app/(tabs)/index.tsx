@@ -100,16 +100,21 @@ const HomeScreen = ({ navigation }: any) => {
       <FlatList
         horizontal
         data={index.ageGroups}
-        renderItem={({ item } : any) => (
-          <TouchableOpacity 
-              key={item.id} 
-              style={styles.ageGroup}
-              onPress={() => navigation.navigate('Age', { ageGroup: item })}  
-            >
-            <Image source={ageGroupsIcon[item.id]} style={styles.ageImage} />
-            <Text style={styles.ageGroupsText}>{item.title}</Text>
-          </TouchableOpacity>
-        )}
+        renderItem={({ item } : any) => {
+
+          if(item.id === 6) return <></> 
+
+          return (
+            <TouchableOpacity 
+                key={item.id} 
+                style={styles.ageGroup}
+                onPress={() => navigation.navigate('Age', { ageGroup: item })}  
+              >
+              <Image source={ageGroupsIcon[item.id]} style={styles.ageImage} />
+              <Text style={styles.ageGroupsText}>{item.title}</Text>
+            </TouchableOpacity>
+          ) 
+        }}
         keyExtractor={item => item.title}
         showsHorizontalScrollIndicator={false}
       />
@@ -235,10 +240,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   tileItem: {
-    width: 170, 
-    height: 170,
+    width: 150, 
+    height: 150,
+    marginHorizontal: 10,
+    marginVertical: 10,
     borderRadius: 15,
-    marginBottom: 15,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -249,8 +255,8 @@ const styles = StyleSheet.create({
     elevation: 5, // To jest potrzebne dla Androida
   },
   indexUrl: {
-    width: 170, 
-    height: 170,
+    width: 150, 
+    height: 150,
     borderRadius: 15,
   },
   ageGroup: {

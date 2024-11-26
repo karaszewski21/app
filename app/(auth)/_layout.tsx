@@ -15,9 +15,7 @@ const Stack = createStackNavigator();
 const AuthLayout = () => {
   const { session, isLoading } = useSession();
 
-  if (!isLoading && session) return <Redirect href="/(tabs)/" />;
-
-
+  if (!isLoading && session) return <Redirect href="/(tabs)" />;
 
   return (
     <ImageBackground
@@ -25,33 +23,30 @@ const AuthLayout = () => {
       style={styles.rootContainer}
       resizeMode='cover'
     >
-       <NavigationContainer independent={true} theme={globalTheme}>
-        <Stack.Navigator>
-            <Stack.Screen
-              name="preview"
-              component={Preview}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="sign-in"
-              component={SignIn}
-              options={{
-                headerShown: false,
-              }}
-      
-            />
-            <Stack.Screen
-              name="sign-up"
-              component={SignUp}
-              options={{
-                headerShown: false,
-              }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-
+      <Stack.Navigator>
+          <Stack.Screen
+            name="preview"
+            component={Preview}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="sign-in"
+            component={SignIn}
+            options={{
+              headerShown: false,
+            }}
+    
+          />
+          <Stack.Screen
+            name="sign-up"
+            component={SignUp}
+            options={{
+              headerShown: false,
+            }}
+          />
+      </Stack.Navigator>
       <Loader isLoading={isLoading} />
     </ImageBackground>
   );

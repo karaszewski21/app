@@ -34,7 +34,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: 150,
     height: 150,
-    margin: 10,
+    marginHorizontal: 10,
+    marginVertical: 10,
+  //  margin: 10,
   },
   button: {
     flex: 1,
