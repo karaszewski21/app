@@ -261,6 +261,8 @@ const VideoPlayer = () => {
 
 const styles = StyleSheet.create({
   mainContainer: {
+    position: 'absolute',
+    width: '100%',
     borderRadius: 15,
     borderCurve: 'continuous',
     shadowColor: 'black',
@@ -276,7 +278,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     flexDirection: 'column',
     height: 110,
-    width: '100%',
+   // width: '100%',
   },
 
   headerPlayerContainer: {
@@ -343,12 +345,12 @@ const styles = StyleSheet.create({
   // VIDEO
   videoContainer: {
     flexDirection: 'column',
-    width: '100%',
+ //   width: '100%',
   },
 
   videoHeaderContainer: {
     flexDirection: 'row',
-    width: '100%',
+//    width: '100%',
     justifyContent: 'space-between',
     height: 45,
     padding: 10
@@ -358,7 +360,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%'
+ //   width: '100%'
   },
 
   titleVideo: {

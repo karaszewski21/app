@@ -44,7 +44,7 @@ export default function TabLayout() {
   useEffect(() => {
       translateY.value = 0;
       if (isOpenPlayer) {
-        translateY.value = withSpring(-70);
+        translateY.value = withSpring(-380);
       }
 
   }, [isOpenPlayer]);

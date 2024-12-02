@@ -21,7 +21,7 @@ const ReaderFlipperScreen = ({route, navigation }:any) => {
       <View  style={{ flex: 1 }}>
           <TouchableOpacity 
             style={styles.closeButton} 
-            onPress={() => navigation.navigate('Details')}
+            onPress={() => navigation.goBack()}
           >
             <Ionicons name="close-circle" size={24} color="#fff" />
           </TouchableOpacity>
