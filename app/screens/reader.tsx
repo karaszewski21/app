@@ -17,6 +17,7 @@ import { OptionsReader } from '@/model/reader';
 import ReaderLangScreen from '@/app/screens/reader_lang';
 import { globalTheme } from '@/constants/Colors';
 import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
+import { VocabularyModal } from '@/components/common/VocabularyModal';
 
 const ReaderStack = createStackNavigator();
 
@@ -42,6 +43,7 @@ export default function ReaderStackScreen({route}:any) {
             <ReaderStack.Screen name="ReaderFlipper" component={ReaderFlipperScreen} options={{headerShown: false}}/>
             <ReaderStack.Screen name="ReaderText" component={ReaderTextScreen} options={{headerShown: false}}/>
             <ReaderStack.Screen name="ReaderLang" component={ReaderLangScreen} options={{headerShown: false}}/>
+            <ReaderStack.Screen  name="modal" component={VocabularyModal} options={{presentation: 'modal'}}/>
           </ReaderStack.Navigator>
         </NavigationContainer>
       </NavigationIndependentTree>
@@ -141,6 +143,8 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     height: '100%',
+    width: '100%',
+    zIndex: 100
   },
   container: {
     flex: 1,

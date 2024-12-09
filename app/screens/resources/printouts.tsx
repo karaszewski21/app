@@ -74,8 +74,7 @@ const PrintoutsScreen = ({route, navigation }:any) => {
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
           </head>
           <body style="text-align: center;">
-            <img
-              src="${url}" style="width: 90vw; height: 95vh;" />
+            <img src="${url}" style="width: 100vw; height: 99vh;"/>
           </body>
         </html>
       `

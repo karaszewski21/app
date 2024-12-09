@@ -1,12 +1,12 @@
 export const reader3 = [
     { 
-        id: '16271817-907d-4896-88z82-060dffbc61d5418',
+        id: '16271817-907d-4896-88z82-nati1',
         name: 'print1',
-        fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg'
+        fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/print/1.png'
     },
     { 
-        id: '16271817-907d-48xz96-8882-060bcdfd6fg1d5418',
+        id: '16271817-907d-4896-88z82-nati2',
         name: 'print2',
-        fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/stories/Leonardo_Phoenix_A_serene_and_breathtaking_beauty_landscape_fe_0.jpg'
+        fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/print/2.png'
     },
   ];

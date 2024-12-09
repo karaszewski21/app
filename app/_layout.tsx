@@ -10,6 +10,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { DefaultTheme, NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { globalTheme } from '@/constants/Colors';
+import { NativeBaseProvider } from "native-base";
 
 export default function Root() {
     const [loaded, error] = useFonts({
@@ -31,19 +32,21 @@ export default function Root() {
 
   return (
     <SessionProvider>
-      {/* <NotificationProvider> */}
-        <TabsScreenContextProvider>
-          <PlayerModalProvider>
-            <GlobalModalProvider>
-              <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-                <Stack.Screen name="index" options={{ headerShown: false }} />
-              </Stack>
-            </GlobalModalProvider>
-          </PlayerModalProvider>
-        </TabsScreenContextProvider>
-      {/* </NotificationProvider> */}
+       <NativeBaseProvider>
+        {/* <NotificationProvider> */}
+          <TabsScreenContextProvider>
+            <PlayerModalProvider>
+              <GlobalModalProvider>
+                <Stack>
+                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                  <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+                  <Stack.Screen name="index" options={{ headerShown: false }} />
+                </Stack>
+              </GlobalModalProvider>
+            </PlayerModalProvider>
+          </TabsScreenContextProvider>
+        {/* </NotificationProvider> */}
+      </NativeBaseProvider>
     </SessionProvider>
   );
 }

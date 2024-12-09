@@ -8,13 +8,17 @@ interface Record {
 
 const PlayerModalContext = createContext<{
   openPlayer: (record: Record) => void;
+  openFullPlayer: (full: boolean) => void;
   closePlayer: () => void;
   isOpenPlayer: boolean;
+  isFullOpenPlayer: boolean;
   record: Record | null;
 }>({
     openPlayer: () => null,
+    openFullPlayer: () => null,
     closePlayer: () => null,
     isOpenPlayer: false, 
+    isFullOpenPlayer: false,
     record: null
 });
 
@@ -31,7 +35,8 @@ export function usePlayerModal() {
 }
 
 export function PlayerModalProvider({ children }: PropsWithChildren) {
-  const [openPlayer, setOpenPlayer] = useState(false);
+  const [openPlayer,  setOpenPlayer] = useState(false);
+  const [openFullPlayer,  setFullOpenPlayer] = useState(false);
   const [record, setRecord] = useState<Record | null>(null);
 
   return (
@@ -41,10 +46,15 @@ export function PlayerModalProvider({ children }: PropsWithChildren) {
           setOpenPlayer(true);
           setRecord(record);
         },
+        openFullPlayer: (full: boolean) => {
+          setFullOpenPlayer(full);
+        },
         closePlayer: () => {
           setOpenPlayer(false);
+          setFullOpenPlayer(false);
         },
         isOpenPlayer: openPlayer,
+        isFullOpenPlayer: openFullPlayer,
         record: record,
       }}>  
       {children}

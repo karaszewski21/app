@@ -552,7 +552,7 @@ export const index = {
           },
           {
             type: 'printouts',
-            ids: ['16271817-907d-4896-8882-060bc61d5418', 'd5935d8f-aa77-4c0d-a32f-b9bb5a2b1fb7'],
+            ids: ['16271817-907d-4896-8882-old1', '16271817-90fd7d-4896-8882-old2'],
           },
         ]
       },
@@ -1122,7 +1122,7 @@ export const index = {
           },
           {
             type: 'printouts',
-            ids: ['16271817-907d-4896-8882-060bc61d5418', 'd5935d8f-aa77-4c0d-a32f-b9bb5a2b1fb7'],
+            ids: ['16271817-907d-48zxz96-choo1', '16271817-907d-48zxz96-choo2'],
           },
         ]
       },
@@ -1166,7 +1166,7 @@ export const index = {
             {
               type: 'cover',
               title: '',
-              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/index.png'
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.png'
             },
             {
               type: 'content',
@@ -1569,7 +1569,7 @@ export const index = {
           },
           {
             type: 'printouts',
-            ids: ['16271817-907d-4896-8882-060bc61d5418', 'd5935d8f-aa77-4c0d-a32f-b9bb5a2b1fb7'],
+            ids: ['16271817-907d-4896-88z82-nati1', '16271817-907d-4896-88z82-nati2'],
           },
         ]
       },

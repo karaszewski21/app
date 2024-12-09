@@ -15,6 +15,7 @@ import FavoritesScreen from './fave';
 import FunScreen from './fun';
 import ProfileScreen from './profile';
 import { globalTheme } from '@/constants/Colors';
+import Player from '@/components/player/Player';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +24,8 @@ export default function TabLayout() {
   const translateTabsY = useSharedValue<number>(0);
   const translateY = useSharedValue<number>(0);
   const { isTabs } = useTabsScreen();
-  const { isOpenPlayer } = usePlayerModal();
+  const { isOpenPlayer, isFullOpenPlayer } = usePlayerModal();
+  const height = useSharedValue(0);
 
   const animatedTabsStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: withSpring(translateTabsY.value)}],
@@ -32,6 +34,13 @@ export default function TabLayout() {
   const animatedModalStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: withSpring(translateY.value)}],
   }));
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      height: height.value,
+    };
+  });
+
 
   useEffect(() => {
     translateTabsY.value = 0;
@@ -44,10 +53,28 @@ export default function TabLayout() {
   useEffect(() => {
       translateY.value = 0;
       if (isOpenPlayer) {
-        translateY.value = withSpring(-380);
+        translateY.value = withSpring(-120);
+        height.value = withSpring(100, 
+          {  
+            mass: 1,
+            damping: 100,
+            stiffness: 200
+          }
+        );
       }
 
-  }, [isOpenPlayer]);
+      if (isFullOpenPlayer) {
+        translateY.value = withSpring(-250);
+        height.value = withSpring(400, 
+          {  
+            mass: 1,
+            damping: 100,
+            stiffness: 200
+          }
+        );
+      }
+
+  }, [isOpenPlayer, isFullOpenPlayer]);
 
   if (!session) {
     return (
@@ -74,7 +101,7 @@ export default function TabLayout() {
               {  
                 isOpenPlayer &&
                 <Animated.View style={{...animatedModalStyles, transform: [{translateY: 0}]}}>
-                  <VideoPlayer />
+                  <Player />
                 </Animated.View>
               }
               <Animated.View style={{...animatedTabsStyles, transform: [{translateY: 0}]}}>
