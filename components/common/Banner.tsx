@@ -43,7 +43,8 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, hidden }) => {
 
 const styles = StyleSheet.create({
     container: {
-      padding: 15,
+      paddingLeft: 15,
+      paddingRight: 15
     },
     bannerContainer: {
       position: 'absolute',

@@ -53,6 +53,7 @@ const useFavorite = () => {
   };
 
   const isFavorite = (id: string) => {
+    console.log('isfav',  favorites.some(fav => fav.id === id))
     return favorites.some(fav => fav.id === id);
   };
 

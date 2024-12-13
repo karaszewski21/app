@@ -32,11 +32,10 @@ const SquareButton: React.FC<SquareButtonProps> = ({ props, children }: SquareBu
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 150,
-    height: 150,
+    width: 140,
+    height: 140,
     marginHorizontal: 10,
     marginVertical: 10,
-  //  margin: 10,
   },
   button: {
     flex: 1,

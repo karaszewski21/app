@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useFavorite from '@/hooks/useFavorite';
 import Banner from '@/components/common/Banner';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, interpolate, withSpring } from 'react-native-reanimated';
 import { BANNER_HEIGHT } from '@/constants/Common';
 import ListFaveItem from '@/components/common/ListFaveItem';
@@ -19,8 +19,17 @@ const FaveStack = createStackNavigator();
 
 export default function FunStackScreen() {
   return (
-    <FaveStack.Navigator>
-      <FaveStack.Screen name="FaveDetails" component={FaveScreen} options={{headerShown: false}}/>
+    <FaveStack.Navigator
+      screenOptions={{detachPreviousScreen: true}}
+    >
+      <FaveStack.Screen 
+          name="FaveDetails" 
+          component={FaveScreen} 
+          options={{
+            headerShown: false,
+            detachPreviousScreen: true
+          }}
+        />
       <FaveStack.Screen 
           name="BookDetails" 
           component={BookStackScreen}
@@ -71,9 +80,15 @@ const FaveScreen = ({ navigation }:any) => {
     }
   }
 
+  useEffect(() => {
+
+    console.log('-->fa',favorites)
+
+  }, [])
+
   return (
     <SafeAreaView style={styles.container}>
-      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
+      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/banerbook2.png" hidden={hiddenBanner}/>
       <FlatList
         data={favorites}
         renderItem={({ item }) => {

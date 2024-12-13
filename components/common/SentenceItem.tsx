@@ -12,16 +12,22 @@ import Animated, {
   } from 'react-native-reanimated';
   import { Audio } from 'expo-av';
 import { VocabularyModal } from './VocabularyModal';
+import { Word } from '@/model/reader';
 interface VideoPlayerProps {
     text: string;
     translation: string
     audioUrl: string;
     vocabulary: any[]
     getTranslationHeightView?: (height: number) => void;
+    handleWord?: (word:Word) => void
 }
 
 type AudioSentenceContextType = {
     currentSound: Audio.Sound | null;
+    selectedWord: Word | null;
+    setWord: (word: Word) => void;
+    isModalVisible: boolean;
+    setIsModalVisible: (val: boolean) => void;
     playAudio: (audioUrl: string) => Promise<void>;
     // getTranslationHeightView: (height: number) => number;
     stopAndUnloadSound: () => Promise<void>;
@@ -31,6 +37,8 @@ const AudioSentenceContext = createContext<AudioSentenceContextType | undefined>
   
 export const AudioSentenceProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
   const [currentSound, setCurrentSound] = useState<Audio.Sound | null>(null);
+  const [selectedWord, setSelectedWord] = useState<Word | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const stopAndUnloadSound = async () => {
     if (currentSound) {
@@ -54,6 +62,10 @@ export const AudioSentenceProvider: React.FC<{children: React.ReactNode}> = ({ c
 
   };
 
+  const setWord = (word: Word) => {
+    setSelectedWord(word)
+  }
+
   useEffect(() => {
     return () => {
       if (currentSound) {
@@ -66,7 +78,7 @@ export const AudioSentenceProvider: React.FC<{children: React.ReactNode}> = ({ c
 
 
   return (
-    <AudioSentenceContext.Provider value={{ currentSound, playAudio, stopAndUnloadSound }}>
+    <AudioSentenceContext.Provider value={{ currentSound, isModalVisible, selectedWord, setIsModalVisible, setWord, playAudio, stopAndUnloadSound }}>
       {children}
     </AudioSentenceContext.Provider>
   );
@@ -80,24 +92,14 @@ export const useAudioSentence = () => {
   return context;
 };
 
-interface Word {
-  word: string;
-  translation: string;
-  audioUrl: string;
-}
-
-const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl, vocabulary, getTranslationHeightView }) => {
+const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl, vocabulary, handleWord, getTranslationHeightView }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [selectedWord, setSelectedWord] = useState<Word | null>(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const { playAudio} = useAudioSentence();
+  const { playAudio, setWord, setIsModalVisible } = useAudioSentence();
   const rotation = useSharedValue(0);
   const height = useSharedValue(0);
   const [translationHeight, setTranslationHeight] = useState(0);
 
-
   useEffect(() => {
-
     if (!isExpanded) {
       if (getTranslationHeightView) getTranslationHeightView(0)
     }
@@ -113,37 +115,45 @@ const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl,
   }, [height.value]);
 
   const handleWordPress = (word: Word) => {
-    setSelectedWord(word);
+    setWord(word);
     setIsModalVisible(true);
+    handleWord && handleWord(word)
   };
 
   const renderText = () => {
-    if (!vocabulary?.length) return <Text style={styles.text}>{text}</Text>;
 
-    const words = vocabulary.map(v => v.word);
-    const pattern = new RegExp(`(${words.map(word => 
-      word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    ).join('|')})`, 'gi');
+    
+      if (!vocabulary?.length) return <Text style={styles.text}>{text}</Text>;
+      const words = vocabulary.map(v => v.word);
+      const pattern = new RegExp(`(${words.map(word => 
+        word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      ).join('|')})`, 'gi');
 
-    const parts = text.split(pattern);
+      try {
+      console.log(pattern,text.split(pattern))
+      const parts = text.split(pattern);
 
-    return (
-      <Text style={styles.text}>
-        {parts.map((part, index) => {
-          const matchedWord = vocabulary.find(v => 
-            v.word.toLowerCase() === part.toLowerCase()
-          );
 
-          if (matchedWord) {
-            return (
-              <Text key={index} onPress={() => handleWordPress(matchedWord)} style={{ fontSize: 22, color: '#fff', fontWeight: 'bold', textDecorationLine: 'underline'}}>{part}</Text>
+      return (
+        <Text style={styles.text}>
+          { parts.map((part, index) => {
+            const matchedWord = vocabulary.find(v => 
+              v.word.toLowerCase() === part.toLowerCase()
             );
-          }
 
-          return <Text key={index}>{part}</Text>;
-        })}
-      </Text>
-    );
+            if (matchedWord) {
+              return (
+                <Text key={index} onPress={() => handleWordPress(matchedWord)} style={{ fontSize: 22, color: '#fff', fontWeight: 'bold', textDecorationLine: 'underline'}}>{part}</Text>
+              );
+            }
+
+            return <Text key={index}>{part}</Text>;
+          })}
+        </Text>
+      );
+    } catch (error) {
+        console.log('-->error', error)
+    }
   };
 
 
@@ -174,17 +184,6 @@ const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl,
           rotate: `${interpolate(rotation.value, [0, 1], [0, 90])}deg`,
         },
       ],
-    };
-  });
-
-  const containerStyle = useAnimatedStyle(() => {
-    return {
-      maxHeight: interpolate
-      ( height.value, 
-        [0, 1], 
-        [0, translationHeight + 20] // +20 dla paddingu
-      ),
-      opacity: height.value,
     };
   });
 
@@ -221,19 +220,6 @@ const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl,
             </>
           )}
         </Animated.View>
-
-      <VocabularyModal
-        word={selectedWord ?? {} as any}
-        isVisible={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
-        onMarkAsKnown={(word) => {
-          console.log('Marked as known:', word);
-        }}
-        onMarkToLearn={(word) => {
-          console.log('Marked to learn:', word);
-        }}
-        playAudio={(url) => playAudio(url)}
-      />
     </View>
   );
 };
@@ -279,4 +265,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SentenceItem;
+export default React.memo(SentenceItem);

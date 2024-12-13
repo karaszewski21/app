@@ -170,7 +170,7 @@ const FunScreen = ({ navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/books/amp/index.png" hidden={hiddenBanner}/>
+        <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/banerbook2.png" hidden={hiddenBanner}/>
         <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup} reset={true}/>
         <FilterButtons activeFilter={activeFilter} onFilterChange={onFilterChange} hidden={hiddenBanner}/>
         <Animated.View style={[styles.animatedContainer, animatedStyle]}>
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    marginTop: 5,
   },
 
   buttonsContainer: {

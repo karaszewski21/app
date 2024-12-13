@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { DefaultTheme, NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { globalTheme } from '@/constants/Colors';
 import { NativeBaseProvider } from "native-base";
+import { AudioSentenceProvider } from '@/components/common/SentenceItem';
 
 export default function Root() {
     const [loaded, error] = useFonts({
@@ -34,6 +35,7 @@ export default function Root() {
     <SessionProvider>
        <NativeBaseProvider>
         {/* <NotificationProvider> */}
+        <AudioSentenceProvider>
           <TabsScreenContextProvider>
             <PlayerModalProvider>
               <GlobalModalProvider>
@@ -45,6 +47,7 @@ export default function Root() {
               </GlobalModalProvider>
             </PlayerModalProvider>
           </TabsScreenContextProvider>
+        </AudioSentenceProvider>
         {/* </NotificationProvider> */}
       </NativeBaseProvider>
     </SessionProvider>

@@ -98,7 +98,8 @@ const Filter: React.FC<FilterProps> = ({ filter, hidden, onOptionSelect, reset }
 
 const styles = StyleSheet.create({
     container: {
-      padding: 15,
+      paddingLeft: 15,
+      paddingRight: 15
     },
     filterContainer: {
       position: 'absolute',

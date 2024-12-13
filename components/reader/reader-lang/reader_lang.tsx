@@ -40,7 +40,6 @@ const ReaderLangSlider = ({ pages, onClose }: any) => {
     return (
       <View style={styles.pageContainer}>
         <ScrollView style={styles.pageContent}>
-          <AudioSentenceProvider>
             {item.paragraphs.map((paragraph: any, index: number) => {
               switch (paragraph.type) {
                 case 'text':
@@ -52,7 +51,6 @@ const ReaderLangSlider = ({ pages, onClose }: any) => {
                   return null;
               }
             })}
-          </AudioSentenceProvider>
         </ScrollView>
         <View style={styles.paginationContainer}>
           <Text style={styles.paginationText}>
@@ -115,7 +113,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     textAlign: 'justify',
-   // padding: 10
   },
 
   coverContainer: {

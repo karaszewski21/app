@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,8 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import SentenceItem, { AudioSentenceProvider } from './SentenceItem';
+import uuid from 'react-native-uuid';
+import { Word } from '@/model/reader';
 
 // Interfejsy dla struktury danych
 interface VocabularyItem {
@@ -32,9 +34,10 @@ interface AccordionItem {
 interface AccordionItemProps {
   item: AccordionItem;
   index: number;
+  handleWord?: (word: Word) => void
 }
 
-const AccordionItem: React.FC<AccordionItemProps> = ({ item, index }) => {
+const AccordionItem: React.FC<AccordionItemProps> = ({ item, handleWord, index }) => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [totalTranslationHeight, setTotalTranslationHeight] = useState<number>(0);
   const height = useSharedValue(0);
@@ -76,10 +79,11 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ item, index }) => {
     setTotalTranslationHeight((el) => el + h)
   } 
 
-  const toggleExpand = (): void => {
-    setExpanded(!expanded);
-  };
+  const toggleExpand = useCallback(() => {
+    setExpanded((prevExpanded) => !prevExpanded);
+  }, []);
 
+  
   const containerStyle = useAnimatedStyle(() => {
     const baseHeight = interpolate(height.value, [0, 1], [0, 400]);
     return {
@@ -101,13 +105,13 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ item, index }) => {
       </TouchableOpacity>
       <Animated.View style={[containerStyle]}>
         { expanded && 
-          item.paragraphs.map((element, index) => {
-            const cleanText = element.text.replace(/\s+/g, ' ').trim();
-            return (
-              <View key={index} style={{ marginBottom: 20 }}>
-                <SentenceItem text={cleanText} translation={element.translation} audioUrl={element.audioUrl} vocabulary={element.vocabulary} getTranslationHeightView={translationHeightView}/>
-              </View>)
-          })
+            item.paragraphs.map((element, index) => {
+              const cleanText = element.text.replace(/\s+/g, ' ').trim();
+              return (
+                <View key={index} style={{ marginBottom: 20 }}>
+                  <SentenceItem text={cleanText} translation={element.translation} audioUrl={element.audioUrl} vocabulary={element.vocabulary} handleWord={handleWord} getTranslationHeightView={translationHeightView}/>
+                </View>)
+            })
         }
       </Animated.View>
     </View>

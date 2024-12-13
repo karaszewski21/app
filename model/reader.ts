@@ -48,6 +48,11 @@ interface EndReaderLangPage {
   subtitle: string;
 }
 
+export interface Word {
+  word: string;
+  translation: string;
+  audioUrl: string;
+}
 export interface OptionsReader {
     backgroundUrl: string,
     textColor: string,

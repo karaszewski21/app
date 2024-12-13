@@ -10,7 +10,7 @@ interface Word {
   
 interface VocabularyModalProps {
     word: Word;
-    isVisible: boolean;
+  //  isVisible: boolean;
     onClose: () => void;
     onMarkAsKnown: (word: Word) => void;
     onMarkToLearn: (word: Word) => void;
@@ -19,20 +19,13 @@ interface VocabularyModalProps {
   
 export const VocabularyModal: React.FC<VocabularyModalProps> = ({
   word,
-  isVisible,
+ // isVisible,
   onClose,
   onMarkAsKnown,
   onMarkToLearn,
   playAudio
 }) => {
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={isVisible}
-        onRequestClose={onClose}
-      >
-        <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <TouchableOpacity style={styles.closeButton} onPress={onClose}>
               <MaterialCommunityIcons name="close" size={24} color="#FFFFFF" />
@@ -72,24 +65,16 @@ export const VocabularyModal: React.FC<VocabularyModalProps> = ({
               </TouchableOpacity>
             </View>
           </View>
-        </View>
-      </Modal>
     );
   };
 
   const styles = StyleSheet.create({
-    modalOverlay: {
-      flex: 1,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
     modalContent: {
       backgroundColor: '#2A2A2A',
       borderRadius: 15,
       padding: 20,
-      width: '80%',
-      maxWidth: 400,
+     width: '80%',
+     maxWidth: 300,
     },
     closeButton: {
       position: 'absolute',

@@ -25,7 +25,6 @@ export default function TabLayout() {
   const translateY = useSharedValue<number>(0);
   const { isTabs } = useTabsScreen();
   const { isOpenPlayer, isFullOpenPlayer } = usePlayerModal();
-  const height = useSharedValue(0);
 
   const animatedTabsStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: withSpring(translateTabsY.value)}],
@@ -34,13 +33,6 @@ export default function TabLayout() {
   const animatedModalStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: withSpring(translateY.value)}],
   }));
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      height: height.value,
-    };
-  });
-
 
   useEffect(() => {
     translateTabsY.value = 0;
@@ -53,23 +45,21 @@ export default function TabLayout() {
   useEffect(() => {
       translateY.value = 0;
       if (isOpenPlayer) {
-        translateY.value = withSpring(-120);
-        height.value = withSpring(100, 
+        translateY.value = withSpring(-120,
           {  
             mass: 1,
-            damping: 100,
-            stiffness: 200
+            damping: 50,
+            stiffness: 100
           }
         );
       }
 
       if (isFullOpenPlayer) {
-        translateY.value = withSpring(-250);
-        height.value = withSpring(400, 
+        translateY.value = withSpring(-250,
           {  
             mass: 1,
-            damping: 100,
-            stiffness: 200
+            damping: 50,
+            stiffness: 100
           }
         );
       }

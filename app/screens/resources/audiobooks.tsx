@@ -62,7 +62,7 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
             <SquareButton key={index} props={{title: '', disabled: isLock, icon: 'text', backgroundColor: item.options.backgroundColor, navigate: () => openAudioBookItem(item)}}>
               { item.type === 'pl' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
-                  <Text style={[styles.tileTitle, {color: item.options.textColor}]}>{item.name}</Text>
+                  <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={1}>{item.name}</Text>
                   <Image source={require('@/assets/icons/pl.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
                   <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: item.options.textPlayColor}}>słuchaj</Text>
@@ -72,7 +72,7 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
               }
               { item.type === 'eng' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
-                  <Text style={[styles.tileTitle, {color: item.options.textColor}]}>{item.name}</Text>
+                  <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={1}>{item.name}</Text>
                   <Image source={require('@/assets/icons/eng-flag.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
                   <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: item.options.textPlayColor}}>słuchaj</Text>

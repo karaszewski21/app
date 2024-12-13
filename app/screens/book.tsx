@@ -157,7 +157,6 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     zIndex: 100
-  //  backgroundColor: 'red'
   },
   container: {
     flex: 1,
@@ -167,7 +166,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-  //  marginBottom: 10,
   },
   scannerContainer: {
     height: '80%'
