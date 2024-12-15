@@ -65,13 +65,6 @@ export default function HomeScreenStack() {
 const HomeScreen = ({ navigation }: any) => {
   const { ageGroupsIcon } = useAgeGroupsIcon();
 
-
-  useEffect(() => {
-    console.log('-->HomeScreen');
-
-    return () => console.log('-->HomeScreen unmounted');
-  }, [])
-
   const renderStory = () => { 
     return ( 
         <FlatList

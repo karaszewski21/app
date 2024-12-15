@@ -82,7 +82,7 @@ export const quizOld = {
           "Pod liśćmi",
           "W norce",
         ],
-        correctOptionIndex: 1,
+        correctOptionIndex: 0,
         correctFeedback: "Świetnie! Wiewiórki rzeczywiście śpią w dziupli! 🎉",
         incorrectFeedback: "Spróbuj jeszcze raz! Pomyśl o bezpiecznym miejscu w drzewie 🐿️",
         explanation: "Wiewiórki układają się do snu w małej dziupli, gdzie jest im ciepło i bezpiecznie.",

@@ -8,23 +8,33 @@ import QuizesScreen from '@/app/screens/resources/quizes'
 import BookWrapper from '@/components/common/BookWrapper';
 import SquareButton from '@/components/common/SquareButton';
 import PlayButton from '@/components/buttons/PlayButton';
-import { AudioPlay, Resource, Version } from '@/model';
+import { AudioPlay, Resource } from '@/model';
+import { Version, OptionsPlayer} from '@/model/audio_player';
+import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
+import { globalTheme } from '@/constants/Colors';
+import uuid from 'react-native-uuid';
 
 const AudioPlayStack = createStackNavigator();
 
 export default function AudioPlayStackScreen({route}:any) {
+  const { audioplay } = route.params;
+  const options = audioplay.options as OptionsPlayer;
   return (
-    <ImageBackground style={styles.rootContainer} resizeMode='cover'>
-      <AudioPlayStack.Navigator>
-        <AudioPlayStack.Screen 
-          name="Details" 
-          component={AudioPlayScreen}
-          options={{headerShown: false}}
-          initialParams={route.params}
-        />
-        <AudioPlayStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}}/>
-        <AudioPlayStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
-      </AudioPlayStack.Navigator>
+   <ImageBackground source={{uri:options.backgroundUrl}}  style={styles.rootContainer} resizeMode='cover'>
+      <NavigationIndependentTree>
+        <NavigationContainer theme={globalTheme}>
+          <AudioPlayStack.Navigator>
+            <AudioPlayStack.Screen 
+              name="Details" 
+              component={AudioPlayScreen}
+              options={{headerShown: false}}
+              initialParams={route.params}
+            />
+            <AudioPlayStack.Screen name="Quizes" component={QuizesScreen} options={{headerShown: false}}/>
+            <AudioPlayStack.Screen name="Printouts" component={PrintoutsScreen} options={{headerShown: false}}/>
+          </AudioPlayStack.Navigator>
+        </NavigationContainer>
+      </NavigationIndependentTree>
     </ImageBackground>
   );
 }
@@ -33,12 +43,13 @@ const AudioPlayScreen = ({ route, navigation } : any) => {
   const { audioplay } = route.params;
   const resources = audioplay.resource as Resource[];
   const versions = audioplay.versions as Version[];
+  const options = audioplay.options as OptionsPlayer;
 
   const { openPlayer } = usePlayerModal();
 
-  const openAudio = (version: any) => {
+  const openAudio = (version: Version) => {
     openPlayer({
-      title: version.type,
+      title: version.title,
       fileUrl: version.audioFile,
       imageUrl: version.imageUrl
     })
@@ -50,36 +61,36 @@ const AudioPlayScreen = ({ route, navigation } : any) => {
         <BookWrapper props={audioplay}>
           {
             versions.map((item, index) => 
-              <>
+              <Fragment key={uuid.v4()}>
                 { item.type === 'pl' &&  
                   <PlayButton 
-                      key={index}
+                      key={uuid.v4()}
                       props={{
-                      title:"Zacznij słuchać",
-                      subtitle:"Czas słuchowiska: 5 min", 
+                      title: item.title,
+                      subtitle: item.subTitle,
                       onPress:() => openAudio(item),
-                      backgroundColor:"#c3d5e1",
-                      textColor:"#000"
+                      backgroundColor: item.backgroundColor,
+                      textColor: item.textColor
                     }}
                   >
                     <Image source={require('@/assets/icons/pl.png')} style={{width: 30, height: 30}} resizeMode='contain'/> 
                   </PlayButton>
                 }
-              { item.type === 'eng' &&
-                  <PlayButton 
-                    key={index}
-                    props={{
-                      title:"Zacznij słuchać",
-                      subtitle:"Czas słuchowiska: 5 min", 
-                      onPress:() => openAudio(item),
-                      backgroundColor:"#f5d066",
-                      textColor:"#000"
-                    }}
-                  >
-                    <Image source={require('@/assets/icons/eng-flag.png')} style={{width: 30, height: 30}} resizeMode='contain'/> 
-                  </PlayButton>
-                }
-              </>
+                { item.type === 'eng' &&
+                    <PlayButton 
+                        key={uuid.v4()}
+                        props={{
+                        title: item.title,
+                        subtitle: item.subTitle,
+                        onPress:() => openAudio(item),
+                        backgroundColor: item.backgroundColor,
+                        textColor: item.textColor
+                      }}
+                    >
+                      <Image source={require('@/assets/icons/eng-flag.png')} style={{width: 30, height: 30}} resizeMode='contain'/> 
+                    </PlayButton>
+                  }
+              </Fragment>
             )
           }
           <View style={styles.buttons}>
@@ -87,13 +98,13 @@ const AudioPlayScreen = ({ route, navigation } : any) => {
               resources.map((element, index) => 
               <Fragment key={index}>
                 { element.type === 'quiz' &&  
-                  <SquareButton key={element.type} props={{title: 'quizy', icon: 'text', backgroundColor: '#55b1be', color: '#fff', navigate: () => navigation.navigate('Quizes', { book:audioplay, resource: element}) }}>
+                  <SquareButton key={element.type} props={{title: 'quizy', icon: 'text', backgroundColor: options.tileColor, color: options.textColor, navigate: () => navigation.navigate('Quizes', { book:audioplay, resource: element}) }}>
                     <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
                   </SquareButton>
                 }
 
                 { element.type === 'printouts' && 
-                  <SquareButton  key={element.type} props={{title: 'drukowanki', icon: 'print',  backgroundColor: '#55b1be', color: '#fff', navigate: () =>  navigation.navigate('Printouts', {book:audioplay, resource: element}) }}>
+                  <SquareButton  key={element.type} props={{title: 'drukowanki', icon: 'print', backgroundColor: options.tileColor, color: options.textColor, navigate: () =>  navigation.navigate('Printouts', {book:audioplay, resource: element}) }}>
                     <Image source={require('@/assets/icons/print.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
                   </SquareButton>
                 }
@@ -112,7 +123,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
-    backgroundColor: 'red'
   },
   container: {
     flex: 1,

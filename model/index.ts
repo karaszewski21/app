@@ -1,3 +1,4 @@
+import { OptionsPlayer, Version } from "./audio_player";
 import { OptionsBook } from "./book";
 import { LangReaderPage, OptionsReader, ReaderPage } from "./reader";
 
@@ -57,7 +58,7 @@ export interface AudioPlay {
     rating: number, 
     reviewCount: number,
     type: ProductType,
-    resource: Resource[]
+    options: OptionsPlayer,
     versions: Version[]
 }
 
@@ -70,13 +71,4 @@ export interface AgeGroup {
 export interface Resource {
     type: string,
     ids: string[],
-}
-
-export interface Version {
-    type: LangType,
-    name: string,
-    narrator: string,
-    duration: number,
-    imageUrl: string,
-    audioFile: string
 }

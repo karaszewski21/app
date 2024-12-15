@@ -25,6 +25,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
     player.timeUpdateEventInterval = 0.5;
     player.play();
     setIsPlaying(true);
+    console.log('-->duration',player.duration)    
     player.bufferOptions = {
       ...player.bufferOptions,
       preferredForwardBufferDuration: 5,
@@ -33,14 +34,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
   });
 
   useEventListener(player, 'playingChange', ({ isPlaying }) => {
-    setIsPlaying(isPlaying);    
-    setDuration(player.duration);
+    setIsPlaying(isPlaying);
   });
 
   useEventListener(player, 'timeUpdate', ({ currentTime }) => {
       if (isPlaying) {
+        setDuration(player.duration);
         setCurrentTime((currentTime / duration) * 100);
-        console.log(record)
       }
   });
 
@@ -68,11 +68,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
     );
   };
 
-  const formatTime = (timeInSeconds: any) => {
+  const formatTime = useCallback((timeInSeconds: any) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  };
+  }, [currentTime]);
 
   const onStart = (value: number) => {
     player.pause();

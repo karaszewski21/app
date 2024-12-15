@@ -128,7 +128,7 @@ const Quiz = ({ quizData, theme = {}}: any) => {
     const currentQuestion = quizData.questions[questionIndex];
     let newSelectedOptions: any = {...selectedOptions};
 
-    if (isAnswerCorrect(quizData,options, questionIndex)) {
+    if (isAnswerCorrect(quizData, options, questionIndex)) {
       setScore(prevScore => prevScore + (quizData.questions[questionIndex].points || 0));
     }
 
@@ -332,32 +332,68 @@ const renderResult = () => (
     </Text>
     
     <Text style={[styles.answersHeader,{color: currentTheme.textColor}]}>Poprawne odpowiedzi:</Text>
-    {quizData.questions.map((question: any, index: number) => (
-      <View key={index} style={styles.questionResult}>
-        <Text style={styles.questionText}>{index + 1}. {question.text}</Text>
-        
-        {question.answerType === 'multiple' ? (
-          <View>
-            <Text style={styles.correctAnswerText}>Poprawne odpowiedzi:</Text>
-            {question.correctOptionIndex.map((correctIndex: number) => (
-              <Text key={correctIndex} style={styles.answerText}>
-                • {question.options[correctIndex]}
-              </Text>
-            ))}
-          </View>
-        ) : (
-          <Text style={styles.correctAnswerText}>
-            Poprawna odpowiedź: {question.options[question.correctOptionIndex]}
-          </Text>
-        )}
-        
-        {question.explanation && (
-          <Text style={styles.explanationText}>
-            Wyjaśnienie: {question.explanation}
-          </Text>
-        )}
-      </View>
-    ))}
+
+    { quizData.questions.map((question: any, index: number) =>  {
+      const isCorrect = selectedOptions[index] == question.correctOptionIndex;
+
+      return (
+        <View key={index} style={[styles.questionResult, !isCorrect ? {borderColor: '#db2c2c', borderWidth: 4} : {}]}>
+          <Text style={styles.questionText}>{index + 1}. {question.text}</Text>
+
+          { isCorrect ? 
+              <></> 
+              : 
+              <View>
+                  {
+                    selectedOptions[index] === undefined ?
+                      <Text style={styles.incorrectAnswerText}>Brak odpowiedzi</Text> 
+                      : 
+                      <View>
+                      { question.type === 'text' ?
+                          <Text style={styles.incorrectAnswerText}>Zła odpowiedź: {question.options[selectedOptions[index]]}</Text>
+                        :  <View>
+                            <Text style={styles.incorrectAnswerText}>Zła odpowiedź:</Text>
+                            <Image source={{ uri: question.options[selectedOptions[index]]}} style={styles.questionImage} resizeMode='contain'/>
+                          </View>
+                      }
+                    </View>
+                  }    
+              </View> 
+          }
+
+          {question.answerType === 'multiple' ? (
+            <View>
+              <Text style={styles.correctAnswerText}>Poprawne odpowiedzi:</Text>
+              {question.correctOptionIndex.map((correctIndex: number) => (
+                <Text key={correctIndex} style={styles.answerText}>
+                  • {question.options[correctIndex]}
+                </Text>
+              ))}
+            </View>
+          ) : (
+            <View>
+              { question.type === 'text' ?
+                <Text style={styles.correctAnswerText}>
+                  Poprawna odpowiedź: {question.options[question.correctOptionIndex]}
+                </Text>
+              :  <View>
+                  <Text style={styles.correctAnswerText}>
+                    Poprawna odpowiedź:
+                  </Text>
+                  <Image source={{ uri: question.options[question.correctOptionIndex]}} style={styles.questionImage} resizeMode='contain'/>
+                </View>
+              }
+            </View>
+          )}
+          
+          {question.explanation && (
+            <Text style={styles.explanationText}>
+              Wyjaśnienie: {question.explanation}
+            </Text>
+          )}
+        </View>)
+      }
+    )}
     
       <TouchableOpacity style={[styles.repeatButton, { backgroundColor: currentTheme.buttonBgColor}]} onPress={resetQuiz}>
         <Text style={[styles.repeatButtonText, { color: currentTheme.buttonTextColor }]}>Powtórz quiz</Text>
@@ -599,7 +635,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 16,
     marginBottom: 16,
-    shadowColor: '#000',
+    shadowColor: 'red',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -622,6 +658,14 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 8,
   },
+
+  incorrectAnswerText: {
+    fontSize: 15,
+    color: '#db2c2c',
+    marginTop: 8,
+    marginBottom: 8,
+  },
+
   answerText: {
     fontSize: 14,
     color: '#4A5568',

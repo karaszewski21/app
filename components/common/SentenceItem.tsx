@@ -130,10 +130,9 @@ const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl,
       ).join('|')})`, 'gi');
 
       try {
-      console.log(pattern,text.split(pattern))
+      console.log(pattern)
       const parts = text.split(pattern);
-
-
+      console.log(parts)
       return (
         <Text style={styles.text}>
           { parts.map((part, index) => {
@@ -141,12 +140,14 @@ const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl,
               v.word.toLowerCase() === part.toLowerCase()
             );
 
+            console.log('matchedWord', matchedWord)
+
             if (matchedWord) {
               return (
                 <Text key={index} onPress={() => handleWordPress(matchedWord)} style={{ fontSize: 22, color: '#fff', fontWeight: 'bold', textDecorationLine: 'underline'}}>{part}</Text>
               );
             }
-
+            console.log('part', part)
             return <Text key={index}>{part}</Text>;
           })}
         </Text>

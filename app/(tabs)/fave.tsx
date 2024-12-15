@@ -80,12 +80,6 @@ const FaveScreen = ({ navigation }:any) => {
     }
   }
 
-  useEffect(() => {
-
-    console.log('-->fa',favorites)
-
-  }, [])
-
   return (
     <SafeAreaView style={styles.container}>
       <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/banerbook2.png" hidden={hiddenBanner}/>

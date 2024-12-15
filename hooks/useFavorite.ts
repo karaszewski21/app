@@ -1,15 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AudioPlay, Book, Reader } from '@/model';
+import { useFocusEffect } from '@react-navigation/native';
 
 type Favorite = Book | Reader | AudioPlay;
 
 const useFavorite = () => {
   const [favorites, setFavorites] = useState<Favorite[]>([]);
 
-  useEffect(() => {
-    loadFavorites();
-  }, []);
+   useFocusEffect(
+      useCallback(() => {
+        loadFavorites();
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
 
   const loadFavorites = async () => {
     try {

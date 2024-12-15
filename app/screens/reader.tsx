@@ -24,7 +24,6 @@ const ReaderStack = createStackNavigator();
 export default function ReaderStackScreen({route}:any) {
   const { reader } = route.params;
   const options = reader.content.options as OptionsReader;
-  console.log(options.backgroundUrl)
   return (
     <ImageBackground source={{uri:options.backgroundUrl}}  style={styles.rootContainer} resizeMode='cover'>
       <NavigationIndependentTree>
@@ -43,7 +42,6 @@ export default function ReaderStackScreen({route}:any) {
             <ReaderStack.Screen name="ReaderFlipper" component={ReaderFlipperScreen} options={{headerShown: false}}/>
             <ReaderStack.Screen name="ReaderText" component={ReaderTextScreen} options={{headerShown: false}}/>
             <ReaderStack.Screen name="ReaderLang" component={ReaderLangScreen} options={{headerShown: false}}/>
-            <ReaderStack.Screen  name="modal" component={VocabularyModal} options={{presentation: 'modal'}}/>
           </ReaderStack.Navigator>
         </NavigationContainer>
       </NavigationIndependentTree>
