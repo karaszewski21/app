@@ -1,25 +1,22 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, GestureResponderEvent, Image } from 'react-native';
 import Animated, { 
-    useAnimatedStyle, 
-    withTiming, 
-    withSpring,
     useSharedValue, 
-    interpolate,
-    Easing,
     FadeInUp,
   } from 'react-native-reanimated';
   import { Audio } from 'expo-av';
 import { VocabularyModal } from './VocabularyModal';
 import { Word } from '@/model/reader';
+import { Pressable } from 'react-native-gesture-handler';
 interface VideoPlayerProps {
     text: string;
     translation: string
     audioUrl: string;
     vocabulary: any[]
     getTranslationHeightView?: (height: number) => void;
-    handleWord?: (word:Word) => void
+    handleWord?: (word:Word, options: { x: number, y: number }) => void;
+    widthTextContent?: number;
 }
 
 type AudioSentenceContextType = {
@@ -92,7 +89,7 @@ export const useAudioSentence = () => {
   return context;
 };
 
-const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl, vocabulary, handleWord, getTranslationHeightView }) => {
+const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl, vocabulary, handleWord, getTranslationHeightView, widthTextContent }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { playAudio, setWord, setIsModalVisible } = useAudioSentence();
   const rotation = useSharedValue(0);
@@ -114,40 +111,37 @@ const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl,
 
   }, [height.value]);
 
-  const handleWordPress = (word: Word) => {
+  const handleWordPress = (word: Word, event: GestureResponderEvent) => {
     setWord(word);
     setIsModalVisible(true);
-    handleWord && handleWord(word)
+    const x = event.nativeEvent.locationX + event.nativeEvent.pageX;
+    handleWord && handleWord(word, {x: x, y: event.nativeEvent.pageY})
   };
 
   const renderText = () => {
+      if (!vocabulary?.length) return <Text style={[styles.text, {width: widthTextContent}]}>{text}</Text>;
 
-    
-      if (!vocabulary?.length) return <Text style={styles.text}>{text}</Text>;
       const words = vocabulary.map(v => v.word);
       const pattern = new RegExp(`(${words.map(word => 
         word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
       ).join('|')})`, 'gi');
 
       try {
-      console.log(pattern)
       const parts = text.split(pattern);
-      console.log(parts)
+      
       return (
-        <Text style={styles.text}>
+        <Text style={[styles.text, {width: widthTextContent}]}>
           { parts.map((part, index) => {
             const matchedWord = vocabulary.find(v => 
               v.word.toLowerCase() === part.toLowerCase()
             );
 
-            console.log('matchedWord', matchedWord)
 
             if (matchedWord) {
               return (
-                <Text key={index} onPress={() => handleWordPress(matchedWord)} style={{ fontSize: 22, color: '#fff', fontWeight: 'bold', textDecorationLine: 'underline'}}>{part}</Text>
+                <Text key={index} onPress={(event) => handleWordPress(matchedWord, event)} style={{ fontSize: 22, color: '#fff', fontWeight: 'bold', textDecorationLine: 'underline'}}>{part}</Text>
               );
             }
-            console.log('part', part)
             return <Text key={index}>{part}</Text>;
           })}
         </Text>
@@ -157,59 +151,22 @@ const SentenceItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl,
     }
   };
 
-
-  const startAudio = async () => {
-      playAudio(audioUrl)
-  }
-
-  const toggleExpand = () => {
-    const newValue = !isExpanded;
-    setIsExpanded(newValue);
-    
-    rotation.value = withSpring(newValue ? 1 : 0, {
-      damping: 10,
-      stiffness: 100
-    });
-    
-    height.value = withTiming(newValue ? 1 : 0, {
-      duration: 300,
-      easing: Easing.bezier(0.4, 0.0, 0.2, 1),
-    });
-  };
-
-
- const arrowStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          rotate: `${interpolate(rotation.value, [0, 1], [0, 90])}deg`,
-        },
-      ],
-    };
-  });
-
   return (
     <View style={styles.sentenceContainer}>
         <View style={styles.rowContainer}>
-          <TouchableOpacity style={styles.playButton} onPress={startAudio}>
+          <Pressable style={styles.playButton} onPress={() => playAudio(audioUrl)}>
             <MaterialCommunityIcons 
-                name={'play'} 
-                size={24} 
+                name={'play-circle-outline'} 
+                size={22} 
                 color="#FFFFFF" 
             />
-          </TouchableOpacity>
+          </Pressable>
           
-          {renderText()}
+          { renderText() }
     
-          <TouchableOpacity onPress={toggleExpand}>
-            <Animated.View style={arrowStyle}>
-                <MaterialCommunityIcons 
-                    name={'chevron-up'} 
-                    size={24} 
-                    color="#FFFFFF" 
-                />
-            </Animated.View>
-          </TouchableOpacity>
+          <Pressable style={styles.expandButton} onPress={()  => setIsExpanded(!isExpanded)}>
+              <Image source={require('@/assets/icons/lang.png')} style={{width: 25, height: 35, resizeMode: 'contain'}}/>
+          </Pressable>
         </View>
         
         <Animated.View entering={FadeInUp.duration(1000)}>
@@ -243,7 +200,7 @@ const styles = StyleSheet.create({
     width: 20,
   },
   text: {
-    flex: 1,
+    display: 'flex',
     fontSize: 20,
     color: '#fff',
     lineHeight: 24,

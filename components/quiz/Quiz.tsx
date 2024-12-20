@@ -363,7 +363,7 @@ const renderResult = () => (
 
           {question.answerType === 'multiple' ? (
             <View>
-              <Text style={styles.correctAnswerText}>Poprawne odpowiedzi:</Text>
+              {/* <Text style={styles.correctAnswerText}>Odpowiedzi</Text> */}
               {question.correctOptionIndex.map((correctIndex: number) => (
                 <Text key={correctIndex} style={styles.answerText}>
                   • {question.options[correctIndex]}

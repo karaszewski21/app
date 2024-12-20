@@ -21,11 +21,11 @@ const ReaderLangScreen = ({ route, navigation }:any) => {
     return () => { 
       showTabs();
       setIsModalVisible(false);
+      translateY.value = 500
     }
   }, [])
 
   useEffect(() => {
-    translateY.value = 0;
       if (isModalVisible) {
         translateY.value = withSpring(-(WIDTH + 200),
           {  
@@ -35,7 +35,7 @@ const ReaderLangScreen = ({ route, navigation }:any) => {
           }
         );
       } else {
-        translateY.value = withSpring(500,
+        translateY.value = withSpring(0,
           {  
             mass: 1,
             damping: 50,

@@ -58,7 +58,7 @@ export const index = {
               },
               {
                 type: 'english',
-                ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9fxxx', 'a40bcbb9-871a-43db-ba87-622sds59199fgfgff', 'a40bcbb9-871a-43db-ba87-622sds59199fc9fzzz', 'a40bcbb9-871a-43db-ba87-622sds59199fc9fccc'],
+                ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9fxxx', 'a40bcbb9-871a-43db-ba87-622sds59199fgfgff', 'a40bcbb9-871a-43db-ba87-image'],
                 bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/index.png',
               },
             ]

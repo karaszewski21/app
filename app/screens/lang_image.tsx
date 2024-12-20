@@ -1,5 +1,6 @@
 import WordImageItem, { AudioWordProvider } from '@/components/common/WordImageItem';
 import { useTabsScreen } from '@/context/tabContext';
+import { LangImage } from '@/model/book';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { ScrollView, View, Image, TouchableOpacity, StyleSheet, Modal, Dimensions, Text } from 'react-native';
@@ -8,17 +9,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get('window');
 
-interface LangImage {
-  imageUrl: string
-  vocabulary: [
-    {
-      word: string,
-      translation: string,
-      audioUrl: string,
-      position: { top: number, left: number }
-    }
-  ]     
-}
 
 const LangImageScreen = ({ route, navigation } : any) => { 
     const resource = route.params.resource;

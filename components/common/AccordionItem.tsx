@@ -5,14 +5,14 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import SentenceItem, { AudioSentenceProvider } from './SentenceItem';
-import uuid from 'react-native-uuid';
 import { Word } from '@/model/reader';
 
-// Interfejsy dla struktury danych
+const { width: WIDTH, height } = Dimensions.get('window');
 interface VocabularyItem {
   word: string;
   translation: string;
@@ -34,7 +34,7 @@ interface AccordionItem {
 interface AccordionItemProps {
   item: AccordionItem;
   index: number;
-  handleWord?: (word: Word) => void
+  handleWord?: (word: Word, options: { x: number, y: number }) => void
 }
 
 const AccordionItem: React.FC<AccordionItemProps> = ({ item, handleWord, index }) => {
@@ -109,7 +109,15 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ item, handleWord, index }
               const cleanText = element.text.replace(/\s+/g, ' ').trim();
               return (
                 <View key={index} style={{ marginBottom: 20 }}>
-                  <SentenceItem text={cleanText} translation={element.translation} audioUrl={element.audioUrl} vocabulary={element.vocabulary} handleWord={handleWord} getTranslationHeightView={translationHeightView}/>
+                  <SentenceItem 
+                      text={cleanText} 
+                      widthTextContent={WIDTH - 90} 
+                      translation={element.translation} 
+                      audioUrl={element.audioUrl} 
+                      vocabulary={element.vocabulary} 
+                      handleWord={(word, options) => handleWord && handleWord(word,options)} 
+                      getTranslationHeightView={translationHeightView}
+                  />
                 </View>)
             })
         }
@@ -120,9 +128,6 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ item, handleWord, index }
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   accordionItem: {
     backgroundColor: '#000',
     marginVertical: 4,
@@ -168,15 +173,15 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginTop: 2,
   },
-  translation: {
-    fontSize: 20,
-    color: '#fff',
-    lineHeight: 24,
-    textAlign: 'justify',
-    letterSpacing: 0.5,
-    marginHorizontal: 20,
-    marginVertical: 10
-  }
+  // translation: {
+  //   fontSize: 20,
+  //   color: '#fff',
+  //   lineHeight: 24,
+  //   textAlign: 'justify',
+  //   letterSpacing: 0.5,
+  //   marginHorizontal: 20,
+  //   marginVertical: 10
+  // }
 });
 
 export default AccordionItem;

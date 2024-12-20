@@ -3,11 +3,9 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useState, useRef } from 'react';
 import { View, Text, StyleSheet, Dimensions, FlatList, Image, ScrollView, TouchableOpacity } from 'react-native';
 
-
-const { width, height } = Dimensions.get('window');
+const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
 const ReaderLangSlider = ({ pages, onClose }: any) => {
-
 
   const renderCoverPage = (item: any) => {
     return (
@@ -39,13 +37,13 @@ const ReaderLangSlider = ({ pages, onClose }: any) => {
 
     return (
       <View style={styles.pageContainer}>
-        <ScrollView style={styles.pageContent}>
+        <ScrollView keyboardShouldPersistTaps={'always'}>
             {item.paragraphs.map((paragraph: any, index: number) => {
               switch (paragraph.type) {
                 case 'text':
                 const cleanText = paragraph.text.replace(/\s+/g, ' ').trim();
                 return (
-                  <SentenceItem key={index} text={cleanText} translation={paragraph.translation} audioUrl={paragraph.audioUrl} vocabulary={paragraph.vocabulary}/>
+                  <SentenceItem key={index} widthTextContent={WIDTH - 90} text={cleanText} translation={paragraph.translation} audioUrl={paragraph.audioUrl} vocabulary={paragraph.vocabulary}/>
                 );
                 default:
                   return null;
@@ -106,8 +104,8 @@ const ReaderLangSlider = ({ pages, onClose }: any) => {
 
 const styles = StyleSheet.create({
   pageContainer: {
-    width,
-    height: height,
+    width: WIDTH,
+    height: HEIGHT,
   },
   pageContent: {
     flex: 1,
@@ -117,7 +115,7 @@ const styles = StyleSheet.create({
 
   coverContainer: {
     flex: 1,
-    width,
+    width: WIDTH,
     justifyContent: 'space-between',
   },
   coverContent: {
@@ -126,8 +124,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   coverImage: {
-    width: width * 0.8,
-    height: width * 0.8,
+    width: WIDTH * 0.8,
+    height: WIDTH * 0.8,
     marginBottom: 20,
     borderRadius: 15
   },
@@ -182,7 +180,7 @@ const styles = StyleSheet.create({
   },
   endContainer: {
     flex: 1,
-    width,
+    width: WIDTH,
     padding: 20,
     justifyContent: 'space-between',
     alignItems: 'center',

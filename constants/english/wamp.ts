@@ -1,3 +1,5 @@
+import { LangImage } from "@/model/book"
+
 export const wamp = [
     { 
         id: 'a40bcbb9-871a-43db-ba87-622sds59199fc9fxxx', 
@@ -262,6 +264,62 @@ export const wamp = [
                   audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
                 }
               ]     
+            }
+          ]
+        }
+      ]
+    },
+  ]
+
+  export const wamp1 = [
+    { 
+      id: 'a40bcbb9-871a-43db-ba87-image', 
+      type: 'image',
+      title: 'Chapter: Spring', 
+      options: {
+          textColor: '#000',
+          backgroundColor: '#91654d',
+          progressBackgroundColor: '#91654d',
+      },
+      content: [
+        {
+          imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/gallery/7.png',
+          vocabulary: [
+            {
+              word: 'looked out',
+              translation: 'spojrzeć na zewnątrz',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+              position: { 
+                top: 20, 
+                left: 20 
+              }
+            },
+            {
+              word: 'notice',
+              translation: 'zauważyć',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+              position: { 
+                top: 50, 
+                left: 50 
+              }
+            },
+            {
+              word: 'weather',
+              translation: 'zauważyć',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+              position: { 
+                top: 30, 
+                left: 50 
+              }
+            },
+            {
+              word: 'gentle breeze',
+              translation: 'zauważyć',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+              position: { 
+                top: 80, 
+                left: 70 
+              }
             }
           ]
         }
