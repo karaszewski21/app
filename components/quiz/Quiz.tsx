@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, StyleSheet, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { ResizeMode, Video } from 'expo-av';
 import uuid from 'react-native-uuid';
 import { isAnswerCorrect } from './component/Utils';
@@ -7,6 +7,7 @@ import WelcomeScreen from './component/Welcome';
 import SendMail from './component/SendMail';
 import QuizPlayer from './component/QuizPlayer';
 import { ImageModal } from './component/ImageModal';
+import { Image } from 'expo-image';
 
 const defaultTheme = {
   // Tekst
@@ -36,6 +37,9 @@ const defaultTheme = {
   // Timewr
   timerTextColor: '#FFFFFF',
 };
+
+const blurhash =
+  '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
 const Quiz = ({ quizData, theme = {}}: any) => {
   const currentTheme = { ...defaultTheme, ...theme.quizTheme };
@@ -270,7 +274,7 @@ const renderQuestion = () => {
           </Text>
           {currentQuestion.image && (
             <View>
-              <Image source={{ uri: currentQuestion.image }} style={styles.questionImage} resizeMode='contain'/>
+              <Image source={{ uri: currentQuestion.image }} style={styles.questionImage} contentFit='contain' placeholder={require('@/assets/gifs/loader.gif')} transition={2000}/>
               <TouchableOpacity 
                 style={styles.zoomButton}
                 onPress={() => handleImagePress(currentQuestion.image)}
@@ -353,7 +357,7 @@ const renderResult = () => (
                           <Text style={styles.incorrectAnswerText}>Zła odpowiedź: {question.options[selectedOptions[index]]}</Text>
                         :  <View>
                             <Text style={styles.incorrectAnswerText}>Zła odpowiedź:</Text>
-                            <Image source={{ uri: question.options[selectedOptions[index]]}} style={styles.questionImage} resizeMode='contain'/>
+                            <Image source={{ uri: question.options[selectedOptions[index]]}} style={styles.questionImage} contentFit='cover' placeholder={{ blurhash }}/>
                           </View>
                       }
                     </View>

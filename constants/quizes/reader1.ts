@@ -54,7 +54,7 @@ export const quizOld = {
         id: 1,
         text: "Kto mieszka w koronie dębu?",
         audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/audio/1_1.mp3',
-        image: "https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/image/1_1.png",
+        image: "https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/image/1_1.webp",
         type: "text",
         answerType: "single",
         options: [
@@ -74,7 +74,7 @@ export const quizOld = {
         text: "Gdzie śpią małe wiewiórki?",
         audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/audio/1_2.mp3',
         type: "text",
-        image: "https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/image/1_2.png",
+        image: "https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/image/1_2.webp",
         answerType: "single",
         options: [
           "W dziupli",
@@ -93,7 +93,7 @@ export const quizOld = {
         text: "Kto śpi przy pniu dębu?",
         audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/audio/1_3.mp3',
         type: "text",
-        image: "https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/image/1_3.png", 
+        image: "https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/image/1_3.webp", 
         answerType: "single",
         options: [
           "Misie",

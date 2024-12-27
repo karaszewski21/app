@@ -54,7 +54,7 @@ export const quizNatalia1 = {
       id: 1,
       text: "O czym śniła Natalka na początku historii?",
       audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/quiz/audio/1_1.mp3',
-      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_1.png", // fota natalki i smoka
+      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/quiz/image/1_1.webp", // fota natalki i smoka
       type: "text",
       answerType: "single",
       options: [
@@ -109,7 +109,7 @@ export const quizNatalia1 = {
       id: 4,
       text: "Jakie zwierzątko okazało się być 'smokiem' Natalki?",
       audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/quiz/audio/1_4.mp3',
-      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_4.png", // fota tego potwora
+      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/quiz/image/1_4.webp", // fota tego potwora
       type: "text",
       answerType: "single",
       options: [
@@ -237,7 +237,7 @@ export const quizNatalia2 = {
       id: 3,
       text: "Jak wyglądał 'smok' Natalki?",
       audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/quiz/audio/2_3.mp3',
-      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_4.png", // fota tego potwora
+      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/quiz/image/1_4.webp", // fota tego potwora
       type: "text",
       answerType: "single",
       options: [

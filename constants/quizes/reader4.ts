@@ -54,7 +54,7 @@ export const quizZosia1 = {
       id: 1,
       text: "Jak nazywa się ulubiona lalka Zosi?",
       audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/audio/quiz_1_1.mp3',
-      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_1.png", // fota lucynki
+      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_1.webp", // fota lucynki
       type: "text",
       answerType: "single",
       options: [
@@ -73,7 +73,7 @@ export const quizZosia1 = {
       id: 2,
       text: "Co obudziło Zosię rano?",
       audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/audio/quiz_1_2.mp3',
-      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_2.png", // okno zkaretką
+      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_2.webp", // okno zkaretką
       type: "text",
       answerType: "single",
       options: [
@@ -92,7 +92,7 @@ export const quizZosia1 = {
       id: 3,
       text: "Dlaczego mama Zosi pojechała do szpitala?",
       audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/audio/quiz_1_3.mp3',
-      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_3.png", // fota mamy z brzuchem
+      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_3.webp", // fota mamy z brzuchem
       type: "text",
       answerType: "single",
       options: [
@@ -111,7 +111,7 @@ export const quizZosia1 = {
       id: 4,
       text: "Co babcia zaproponowała Zosi?",
       audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/audio/quiz_1_4.mp3',
-      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_4.png", // fota babci
+      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_4.webp", // fota babci
       type: "text",
       answerType: "single",
       options: [
@@ -130,7 +130,7 @@ export const quizZosia1 = {
       id: 5,
       text: "Jaki był braciszek Zosi, gdy go zobaczyła?",
       audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/audio/quiz_1_5.mp3',
-      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_5.png", // fota mamy i dzidzusia
+      image: "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/1_5.webp", // fota mamy i dzidzusia
       type: "text",
       answerType: "single",
       options: [
@@ -356,10 +356,10 @@ export const quizZosia3 = {
       type: "image",
       answerType: "single",
       options: [
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_1_2.png", //linki do fotek do zuzi
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_1_1.png",
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_1_3.png",
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_1_4.png"
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_1_2.webp", //linki do fotek do zuzi
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_1_1.webp",
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_1_3.webp",
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_1_4.webp"
       ],
       correctOptionIndex: 0,
       correctFeedback: "Dokładnie tak! 😨 Zosia była przestraszona, nie wiedziała co się dzieje z mamusią",
@@ -374,10 +374,10 @@ export const quizZosia3 = {
       type: "image",
       answerType: "single",
       options: [
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_2_1.png",  //linki do fotek do babci
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_2_2.png",
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_2_3.png",
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_2_4.png"
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_2_1.webp",  //linki do fotek do babci
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_2_2.webp",
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_2_3.webp",
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_2_4.webp"
       ],
       correctOptionIndex: 1,
       correctFeedback: "Wspaniale! 🤗 Babcia była spokojna i troskliwa, dzięki temu pomogła Zosi",
@@ -392,10 +392,10 @@ export const quizZosia3 = {
       type: "image",
       answerType: "single",
       options: [
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_3_1.png",
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_3_4.png",
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_3_3.png",
-        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_3_2.png"
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_3_1.webp",
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_3_4.webp",
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_3_3.webp",
+        "https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/quiz/image/3_3_2.webp"
       ],
       correctOptionIndex: 0,
       correctFeedback: "Wspaniale! 🤗 Babcia była spokojna i troskliwa, dzięki temu pomogła Zosi",

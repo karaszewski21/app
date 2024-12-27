@@ -25,7 +25,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
     player.timeUpdateEventInterval = 0.5;
     player.play();
     setIsPlaying(true);
+    console.log('-->url',url)    
     console.log('-->duration',player.duration)    
+    console.log('-->status',player.status)    
     player.bufferOptions = {
       ...player.bufferOptions,
       preferredForwardBufferDuration: 5,
@@ -34,10 +36,17 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
   });
 
   useEventListener(player, 'playingChange', ({ isPlaying }) => {
+    console.log('--->playingChange',isPlaying)
+    setIsPlaying(isPlaying);
+  });
+
+  useEventListener(player, 'statusChange', ({ status }) => {
+    console.log('--->status',status)
     setIsPlaying(isPlaying);
   });
 
   useEventListener(player, 'timeUpdate', ({ currentTime }) => {
+   // console.log('--->timeUpdate',currentTime)
       if (isPlaying) {
         setDuration(player.duration);
         setCurrentTime((currentTime / duration) * 100);

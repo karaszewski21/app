@@ -22,6 +22,7 @@ interface VideoPlayerProps {
 type AudioSentenceContextType = {
     currentSound: Audio.Sound | null;
     selectedWord: Word | null;
+    setCurrentSound: (currentSound: Audio.Sound | null) => void;
     setWord: (word: Word) => void;
     isModalVisible: boolean;
     setIsModalVisible: (val: boolean) => void;
@@ -75,7 +76,7 @@ export const AudioSentenceProvider: React.FC<{children: React.ReactNode}> = ({ c
 
 
   return (
-    <AudioSentenceContext.Provider value={{ currentSound, isModalVisible, selectedWord, setIsModalVisible, setWord, playAudio, stopAndUnloadSound }}>
+    <AudioSentenceContext.Provider value={{ currentSound, isModalVisible, selectedWord, setCurrentSound, setIsModalVisible, setWord, playAudio, stopAndUnloadSound }}>
       {children}
     </AudioSentenceContext.Provider>
   );

@@ -14,14 +14,15 @@ const ReaderLangScreen = ({ route, navigation }:any) => {
   const { showTabs, hiddenTabs } = useTabsScreen();
   const { content: pages} = route.params;
   const translateY = useSharedValue<number>(500);
-  const { playAudio, selectedWord, setIsModalVisible, isModalVisible } = useAudioSentence();
+  const { playAudio, selectedWord, setIsModalVisible, isModalVisible, setCurrentSound } = useAudioSentence();
 
   useEffect(()=> {
     hiddenTabs()
     return () => { 
       showTabs();
       setIsModalVisible(false);
-      translateY.value = 500
+      translateY.value = 500;
+      setCurrentSound(null);
     }
   }, [])
 

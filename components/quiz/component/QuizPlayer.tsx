@@ -36,7 +36,7 @@ const QuizPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
         if (isPlaying) {
           await sound.pauseAsync();
         } else {
-          await sound.playAsync();
+          await sound.replayAsync();
         }
         setIsPlaying(!isPlaying);
       } else if (audioUrl) {

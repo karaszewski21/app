@@ -6,57 +6,72 @@ import * as FileSystem from 'expo-file-system';
 import VideoPlayer from './SmallPlayer';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+const oldOukPlAudio = require('@/assets/readers/old_ouk/pl.mp4');
+
 const Player = () => {
   const { record, closePlayer, openFullPlayer } = usePlayerModal();
   const [file, setFile] = useState<string| null>(null);
+  const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const { showTabs } = useTabsScreen();
 
-
+  const callback = (downloadProgress: any)=> {
+    const progress = downloadProgress.totalBytesWritten / downloadProgress.totalBytesExpectedToWrite;
+    setDownloadProgress(progress);
+  };
+  
   useEffect(() => {
     return () => { 
       showTabs() 
     }
   }, []);
 
-  useEffect(() => {
-    const directoryName = FileSystem.documentDirectory + 'audiobooks/';
-    const fileName =  `${record?.title.replace(' ','-')}.mp4`;
+   useEffect(() => {
+      setFile(oldOukPlAudio)
+  }, [record])
 
-    const existFile = async () => {
-      setFile(null) 
+  // useEffect(() => {
+  //   console.log('-->progress', downloadProgress)
+  // }, [downloadProgress])
 
-      await FileSystem.makeDirectoryAsync(directoryName, { intermediates: true });
-      const files = await FileSystem.readDirectoryAsync(directoryName);
+  // useEffect(() => {
+  //   const directoryName = FileSystem.cacheDirectory + 'audiobooks/';
+  //   const fileName =  `${record?.title.replace(' ','-')}.mp4`;
 
-      if (files.includes(fileName)) {
-        const fileUri = directoryName + fileName;
-        setFile(fileUri);
+  //   const existFile = async () => {
+  //     setFile(null) 
+
+  //     await FileSystem.makeDirectoryAsync(directoryName, { intermediates: true });
+  //     const files = await FileSystem.readDirectoryAsync(directoryName);
+
+  //     if (files.includes(fileName)) {
+  //       const fileUri = directoryName + fileName;
+  //       setFile(fileUri);
         
-      } else {;
-        await downloadFile();
-      }
-    }  
+  //     } else {;
+  //       await downloadFile();
+  //     }
+  //   }  
 
-    const downloadFile = async () => {
-        try {  
-            const downloadResumable = FileSystem.createDownloadResumable(record?.fileUrl ?? '', directoryName + fileName);
-            const file = await downloadResumable.downloadAsync();   
-            if (file) {
-                console.log('Finished downloading to ', file.uri);
-                setFile(file.uri) 
-            }   
-        } catch (error) {
-            console.error(error);
-        }    
-    }
+  //   const downloadFile = async () => {
+  //       try {  
+  //           const downloadResumable = FileSystem.createDownloadResumable(record?.fileUrl ?? '', directoryName+fileName,{},callback);
+  //           const file = await downloadResumable.downloadAsync();   
+  //           if (file) {
+  //               console.log('Finished downloading to ', file.uri);
+  //               setFile(file.uri) 
+  //           }   
+  //       } catch (error) {
+  //           console.error(error);
+  //       }    
+  //   }
 
-    existFile();
+  //   existFile();
 
-  }, [record]);
+  // }, [record]);
 
   return (
     <GestureHandlerRootView style={styles.mainContainer}>
-      { file &&  <VideoPlayer url={file}/> }  
+      { file && <VideoPlayer url={file}/> }  
     </GestureHandlerRootView>
     );
 };

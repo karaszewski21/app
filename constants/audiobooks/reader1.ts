@@ -6,8 +6,8 @@ export const reader1 = [
       ageGroup: "adult",
       narrator: "Anna Nowak",
       duration: 36000,
-      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/index.png',
-      audioFile: "https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/eng.mp4",
+      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/index.webp',
+      audioFile: "assets/old_ouk/pl.mp4",
       options: {
         textColor: '#000',
         backgroundColor: '#91654d',
@@ -21,8 +21,8 @@ export const reader1 = [
       ageGroup: "adult",
       narrator: "Anna Nowak",
       duration: 36000,
-      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/index.png',
-      audioFile: "https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/pl.mp4",
+      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/index.webp',
+      audioFile: "assets/old_ouk/pl.mp4",
       options: {
         textColor: '#000',
         backgroundColor: '#91654d',

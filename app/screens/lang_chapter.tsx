@@ -14,7 +14,7 @@ const LangChapterScreen = ({ route, navigation } : any) => {
     const resource = route.params.resource;
     const { showTabs, hiddenTabs } = useTabsScreen();
     const translateY = useSharedValue<number>(500);
-    const { playAudio, isModalVisible, setIsModalVisible} = useAudioSentence();
+    const { playAudio, isModalVisible, setIsModalVisible, setCurrentSound} = useAudioSentence();
     const uniqueKey = useMemo(() => uuid.v4(), []);
     const [word, setWord] = useState<{item: any, options:{ x: number, y: number }} | null>()
 
@@ -23,7 +23,8 @@ const LangChapterScreen = ({ route, navigation } : any) => {
       return () => { 
         showTabs();
         setIsModalVisible(false);
-        translateY.value = 500
+        translateY.value = 500;
+        setCurrentSound(null);
       }
     }, [])
 

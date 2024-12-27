@@ -84,7 +84,7 @@ export const index = {
             reviewCount: 85,
             content: {
               options: {
-                backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/background.png',
+                backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/background.webp',
                 textColor: '#fff',
                 tileColor: '#6f6e45',
                 backgroundColor: '#6f6e45',
@@ -237,9 +237,9 @@ export const index = {
         id: '5fa869da-166d-45cc-a57d-36dda0a181b56',
         type: 'reader' as ProductType,
         ageGroupId: 3,
-        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/index3.png',
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/index.webp',
         gallery: [ 
-          'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/gallery/1.png',
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/gallery/cover.webp',
         ],
         title: "Stary dąb",
         description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
@@ -273,7 +273,7 @@ export const index = {
             {
               type: 'cover',
               title: '',
-              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/index.png'
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/index.webp'
             },
             {
               type: 'content',
@@ -378,19 +378,19 @@ export const index = {
             }
           ] as ReaderPage[],
           image: [
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/3.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/4.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/5.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/6.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/7.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/8.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/9.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/3.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/4.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/5.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/6.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/7.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/8.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/9.webp',
           ],
           english: [
             {
               type: 'cover',
               title: '',
-              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/index.png'
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/index.webp'
             },
             {
               type: 'content',
@@ -543,12 +543,12 @@ export const index = {
           {
             type: 'quiz',
             ids: ['9dcceb17-1189-42f9-815e-quizOld', '9dcceb17-1189-42f9-815e-quizOld2'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.png',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.webp',
           },
           {
             type: 'audiobook',
             ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b', '8161eb39-7ab7-4186-b7fd-0f43b54df133'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.png',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.webp',
           },
           {
             type: 'printouts',
@@ -560,9 +560,9 @@ export const index = {
         id: '5fa869da-166d-45cc-a57d-36dda0a181bdf56',
         type: 'reader' as ProductType,
         ageGroupId: 4,
-        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.png',
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.webp',
         gallery: [ 
-          'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/gallery/2.png',
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/gallery/cover.webp',
         ],
         title: "Ciuchcia",
         description: "W świecie, gdzie wszystko musi być szybkie i nowoczesne, poznajemy uroczą Ciuchcię, która powoli podróżuje malowniczą trasą przez góry. Gdy zostaje zastąpiona przez szybsze pociągi, wydaje się, że jej dni dobiegły końca. Jednak pewnego dnia burza pokazuje wszystkim, że czasem to właśnie stare, sprawdzone rozwiązania są najlepsze!",
@@ -596,7 +596,7 @@ export const index = {
             {
               type: 'cover',
               title: 'Przeczytaj o małej lokomotywie z wielkim sercem!',
-              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.png'
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.webp'
             },
             {
               type: 'content',
@@ -796,21 +796,21 @@ export const index = {
           ] as ReaderPage[],
   
           image: [
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/1.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/2.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/3.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/4.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/5.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/6.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/7.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/8.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/1.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/2.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/3.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/4.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/5.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/6.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/7.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/8.webp',
           ],
   
           english: [
             {
               type: 'cover',
               title: '',
-              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.png'
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.webp'
             },
             {  
               type: 'content',
@@ -1130,9 +1130,9 @@ export const index = {
         id: '5fa869da-166d-45cc-a57d-36ddfda181b56',
         type: 'reader' as ProductType,
         ageGroupId: 3,
-        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.png',
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.webp',
         gallery: [ 
-          'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/gallery/cover.png',
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/gallery/cover.webp',
         ],
         title: "Natalia i smok",
         description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
@@ -1272,20 +1272,20 @@ export const index = {
           ] as ReaderPage[],
   
           image: [
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/1.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/2.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/3.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/4.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/5.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/6.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/7.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/1.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/2.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/3.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/4.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/5.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/6.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/7.webp',
           ],
   
           english: [
             {
               type: 'cover',
               title: '',
-              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.png'
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.webp'
             },
             {
               type: 'content',
@@ -1577,9 +1577,9 @@ export const index = {
         id: '5fa869da-166d-45ccfd-d57d-36dda0a181b56',
         type: 'reader' as ProductType,
         ageGroupId: 3,
-        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/index.png',
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/index.webp',
         gallery: [ 
-          'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/gallery/cover.png',
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/gallery/cover.webp',
         ],
         title: "Zosia i wielki strach",
         description: "Główna bohaterka, mała Zosia, musi zmierzyć się z nieoczekiwaną sytuacją, gdy jej mama trafia do szpitala, by urodzić jej braciszka,Historia porusza ważne tematy takie jak radzenie sobie ze strachem, pojawienie się rodzeństwa w rodzinie oraz rola wsparcia najbliższych.",
@@ -1587,7 +1587,7 @@ export const index = {
         reviewCount: 120,
         content: {
           options: {
-            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/background2.png',
+            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/background.webp',
             textColor: '#222',
             tileColor: '#6b5a6c',
             text: {
@@ -1773,14 +1773,14 @@ export const index = {
             }
           ] as ReaderPage[],
           image: [
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/1.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/2.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/3.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/4.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/5.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/6.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/7.png',
-            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/8.png',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/1.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/2.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/3.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/4.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/5.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/6.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/7.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/reader/8.webp',
           ],
           english: [
             {
