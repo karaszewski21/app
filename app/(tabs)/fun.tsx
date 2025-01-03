@@ -16,14 +16,15 @@ import Banner from '@/components/common/Banner';
 import Filter from '@/components/common/Filter';
 import { AgeGroup, AudioPlay, Reader } from '@/model';
 import useRating from '@/hooks/useRating';
+import { useFocusEffect } from '@react-navigation/native';
 
 const FunStack = createStackNavigator();
 const { width } = Dimensions.get('window');
 
-export default function FunStackScreen() {
+export default function FunStackScreen({route}:any) {
   return (
     <FunStack.Navigator>
-      <FunStack.Screen name="FunDetails" component={FunScreen} options={{headerShown: false}}/>
+      <FunStack.Screen name="FunDetails" component={FunScreen} options={{headerShown: false}} initialParams={route.params}/>
       <FunStack.Screen 
           name="ReaderDetails" 
           component={ReaderStackScreen}
@@ -73,7 +74,7 @@ const FilterButtons = ({ activeFilter, onFilterChange, hidden }: any) => {
   );
 }
 
-const FunScreen = ({ navigation }:any) => {
+const FunScreen = ({route, navigation }:any) => {
   const [activeFilter, setActiveFilter] = useState('reader');
   const { isFavorite, addFavorite, removeFavorite } = useFavorite();
   const {ratingModal, product, setRatingModal, onRatingPress, onSelectProductPress } = useRating();
@@ -82,9 +83,23 @@ const FunScreen = ({ navigation }:any) => {
   const [selectedAgeGroup, setAgeGroup] = useState<AgeGroup>();
   const [readerList, setReaders] = useState<Reader[]>();
   const [audiPlayList, setAudioPlays] = useState<AudioPlay[]>();
+  const isPlayerParams = route.params?.player;
 
   const readerListRef = useRef<FlatList>(null);
   const playerListRef = useRef<FlatList>(null);
+
+
+  useFocusEffect(
+    useCallback(() => {
+        if(isPlayerParams) {
+          setTimeout(() => {
+            onFilterChange('play')
+          }, 100);
+        }
+    return () => {
+    };
+  }, [isPlayerParams])
+);
 
 
   useEffect(() => {

@@ -247,7 +247,7 @@ export const index = {
         reviewCount: 120,
         content: {
           options: {
-            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/background.png',
+            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/background.webp',
             textColor: '#fff',
             tileColor: '#91654d',
             text: {
@@ -570,26 +570,26 @@ export const index = {
         reviewCount: 120,
         content: {
           options: {
-            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/background.png',
-            textColor: '#fff',
+            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/background.webp',
+            textColor: '#222',
             tileColor: '#91654d',
             text: {
               title: 'Zacznij czytać',
               subTitle: 'Czas czytania: 5 min',
               textColor: '#fff',
-              backgroundColor: '#3f3b27',
+              backgroundColor: '#44746c',
             },
             image: {
               title: 'Zacznij czytać',
               subTitle: 'Czas czytania: 5 min',
               textColor: '#000',
-              backgroundColor: '#8e7f67',
+              backgroundColor: '#9d281a',
             },
             english: {
               title: 'Zacznij czytać',
               subTitle: 'Czas czytania: 10 min',
               textColor: '#000',
-              backgroundColor: '#7d2d11',
+              backgroundColor: '#44746c',
             }
           },
           text: [
@@ -1140,26 +1140,26 @@ export const index = {
         reviewCount: 120,
         content: {
           options: {
-            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/background.png',
+            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/background.webp',
             textColor: '#fff',
-            tileColor: '#91654d',
+            tileColor: '#cd2b83',
             text: {
               title: 'Zacznij czytać',
               subTitle: 'Czas czytania: 5 min',
               textColor: '#fff',
-              backgroundColor: '#3f3b27',
+              backgroundColor: '#cd2b83',
             },
             image: {
               title: 'Zacznij czytać',
               subTitle: 'Czas czytania: 3-4 minuty',
               textColor: '#000',
-              backgroundColor: '#8e7f67',
+              backgroundColor: '#544a86',
             },
             english: {
               title: 'Zacznij czytać',
               subTitle: 'Czas czytania: 10 min',
               textColor: '#000',
-              backgroundColor: '#7d2d11',
+              backgroundColor: '#24bedb',
             }
           },
           text: [

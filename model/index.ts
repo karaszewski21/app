@@ -58,7 +58,9 @@ export interface AudioPlay {
     rating: number, 
     reviewCount: number,
     type: ProductType,
-    options: OptionsPlayer,
+    content: {
+        options: OptionsPlayer,
+    }
     versions: Version[]
 }
 

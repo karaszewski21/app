@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ImageBackground} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from '@react-navigation/stack';
 import BookStackScreen from '@/app/screens/book';
@@ -11,54 +11,71 @@ import Story from '@/components/story/StoryBasic';
 import { Book, Reader } from '@/model';
 import useAgeGroupsIcon from '@/hooks/useAgeGroupsIcon';
 import IndexVideo from '@/components/common/IndexVideo';
+import FunStackScreen from '@/app/(tabs)/fun';
+import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
+import { globalTheme } from '@/constants/Colors';
 
 const HomeStack = createStackNavigator();
 
 export default function HomeScreenStack() {
   return (
-      <HomeStack.Navigator>
-        <HomeStack.Screen 
-          name="Home" 
-          component={HomeScreen} 
-          options={{
-            headerShown: false,
-            detachPreviousScreen: false
-          }}
-        />
-        <HomeStack.Screen 
-          name="News" 
-          component={NewsScreen}
-          options={{
-            headerShown: false,
-            detachPreviousScreen: false
-          }}
+    <ImageBackground source={require('@/assets/background.webp')}  style={styles.rootContainer} resizeMode='cover'>
+      <NavigationIndependentTree>
+        <NavigationContainer theme={globalTheme}>
+          <HomeStack.Navigator screenOptions={{cardStyle: { backgroundColor: 'transparent' }}}>
+            <HomeStack.Screen 
+              name="Home" 
+              component={HomeScreen} 
+              options={{
+                headerShown: false,
+                detachPreviousScreen: false
+              }}
+            />
+            <HomeStack.Screen 
+              name="News" 
+              component={NewsScreen}
+              options={{
+                headerShown: false,
+                detachPreviousScreen: false
+              }}
 
-        />
-        <HomeStack.Screen 
-          name="BookDetails" 
-          component={BookStackScreen}
-          options={{
-            headerShown: false,
-            detachPreviousScreen: false
-          }}
-        />
-        <HomeStack.Screen 
-          name="ReaderDetails" 
-          component={ReaderStackScreen}
-          options={{
-            headerShown: false,
-            detachPreviousScreen: false
-          }}
-        />
-        <HomeStack.Screen 
-          name="Age" 
-          component={AgeStackScreen}
-          options={{
-            headerShown: false,
-            detachPreviousScreen: false
-          }}
-        />
-      </HomeStack.Navigator>
+            />
+            <HomeStack.Screen 
+              name="BookDetails" 
+              component={BookStackScreen}
+              options={{
+                headerShown: false,
+                detachPreviousScreen: false
+              }}
+            />
+            <HomeStack.Screen 
+              name="ReaderDetails" 
+              component={ReaderStackScreen}
+              options={{
+                headerShown: false,
+                detachPreviousScreen: false
+              }}
+            />
+            <HomeStack.Screen 
+              name="Age" 
+              component={AgeStackScreen}
+              options={{
+                headerShown: false,
+                detachPreviousScreen: false
+              }}
+            />
+            <HomeStack.Screen 
+              name="FunDetails" 
+              component={FunStackScreen}
+              options={{
+                headerShown: false,
+                detachPreviousScreen: false
+              }}
+            />
+          </HomeStack.Navigator>
+        </NavigationContainer>
+      </NavigationIndependentTree>
+    </ImageBackground>
   );
 }
 
@@ -173,10 +190,10 @@ const HomeScreen = ({ navigation }: any) => {
         <View>
             {renderStory()}
         </View>
-        <Text style={styles.sectionTitle}>Zacznij tutaj</Text>
+        {/* <Text style={styles.sectionTitle}>Zacznij tutaj</Text>
         <View>
             {reanderAgeGroup()}
-        </View>
+        </View> */}
         <Text style={styles.sectionTitle}>Najnowsze książki</Text>
         <View style={styles.tilesContainer}>
           {index.books.map(book => (
@@ -185,10 +202,23 @@ const HomeScreen = ({ navigation }: any) => {
         </View>
 
         <Text style={styles.sectionTitle}>Najnowsze Czytanki</Text>
-        <View style={[styles.tilesContainer, {paddingBottom: 80}]}>
+        <View style={styles.tilesContainer}>
           {index.readers.map(reader => (
             renderReaderItem(reader)
           ))}
+        </View>
+
+        <Text style={[styles.sectionPlayerTitle, {textAlign: 'center'}]}>Słuchowiska</Text>
+        <View style={[styles.tilePlayerContainer, {paddingBottom: 80}]}>
+          <TouchableOpacity 
+              style={{width: 220, height: 180}}
+              onPress={() => navigation.navigate('FunDetails', { player: true })}
+            >
+              <Image 
+                source={require('@/assets/icons/radio.webp')} 
+                style={{width: '100%', height: '100%', borderRadius: 30}}
+              />
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -203,6 +233,12 @@ const HomeScreen = ({ navigation }: any) => {
 // #a5ccba - mięta jasna
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    zIndex: 100
+  },
   container: {
     flex: 1,
   },
@@ -223,14 +259,25 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 24,
-    margin: 10,
+    marginHorizontal: 10,
+    marginTop: 20,
     fontFamily: 'ShantellSans-SemiBoldItalic'
   },
- 
+  sectionPlayerTitle: {
+    fontSize: 20,
+    marginHorizontal: 10,
+    marginTop: 20,
+    fontFamily: 'ShantellSans-SemiBoldItalic'
+  },
   tilesContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+  },
+  tilePlayerContainer: {
+    marginTop: -10,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   tileItem: {
     width: 150, 

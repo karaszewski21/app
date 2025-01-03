@@ -6,43 +6,35 @@ export const players = [
     id: '5fa869da-166d-45cc-da57d-36dda0a181b56',
     type: 'audio_play' as ProductType,
     ageGroupId: 3,
-    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/index.png',
+    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/index.webp',
     gallery: [ 
-      'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/gallery/1.png',
+      'https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/cover.webp',
     ],
-    title: "Słuchowisko 1",
-    description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
-    rating: 4, 
-    reviewCount: 120,
-    options: {
-      backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/background.png',
-      textColor: '#000',
-      tileColor: '#7d2d11'
-    } as OptionsPlayer,
+    title: "Brzydkie Kaczątko",
+    description: "To jest pełen tekst baśni „Brzydkie Kaczątko” autorstwa Hansa Christiana Andersena. Opowiada historię młodego ptaka, który różni się wyglądem od swojego rodzeństwa i jest przez to odrzucany przez innych. Przechodzi przez trudne chwile, samotność i nieakceptację, ale w końcu odkrywa swoją prawdziwą naturę, przemieniając się w pięknego łabędzia. To opowieść o akceptacji siebie, przemianie i poszukiwaniu własnego miejsca w świecie",
+    rating: 4.7, 
+    reviewCount: 11,
+    content: {
+      options: {
+        backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/background.webp',
+        textColor: '#000',
+        tileColor: '#ad4a4c'
+      } as OptionsPlayer,
+    },
     versions: [{
-      title: 'title 1',
-      subTitle: 'subTitle 2',
+      title: 'Brzydkie Kaczątko',
+      subTitle: 'czas trwania - 30 minut',
       type: 'pl',
       audioFile: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/pl.mp4',
-      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/index.png',
+      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/index.webp',
       textColor: '#000',
-      backgroundColor: '#7d2d11',
-      duration: 4
-    },
-    {
-      title: 'title eng 1',
-      subTitle: 'subTitle eng 2',
-      type: 'eng',
-      audioFile: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/pl.mp4',
-      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/index.png',
-      textColor: '#000',
-      backgroundColor: '#7d2d11',
+      backgroundColor: '#c3cdaf',
       duration: 4
     }] as Version[],
     resource: [
       {
         type: 'quiz',
-        ids: ['9dcceb17-1189-42f9-815e-46b5988d1ba111', 'fb15337b-43e5-414e-b4cb-d59f81370f1edd'],
+        ids: ['a1b2c3d4-5678-9101-Ugly', 'b2c3d4e5-6789-1011-quizBrzydkieKaczatko2'],
         bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.png',
       },
       {
@@ -55,49 +47,36 @@ export const players = [
     id: '5fa869da-166d-45cc-a57d-36ddads0a181b56',
     type: 'audio_play' as ProductType,
     ageGroupId: 3,
-    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/index.png',
+    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/players/cat/index.webp',
     gallery: [ 
-      'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/gallery/1.png',
+      'https://goldfish.fra1.digitaloceanspaces.com/players/cat/cover.webp',
     ],
-    title: "Słuchowisko 2",
-    description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
-    rating: 4, 
-    reviewCount: 120,
-    options: {
-      backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/background2.png',
-      textColor: '#000',
-      tileColor: '#7d2d11'
-    } as OptionsPlayer,
+    title: "Kot w butach",
+    description: "Opowieść o młodym chłopcu Janku, który po śmierci ojca otrzymuje w spadku tylko kota. Początkowo uważa to za stratę, ale wkrótce odkrywa, że kot jest wyjątkowy – potrafi mówić i ma niezwykły spryt. Dzięki przebiegłym planom kota, Janek zdobywa przychylność króla, bogactwo i serce królewny. Historia pokazuje, że inteligencja, odwaga i pomysłowość mogą zmienić życie na lepsze, nawet w najtrudniejszych sytuacjach.",
+    rating: 3.5, 
+    reviewCount: 8,
+    content: {
+      options: {
+        backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/players/cat/background.webp',
+        textColor: '#000',
+        tileColor: '#ad4a4c'
+      } as OptionsPlayer,
+    },
     versions: [{
-      title: 'title 1',
-      subTitle: 'subTitle 2',
+      title: 'Kot w butach',
+      subTitle: 'czas trwania - 15 minut',
       type: 'pl',
       audioFile: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/pl.mp4',
-      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/index.png',
+      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/players/cat/index.webp',
       textColor: '#000',
-      backgroundColor: '#7d2d11',
-      duration: 36000,
-    },
-    {
-      title: 'title eng 1',
-      subTitle: 'subTitle eng 2',
-      type: 'eng',
-      audioFile: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/pl.mp4',
-      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/index.png',
-      textColor: '#000',
-      backgroundColor: '#7d2d11',
-      duration: 36000,
+      backgroundColor: '#c3cdaf',
+      duration: 4
     }] as Version[],
     resource: [
       {
         type: 'quiz',
-        ids: ['9dcceb17-1189-42f9-815e-46b5988d1ba111', 'fb15337b-43e5-414e-b4cb-d59f81370f1edd'],
+        ids: ['quizKotwButach1', 'quizKotwButach2'],
         bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.png',
-      },
-      {
-        type: 'audiobook',
-        ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b', '8161eb39-7ab7-4186-b7fd-0f43b54df133'],
-        bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.png',
       },
       {
         type: 'printouts',

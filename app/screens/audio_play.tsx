@@ -18,7 +18,7 @@ const AudioPlayStack = createStackNavigator();
 
 export default function AudioPlayStackScreen({route}:any) {
   const { audioplay } = route.params;
-  const options = audioplay.options as OptionsPlayer;
+  const options = audioplay.content.options as OptionsPlayer;
   return (
    <ImageBackground source={{uri:options.backgroundUrl}}  style={styles.rootContainer} resizeMode='cover'>
       <NavigationIndependentTree>
@@ -43,7 +43,7 @@ const AudioPlayScreen = ({ route, navigation } : any) => {
   const { audioplay } = route.params;
   const resources = audioplay.resource as Resource[];
   const versions = audioplay.versions as Version[];
-  const options = audioplay.options as OptionsPlayer;
+  const options = audioplay.content.options as OptionsPlayer;
 
   const { openPlayer } = usePlayerModal();
 
