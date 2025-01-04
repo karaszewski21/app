@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: 10,
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
   },
   image: {
-    width: 35,
-    height: 35,
+    width: 30,
+    height: 30,
     borderRadius: 50,
     backgroundColor: '#c3d5e1',
     shadowColor: "#000",

@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    marginTop: -30,
+    marginTop: -50,
 
   },
   contentButtons: {

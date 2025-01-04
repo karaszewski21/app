@@ -6,7 +6,48 @@ import * as FileSystem from 'expo-file-system';
 import VideoPlayer from './SmallPlayer';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-const oldOukPlAudio = require('@/assets/readers/old_ouk/pl.mp4');
+const videos = [
+  {
+    name: 'puss_in_boot',
+    file: require('@/assets/video/Puss_in_Boots.mp4')
+  },
+  {
+    name: 'ugly_duck',
+    file: require('@/assets/video/Ugly_Duck.mp4'),
+  },
+  {
+    name: 'natalia_eng',
+    file: require('@/assets/video/natalia_eng.mp4'),
+  },
+  {
+    name: 'natalia_pl',
+    file: require('@/assets/video/natalia_pl.mp4'),
+  },
+  {
+    name: 'Old_Ouk_Eng',
+    file: require('@/assets/video/Old_Ouk_Eng.mp4'),
+  },
+  {
+    name: 'Old_Ouk_Pl',
+    file: require('@/assets/video/Old_Ouk_Pl.mp4'),
+  },
+  {
+    name: 'train_eng',
+    file: require('@/assets/video/train_eng.mp4'),
+  },
+  {
+    name: 'train_pl',
+    file: require('@/assets/video/train_pl.mp4'),
+  },
+  {
+    name: 'zosia_eng',
+    file: require('@/assets/video/zosia_eng.mp4'),
+  },
+  {
+    name: 'zosia_pl',
+    file: require('@/assets/video/zosia_pl.mp4'),
+  }
+]
 
 const Player = () => {
   const { record, closePlayer, openFullPlayer } = usePlayerModal();
@@ -26,7 +67,9 @@ const Player = () => {
   }, []);
 
    useEffect(() => {
-      setFile(oldOukPlAudio)
+      if (record?.fileUrl) {
+          setFile(videos.find(el => el.name === record?.fileUrl)?.file)
+      }
   }, [record])
 
   // useEffect(() => {

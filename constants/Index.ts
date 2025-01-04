@@ -547,7 +547,7 @@ export const index = {
           },
           {
             type: 'audiobook',
-            ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b', '8161eb39-7ab7-4186-b7fd-0f43b54df133'],
+            ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b-old', '8161eb39-7ab7-4186-b7fd-0f43b54df133-old'],
             bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.webp',
           },
           {
@@ -1117,7 +1117,7 @@ export const index = {
           },
           {
             type: 'audiobook',
-            ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b', '8161eb39-7ab7-4186-b7fd-0f43b54df133'],
+            ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b-train', '8161eb39-7ab7-4186-b7fd-0f43b54df133-train'],
             bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.png',
           },
           {
@@ -1132,6 +1132,7 @@ export const index = {
         ageGroupId: 3,
         indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.webp',
         gallery: [ 
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/gallery/cover.webp',
           'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/gallery/cover.webp',
         ],
         title: "Natalia i smok",
@@ -1564,7 +1565,7 @@ export const index = {
           },
           {
             type: 'audiobook',
-            ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b', '8161eb39-7ab7-4186-b7fd-0f43b54df133'],
+            ids: ['8161eb39-7ab7-4186-b7fd-0f43b54df133-nat', 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-nat'],
             bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.png',
           },
           {
@@ -1925,7 +1926,7 @@ export const index = {
           },
           {
             type: 'audiobook',
-            ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92bzosia', '8161eb39-7ab7-4186-b7fd-0f43b54df133zosia'],
+            ids: ['8161eb39-7ab7-4186-b7fd-0f43b54df133-zosia', 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-zosia'],
             bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.png',
           },
           {
