@@ -244,7 +244,7 @@ export const index = {
         title: "Stary dąb",
         description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
         rating: 4, 
-        reviewCount: 120,
+        reviewCount: 8,
         content: {
           options: {
             backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/background.webp',
@@ -543,16 +543,16 @@ export const index = {
           {
             type: 'quiz',
             ids: ['9dcceb17-1189-42f9-815e-quizOld', '9dcceb17-1189-42f9-815e-quizOld2'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.webp',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/baner_quiz.webp',
           },
           {
             type: 'audiobook',
             ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b-old', '8161eb39-7ab7-4186-b7fd-0f43b54df133-old'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.webp',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/baner_audio.webp',
           },
           {
             type: 'printouts',
-            ids: ['16271817-907d-4896-8882-old1', '16271817-90fd7d-4896-8882-old2'],
+            ids: ['16271817-907d-4896-8882-old1', '16271817-90fd7d-4896-8882-old2', '16271817-90fd7d-4896-8882-old3'],
           },
         ]
       },
@@ -567,7 +567,7 @@ export const index = {
         title: "Ciuchcia",
         description: "W świecie, gdzie wszystko musi być szybkie i nowoczesne, poznajemy uroczą Ciuchcię, która powoli podróżuje malowniczą trasą przez góry. Gdy zostaje zastąpiona przez szybsze pociągi, wydaje się, że jej dni dobiegły końca. Jednak pewnego dnia burza pokazuje wszystkim, że czasem to właśnie stare, sprawdzone rozwiązania są najlepsze!",
         rating: 4, 
-        reviewCount: 120,
+        reviewCount: 7,
         content: {
           options: {
             backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/background.webp',
@@ -1113,16 +1113,16 @@ export const index = {
           {
             type: 'quiz',
             ids: ['9dcceb17-1189-42fxx9-815e-Coo1', '9dcceb17-1189-42fxx9-815e-Coo2'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.png',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/quiz/baner_quiz.webp',
           },
           {
             type: 'audiobook',
             ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b-train', '8161eb39-7ab7-4186-b7fd-0f43b54df133-train'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.png',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/baner_audio.webp',
           },
           {
             type: 'printouts',
-            ids: ['16271817-907d-48zxz96-choo1', '16271817-907d-48zxz96-choo2'],
+            ids: ['16271817-907d-48zxz96-choo1', '16271817-907d-48zxz96-choo22'],
           },
         ]
       },
@@ -1137,8 +1137,8 @@ export const index = {
         ],
         title: "Natalia i smok",
         description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
-        rating: 4, 
-        reviewCount: 120,
+        rating: 5, 
+        reviewCount: 17,
         content: {
           options: {
             backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/background.webp',
@@ -1561,12 +1561,12 @@ export const index = {
           {
             type: 'quiz',
             ids: ['9dcceb17-1189-42fxx9-815e-natalia1', '9dcceb17-1189-42fxx9-815e-quizNatalia2', '9dcceb17-1189-42fxx9-815e-quizNatalia3'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.png',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/baner_quiz.webp',
           },
           {
             type: 'audiobook',
             ids: ['8161eb39-7ab7-4186-b7fd-0f43b54df133-nat', 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-nat'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.png',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/baner_audio.webp',
           },
           {
             type: 'printouts',
@@ -1584,8 +1584,8 @@ export const index = {
         ],
         title: "Zosia i wielki strach",
         description: "Główna bohaterka, mała Zosia, musi zmierzyć się z nieoczekiwaną sytuacją, gdy jej mama trafia do szpitala, by urodzić jej braciszka,Historia porusza ważne tematy takie jak radzenie sobie ze strachem, pojawienie się rodzeństwa w rodzinie oraz rola wsparcia najbliższych.",
-        rating: 4, 
-        reviewCount: 120,
+        rating: 5, 
+        reviewCount: 22,
         content: {
           options: {
             backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/background.webp',
@@ -1922,12 +1922,12 @@ export const index = {
           {
             type: 'quiz',
             ids: ['9dcceb17-1189-42fxx9-815e-46b5988d1sdbaquizZosia1', '9dcceb17-1189-42fxx9-815e-46b5988d1sdbaquizZosia2', '9dcceb17-1189-42fxx9-815e-46b5988d1sdbaquizZosia3'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.png',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/baner_quiz.webp',
           },
           {
             type: 'audiobook',
             ids: ['8161eb39-7ab7-4186-b7fd-0f43b54df133-zosia', 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-zosia'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.png',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/baner_audio.webp',
           },
           {
             type: 'printouts',

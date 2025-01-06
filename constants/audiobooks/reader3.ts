@@ -2,7 +2,8 @@ export const reader3 = [
   {
     id: 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-nat',
     type: "eng",
-    name: 'Natalia i Smok',
+    title: 'Natalia i Smok - audiobook',
+    name: 'audiobook',
     ageGroup: "adult",
     narrator: "Anna Nowak",
     duration: 10000,
@@ -17,7 +18,8 @@ export const reader3 = [
   {
     id: '8161eb39-7ab7-4186-b7fd-0f43b54df133-nat',
     type: "pl",
-    name: 'Natalia i Smok',
+    title: 'Natalia i Smok - audiobook',
+    name: 'audiobook',
     ageGroup: "adult",
     narrator: "Anna Nowak",
     duration: 10000,

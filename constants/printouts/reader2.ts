@@ -5,8 +5,8 @@ export const reader2 = [
         fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/print/1.webp'
     },
     { 
-        id: '16271817-907d-48zxz96-choo2',
+        id: '16271817-907d-48zxz96-choo22',
         name: 'print2',
-        fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/print/1.webp'
+        fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/print/add.png'
     },
   ];

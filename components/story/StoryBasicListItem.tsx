@@ -242,7 +242,7 @@ export const StoryBasicListItem = ({
         <View style={styles.backgroundContainer}>
             <Video
               ref={videoRef}
-              source={{ uri: content[current].story_image ?? '' }}
+              source={content[current].story_image as any}
               resizeMode={ResizeMode.COVER}
               shouldPlay={true}
               isLooping={false}

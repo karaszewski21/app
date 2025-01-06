@@ -185,7 +185,7 @@ const FunScreen = ({route, navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/banerbook2.png" hidden={hiddenBanner}/>
+        <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/baner_story.webp" hidden={hiddenBanner}/>
         <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup} reset={true}/>
         <FilterButtons activeFilter={activeFilter} onFilterChange={onFilterChange} hidden={hiddenBanner}/>
         <Animated.View style={[styles.animatedContainer, animatedStyle]}>

@@ -2,7 +2,1348 @@ import { ProductType, ReaderContent } from "@/model";
 import { ReaderPage } from "@/model/reader";
 
 export const readers = [
- {
+      {
+        id: '5fa869da-166d-45cc-a57d-36dda0a181b56',
+        type: 'reader' as ProductType,
+        ageGroupId: 3,
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/index.webp',
+        gallery: [ 
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/gallery/cover.webp',
+        ],
+        title: "Stary dąb",
+        description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
+        rating: 4, 
+        reviewCount: 8,
+        content: {
+          options: {
+            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/background.webp',
+            textColor: '#fff',
+            tileColor: '#91654d',
+            text: {
+              title: 'Zacznij czytać',
+              subTitle: 'Czas czytania: 5 min',
+              textColor: '#fff',
+              backgroundColor: '#3f3b27',
+            },
+            image: {
+              title: 'Zacznij czytać',
+              subTitle: 'Czas czytania: 5 min',
+              textColor: '#000',
+              backgroundColor: '#8e7f67',
+            },
+            english: {
+              title: 'Zacznij czytać',
+              subTitle: 'Czas czytania: 10 min',
+              textColor: '#000',
+              backgroundColor: '#7d2d11',
+            }
+          },
+          text: [
+            {
+              type: 'cover',
+              title: '',
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/index.webp'
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `W ciemnym gęstym lesie rósł sobie pewien naprawdę stary dąb. Nikt nie wie dokładnie, 
+                          jak długo tam był, przeżył jednak wiele pokoleń i pamiętał naprawdę sporo. 
+                          Często wspominał wszystko, co działo się wokół niego przez
+                          ten bardzo długi czas.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Jego potężna korona tworzyła bowiem doskonałe
+                          schronienie przed deszczem, który padał na jego ogromne liście. Jego
+                          gałęzie przypominały szeroko otwarte ramiona, przygarniające z miłością
+                          wszystkich małych mieszkańców lasu.`
+                  },
+                  {
+                    type: 'text',
+                    text: `W bujnej koronie dębu zamieszkała rodzina turkawek. Swym pięknym
+                          śpiewem tworzą przyjacielską atmosferę i żyją w prawdziwej harmonii ze
+                          starym dębem. Informują przy okazji wszystkich wokół, że stary dąb jest
+                          bezpieczną przystanią, w której panuje błogość i spokój. Dla małych
+                          turkawek stał się on swego rodzaju oazą, w której mogą bez obaw złożyć jaja
+                          w małym gniazdku i przymknąć oczy, by nabrać nowych sił.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Na pewno będą
+                          tam mieć piękne sny o tym, jak pewnego dnia ich małe turkaweczki rozłożą
+                          wreszcie skrzydła i polecą w górę ze swoimi rodzicami. Wzlecą ponad
+                          chmury i wyruszą w pełną przygód drogę tam, gdzie kończy się ziemia, a
+                          zaczyna morze, które delikatnie uderza falami o skalisty brzeg.`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `W bujnej koronie dębu zamieszkała rodzina turkawek. Swym pięknym
+                          śpiewem tworzą przyjacielską atmosferę i żyją w prawdziwej harmonii ze
+                          starym dębem. Informują przy okazji wszystkich wokół, że stary dąb jest
+                          bezpieczną przystanią, w której panuje błogość i spokój.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Dla małych turkawek stał się on swego rodzaju oazą, w której mogą bez obaw złożyć jaja
+                          w małym gniazdku i przymknąć oczy, by nabrać nowych sił. Na pewno będą
+                          tam mieć piękne sny o tym, jak pewnego dnia ich małe turkaweczki rozłożą
+                          wreszcie skrzydła i polecą w górę ze swoimi rodzicami.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Wzlecą ponad chmury i wyruszą w pełną przygód drogę tam, gdzie kończy się ziemia, a
+                          zaczyna morze, które delikatnie uderza falami o skalisty brzeg.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Na dole, przy pniu dębu, urzędują zaś dwa młode niedźwiedzie, które na
+                          chwilę zniknęły mamie z oczu. Dąb obserwuje w milczeniu małe,
+                          niegramotne niedźwiadki i przypatruje się, jak beztrosko pożywiają się
+                          świeżymi owocami lasu.`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `Ich delikatna woń powoli wznosi się pomiędzy liście
+                          i nawet stary dąb, gdyby mógł, wciągnąłby głęboko ich zapach. Jego liście
+                          cichutko szumią i w końcu nawet ono samo, potężne drzewo, delikatnie
+                          przymyka oczy. Wietrzyk smaga czule rozgałęzioną koronę, która przechyla
+                          się z boku na bok jak łódka na szerokim morzu, a wraz z nią powoli huśtają
+                          się wszyscy mieszkańcy drzewa.`
+                  },
+                  {
+                    type: 'text',
+                    text: `A gdy wokół już zupełnie się ściemniło, usnęły również małe misie, które od
+                          dawna odpoczywały ze swoją mamą w ciepłej i bezpiecznej jamie. Wtedy
+                          znów spadł ulewny deszcz. Pomaga on usnąć wszystkim leśnym
+                          zwierzątkom, by rano zbudziły się wypoczęte i pełne energii.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Jeszcze tylko
+                          chwila i wszyscy mieszkańcy lasu pójdą spać spokojnym snem. Dąb jest
+                          wdzięczny za każdy kolejny dzień, w trakcie którego mógł być schronieniem
+                          dla leśnych stworzeń. On sam też jest już zmęczony, cieszy się więc, że może
+                          w końcu odpocząć`
+                  }
+                ]
+            },
+            {
+              type: 'end',
+              title: 'Dobranoc!',
+              subtitle: 'Brawo! Świetnie ci poszło!'
+            }
+          ] as ReaderPage[],
+          image: [
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/3.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/4.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/5.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/6.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/7.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/8.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/9.webp',
+          ],
+          english: [
+            {
+              type: 'cover',
+              title: '',
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/reader/index.webp'
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                {
+                  type: 'text',
+                  text: `In a dark dense forest, there stood a very old oak tree. Its mighty crown provided perfect shelter from the rain, with branches like wide-open arms welcoming all small forest dwellers.`,
+                  translation: 'W ciemnym, gęstym lesie rósł bardzo stary dąb. Jego potężna korona dawała doskonałe schronienie przed deszczem, a gałęzie przypominały szeroko otwarte ramiona, przyjmujące wszystkich małych mieszkańców lasu.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/1.mp3',
+                  vocabulary: [
+                    {
+                      word: 'dark dense forest',
+                      translation: 'ciemny, gęsty las',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/1_1.mp3',
+                    },
+                    {
+                      word: 'old oak tree',
+                      translation: 'stary dąb',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/1_2.mp3',
+                    },
+                    {
+                      word: 'mighty crown',
+                      translation: 'potężna korona',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/1_3.mp3',
+                    },
+                    {
+                      word: 'forest dwellers',
+                      translation: 'mieszkańcy lasu',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/1_4.mp3',
+                    }
+                  ]
+                },
+                {
+                  type: 'text',
+                  text: `A family of turtledoves lived in its lush crown, creating a friendly atmosphere with their beautiful singing.`,
+                  translation: 'W bujnej koronie zamieszkała rodzina turkawek, tworząc przyjacielską atmosferę swoim pięknym śpiewem.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/2.mp3',
+                  vocabulary: [
+                    {
+                      word: 'turtledoves',
+                      translation: 'turkawki',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/2_1.mp3',
+                    },
+                    {
+                      word: 'lush crown',
+                      translation: 'bujna korona',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/2_2.mp3',
+                    },
+                    {
+                      word: 'friendly atmosphere',
+                      translation: 'przyjacielska atmosfera',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/2_3.mp3',
+                    }
+                  ]
+                },
+              ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                {
+                  type: 'text',
+                  text: `Below, by the trunk, two young bears played carelessly, enjoying fresh forest fruits.`,
+                  translation: 'Na dole, przy pniu, dwa młode niedźwiadki beztrosko się bawiły, zajadając świeże owoce leśne.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/3.mp3',
+                  vocabulary: [
+                    {
+                      word: 'young bears',
+                      translation: 'młode niedźwiadki',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/3_1.mp3'
+                    },
+                    {
+                      word: 'trunk',
+                      translation: 'pień',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/3_2.mp3'
+                    },
+                    {
+                      word: 'carelessly',
+                      translation: 'beztrosko',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/3_3.mp3'
+                    },
+                    {
+                      word: 'fresh forest fruits',
+                      translation: 'świeże owoce leśne',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/3_4.mp3'
+                    }
+                  ]
+                },
+                {
+                  type: 'text',
+                  text: `Two small squirrels also found shelter here, spending their days jumping from tree to tree, playing tag, and discovering wonderful new places in the forest.`,
+                  translation: 'Schronienie znalazły tu również dwie małe wiewiórki, spędzające dni na skakaniu z drzewa na drzewo, graniu w berka i odkrywaniu cudownych nowych miejsc w lesie.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/4.mp3',
+                  vocabulary: [
+                    {
+                      word: 'squirrels',
+                      translation: 'wiewiórki',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/4_1.mp3',
+                    },
+                    {
+                      word: 'playing tag',
+                      translation: 'granie w berka',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/4_2.mp3',
+                    },
+                    {
+                      word: 'wonderful places',
+                      translation: 'cudowne miejsca',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/4_3.mp3',
+                    }
+                  ]
+                },
+                {
+                  type: 'text',
+                  text: `As night fell and heavy rain began to fall, all the forest creatures fell into a peaceful sleep, protected by the old oak tree, who was grateful for another day of being a shelter for forest creatures.`,
+                  translation: 'Gdy zapadła noc i zaczął padać rzęsisty deszcz, wszystkie leśne stworzenia pogrążyły się w spokojnym śnie, chronione przez starego dęba, który był wdzięczny za kolejny dzień bycia schronieniem dla leśnych stworzeń.',
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/5.mp3',
+                  vocabulary: [
+                    {
+                      word: 'as night fell',
+                      translation: 'gdy zapadła noc',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/5_1.mp3',
+                    },
+                    {
+                      word: 'heavy rain',
+                      translation: 'rzęsisty deszcz',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/5_2.mp3',
+                    },
+                    {
+                      word: 'peaceful sleep',
+                      translation: 'spokojny sen',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/5_3.mp3',
+                    },
+                    {
+                      word: 'grateful',
+                      translation: 'wdzięczny',
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/english/5_4.mp3',
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              type: 'end',
+              title: 'Good night!',
+              subtitle: 'Bravo! You did great!'
+            }
+          ] as LangReaderPage[]
+        } as ReaderContent,
+        resource: [
+          {
+            type: 'quiz',
+            ids: ['9dcceb17-1189-42f9-815e-quizOld', '9dcceb17-1189-42f9-815e-quizOld2'],
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/baner_quiz.webp',
+          },
+          {
+            type: 'audiobook',
+            ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b-old', '8161eb39-7ab7-4186-b7fd-0f43b54df133-old'],
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/baner_audio.webp',
+          },
+          {
+            type: 'printouts',
+            ids: ['16271817-907d-4896-8882-old1', '16271817-90fd7d-4896-8882-old2', '16271817-90fd7d-4896-8882-old3'],
+          },
+        ]
+      },
+      {
+        id: '5fa869da-166d-45cc-a57d-36dda0a181bdf56',
+        type: 'reader' as ProductType,
+        ageGroupId: 4,
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.webp',
+        gallery: [ 
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/gallery/cover.webp',
+        ],
+        title: "Ciuchcia",
+        description: "W świecie, gdzie wszystko musi być szybkie i nowoczesne, poznajemy uroczą Ciuchcię, która powoli podróżuje malowniczą trasą przez góry. Gdy zostaje zastąpiona przez szybsze pociągi, wydaje się, że jej dni dobiegły końca. Jednak pewnego dnia burza pokazuje wszystkim, że czasem to właśnie stare, sprawdzone rozwiązania są najlepsze!",
+        rating: 4, 
+        reviewCount: 7,
+        content: {
+          options: {
+            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/background.webp',
+            textColor: '#222',
+            tileColor: '#91654d',
+            text: {
+              title: 'Zacznij czytać',
+              subTitle: 'Czas czytania: 5 min',
+              textColor: '#fff',
+              backgroundColor: '#44746c',
+            },
+            image: {
+              title: 'Zacznij czytać',
+              subTitle: 'Czas czytania: 5 min',
+              textColor: '#000',
+              backgroundColor: '#9d281a',
+            },
+            english: {
+              title: 'Zacznij czytać',
+              subTitle: 'Czas czytania: 10 min',
+              textColor: '#000',
+              backgroundColor: '#44746c',
+            }
+          },
+          text: [
+            {
+              type: 'cover',
+              title: 'Przeczytaj o małej lokomotywie z wielkim sercem!',
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.webp'
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `Na krótkiej trasie, między górskimi wioskami, jeździła sobie kiedyś pewna
+                          Ciuchcia. Była bardzo wolna, ponieważ w dawnych czasach nie musiała być
+                          wcale szybka. Pociągami jeździły wtedy przede wszystkim rodziny na górskie
+                          wycieczki.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Podczas niespiesznej jazdy wszyscy podziwiali przepiękne widoki.
+                          Szczególnie dzieci, które chętnie wyglądały przez okna i obserwowały
+                          urzekające krajobrazy. A im wyżej pociąg wjeżdżał w góry, tym więcej piękna
+                          widziały. Pasące się na łąkach krówki, jeziorka pełne ryb tuż obok trasy,
+                          ruiny zamku, w którym kiedyś mieszkał podobno sam król. Czasami widać
+                          też było stado saren. Taka przejażdżka zapewniała wspaniałe wrażenia.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Czasy jednak się zmieniły – teraz wszyscy żyją szybciej. Coraz częściej
+                            korzystają z pociągów pospiesznych, które wożą ludzi z miejsca na miejsce
+                            tak szybko, że ci nie mają nawet okazji, by nacieszyć się jazdą. Przy takiej
+                            prędkości krajobrazy za oknem szybko znikają, zlewając się w jeden
+                            rozmazany obraz. I tak Ciuchcia jeździła coraz rzadziej i rzadziej, aż w końcu
+                            zupełnie przestała wyjeżdżać na szlak.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Co zrobimy z tą starą niepotrzebną ciuchcią? – zapytał ktoś.
+                           – Do zajezdni z nią! – zdecydowali o jej losie niewdzięczni zawiadowcy.`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `Gdybyście, drogie dzieci, nie wiedziały – zajezdnia, to takie miejsce, gdzie
+                            odpoczywają pociągi. Tam dbają o nie mechanicy, abyśmy mogli nimi
+                            bezpiecznie jeździć. Ciuchcia wylądowała w najciemniejszym kącie zajezdni,
+                            ponieważ nie była już zupełnie nikomu potrzebna. Stamtąd obserwowała po
+                            cichutku pędzące pociągi.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Po co cię tu postawili?! Zabierasz tylko miejsce. Mieli cię rozmontować, a z
+                            twoich elementów zrobić nowy pociąg pospieszny.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Nowy pociąg pospieszny? A po co? Z niej nie chciałbym nawet jednej śrubki!`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Tak, tak, jesteś całkowicie niepotrzebna. Zawadzasz tu tylko wszystkim –
+                          wyśmiewały się z Ciuchci supernowoczesne pociągi.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Ciuchcia coraz bardziej chowała się w kąt, by nikt jej nie widział i by nikomu
+                          nie przeszkadzała. Na szczęście znalazł się ktoś, kto stanął w jej obronie.
+                          Ktoś, komu jej los nie był obojętny.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Przecież ja cię znam! – powiedział pewien stary mechanik, który zajmował
+                          się pociągami w tej zajezdni. – Gdy byłem mały, moi rodzice często jeździli ze
+                          mną w góry. To były cudowne wycieczki. A ty zawsze nas tam woziłaś. I za to
+                          ci dziękuję! – mechanik poklepał Ciuchcię po starej blasze. – Wiesz co?
+                          Troszkę cię oporządzę – zdecydował stary mechanik i poszedł po olej.`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `– Po co to robisz? To tylko strata czasu – śmiali się z niego koledzy, widząc,
+                          jak zajmuje się nieczynnym pociągiem. – Przecież on już nigdy nigdzie nie
+                          pojedzie.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Może nie, ale były czasy, gdy sprawiał ludziom radość. Zasługuje na mój
+                            szacunek, bo dzięki niemu przeżyłem piękne chwile – bronił się stary
+                            mechanik i oliwił rdzewiejące elementy ciuchci.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Ale koledzy mechanicy już go nie słuchali. Woleli ścigać się, który z nich
+                          lepiej i szybciej przygotuje do drogi swój ekspres.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Tak mijały dni, a Ciuchcia nie czuła się już tak bardzo opuszczona, ponieważ
+                          stary mechanik odwiedzał ją regularnie każdego popołudnia po pracy i
+                          opowiadał jej różne historie z czasów, gdy kiedyś nią jeździł. Ciuchcia
+                          słuchając tego wszystkiego chętnie wspominała piękne miejsca, które w
+                          ciągu swojego życia tyle razy odwiedziła.`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `Pewnego dnia zerwała się wyjątkowo mocna burza. Wiatr łamał drzewa,
+                          które spadały na drogi. Samochody i autobusy były zablokowane, ludzie nie
+                          mogli pojechać do pracy, a dzieci do szkół.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Trzeba dojechać koleją do miejsc, które są nieprzejezdne i pomóc
+                            odblokować drogi – powiedzieli mechanicy.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Ale ciężkie i wysokie drzewa zerwały swoimi konarami również przewody
+                          elektryczne. I okazało się, że superszybkie pociągi nie były w stanie wyjechać
+                          z zajezdni.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Wpadłem na pewien pomysł – podrapał się po brodzie stary mechanik. Na
+                          górce między dolinami, w pobliżu zajezdni, jest zakład elektryczny. –
+                          Skoczymy z Ciuchcią po specjalistów elektryków. Oni naprawią przewody,
+                          dzięki czemu pociągi będą mogły pojechać i pomóc ludziom – zapoznał ich
+                          ze swoim planem.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– To znakomity pomysł! – uznali pozostali koledzy. Nawet pociągi
+                          ekspresowe musiały się z tym zgodzić!`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `I tak po długiej przerwie, Ciuchcia znowu wyjechała na tory. A ponieważ
+                          stary mechanik odpowiednio o nią zadbał, pociąg był w dobrym stanie i
+                          droga przebiegła bez problemów. Gdy gdzieś na trasie leżały połamane
+                          gałęzie albo zwalone drzewo, Ciuchcia bez większego wysiłku spychała je z
+                          drogi.`
+                  },
+                  {
+                    type: 'text',
+                    text: `W końcu wtoczyła się na górkę, elektrycy wsiedli do pociągu i po powrocie do
+                          zajezdni zabrali się za naprawę przewodów elektrycznych. Pociągi
+                          pospieszne mogły wyruszyć, by pomóc rozwozić ludzi i dzieci w czasie, gdy
+                          ciężkie maszyny usuwały drzewa, które zwaliły się na drogi.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Dziękujemy ci, Ciuchcio! Bardzo nam pomogłaś. Bez ciebie by się nie udało
+                          – przyznały pociągi, gdy wreszcie wróciły do zajezdni po pracowitym dniu. –
+                          Już nigdy nie będziemy się z ciebie śmiać.`
+                  },
+                  {
+                    type: 'text',
+                    text: `– Nie ma za co, musimy sobie przecież pomagać – uśmiechnęła się skromnie Ciuchcia.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Ale momencik… Taki wyjątkowy pociąg nie powinien chyba stać w ciemnym
+                          kącie zajezdni, prawda?`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `– W każdy weekend zaprosimy rodziny do wspólnej jazdy starą trasą z naszą
+                          bohaterską Ciuchcią – zdecydowali wszyscy pracownicy kolei.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Zgadnijcie, kto wybrał się na tę przejażdżkę jako pierwszy? Oczywiście – stary mechanik.`
+                  }
+                ]
+            },
+            {
+              type: 'end',
+              title: 'Dobranoc!',
+              subtitle: 'Brawo! Świetnie ci poszło!'
+            }
+          ] as ReaderPage[],
+  
+          image: [
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/1.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/2.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/3.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/4.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/5.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/6.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/7.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/8.webp',
+          ],
+  
+          english: [
+            {
+              type: 'cover',
+              title: '',
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/index.webp'
+            },
+            {  
+              type: 'content',
+              paragraphs: [
+                {
+                  "type": "text",
+                  "text": "There once was a Choo-choo train that ran on a short route between mountain villages. She was very slow because in the old days, speed wasn't important. Trains were mainly used by families going on mountain trips, who enjoyed admiring the beautiful views.",
+                  "translation": "Na krótkiej trasie, między górskimi wioskami, jeździła sobie kiedyś pewna Ciuchcia. Była bardzo wolna, ponieważ w dawnych czasach nie musiała być wcale szybka. Pociągami jeździły wtedy przede wszystkim rodziny na górskie wycieczki. Podczas niespiesznej jazdy wszyscy podziwiali przepiękne widoki.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/1.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "mountain villages",
+                      "translation": "górskie wioski",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/1_1.mp3',
+                    },
+                    {
+                      "word": "beautiful views",
+                      "translation": "przepiękne widoki",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/1_2.mp3',
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "Especially children loved looking out the windows at grazing cows, fish-filled lakes, castle ruins where a king supposedly lived, and sometimes even herds of deer. Such rides provided wonderful experiences.",
+                  "translation": "Szczególnie dzieci, które chętnie wyglądały przez okna i obserwowały urzekające krajobrazy, pasące się krówki, jeziorka pełne ryb, ruiny zamku, w którym podobno mieszkał król, i czasami stado saren. Taka przejażdżka zapewniała wspaniałe wrażenia.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/2.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "castle ruins",
+                      "translation": "ruiny zamku",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/2_1.mp3',
+                    },
+                    {
+                      "word": "grazing cows",
+                      "translation": "pasące się krówki",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/2_2.mp3',
+                    },
+                    {
+                      "word": "fish-filled lakes",
+                      "translation": "jeziorka pełne ryb",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/2_3.mp3',
+                    },
+                    {
+                      "word": "looking out the windows",
+                      "translation": "wyglądały przez okna",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/2_4.mp3',
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "But times changed - now everyone lives faster. People increasingly use express trains that transport them so quickly from place to place that they don't even have time to enjoy the journey. At such speeds, the landscapes blur into one smeared image outside the window.",
+                  "translation": "Czasy jednak się zmieniły – teraz wszyscy żyją szybciej. Coraz częściej korzystają z pociągów pospiesznych, które wożą ludzi z miejsca na miejsce tak szybko, że ci nie mają nawet okazji, by nacieszyć się jazdą. Przy takiej prędkości krajobrazy za oknem szybko znikają, zlewając się w jeden rozmazany obraz.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/3.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "times changed",
+                      "translation": "czasy się zmieniły",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/3_1.mp3',
+                    },
+                    {
+                      "word": "express trains",
+                      "translation": "pociągi ekspresowe",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/3_2.mp3',
+                    },
+                    {
+                      "word": "to enjoy the journey",
+                      "translation": "nacieszyć się podróżą",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/3_3.mp3',
+                    },
+                    {
+                      "word": "landscapes blur",
+                      "translation": "krajobrazy zlewają się",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/3_4.mp3',
+                    },
+                    {
+                      "word": "smeared image",
+                      "translation": "rozmazany obraz",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/3_5.mp3',
+                    },
+                    {
+                      "word": "increasingly",
+                      "translation": "coraz częściej",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/3_6.mp3',
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "And so the Choo-choo train ran less and less frequently until she completely stopped running on the tracks.",
+                  "translation": "I tak Ciuchcia jeździła coraz rzadziej i rzadziej, aż w końcu zupełnie przestała wyjeżdżać na szlak.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/4.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "stopped running",
+                      "translation": "przestała wyjeżdżać",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/4_1.mp3',
+                    }
+                  ]
+                },
+              ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                {
+                  "type": "text",
+                  "text": "'What shall we do with this old useless Choo-choo train?' someone asked. 'Take her to the depot!' decided the ungrateful dispatchers. Children, if you don't know - a depot is a place where trains rest. There, mechanics take care of them so we can ride them safely.",
+                  "translation": "'Co zrobimy z tą starą niepotrzebną ciuchcią?' zapytał ktoś. 'Do zajezdni z nią!' zdecydowali o jej losie niewdzięczni zawiadowcy. Gdybyście, drogie dzieci, nie wiedziały – zajezdnia, to takie miejsce, gdzie odpoczywają pociągi. Tam dbają o nie mechanicy, abyśmy mogli nimi bezpiecznie jeździć.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/5.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "depot",
+                      "translation": "zajezdnia",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/5_1.mp3',
+                    },
+                    {
+                      "word": "ungrateful dispatchers",
+                      "translation": "niewdzięczni dyspozytorzy",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/5_2.mp3',
+                    },
+                    {
+                      "word": "mechanics",
+                      "translation": "mechanicy",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/5_3.mp3',
+                    },
+                    {
+                      "word": "take care of",
+                      "translation": "dbać o",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/5_4.mp3',
+                    },
+                    {
+                      "word": "useless",
+                      "translation": "bezużyteczny",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/5_5.mp3',
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "The Little Choo-choo train ended up in the darkest corner of the depot because she wasn't needed anymore. From there, she quietly observed the speeding trains.",
+                  "translation": "Ciuchcia wylądowała w najciemniejszym kącie zajezdni, ponieważ nie była już zupełnie nikomu potrzebna. Stamtąd obserwowała po cichutku pędzące pociągi.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/6.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "darkest corner",
+                      "translation": "najciemniejszy kąt",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/6_1.mp3',
+                    },
+                    {
+                      "word": "ended up",
+                      "translation": "wylądowała",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/6_2.mp3',
+                    },
+                    {
+                      "word": "wasn't needed anymore",
+                      "translation": "nie była już potrzebna",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/6_3.mp3',
+                    },
+                    {
+                      "word": "quietly observed",
+                      "translation": "po cichu obserwowała",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/6_4.mp3',
+                    },
+                    {
+                      "word": "speeding trains",
+                      "translation": "pędzące pociągi",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/6_5.mp3',
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "Fortunately, someone stood up for her - an old mechanic who remembered her from his childhood. He took care of her despite his colleagues' mockery.",
+                  "translation": "Na szczęście znalazł się ktoś, kto stanął w jej obronie - pewien stary mechanik, który pamiętał ją z dzieciństwa. Zajmował się nią mimo drwin kolegów.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/7.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "stood up for her",
+                      "translation": "wstawił się za nią",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/7_1.mp3',
+                    },
+                    {
+                      "word": "remembered from childhood",
+                      "translation": "pamiętał z dzieciństwa",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/7_2.mp3',
+                    },
+                    {
+                      "word": "despite",
+                      "translation": "mimo",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/7_3.mp3',
+                    },
+                    {
+                      "word": "colleagues' mockery",
+                      "translation": "kpiny kolegów",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/7_4.mp3',
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "Then one stormy day, when fallen trees blocked roads and damaged power lines, the modern electric trains couldn't leave the depot. That's when the Little Choo-choo, which didn't need electricity, proved invaluable by helping transport electricians to fix the power lines.",
+                  "translation": "Pewnego burzowego dnia, gdy powalone drzewa zablokowały drogi i uszkodziły przewody elektryczne, nowoczesne pociągi elektryczne nie mogły wyjechać z zajezdni. Wtedy właśnie Ciuchcia, która nie potrzebowała elektryczności, okazała się niezastąpiona, pomagając przetransportować elektryków do naprawy linii.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/8.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "stormy day",
+                      "translation": "burzowy dzień",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/8_1.mp3',
+                    },
+                    {
+                      "word": "fallen trees",
+                      "translation": "powalone drzewa",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/8_2.mp3',
+                    },
+                    {
+                      "word": "power lines",
+                      "translation": "linie energetyczne",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/8_3.mp3',
+                    },
+                    {
+                      "word": "proved invaluable",
+                      "translation": "okazała się nieoceniona",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/8_4.mp3',
+                    },
+                    {
+                      "word": "electricians",
+                      "translation": "elektrycy",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/8_5.mp3',
+                    },
+                    {
+                      "word": "to fix",
+                      "translation": "naprawić",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/8_6.mp3',
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+               {
+                  "type": "text",
+                  "text": "After this event, everyone appreciated her value. The railway workers decided that every weekend, the heroic Little Choo-choo train would take families on trips along the old route.",
+                  "translation": "Po tym wydarzeniu wszyscy docenili jej wartość. Pracownicy kolei zdecydowali, że w każdy weekend bohaterska Ciuchcia będzie woziła rodziny na wycieczki starą trasą.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/9.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "heroic",
+                      "translation": "bohaterska",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/9_1.mp3',
+                    },
+                    {
+                      "word": "railway workers",
+                      "translation": "pracownicy kolei",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/9_2.mp3',
+                    },
+                    {
+                      "word": "appreciated",
+                      "translation": "docenili",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/9_3.mp3',
+                    } 
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "And guess who was the first to take such a ride? Of course - the old mechanic.",
+                  "translation": "Zgadnijcie, kto wybrał się na tę przejażdżkę jako pierwszy? Oczywiście - stary mechanik.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/10.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "guess who",
+                      "translation": "zgadnijcie kto",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/10_1.mp3',
+                    },
+                    {
+                      "word": "to take a ride",
+                      "translation": "wyruszyć w podróż",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/10_2.mp3',
+                    },
+                    {
+                      "word": "of course",
+                      "translation": "oczywiście",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/english/10_3.mp3',
+                    },
+                  ]
+                }
+              ]
+            },
+            {
+              type: 'end',
+              title: 'Bravo!',
+              subtitle: 'You did a fantastic job!'
+            }
+          ] as LangReaderPage[]
+        } as ReaderContent,
+        resource: [
+          {
+            type: 'quiz',
+            ids: ['9dcceb17-1189-42fxx9-815e-Coo1', '9dcceb17-1189-42fxx9-815e-Coo2'],
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/quiz/baner_quiz.webp',
+          },
+          {
+            type: 'audiobook',
+            ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b-train', '8161eb39-7ab7-4186-b7fd-0f43b54df133-train'],
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/choo-choo/reader/baner_audio.webp',
+          },
+          {
+            type: 'printouts',
+            ids: ['16271817-907d-48zxz96-choo1', '16271817-907d-48zxz96-choo22'],
+          },
+        ]
+      },
+      {
+        id: '5fa869da-166d-45cc-a57d-36ddfda181b56',
+        type: 'reader' as ProductType,
+        ageGroupId: 3,
+        indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.webp',
+        gallery: [ 
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/gallery/cover.webp',
+          'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/gallery/cover.webp',
+        ],
+        title: "Natalia i smok",
+        description: "Główny bohater - wiekowy dąb - pełni rolę opiekuna i strażnika leśnej społeczności. Jego rozłożyste gałęzie i potężna korona tworzą bezpieczne schronienie dla wielu mieszkańców lasu",
+        rating: 5, 
+        reviewCount: 17,
+        content: {
+          options: {
+            backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/background.webp',
+            textColor: '#fff',
+            tileColor: '#cd2b83',
+            text: {
+              title: 'Zacznij czytać',
+              subTitle: 'Czas czytania: 5 min',
+              textColor: '#fff',
+              backgroundColor: '#cd2b83',
+            },
+            image: {
+              title: 'Zacznij czytać',
+              subTitle: 'Czas czytania: 3-4 minuty',
+              textColor: '#000',
+              backgroundColor: '#544a86',
+            },
+            english: {
+              title: 'Zacznij czytać',
+              subTitle: 'Czas czytania: 10 min',
+              textColor: '#000',
+              backgroundColor: '#24bedb',
+            }
+          },
+          text: [
+            {
+              type: 'cover',
+              title: '',
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.png'
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `W ciemnym gęstym lesie rósł sobie pewien naprawdę stary dąb. Nikt nie wie dokładnie, 
+                          jak długo tam był, przeżył jednak wiele pokoleń i pamiętał naprawdę sporo. 
+                          Często wspominał wszystko, co działo się wokół niego przez
+                          ten bardzo długi czas.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Jego potężna korona tworzyła bowiem doskonałe
+                          schronienie przed deszczem, który padał na jego ogromne liście. Jego
+                          gałęzie przypominały szeroko otwarte ramiona, przygarniające z miłością
+                          wszystkich małych mieszkańców lasu.`
+                  },
+                  {
+                    type: 'text',
+                    text: `W bujnej koronie dębu zamieszkała rodzina turkawek. Swym pięknym
+                          śpiewem tworzą przyjacielską atmosferę i żyją w prawdziwej harmonii ze
+                          starym dębem. Informują przy okazji wszystkich wokół, że stary dąb jest
+                          bezpieczną przystanią, w której panuje błogość i spokój. Dla małych
+                          turkawek stał się on swego rodzaju oazą, w której mogą bez obaw złożyć jaja
+                          w małym gniazdku i przymknąć oczy, by nabrać nowych sił.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Na pewno będą
+                          tam mieć piękne sny o tym, jak pewnego dnia ich małe turkaweczki rozłożą
+                          wreszcie skrzydła i polecą w górę ze swoimi rodzicami. Wzlecą ponad
+                          chmury i wyruszą w pełną przygód drogę tam, gdzie kończy się ziemia, a
+                          zaczyna morze, które delikatnie uderza falami o skalisty brzeg.`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `W bujnej koronie dębu zamieszkała rodzina turkawek. Swym pięknym
+                          śpiewem tworzą przyjacielską atmosferę i żyją w prawdziwej harmonii ze
+                          starym dębem. Informują przy okazji wszystkich wokół, że stary dąb jest
+                          bezpieczną przystanią, w której panuje błogość i spokój.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Dla małych turkawek stał się on swego rodzaju oazą, w której mogą bez obaw złożyć jaja
+                          w małym gniazdku i przymknąć oczy, by nabrać nowych sił. Na pewno będą
+                          tam mieć piękne sny o tym, jak pewnego dnia ich małe turkaweczki rozłożą
+                          wreszcie skrzydła i polecą w górę ze swoimi rodzicami.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Wzlecą ponad chmury i wyruszą w pełną przygód drogę tam, gdzie kończy się ziemia, a
+                          zaczyna morze, które delikatnie uderza falami o skalisty brzeg.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Na dole, przy pniu dębu, urzędują zaś dwa młode niedźwiedzie, które na
+                          chwilę zniknęły mamie z oczu. Dąb obserwuje w milczeniu małe,
+                          niegramotne niedźwiadki i przypatruje się, jak beztrosko pożywiają się
+                          świeżymi owocami lasu.`
+                  }
+                ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                  {
+                    type: 'text',
+                    text: `Ich delikatna woń powoli wznosi się pomiędzy liście
+                          i nawet stary dąb, gdyby mógł, wciągnąłby głęboko ich zapach. Jego liście
+                          cichutko szumią i w końcu nawet ono samo, potężne drzewo, delikatnie
+                          przymyka oczy. Wietrzyk smaga czule rozgałęzioną koronę, która przechyla
+                          się z boku na bok jak łódka na szerokim morzu, a wraz z nią powoli huśtają
+                          się wszyscy mieszkańcy drzewa.`
+                  },
+                  {
+                    type: 'text',
+                    text: `A gdy wokół już zupełnie się ściemniło, usnęły również małe misie, które od
+                          dawna odpoczywały ze swoją mamą w ciepłej i bezpiecznej jamie. Wtedy
+                          znów spadł ulewny deszcz. Pomaga on usnąć wszystkim leśnym
+                          zwierzątkom, by rano zbudziły się wypoczęte i pełne energii.`
+                  },
+                  {
+                    type: 'text',
+                    text: `Jeszcze tylko
+                          chwila i wszyscy mieszkańcy lasu pójdą spać spokojnym snem. Dąb jest
+                          wdzięczny za każdy kolejny dzień, w trakcie którego mógł być schronieniem
+                          dla leśnych stworzeń. On sam też jest już zmęczony, cieszy się więc, że może
+                          w końcu odpocząć`
+                  }
+                ]
+            },
+            {
+              type: 'end',
+              title: 'Dobranoc!',
+              subtitle: 'Brawo! Świetnie ci poszło!'
+            }
+          ] as ReaderPage[],
+  
+          image: [
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/1.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/2.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/3.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/4.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/5.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/6.webp',
+            'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/reader/7.webp',
+          ],
+  
+          english: [
+            {
+              type: 'cover',
+              title: '',
+              image: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/index.webp'
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                {
+                  "type": "text",
+                  "text": "Natalia loved dragons more than anything in the world. She had dragon toys, dragon bedding, a dragon alarm clock shaped like an egg, and even a backpack with fire-breathing dragons.",
+                  "translation": "Natalia kochała smoki najbardziej na świecie. Miała smocze zabawki, pościel w smoki, budzik w kształcie smoczego jajka, a nawet plecak ze smokami ziejącymi ogniem",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/1.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "dragons",
+                      "translation": "smoki",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/1_1.mp3',
+                    },
+                    {
+                      "word": "bedding",
+                      "translation": "pościel",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/1_2.mp3',
+                    },
+                    {
+                      "word": "alarm clock",
+                      "translation": "budzik",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/1_3.mp3',
+                    },
+                    {
+                      "word": "shaped like",
+                      "translation": "w kształcie",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/1_4.mp3',
+                    },
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "Every morning she would carefully arrange all her dragon figurines on the shelf, making sure they were facing the same direction.",
+                  "translation": "Każdego ranka starannie układała wszystkie swoje smocze figurki na półce, upewniając się, że patrzą w tym samym kierunku.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/2.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "arrange",
+                      "translation": "układać",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/2_1.mp3',
+                    },
+          
+                    {
+                      "word": "carefully",
+                      "translation": "starannie",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/2_2.mp3',
+                    },
+                    {
+                      "word": "figurines",
+                      "translation": "figurki",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/2_3.mp3',
+                    },
+                    {
+                      "word": "shelf",
+                      "translation": "półka",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/2_4.mp3',
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "One night, Natalia dreamed of flying high above a river on a huge dragon's back. The wind was blowing through her hair, and she was laughing with joy.",
+                  "translation": "Pewnej nocy Natalia śniła o locie wysoko nad rzeką na grzbiecie ogromnego smoka. Wiatr rozwiewał jej włosy, a ona śmiała się z radości.",
+                  audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/3.mp3',
+                  "vocabulary": [
+                    {
+                      "word": "dreamed",
+                      "translation": "śniła",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/3_1.mp3',
+                    },
+                    {
+                      "word": "huge",
+                      "translation": "ogromny",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/3_2.mp3',
+                    },
+                    {
+                      "word": "wind",
+                      "translation": "wiatr",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/3_3.mp3',
+                    },
+                    {
+                      "word": "joy",
+                      "translation": "radość",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/3_4.mp3',
+                    },
+                    {
+                      "word": "flying high",
+                      "translation": "lot wysoko",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/3_5.mp3',
+                    },
+                    {
+                      "word": "river",
+                      "translation": "rzeka",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/3_6.mp3',
+                    },
+                    {
+                      "word": "back",
+                      "translation": "grzbiet",
+                      audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/3_7.mp3',
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "Suddenly, she heard a bell ringing - it was her dragon egg alarm clock waking her up for another day of school.",
+                  "translation": "Nagle usłyszała dzwonienie - to jej budzik w kształcie smoczego jajka budził ją na kolejny dzień szkoły.",
+                  "vocabulary": [
+                    {
+                      "word": "suddenly",
+                      "translation": "nagle"
+                    },
+                    {
+                      "word": "bell ringing",
+                      "translation": "dzwonienie"
+                    }
+                  ]
+                },
+              ]
+            },
+            {
+              type: 'content',
+              paragraphs: [
+                {
+                  "type": "text",
+                  "text": "Mom promised Natalia a dragon if she got good grades. The girl studied hard all year, learning multiplication, division, and spelling.",
+                  "translation": "Mama obiecała Natalii smoka, jeśli dostanie dobre oceny. Dziewczynka ciężko się uczyła przez cały rok, ucząc się mnożenia, dzielenia i ortografii.",
+                  "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/5.mp3",
+                  "vocabulary": [
+                    {
+                      "word": "multiplication",
+                      "translation": "mnożenie",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/5_1.mp3"
+                    },
+                    {
+                      "word": "division",
+                      "translation": "dzielenie",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/5_2.mp3"
+                    },
+                    {
+                      "word": "spelling",
+                      "translation": "ortografia",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/5_3.mp3"
+                    },
+                    {
+                      "word": "promised",
+                      "translation": "obiecała",
+                       "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/5_4.mp3"
+                    },
+                    {
+                      "word": "studied hard",
+                      "translation": "ciężko się uczyła",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/5_5.mp3"
+                    },
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "When she brought home an excellent report card, her parents took her to the mall. Instead of going to the toy shop as Natalia expected, they went to a pet store. There, mom showed her a special surprise - a real water dragon!",
+                  "translation": "Kiedy przyniosła do domu świetne świadectwo, rodzice zabrali ją do centrum handlowego. Zamiast do sklepu z zabawkami, jak się spodziewała Natalia, poszli do sklepu zoologicznego. Tam mama pokazała jej specjalną niespodziankę - prawdziwego wodnego smoka!",
+                  "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/6.mp3",
+                  "vocabulary": [
+                    {
+                      "word": "report card",
+                      "translation": "świadectwo",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/6_1.mp3",
+                    },
+                    {
+                      "word": "excellent",
+                      "translation": "świetne",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/6_2.mp3",
+                    },
+                    {
+                      "word": "mall",
+                      "translation": "centrum handlowe",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/6_3.mp3",
+                    },
+                    {
+                      "word": "toy shop",
+                      "translation": "sklep z zabawkami",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/6_4.mp3",
+                    },
+                    {
+                      "word": "pet store",
+                      "translation": "sklep zoologiczny",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/6_5.mp3",
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "It was an axolotl from Mexico, pink and small, with delicate spikes around its face. Although it couldn't fly, it could swim underwater just like Chinese dragons.",
+                  "translation": "Był to aksolotl z Meksyku, różowy i mały, z delikatnymi kolcami wokół pyszczka. Chociaż nie potrafił latać, umiał pływać pod wodą jak chińskie smoki.",
+                  "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/7.mp3",
+                  "vocabulary": [
+                    {
+                      "word": "axolotl",
+                      "translation": "aksolotl",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/7_1.mp3",
+                    },
+                    {
+                      "word": "delicate",
+                      "translation": "delikatny",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/7_2.mp3",
+                    },
+                    {
+                      "word": "spikes",
+                      "translation": "kolce",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/7_3.mp3",
+                    },
+                    {
+                      "word": "swim underwater",
+                      "translation": "pływać pod wodą",
+                      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/7_4.mp3",
+                    },
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "Natalia immediately fell in love with her water dragon. On the way home, she held the aquarium tightly on her lap, along with a bag of amphibian food and a book about caring for axolotls. That day, Natalia discovered that even the biggest dreams can come true in unexpected ways.",
+                  "translation": "Natalia od razu pokochała swojego wodnego smoka. W drodze do domu mocno trzymała na kolanach akwarium, wraz z torebką karmy dla płazów i książką o opiece nad aksolotlami. Tego dnia Natalia odkryła, że nawet największe marzenia mogą się spełnić w nieoczekiwany sposób.",
+                  "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/8.mp3",
+                  "vocabulary": [
+                      {
+                        "word": "aquarium",
+                        "translation": "akwarium",
+                        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/8_1.mp3",
+                      },
+                      {
+                        "word": "amphibian",
+                        "translation": "płaz",
+                        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/8_2.mp3",
+                      },
+                      {
+                        "word": "unexpected",
+                        "translation": "nieoczekiwany",
+                        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/8_3.mp3",
+                      },
+                      {
+                        "word": "immediately",
+                        "translation": "od razu",
+                        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/8_4.mp3",
+                      },
+                      {
+                        "word": "fell in love",
+                        "translation": "pokochała",
+                        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/8_5.mp3",
+                      },
+                      {
+                        "word": "caring for",
+                        "translation": "opieka nad",
+                        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/8_6.mp3",
+                      },
+                      {
+                        "word": "discovered",
+                        "translation": "odkryła",
+                        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/english/8_7.mp3",
+                      }
+                    ]
+                }
+              ]
+            },
+            {
+              type: 'end',
+              title: 'Bravo!',
+              subtitle: 'You did great!'
+            }
+          ] as LangReaderPage[]
+        } as ReaderContent,
+        resource: [
+          {
+            type: 'quiz',
+            ids: ['9dcceb17-1189-42fxx9-815e-natalia1', '9dcceb17-1189-42fxx9-815e-quizNatalia2', '9dcceb17-1189-42fxx9-815e-quizNatalia3'],
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/baner_quiz.webp',
+          },
+          {
+            type: 'audiobook',
+            ids: ['8161eb39-7ab7-4186-b7fd-0f43b54df133-nat', 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-nat'],
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/natalie_and_dragon/baner_audio.webp',
+          },
+          {
+            type: 'printouts',
+            ids: ['16271817-907d-4896-88z82-nati1', '16271817-907d-4896-88z82-nati2'],
+          },
+        ]
+      },
+      {
         id: '5fa869da-166d-45ccfd-d57d-36dda0a181b56',
         type: 'reader' as ProductType,
         ageGroupId: 3,
@@ -12,8 +1353,8 @@ export const readers = [
         ],
         title: "Zosia i wielki strach",
         description: "Główna bohaterka, mała Zosia, musi zmierzyć się z nieoczekiwaną sytuacją, gdy jej mama trafia do szpitala, by urodzić jej braciszka,Historia porusza ważne tematy takie jak radzenie sobie ze strachem, pojawienie się rodzeństwa w rodzinie oraz rola wsparcia najbliższych.",
-        rating: 4, 
-        reviewCount: 120,
+        rating: 5, 
+        reviewCount: 22,
         content: {
           options: {
             backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/background.webp',
@@ -350,12 +1691,12 @@ export const readers = [
           {
             type: 'quiz',
             ids: ['9dcceb17-1189-42fxx9-815e-46b5988d1sdbaquizZosia1', '9dcceb17-1189-42fxx9-815e-46b5988d1sdbaquizZosia2', '9dcceb17-1189-42fxx9-815e-46b5988d1sdbaquizZosia3'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.png',
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/baner_quiz.webp',
           },
           {
             type: 'audiobook',
-            ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92bzosia', '8161eb39-7ab7-4186-b7fd-0f43b54df133zosia'],
-            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/audiobook-baner.png',
+            ids: ['8161eb39-7ab7-4186-b7fd-0f43b54df133-zosia', 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-zosia'],
+            bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/zosia/baner_audio.webp',
           },
           {
             type: 'printouts',

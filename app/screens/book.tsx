@@ -96,8 +96,8 @@ const BookScreen = ({ route, navigation }:any) => {
                 }
                 
                 { element.type === 'audiobook' &&
-                  <SquareButton  key={element.type} props={{title: 'audiobooki', icon: 'add', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('AudioBooks', {book, resource: element}) }}>
-                    <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+                  <SquareButton  key={element.type} props={{title: 'audio', icon: 'add', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('AudioBooks', {book, resource: element}) }}>
+                    <Image source={require('@/assets/icons/nuta.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
                   </SquareButton>
                 }
 

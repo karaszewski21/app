@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, StyleSheet, Image, Dimensions} from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Dimensions} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import Quiz from '@/components/quiz/Quiz'
 import { quizes } from '@/constants/quizes';
@@ -13,6 +13,7 @@ import BookButton from '@/components/buttons/BookButton';
 import BuyBookView from '@/components/common/BuyBookView';
 import useBuyBook from '@/hooks/useBuyBook';
 import { OptionsBook } from '@/model/book';
+import { Image } from 'expo-image';
 
 const QuizesStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -45,7 +46,7 @@ const QuizesScreen = ({route, navigation }:any) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.bookDetailsContainer}>
-          <Image style={styles.image} source={{uri: bannerUrl}}></Image>
+          <Image style={styles.image} source={{uri: bannerUrl}} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')}></Image>
         </View>
         <View style={styles.listContent}>
           { quizList.map((item: any, index) =>
@@ -128,20 +129,13 @@ const QuizesScreen = ({route, navigation }:any) => {
       minHeight: '100%',
     },
     bookDetailsContainer: {
-      margin: 10,
+      marginHorizontal: 10,
+      borderRadius: 15,
     },
     image: {
-      height: 200,
+      height: 130,
       width: '100%',
       borderRadius: 15,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 5,
-      },
-      shadowOpacity: 0.34,
-      shadowRadius: 6.27,
-      elevation: 10,
     },
     rankingContainer: {
       padding: 20,

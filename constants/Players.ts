@@ -35,11 +35,11 @@ export const players = [
       {
         type: 'quiz',
         ids: ['a1b2c3d4-5678-9101-Ugly', 'b2c3d4e5-6789-1011-quizBrzydkieKaczatko2'],
-        bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.png',
+        bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/baner_quiz.webp',
       },
       {
         type: 'printouts',
-        ids: ['16271817-907d-4896-8882-060bc61d5418', 'd5935d8f-aa77-4c0d-a32f-b9bb5a2b1fb7'],
+        ids: ['16271817-907d-48zxz96-duck1'],
       },
     ]
   },
@@ -76,11 +76,11 @@ export const players = [
       {
         type: 'quiz',
         ids: ['quizKotwButach1', 'quizKotwButach2'],
-        bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/quiz/quiz-baner.png',
+        bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/players/cat/baner_quiz.webp',
       },
       {
         type: 'printouts',
-        ids: ['16271817-907d-4896-8882-060bc61d5418', 'd5935d8f-aa77-4c0d-a32f-b9bb5a2b1fb7'],
+        ids: ['16271817-907d-48zxz96-kot1', '16271817-907d-48zxz96-kot2'],
       },
     ]
   },

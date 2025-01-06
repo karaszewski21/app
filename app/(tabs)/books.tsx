@@ -75,7 +75,7 @@ const BooksScreen = ({ navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/banerbook2.png" hidden={hiddenBanner}/>
+      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/baner_book.webp" hidden={hiddenBanner}/>
       <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup} reset={true}/>
       <FlatList
           data={bookList}

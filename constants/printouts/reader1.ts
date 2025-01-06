@@ -9,4 +9,9 @@ export const reader1 = [
         name: 'print2',
         fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/print/2.png'
     },
+    { 
+        id: '16271817-90fd7d-4896-8882-old3',
+        name: 'print3',
+        fileUrl: 'https://goldfish.fra1.digitaloceanspaces.com/print/las.webp'
+    }
   ];

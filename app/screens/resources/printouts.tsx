@@ -1,7 +1,7 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Button, Platform, Alert, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Button, Platform, Alert, Dimensions } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStackNavigator } from '@react-navigation/stack';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { printouts } from '@/constants/printouts';
 import * as Print from 'expo-print';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
@@ -10,6 +10,7 @@ import BookButton from '@/components/buttons/BookButton';
 import useBuyBook from '@/hooks/useBuyBook';
 import BuyBookView from '@/components/common/BuyBookView';
 import { OptionsBook } from '@/model/book';
+import { Image } from 'expo-image';
 
 const PrintoutsStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -88,7 +89,7 @@ const PrintoutsScreen = ({route, navigation }:any) => {
       disabled={isLock}
       style={styles.tileItem}
       >
-        <Image source={{ uri: item.fileUrl }} style={styles.image} resizeMode="cover"/>
+        <Image style={styles.image} source={{uri: item.fileUrl}} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')}></Image>
     </TouchableOpacity>
     )
   }
@@ -96,14 +97,14 @@ const PrintoutsScreen = ({route, navigation }:any) => {
   return (
     <SafeAreaView style={styles.container}>
       { Platform.OS === 'ios' && (
-         <>
+         <Fragment>
            <View style={styles.spacer} />
            <Button title="Select printer" onPress={selectPrinter} />
            <View style={styles.spacer} />
            {selectedPrinter ? (
              <Text style={styles.printer}>{`Selected printer: ${selectedPrinter.name}`}</Text>
            ) : undefined}
-         </>
+         </Fragment>
        ) }
       <ScrollView>
         <View style={styles.tilesContainer}>
@@ -162,14 +163,6 @@ const PrintoutsScreen = ({route, navigation }:any) => {
       height: 250,
       borderRadius: 15,
       marginBottom: 15,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5, // To jest potrzebne dla Androida
     },
     image: {
       width: '100%',

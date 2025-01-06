@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { audiobooks } from '@/constants/audiobooks';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,6 +14,7 @@ import useBuyBook from '@/hooks/useBuyBook';
 import BuyBookView from '@/components/common/BuyBookView';
 import BarcodeScanned from '@/components/common/BarcodeScanned';
 import { OptionsBook } from '@/model/book';
+import { Image } from 'expo-image';
 
 const AudioBooksStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -45,7 +46,7 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
   
   const openAudioBookItem = (version: any) => {
       openPlayer({
-        title: version.name,
+        title: version.title,
         fileUrl: version.audioFile,
         imageUrl: version.imageUrl
       })
@@ -55,7 +56,7 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.bookDetailsContainer}>
-          <Image style={styles.image} source={{ uri: bannerUrl }}></Image>
+            <Image style={styles.image} source={{uri: bannerUrl}} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')}></Image>
         </View>
         <View style={styles.listContent}>
           { versions.map((item: any, index) =>
@@ -63,29 +64,29 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
               { item.type === 'pl' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
                   <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={1}>{item.name}</Text>
-                  <Image source={require('@/assets/icons/pl.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
+                  <Image source={require('@/assets/icons/pl.png')} style={{width: 50, height: 50, marginBottom: 5}} contentFit='contain'/>
                   <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: item.options.textPlayColor}}>słuchaj</Text>
-                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} resizeMode='contain'/> 
+                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} contentFit='contain'/> 
                   </View> 
                 </View>
               }
               { item.type === 'eng' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
                   <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={1}>{item.name}</Text>
-                  <Image source={require('@/assets/icons/eng-flag.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
+                  <Image source={require('@/assets/icons/eng-flag.png')} style={{width: 50, height: 50, marginBottom: 5}} contentFit='contain'/>
                   <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: item.options.textPlayColor}}>słuchaj</Text>
-                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} resizeMode='contain'/> 
+                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} contentFit='contain'/> 
                   </View> 
                 </View>}
               { item.type === 'pl-eng' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
                   <Text style={[styles.tileTitle, {color: item.options.textColor}]}>{item.name}</Text>
-                  <Image source={require('@/assets/icons/pl-eng.png')} style={{width: 60, height: 60, marginBottom: 5}} resizeMode='contain'/>
+                  <Image source={require('@/assets/icons/pl-eng.png')} style={{width: 50, height: 50, marginBottom: 5}} contentFit='contain'/>
                   <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: item.options.textPlayColor}}>słuchaj</Text>
-                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} resizeMode='contain'/> 
+                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} contentFit='contain'/> 
                   </View> 
                 </View>
               }
@@ -132,7 +133,8 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
       paddingBottom: 50
     },
     bookDetailsContainer: {
-      margin: 10,
+      marginHorizontal: 10,
+      borderRadius: 15,
     },
     tileTitle: {
       fontSize: 16,
@@ -151,17 +153,9 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
       marginBottom: 10,
     },
     image: {
-      height: 200,
+      height: 130,
       width: '100%',
       borderRadius: 15,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 5,
-      },
-      shadowOpacity: 0.34,
-      shadowRadius: 6.27,
-      elevation: 10,
     },
     scannerContainer: {
       height: '80%'
