@@ -49,7 +49,7 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={{margin: 10}}>
+        <View style={styles.voiceDetailsContainer}>
           <Image style={styles.image} source={{uri: bannerUrl}}></Image>
         </View>
         <View style={styles.listContent}>
@@ -459,18 +459,14 @@ const VoiceQuizScreen = ({route, navigation }:any) => {
     //   textAlign: 'center',
     //   fontFamily: 'ShantellSans-SemiBoldItalic'
     // },
+    voiceDetailsContainer: {
+      marginHorizontal: 10,
+      borderRadius: 15,
+    },
     image: {
-      height: 200,
+      height: 130,
       width: '100%',
       borderRadius: 15,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 5,
-      },
-      shadowOpacity: 0.34,
-      shadowRadius: 6.27,
-      elevation: 10,
     },
     rankingContainer: {
       padding: 20,

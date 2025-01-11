@@ -57,7 +57,7 @@ export const books = [
     type: 'book' as ProductType,
     ageGroupId: 5,
     indexType: 'image',
-    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/index.png',
+    indexUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/index.webp',
     gallery: [ 
       'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/gallery/page5.png',
       'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/gallery/page1.png', 
@@ -65,7 +65,7 @@ export const books = [
       'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/gallery/page3.png',
       'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/gallery/page4.png'
     ],
-    title: "Einstein. Niezwykła mysia podróż przez czasoprzestrzeń",
+    title: "LATO w dolinie tumilu",
     description: `A co, jeśli słynne teorie Einsteina powstały dopiero po spotkaniu wynalazcy z pewną myszką?
                   Czy nie byłaby to odpowiedź na pytanie, jakim cudem pracownik szwajcarskiego urzędu patentowego wywrócił do góry nogami zasady fizyki oraz nasze wyobrażenie o przestrzeni i czasie?`,
     isLock: true,

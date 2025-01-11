@@ -5,6 +5,7 @@ import { reader3 } from "./reader3";
 import { reader4 } from "./reader4";
 import { player1 } from "./player1";
 import { player2 } from "./player2";
+import { mis } from "./mis";
 
 
-export const printouts = [...wamp, ...reader1, ...reader2, ...reader3, ...reader4, ...player1, ...player2]
+export const printouts = [...wamp, ...reader1, ...reader2, ...reader3, ...reader4, ...player1, ...player2, ...mis]

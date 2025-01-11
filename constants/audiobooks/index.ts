@@ -3,5 +3,6 @@ import { reader1 } from "./reader1";
 import { reader2 } from "./reader2";
 import { reader3 } from "./reader3";
 import { reader4 } from "./reader4";
+import { tumilu } from './tumilu'
 
-export const audiobooks = [...wamp, ...reader1, ...reader2, ...reader3, ...reader4]
+export const audiobooks = [...wamp, ...reader1, ...reader2, ...reader3, ...reader4, ...tumilu]

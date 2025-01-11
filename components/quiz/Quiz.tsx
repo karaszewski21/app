@@ -423,10 +423,12 @@ return (
       { screen === 'welcome' ? ( 
             <WelcomeScreen 
               title={quizData.title || 'Quiz'} 
+              imageUrl={quizData.imageUrl}
               synopsis={quizData.synopsis} 
               audioUrl={quizData.audioUrl}
               onStartPress={() => setScreen('quiz')} 
               theme={theme.welcomeTheme}
+              onImagePress={() => handleImagePress(quizData.imageUrl)}
             />
         ) : (
         <>

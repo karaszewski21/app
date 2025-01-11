@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Image, StyleSheet, ScrollView, Text, Dimensions } from 'react-native';
+import { View, Image, StyleSheet, ScrollView, Text, Dimensions, TouchableOpacity } from 'react-native';
 import AgeRange from './AgeRange';
+import { ImageModal } from './ImageModal';
 
 interface BookWrapperProps {
   props: {
@@ -20,8 +21,17 @@ const IMAGE_HEIGHT = 200 / ASPECT_RATIO;
 
 const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isImageModalVisible, setIsImageModalVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+
+  const handleImagePress = (imageUri: string) => {
+    setSelectedImage(imageUri);
+    setIsImageModalVisible(true);
+  };
+  
 
   return (
+    <>
     <ScrollView style={styles.container}>
         <ScrollView
           horizontal
@@ -40,6 +50,11 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
                     style={styles.image}
                     resizeMode="contain"
                   />
+                  <TouchableOpacity 
+                      style={styles.zoomButton}
+                      onPress={() => handleImagePress(imageUrl)}>
+                      <Text style={styles.zoomButtonText}>🔍</Text>
+                  </TouchableOpacity>
                 </View>
             </View>
           ))}
@@ -64,6 +79,12 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
         </View>
       </View>
     </ScrollView>
+     <ImageModal 
+        isVisible={isImageModalVisible}
+        imageUri={selectedImage}
+        onClose={() => setIsImageModalVisible(false)}
+    />
+    </>
   );
 };
 
@@ -130,6 +151,18 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     color: '#333',
   },
+  zoomButton: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    backgroundColor: 'rgba(255,255,255,0.8)',
+    borderRadius: 20,
+    padding: 8,
+    zIndex: 1,
+  },
+  zoomButtonText: {
+    fontSize: 16,
+  }
 });
 
 export default BookWrapper;

@@ -6,13 +6,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import QuizPlayer from './QuizPlayer';
-
+import { ImageModal } from './ImageModal';
+import { Image } from 'expo-image';
 
 interface WelcomeScreenProps {
   title: string;
   synopsis: string;  
   audioUrl: string;
+  imageUrl: string;
   onStartPress: () => void;
+  onImagePress: () => void;
   theme?: {
     textColor: string;
     buttonBgColor: string;
@@ -34,13 +37,25 @@ const defaultTheme = {
   
 };
 
-const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ title, synopsis, onStartPress, audioUrl, theme = {} }) => {
+const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ title, synopsis, onStartPress, onImagePress, audioUrl, imageUrl, theme = {} }) => {
   const currentTheme = { ...defaultTheme, ...theme };
   return (
     <View style={[styles.contentContainer, {backgroundColor: currentTheme.backgroundScreen}]}>
         <Text style={[styles.title, {color: currentTheme.textColor}]}>{title}</Text>
         
         { audioUrl &&  <QuizPlayer audioUrl={audioUrl}/> }
+
+        { imageUrl && <View>
+            <Image source={{ uri: imageUrl }} style={styles.questionImage} contentFit='contain' placeholder={require('@/assets/gifs/loader.gif')} transition={2000}/>
+            <TouchableOpacity 
+              style={styles.zoomButton}
+              onPress={() => onImagePress()}
+            >
+              <Text style={styles.zoomButtonText}>🔍</Text>
+            </TouchableOpacity>
+          </View>
+
+        }
 
         <View style={styles.synopsisContainer}>
             <Text style={[styles.synopsisText,{color: currentTheme.textColor}]}>
@@ -72,6 +87,24 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  questionImage: {
+    width: '100%',
+    height: 200,
+    marginBottom: 10,
+    borderRadius: 15,
+  },
+  zoomButton: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    backgroundColor: 'rgba(255,255,255,0.8)',
+    borderRadius: 20,
+    padding: 8,
+    zIndex: 1,
+  },
+  zoomButtonText: {
+    fontSize: 16,
+  },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
@@ -88,7 +121,7 @@ const styles = StyleSheet.create({
   synopsisText: {
     fontSize: 16,
     color: '#4a5568',
-    textAlign: 'center',
+    textAlign: 'justify',
     lineHeight: 24,
   },
   startButton: {

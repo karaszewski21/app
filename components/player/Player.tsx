@@ -46,6 +46,10 @@ const videos = [
   {
     name: 'zosia_pl',
     file: require('@/assets/video/zosia_pl.mp4'),
+  },
+  {
+    name: 'tumilu_quiz_pl',
+    file: require('@/assets/video/tumilu_quiz_pl.mp4'),
   }
 ]
 
