@@ -31,7 +31,7 @@ const LangImageScreen = ({ route, navigation } : any) => {
         }}  
         style={styles.tileItem}
         >
-          <Image source={{ uri: item.imageUrl }} style={styles.image} resizeMode="cover"/>
+          <Image source={{ uri: item.imageUrl }} style={styles.image} resizeMode="contain"/>
       </TouchableOpacity>
       )
     }
@@ -63,7 +63,7 @@ const LangImageScreen = ({ route, navigation } : any) => {
               <Image
                 source={{ uri: selectedImage?.imageUrl }}
                 style={styles.fullScreenImage}
-                resizeMode='stretch'
+                resizeMode='contain'
               />
               <AudioWordProvider>
                 { selectedImage?.vocabulary.map((item, index) => (

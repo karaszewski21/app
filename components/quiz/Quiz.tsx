@@ -338,7 +338,17 @@ const renderResult = () => (
     <Text style={[styles.answersHeader,{color: currentTheme.textColor}]}>Poprawne odpowiedzi:</Text>
 
     { quizData.questions.map((question: any, index: number) =>  {
-      const isCorrect = selectedOptions[index] == question.correctOptionIndex;
+      let isCorrect;
+
+      if (question.answerType === 'multiple') {
+        const correctOptions = question.correctOptionIndex.sort((a: number, b: number) => a - b);
+        const selected = selectedOptions[index].sort((a: number, b: number) => a - b);
+        isCorrect = correctOptions.length === selected.length &&  correctOptions.every((value: number, i: number) => value === selected[i]);
+      }
+
+      if (question.answerType === 'single') {
+        isCorrect = selectedOptions[index] == question.correctOptionIndex 
+      }
 
       return (
         <View key={index} style={[styles.questionResult, !isCorrect ? {borderColor: '#db2c2c', borderWidth: 4} : {}]}>
@@ -353,23 +363,26 @@ const renderResult = () => (
                       <Text style={styles.incorrectAnswerText}>Brak odpowiedzi</Text> 
                       : 
                       <View>
-                      { question.type === 'text' ?
-                          <Text style={styles.incorrectAnswerText}>Zła odpowiedź: {question.options[selectedOptions[index]]}</Text>
-                        :  <View>
-                            <Text style={styles.incorrectAnswerText}>Zła odpowiedź:</Text>
-                            <Image source={{ uri: question.options[selectedOptions[index]]}} style={styles.questionImage} contentFit='cover' placeholder={{ blurhash }}/>
-                          </View>
-                      }
-                    </View>
+                          { question.type === 'text' ?
+                              <>
+                                { question.answerType === 'single' &&  <Text style={styles.incorrectAnswerText}>Zła odpowiedź: {question.options[selectedOptions[index]]}</Text>}
+                                { question.answerType === 'multiple' &&  <Text style={styles.incorrectAnswerText}>Zostały podane złe odpowiedzi</Text>}
+                              </> 
+                          :  <View>
+                              <Text style={styles.incorrectAnswerText}>Zła odpowiedź:</Text>
+                              <Image source={{ uri: question.options[selectedOptions[index]]}} style={styles.questionImage} contentFit='cover' placeholder={{ blurhash }}/>
+                            </View>
+                          }
+                      </View>
                   }    
               </View> 
           }
 
-          {question.answerType === 'multiple' ? (
+          { question.answerType === 'multiple' ? (
             <View>
-              {/* <Text style={styles.correctAnswerText}>Odpowiedzi</Text> */}
+              <Text style={styles.correctAnswerText}>Poprawna odpowiedź:</Text>
               {question.correctOptionIndex.map((correctIndex: number) => (
-                <Text key={correctIndex} style={styles.answerText}>
+                <Text key={correctIndex} style={[styles.answerText, { color: '#48BB78'}]}>
                   • {question.options[correctIndex]}
                 </Text>
               ))}
@@ -384,7 +397,7 @@ const renderResult = () => (
                   <Text style={styles.correctAnswerText}>
                     Poprawna odpowiedź:
                   </Text>
-                  <Image source={{ uri: question.options[question.correctOptionIndex]}} style={styles.questionImage} resizeMode='contain'/>
+                  <Image source={{ uri: question.options[question.correctOptionIndex]}} style={styles.questionImage} contentFit='cover' placeholder={{ blurhash }}/>
                 </View>
               }
             </View>

@@ -123,7 +123,8 @@ export const quizTumilu1 = {
   "id": "b2c3d4e5-6789-1011-Tumilu",
   "title": "Trudne wybory",
   "synopsis": "Sprawdź, jak dobrze przyjrzałeś się tej malowniczej scenerii, i rozwiąż quiz pełen szczegółów i ciekawostek. Powodzenia!",
-  "audioUrl": "",
+  "imageUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/page1.webp",
+  "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/2.aac",
   "totalQuestions": 5,
   "checkAutoAnswer": false,
   "timer": false,
@@ -162,7 +163,7 @@ export const quizTumilu1 = {
     {
       "id": 1,
       "text": "Co robi Pan Policjant?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/2_1.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -181,7 +182,7 @@ export const quizTumilu1 = {
     {
       "id": 2,
       "text": "Kto czyta książkę?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/2_2.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -200,7 +201,7 @@ export const quizTumilu1 = {
     {
       "id": 3,
       "text": "Co kradnie Pan Złodziej?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/2_3.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -219,7 +220,7 @@ export const quizTumilu1 = {
     {
       "id": 4,
       "text": "Jakiego koloru jest samochód Pana Ślimaka?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/2_4.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -238,7 +239,7 @@ export const quizTumilu1 = {
     {
       "id": 5,
       "text": "Co trzyma mama Filipa",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/2_5.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -260,8 +261,8 @@ export const quizTumilu1 = {
 export const quizTumilu2 = {
   "id": "b2c3d4e5-6789-1011-Tumilu",
   "title": "Przygoda w szczegółach: Quiz z całej wyszukiwanki!",
-  "synopsis": "W tej wyszukiwance ukryły się niesamowite szczegóły! Macie tylko 1 minutę, by odpowiedzieć na wszystkie pytania. Rodzice, pomóżcie swoim małym detektywom, by razem rozwiązać quiz na czas! Czy dacie radę w tym wyzwaniu? Powodzenia!",
-  "audioUrl": "",
+  "synopsis": "Quiz z całej wyszukiwanki! Macie tylko 1 minutę, by odpowiedzieć na wszystkie pytania. Rodzice, pomóżcie swoim małym detektywom, by razem rozwiązać quiz na czas! Czy dacie radę w tym wyzwaniu? Powodzenia!",
+  "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/3.aac",
   "totalQuestions": 5,
   "checkAutoAnswer": false,
   "timer": true,
@@ -300,7 +301,7 @@ export const quizTumilu2 = {
     {
       "id": 1,
       "text": "Z kim Mimi poszła na zakupy?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/3_1.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -319,7 +320,7 @@ export const quizTumilu2 = {
     {
       "id": 2,
       "text": "Co mama Kiki kupiła dla swojej córki?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/3_2.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -337,8 +338,8 @@ export const quizTumilu2 = {
     },
     {
       "id": 3,
-      "text": "Czego będzie się uczył Tutu na wakacjach?",
-      "audioUrl": "",
+      "text": "Czego będzie uczył się Tutu na wakacjach?",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/3_3.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -356,11 +357,11 @@ export const quizTumilu2 = {
     },
     {
       "id": 4,
-      "text": "Co wyjmuje Tutu, gdy wskakuje do samochodu? Są 2 odpowiedzi",
-      "audioUrl": "",
+      "text": "Co wyjmuje Tutu, gdy wskakuje do samochodu jadąc na wakacje? Pamiętaj są tylko 2 odpowiedzi",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/3_4.aac",
       "image": "",
       "type": "text",
-      "answerType": "multi",
+      "answerType": "multiple",
       "options": [
         "książkę do czytania",
         "butelkę wody",
@@ -375,18 +376,18 @@ export const quizTumilu2 = {
     },
     {
       "id": 5,
-      "text": "Bunio otwiera szuflady i wyrzuca z nich wszystko, czego będzie potrzebował na wakacjach. Jest tam ... . Są 3 odpowiedzi.",
-      "audioUrl": "",
+      "text": "Bunio otwiera szuflady i wyrzuca z nich wszystko, co będzie mu potrzebne na wakacjach. Wymień 3 rzeczy spośród podanych odpowiedzi.",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/quiz/3_5.aac",
       "image": "",
       "type": "text",
-      "answerType": "multi",
+      "answerType": "multiple",
       "options": [
         "klej do papieru",
         "kierownica od roweru",
         "ciepły koc",
         "nożyczki do papieru"
       ],
-      "correctOptionIndex": 0,
+      "correctOptionIndex": [0,1,2],
       "correctFeedback": "Doskonała odpowiedź! Bunio będzie potrzebował na wakacjach klej do papieru, kierownicę od roweru, ciepły koc i jeszcze wiele innych rzeczy",
       "incorrectFeedback": "Spróbuj jeszcze raz! Ta informacja znajduje się na 32. stronie czytanki.",
       "explanation": "Wszystkie rzeczy są wymienione na 32. stronie czytanki",

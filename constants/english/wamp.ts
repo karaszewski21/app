@@ -1,5 +1,3 @@
-import { LangImage } from "@/model/book"
-
 export const wamp = [
     { 
         id: 'a40bcbb9-871a-43db-ba87-622sds59199fc9fxxx', 
@@ -271,7 +269,7 @@ export const wamp = [
     },
   ]
 
-  export const wamp1 = [
+export const wamp1 = [
     { 
       id: 'a40bcbb9-871a-43db-ba87-image', 
       type: 'image',
@@ -325,4 +323,4 @@ export const wamp = [
         }
       ]
     },
-  ]
+]

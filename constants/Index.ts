@@ -73,8 +73,8 @@ export const index = {
                         Ale... Jak tu się powstrzymać od kupowania WSZYSTKIEGO, co by się chciało? Czy to wstyd nie umieć pływać? I dlaczego trzeba smarować się kremem i nosić czapkę, skoro słońce tak pięknie świeci? 
                         Ktoś się zgubi na ulicy, ktoś nie założy kółka do pływania, ktoś nauczy się doceniać to, co ma... Dzieci odkryją, co robić, by wakacje były wspaniałe, radosne i BEZPIECZNE`,
           isLock: false,
-          rating: 3.5, 
-          reviewCount: 85,
+          rating: 5, 
+          reviewCount: 23,
           content: {
             options: {
               backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/background.webp',
@@ -92,7 +92,7 @@ export const index = {
             },
             {
               type: 'audiobook',
-              ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b-tumilu'],
+              ids: ['bc6de1ad-de39-44d0-97fa-6bac2301e92b-tumilu', 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-tumilu2'],
               bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/baner-audio.webp',
             },
             {
@@ -102,7 +102,12 @@ export const index = {
             },
             {
               type: 'voice_quiz',
-              ids: ['a40bxxcbb9-871a-43db-ba87-622sdsfdf59199fc9f', 'a40bcbbxxx9-871a-43db-ba87-622fdfsds59199fc9f', 'axxx40bcbb9-871a-43db-ba87-622sds59199fc9f'],
+              ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9f-tumilu', 'a40bcbb9-871a-43db-ba87-622sds59199fc9f-tumilu2'],
+              bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/baner-audio.webp',
+            },
+            {
+              type: 'english',
+              ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9fTumilu', 'a40bcbb9-871a-43db-ba87-622sds59199fgfgffTumilu2', 'a40bcbb9-871a-43db-ba87-imageTumilu', 'a40bcbb9-871a-43db-ba87-imageTumilu2'],
               bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/baner-audio.webp',
             },
           ]

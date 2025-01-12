@@ -61,33 +61,44 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
         <View style={styles.listContent}>
           { versions.map((item: any, index) =>
             <SquareButton key={index} props={{title: '', disabled: isLock, icon: 'text', backgroundColor: item.options.backgroundColor, navigate: () => openAudioBookItem(item)}}>
+               { item.type === undefined && 
+                <View style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                   <Text style={[styles.tileTitle, {color: item.options.textColor}]}>{item.name}</Text>
+                </View>
+              }
+               { item.type === 'image' && 
+                <View style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                  <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={3}>{item.name}</Text>
+                  <Image source={{ uri: item.imageUrl }} style={{width: 70, height: 70, marginBottom: -15 }} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')} transition={2000}/>
+                </View>
+              }
               { item.type === 'pl' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
-                  <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={1}>{item.name}</Text>
+                  <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={2}>{item.name}</Text>
                   <Image source={require('@/assets/icons/pl.png')} style={{width: 50, height: 50, marginBottom: 5}} contentFit='contain'/>
-                  <View style={styles.tilePlayContent}>
+                  {/* <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: item.options.textPlayColor}}>słuchaj</Text>
                     <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} contentFit='contain'/> 
-                  </View> 
+                  </View>  */}
                 </View>
               }
               { item.type === 'eng' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
-                  <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={1}>{item.name}</Text>
+                  <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={2}>{item.name}</Text>
                   <Image source={require('@/assets/icons/eng-flag.png')} style={{width: 50, height: 50, marginBottom: 5}} contentFit='contain'/>
-                  <View style={styles.tilePlayContent}>
+                  {/* <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: item.options.textPlayColor}}>słuchaj</Text>
                     <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} contentFit='contain'/> 
-                  </View> 
+                  </View>  */}
                 </View>}
               { item.type === 'pl-eng' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
                   <Text style={[styles.tileTitle, {color: item.options.textColor}]}>{item.name}</Text>
                   <Image source={require('@/assets/icons/pl-eng.png')} style={{width: 50, height: 50, marginBottom: 5}} contentFit='contain'/>
-                  <View style={styles.tilePlayContent}>
+                  {/* <View style={styles.tilePlayContent}>
                     <Text style={{...styles.tileTitle, marginRight: 5, color: item.options.textPlayColor}}>słuchaj</Text>
                     <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} contentFit='contain'/> 
-                  </View> 
+                  </View>  */}
                 </View>
               }
             </SquareButton>)
@@ -139,7 +150,8 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
     tileTitle: {
       fontSize: 16,
       textAlign: 'center',
-      fontFamily: 'ShantellSans-SemiBoldItalic'
+      fontFamily: 'ShantellSans-SemiBoldItalic',
+      marginBottom: 5
     },
     tilePlayContent: {
       flexDirection: 'row',
