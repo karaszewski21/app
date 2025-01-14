@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet,FlatList, LayoutRectangle, Alert, Modal, ScrollView, Image, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet,FlatList, LayoutRectangle, Alert, Modal, ScrollView, Dimensions } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import {  Fragment, useEffect} from 'react';
 import { Ionicons, } from '@expo/vector-icons';
@@ -13,6 +13,7 @@ import SquareButton from '@/components/common/SquareButton';
 import { english } from '@/constants/english';
 import LangChapterScreen from '../lang_chapter';
 import LangImageScreen from '../lang_image';
+import { Image } from 'expo-image';
 
 
 const LangsStack = createStackNavigator();
@@ -57,13 +58,17 @@ const LangsScreen = ({route, navigation }:any) => {
               <Fragment key={index}>
                 { element.type === 'chapter' &&  
                   <SquareButton key={element.type} props={{title: element.title, icon: 'text', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('LangChapter', {book, resource: element}) }}>
-                    <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+                    <Image source={require('@/assets/icons/quiz.png')} style={{width: 90, height: 90,}} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')}/>
                   </SquareButton>
                 }
-                
+                { element.type === 'chapter-img' &&  
+                  <SquareButton key={element.type} props={{title: element.title, icon: 'text', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('LangChapter', {book, resource: element}) }}>
+                    <Image source={{ uri: element.imageUrl }} style={{width: 90, height: 90,}} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')}/>
+                  </SquareButton>
+                }
                 { element.type === 'image' &&
                   <SquareButton  key={element.type} props={{title: element.title, icon: 'add', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('LangImage', {book, resource: element}) }}>
-                    <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} resizeMode='contain'/>
+                    <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')}/>
                   </SquareButton>
                 }
               </Fragment>

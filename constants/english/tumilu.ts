@@ -1,8 +1,9 @@
 export const tumiluText = [
     { 
         id: 'a40bcbb9-871a-43db-ba87-622sds59199fc9fTumilu', 
-        type: 'chapter',
-        title: 'Chapter: Spring', 
+        type: 'chapter-img',
+        title: 'Bunio', 
+        imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/bunio_icon.webp',
         options: {
             textColor: '#000',
             backgroundColor: '#91654d',
@@ -10,113 +11,79 @@ export const tumiluText = [
         },
         content: [
           {
-            title: 'text1',
-            subTitle: 'textssss 1',
-            imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/index.png',
+            title: "Bunio's Holiday Essentials",
+            imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/bunio.webp',
             paragraphs: [
               {
-                text: `As I looked out the window this morning`,
-                translation: 'Gdy spojrzałem przez okno tego ranka, nie mogłem nie zauważyć, że pogoda jest dziś absolutnie piękna, z bezchmurnym niebem i delikatną bryzą.',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-                vocabulary: [
-                  {
-                    word: 'looked out',
-                    translation: 'spojrzeć na zewnątrz',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
-                  }
-                ]     
+                text: `Bunio opens the drawers and takes out everything he will need for the holidays. There is:`,
+                translation: 'Bunio otwiera szuflady i wyrzuca z nich wszystko, czego będzie potrzebował na wakacjach. Jest tam:',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_1.aac',
+                vocabulary: []     
               },
               {
-                text: `I couldn't help but notice that the weather is absolutely beautiful today, with clear blue skies and a gentle breeze.`,
-                translation: 'Gdy spojrzałem przez okno tego ranka, nie mogłem nie zauważyć, że pogoda jest dziś absolutnie piękna, z bezchmurnym niebem i delikatną bryzą.',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-                vocabulary: [
-                  {
-                    word: 'weather',
-                    translation: 'zauważyć',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
-                  },
-                  {
-                    word: 'gentle breeze',
-                    translation: 'zauważyć',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
-                  }
-                ]     
+                text: `a long scarf, in case it suddenly gets cold`,
+                translation: 'długi szalik, gdyby nagle zrobiło się chłodno',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_2.aac',
+                vocabulary: []     
+              },
+              {
+                text: `glue for paper`,
+                translation: 'klej do papieru',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_3.aac',
+                vocabulary: []     
+              },
+              {
+                text: `four buttons, each different, but all very pretty`,
+                translation: 'cztery guziki, każdy inny, ale wszystkie bardzo ładne',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_4.aac',
+                vocabulary: []     
+              },
+              {
+                text: `a warm blanket, just in case`,
+                translation: 'ciepły koc, tak na wszelki wypadek',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_5.aac',
+                vocabulary: []     
+              },
+              {
+                text: `seven wagons of an electric train set`,
+                translation: 'siedem wagoników kolejki elektrycznej',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_7.aac',
+                vocabulary: []     
+              },
+              {
+                text: `a bicycle handlebar`,
+                translation: 'kierownica od roweru',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_9.aac',
+                vocabulary: []     
               }
             ]
           },
           {
-            title: 'text2',
-            subTitle: 'textssss 2',
-            imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/index.png',
+            title: 'Bunio and Grandpa',
+            subTitle: 'on a Shopping Trip',
+            imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/kret.webp',
             paragraphs: [
               {
-                text: `As Iked ful today, with clear blue skies and a gentle breeze.`,
-                translation: 'Gdy spojrzałem przez okno tego ranka, nie mogłem nie zauważyć, że pogoda jest dziś absolutnie piękna, z bezchmurnym niebem i delikatną bryzą.',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+                text: `In the store, Grandpa is looking for a vest with pockets for himself.`,
+                translation: 'W sklepie dziadek szuka dla siebie kamizelik z kieszeniami',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/2_1.aac',
                 vocabulary: [
                   {
-                    word: 'gentle breeze',
-                    translation: 'zauważyć',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
+                    word: 'a vest with pockets',
+                    translation: 'kamizelik z kieszeniami',
+                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/2_1_1.aac',
                   }
                 ]     
               },
               {
-                text: `e weather is absolutely beze.`,
-                translation: 'Gdy spojrzałem przez okno tego ranka, nie mogłem nie zauważyć, że pogoda jest dziś absolutnie piękna, z bezchmurnym niebem i delikatną bryzą.',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+                text: `Bunio chooses a small alarm clock, ski goggles, and a bunch of colorful ribbons.`,
+                translation: 'Bunio wybiera mały budzik, gogle narciarskie i pęk kolorowych wstążek',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/2_1_2.aac',
                 vocabulary: [
                   {
-                    word: 'weather',
-                    translation: 'zauważyć',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
-                  }
-                ]     
-              }
-            ]
-          },
-          {
-            title: 'text 3',
-            subTitle: 'textssss 3',
-            imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/readers/old_oak/audiobook/index.png',
-            paragraphs: [
-              {
-                text: `As I looked out the window this morning`,
-                translation: 'Gdy spojrzałem przez okno tego ranka',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-                vocabulary: [
-                  {
-                    word: 'looked out',
-                    translation: 'spojrzeć na zewnątrz',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
-                  }
-                ] 
-              },
-              {
-                text: `As I looked out the window this morning, I couldn't help but notice that the weather is absolutely beautiful today, with clear blue skies and a gentle breeze.`,
-                translation: 'Gdy spojrzałem przez okno tego ranka, nie mogłem nie zauważyć, że pogoda jest dziś absolutnie piękna, z bezchmurnym niebem i delikatną bryzą.',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-                vocabulary: [
-                  {
-                    word: 'looked out',
-                    translation: 'spojrzeć na zewnątrz',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
-                  },
-                  {
-                    word: 'notice',
-                    translation: 'zauważyć',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
-                  },
-                  {
-                    word: 'weather',
-                    translation: 'zauważyć',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
-                  },
-                  {
-                    word: 'gentle breeze',
-                    translation: 'zauważyć',
-                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3'
+                    word: 'colorful ribbons',
+                    translation: 'kolorowe wstążki',
+                    audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/2_2_1.mp3'
                   }
                 ]     
               }
@@ -130,7 +97,7 @@ export const tumiluImage = [
     { 
         id: 'a40bcbb9-871a-43db-ba87-imageTumilu2', 
         type: 'image',
-        title: 'Chapter: Spring', 
+        title: 'The Tumilu Valley', 
         options: {
             textColor: '#000',
             backgroundColor: '#91654d',

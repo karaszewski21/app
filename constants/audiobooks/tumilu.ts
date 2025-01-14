@@ -7,7 +7,7 @@ export const tumilu = [
       ageGroup: "adult",
       narrator: "Anna Nowak",
       duration: 10000,
-      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/mimi3.png',
+      imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/mimi_icon.webp',
       audioFile: "tumilu_quiz_pl",
       options: {
         textColor: '#fff',

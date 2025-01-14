@@ -1,78 +1,56 @@
 export const tumilu = [
     { 
         id: 'a40bcbb9-871a-43db-ba87-622sds59199fc9f-tumilu', 
-        title: 'Zagraj', 
-        audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_v3.mp4",
+        title: 'Zgadywanka kolorów', 
+        audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/voice/vioce-quiz_tumilu.aac",
         audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
         options: {
-            textColor: '#000',
+            textColor: '#fff',
             backgroundColor: '#ac295c',
             progressBackgroundColor: '#ac295c',
         },
-        total: '01:12',
+        total: '01:54',
         manifest: [
             {
               id: 1,
-              startTime: "00:11",
-              endTime: "00:22",
-              answerStartTime: "00:22",
-              answerEndTime: "00:27",
-              text: "Kto mieszka w koronie dębu?"
+              startTime: "00:24",
+              endTime: "00:30",
+              answerStartTime: "00:30",
+              answerEndTime: "00:40",
+              text: "Jakiego koloru jest sukienka Pani Gąsienicy?"
             },
             {
               id: 2,
-              startTime: "00:35",
+              startTime: "00:41",
               endTime: "00:41",
               answerStartTime: "00:41",
-              answerEndTime: "00:47",
-              text: "Gdzie śpią małe wiewiórki?"
+              answerEndTime: "00:55",
+              text: "Jakiego koloru jest kamizelka Pana Kreta?"
             },
             {
               id: 3,
-              startTime: "00:50",
-              endTime: "00:59",
-              answerStartTime: "01:00",
-              answerEndTime: "01:12",
-              text: "Co robią wiewiórki w ciągu dnia?"
+              startTime: "00:56",
+              endTime: "00:56",
+              answerStartTime: "00:56",
+              answerEndTime: "01:10",
+              text: "Jakiego koloru jest spódnica mamy Lulu?"
+            },
+            {
+              id: 4,
+              startTime: "01:11",
+              endTime: "01:12",
+              answerStartTime: "01:12",
+              answerEndTime: "01:25",
+              text: "Jakiego koloru jest plecak Pana Bobra?"
+            },
+            {
+              id: 5,
+              startTime: "01:27",
+              endTime: "01:28",
+              answerStartTime: "01:28",
+              answerEndTime: "01:54",
+              text: "Proszę powiedz, jakiego koloru jest worek Pana Złodzeja?"
             }
           ]
-    },
-    { 
-      id: 'a40bcbb9-871a-43db-ba87-622sds59199fc9f-tumilu2', 
-      title: 'Zagraj', 
-      audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_v3.mp4",
-      audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-      options: {
-          textColor: '#000',
-          backgroundColor: '#ac295c',
-          progressBackgroundColor: '#ac295c',
-      },
-      total: '01:12',
-      manifest: [
-          {
-            id: 1,
-            startTime: "00:11",
-            endTime: "00:22",
-            answerStartTime: "00:22",
-            answerEndTime: "00:27",
-            text: "Kto mieszka w koronie dębu?"
-          },
-          {
-            id: 2,
-            startTime: "00:35",
-            endTime: "00:41",
-            answerStartTime: "00:41",
-            answerEndTime: "00:47",
-            text: "Gdzie śpią małe wiewiórki?"
-          },
-          {
-            id: 3,
-            startTime: "00:50",
-            endTime: "00:59",
-            answerStartTime: "01:00",
-            answerEndTime: "01:12",
-            text: "Co robią wiewiórki w ciągu dnia?"
-          }
-        ]
-  }
+    }
   ];

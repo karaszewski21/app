@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
 interface SquareButtonProps {
     props: {
-        title: string;
+        title?: string;
         icon: string;
         color?: string,
         backgroundColor?: string,
@@ -24,7 +24,7 @@ const SquareButton: React.FC<SquareButtonProps> = ({ props, children }: SquareBu
         disabled={props.disabled}
       >
         {children}
-        <Text style={[styles.buttonTitle, {color: props.color}]}>{props.title}</Text>
+       { props.title && <Text style={[styles.buttonTitle, {color: props.color}]}>{props.title}</Text> }
       </TouchableOpacity>
     </Animated.View>
   );

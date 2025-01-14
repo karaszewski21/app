@@ -103,12 +103,12 @@ export const index = {
             {
               type: 'voice_quiz',
               ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9f-tumilu', 'a40bcbb9-871a-43db-ba87-622sds59199fc9f-tumilu2'],
-              bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/baner-audio.webp',
+              bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/baner_voice.webp',
             },
             {
               type: 'english',
               ids: ['a40bcbb9-871a-43db-ba87-622sds59199fc9fTumilu', 'a40bcbb9-871a-43db-ba87-622sds59199fgfgffTumilu2', 'a40bcbb9-871a-43db-ba87-imageTumilu', 'a40bcbb9-871a-43db-ba87-imageTumilu2'],
-              bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/baner-audio.webp',
+              bannerUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/baner_eng.webp',
             },
           ]
         },

@@ -58,16 +58,18 @@ const VoiceQuizesScreen = ({route, navigation }:any) => {
               key={index} 
               props={
                 { 
-                  title: item.title, 
                   disabled: isLock, 
                   icon: 'text', 
                   backgroundColor: item.options.backgroundColor, 
                   color: item.options.textColor, 
                   navigate: () => navigation.navigate('VoiceQuiz', {audio_quiz: item})
                 }}>
-              <Image source={require('@/assets/icons/play.png')} style={{width: 70, height: 70}} resizeMode='contain'/>
-              <Text style={{color:item.options.textColor, fontWeight: 'bold', fontSize: 12}}>{`Czas trwania`}</Text>
-              <Text style={{color:item.options.textColor, fontWeight: 'bold', fontSize: 12}}>{`${item.total} min`}</Text>
+              <View style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+                <Text style={{color:item.options.textColor, fontWeight: 'bold', fontSize: 16, textAlign: 'center'}}>{item.title}</Text>
+                <Image source={require('@/assets/icons/play.png')} style={{width: 30, height: 30, marginVertical: 5}} resizeMode='contain'/>
+                <Text style={{color:item.options.textColor, fontWeight: 'bold', fontSize: 12}}>{`Czas trwania:`}</Text>
+                <Text style={{color:item.options.textColor, fontWeight: 'bold', fontSize: 12}}>{`${item.total} min`}</Text>
+              </View>    
             </SquareButton>)
           }
         </View>
