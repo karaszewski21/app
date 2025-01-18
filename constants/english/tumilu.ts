@@ -99,93 +99,122 @@ export const tumiluImage = [
         type: 'image',
         title: 'The Tumilu Valley', 
         options: {
-            textColor: '#000',
+            textColor: '#fff',
             backgroundColor: '#91654d',
             progressBackgroundColor: '#91654d',
         },
         content: [
           {
-            imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/gallery/7.png',
+            imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/english-words.webp',
+            thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/english-words_min.webp',
             vocabulary: [
               {
-                word: 'looked out',
-                translation: 'spojrzeć na zewnątrz',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+                word: 'Mr. Policeman is upset',
+                translation: 'Pan Policjant jest zdenerwowany',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_2.mp3',
+                colorWord: '#fff',
+                colorTranslation: '#fff',
                 position: { 
-                  top: 20, 
+                  top: 27, 
+                  left: 5 
+                }
+              },
+              {
+                word: 'Tutu is running',
+                translation: 'Tutu biegnie',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_1.mp3',
+                colorWord: '#fff',
+                colorTranslation: '#fff',
+                position: { 
+                  top: 40, 
+                  left: 15 
+                }
+              },
+              {
+                word: 'Bunio is packing a suitcase',
+                translation: 'Bunio pakuje walizkę',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_3.mp3',
+                colorWord: '#fff',
+                colorTranslation: '#fff',
+                position: { 
+                  top: 62, 
                   left: 20 
                 }
               },
               {
-                word: 'notice',
-                translation: 'zauważyć',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+                word: 'Mr. Mole is sleeping in the armchair',
+                translation: 'Pan Kret śpi na fotelu',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_4.mp3',
+                colorWord: '#fff',
+                colorTranslation: '#fff',
                 position: { 
-                  top: 50, 
-                  left: 50 
-                }
-              },
-              {
-                word: 'weather',
-                translation: 'zauważyć',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-                position: { 
-                  top: 30, 
-                  left: 50 
-                }
-              },
-              {
-                word: 'gentle breeze',
-                translation: 'zauważyć',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-                position: { 
-                  top: 80, 
-                  left: 70 
+                  top: 75, 
+                  left: 5 
                 }
               }
             ]
           },
           {
-            imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/gallery/7.png',
+            imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/tumilu_scene.webp',
+            thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/tumilu_scene_min.webp',
             vocabulary: [
               {
-                word: 'looked out',
-                translation: 'spojrzeć na zewnątrz',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+                word: 'Lulu feels like she needs to vent to someone.',
+                translation: 'Lulu czuję, że musi się komuś pożalić.',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/2_1.aac',
+                colorWord: '#fff',
+                colorTranslation: '#fff',
                 position: { 
-                  top: 20, 
-                  left: 20 
+                  top: 5, 
+                  left: 5 
                 }
               },
               {
-                word: 'notice',
-                translation: 'zauważyć',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-                position: { 
-                  top: 50, 
-                  left: 50 
-                }
-              },
-              {
-                word: 'weather',
-                translation: 'zauważyć',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+                word: "Lulu's dad didn't agree to a new swimsuit and goggles.",
+                translation: 'Tata Lulu nie zgodził się na nowy kostium i okulary.',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/2_2.aac',
+                colorWord: '#fff',
+                colorTranslation: '#fff',
                 position: { 
                   top: 30, 
-                  left: 50 
+                  left: 5 
                 }
               },
               {
-                word: 'gentle breeze',
-                translation: 'zauważyć',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
+                word: 'The whole family is packing for the trip.',
+                translation: 'Cała rodzina pakuje się na wyjazd.',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/2_3.aac',
+                colorWord: '#fff',
+                colorTranslation: '#fff',
                 position: { 
-                  top: 80, 
-                  left: 70 
+                  top: 43, 
+                  left: 5 
                 }
-              }
+              },
+              {
+                word: 'Clothes and various items are spread out everywhere.',
+                translation: 'Wszędzie są porozkładane ubrania i różne rzeczy.',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/2_4.aac',
+                colorWord: '#fff',
+                colorTranslation: '#fff',
+                position: { 
+                  top: 67, 
+                  left: 2 
+                }
+              },
+              {
+                word: 'Lulu is packing clothes into the suitcase.',
+                translation: 'Lulu pakuje ubrania do walizki.',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/2_5.mp3',
+                colorWord: '#fff',
+                colorTranslation: '#fff',
+                position: { 
+                  top: 90, 
+                  left: 2 
+                }
+              },
             ]
           }
         ]
-      },
+    },
 ]

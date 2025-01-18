@@ -13,7 +13,7 @@ const { width: WIDTH, height } = Dimensions.get('window');
 const LangChapterScreen = ({ route, navigation } : any) => {
     const resource = route.params.resource;
     const { showTabs, hiddenTabs } = useTabsScreen();
-    const translateY = useSharedValue<number>(500);
+    const translateY = useSharedValue<number>(700);
     const { playAudio, isModalVisible, setIsModalVisible, setCurrentSound} = useAudioSentence();
     const uniqueKey = useMemo(() => uuid.v4(), []);
     const [word, setWord] = useState<{item: any, options:{ x: number, y: number }} | null>()
@@ -23,7 +23,7 @@ const LangChapterScreen = ({ route, navigation } : any) => {
       return () => { 
         showTabs();
         setIsModalVisible(false);
-        translateY.value = 500;
+        translateY.value = 700;
         setCurrentSound(null);
       }
     }, [])
@@ -66,14 +66,14 @@ const LangChapterScreen = ({ route, navigation } : any) => {
               <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <VocabularyModal 
                   word={word?.item ?? {} as any} 
-                  onClose={() => translateY.value = 500}
+                  onClose={() => translateY.value = 700}
                   onMarkAsKnown={(word) => {
                     console.log('Marked as known:', word);
-                    translateY.value = 500
+                    translateY.value = 700
                   }}
                   onMarkToLearn={(word) => {
                     console.log('Marked to learn:', word);
-                    translateY.value = 500
+                    translateY.value = 700
                   }}
                   playAudio={(url) => playAudio(url)}
                 />

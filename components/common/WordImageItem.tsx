@@ -7,6 +7,8 @@ import Animated, {
 
 interface VideoPlayerProps {
     text: string;
+    colorWord: string;
+    colorTranslation: string;
     translation: string
     audioUrl: string;
 }
@@ -70,7 +72,7 @@ export const useAudioWord = () => {
   return context;
 };
 
-const WordImageItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl }) => {
+const WordImageItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl, colorWord, colorTranslation }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { playAudio} = useAudioWord();
 
@@ -86,16 +88,20 @@ const WordImageItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl
   };
 
   return (
-    <View style={styles.sentenceContainer}>
-      <TouchableOpacity onPress={() => toggleExpand()}>
-          <Text style={{ fontSize: 22, color: '#fff', fontWeight: 'bold', textDecorationLine: 'underline'}}>{text}</Text>
-      </TouchableOpacity>
+    <View>
+      <View style={{display: 'flex'}}>
+        <TouchableOpacity onPress={() => toggleExpand()}>
+          <Text style={styles.text}>{text}</Text>
+        </TouchableOpacity>
+      </View>
       <Animated.View entering={FadeInUp.duration(500)}>
         {isExpanded && (
           <>
-            <Animated.Text style={styles.translation}>
-              {translation}
-            </Animated.Text>
+            <View style={{display: 'flex'}}>
+              <Animated.Text style={[styles.translation, {color: colorTranslation}]}>
+                {translation}
+              </Animated.Text>
+            </View>
           </>
         )}
       </Animated.View>
@@ -104,27 +110,28 @@ const WordImageItem: React.FC<VideoPlayerProps> = ({ text, translation, audioUrl
 };
 
 const styles = StyleSheet.create({
-  sentenceContainer: {
-    width: '100%',
-  },
   text: {
-    flex: 1,
-    fontSize: 20,
+    backgroundColor: '#000',
+    fontSize: 16,
     color: '#fff',
     lineHeight: 24,
-    textAlign: 'justify',
     letterSpacing: 0.5,
     marginHorizontal: 10,
+    alignSelf: 'flex-start',
+    borderRadius: 5,
+    paddingHorizontal: 2,
+    paddingVertical: 2
   },
   translation: {
-    fontSize: 20,
+    backgroundColor: '#000',
+    fontSize: 14,
     color: '#fff',
-    lineHeight: 24,
-    textAlign: 'justify',
-    letterSpacing: 0.5,
-    marginHorizontal: 20,
-    marginVertical: 10,
-    flexWrap: 'wrap'
+    marginHorizontal: 10,
+    marginVertical: 2,
+    flexWrap: 'wrap',
+    borderRadius: 5,
+    paddingHorizontal: 2,
+    paddingVertical: 2
   }
 });
 

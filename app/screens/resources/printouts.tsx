@@ -156,11 +156,11 @@ const PrintoutsScreen = ({route, navigation }:any) => {
     tilesContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      justifyContent: 'space-between',
+      justifyContent: 'space-around',
     },
     tileItem: {
-      width: 170, 
-      height: 250,
+      width: 120, 
+      height: 200,
       borderRadius: 15,
       marginBottom: 15,
     },

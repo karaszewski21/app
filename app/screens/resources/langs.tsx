@@ -68,7 +68,7 @@ const LangsScreen = ({route, navigation }:any) => {
                 }
                 { element.type === 'image' &&
                   <SquareButton  key={element.type} props={{title: element.title, icon: 'add', backgroundColor: options.tileColor, color: '#fff', navigate: () => navigation.navigate('LangImage', {book, resource: element}) }}>
-                    <Image source={require('@/assets/icons/audiobook.png')} style={{width: 90, height: 90,}} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')}/>
+                    <Image source={require('@/assets/icons/image-eng.png')} style={{width: 90, height: 90,}} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')}/>
                   </SquareButton>
                 }
               </Fragment>

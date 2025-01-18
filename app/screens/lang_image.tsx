@@ -3,9 +3,10 @@ import { useTabsScreen } from '@/context/tabContext';
 import { LangImage } from '@/model/book';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
-import { ScrollView, View, Image, TouchableOpacity, StyleSheet, Modal, Dimensions, Text } from 'react-native';
+import { ScrollView, View, TouchableOpacity, StyleSheet, Modal, Dimensions, Text } from 'react-native';
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Image } from 'expo-image';
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,7 +32,7 @@ const LangImageScreen = ({ route, navigation } : any) => {
         }}  
         style={styles.tileItem}
         >
-          <Image source={{ uri: item.imageUrl }} style={styles.image} resizeMode="contain"/>
+          <Image style={styles.image} source={{ uri: item.thumbnailUrl }} contentFit='cover' placeholder={require('@/assets/gifs/loader.gif')}></Image>
       </TouchableOpacity>
       )
     }
@@ -60,11 +61,7 @@ const LangImageScreen = ({ route, navigation } : any) => {
               >
               <Ionicons name="close" size={15} color="#000" />
               </TouchableOpacity>
-              <Image
-                source={{ uri: selectedImage?.imageUrl }}
-                style={styles.fullScreenImage}
-                resizeMode='contain'
-              />
+              <Image style={styles.fullScreenImage} source={{ uri: selectedImage?.imageUrl }} contentFit='contain' placeholder={require('@/assets/gifs/loader.gif')}></Image>
               <AudioWordProvider>
                 { selectedImage?.vocabulary.map((item, index) => (
                     <View
@@ -77,7 +74,7 @@ const LangImageScreen = ({ route, navigation } : any) => {
                         },
                       ]}
                     >
-                      <WordImageItem key={index} text={item.word} translation={item.translation} audioUrl={item.audioUrl}/>
+                      <WordImageItem key={index} text={item.word} translation={item.translation} audioUrl={item.audioUrl} colorWord={item.colorWord} colorTranslation={item.colorTranslation}/>
                     </View>
                 ))}
                 </AudioWordProvider>
@@ -95,21 +92,12 @@ const LangImageScreen = ({ route, navigation } : any) => {
     tilesContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      justifyContent: 'space-between',
+      justifyContent: 'space-around',
     },
     tileItem: {
-      width: 170, 
-      height: 250,
+      width: 120, 
+      height: 200,
       borderRadius: 15,
-      marginBottom: 15,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5, // To jest potrzebne dla Androida
     },
     image: {
       width: '100%',

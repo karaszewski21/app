@@ -62,7 +62,7 @@ const BookScreen = ({ route, navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <BookWrapper props={{...book, textColor: options.textColor}}>
+      <BookWrapper props={{...book, textColor: options.textColor, backgroundColor: options.backgroundColor}}>
         <BookButton 
           title="Kup teraz"
           onPress={() => onSelectBookPress(book)}

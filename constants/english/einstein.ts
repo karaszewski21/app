@@ -1,146 +1,207 @@
 export const einstein = [
-    { 
-        id: 'a40bcbb9-871a-43db-ba87-622sds5919', 
-        type: 'chapter',
-        title: 'Chapter 1', 
-        options: {
-            textColor: '#000',
-            backgroundColor: '#91654d',
-            progressBackgroundColor: '#91654d',
-        },
-        content: [
+  { 
+    id: '622sds59199fc9fEinsten1', 
+    type: 'chapter-img',
+    title: 'The old watchmaker', 
+    imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/watchmaker-icon.png',
+    options: {
+        textColor: '#000',
+        backgroundColor: '#91654d',
+        progressBackgroundColor: '#91654d',
+    },
+    content: [
+      {
+        title: "Vocabulary",
+        imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/watch-icon2.png',
+        paragraphs: [
           {
-            id: 1,
-            startTime: "00:11",
-            endTime: "00:22",
-            answerStartTime: "00:22",
-            answerEndTime: "00:27",
-            text: "Kto mieszka w koronie dębu?"
+            text: `The old watchmaker`,
+            translation: 'Stary Zegarmistrz',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_1.aac',
+            vocabulary: []     
           },
           {
-            id: 2,
-            startTime: "00:35",
-            endTime: "00:41",
-            answerStartTime: "00:41",
-            answerEndTime: "00:47",
-            text: "Gdzie śpią małe wiewiórki?"
+            text: `workshop`,
+            translation: 'zakład',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_2.aac',
+            vocabulary: []     
           },
           {
-            id: 3,
-            startTime: "00:50",
-            endTime: "00:59",
-            answerStartTime: "01:00",
-            answerEndTime: "01:12",
-            text: "Co robią wiewiórki w ciągu dnia?"
+            text: `backroom`,
+            translation: 'zaplecze',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_3.aac',
+            vocabulary: []     
+          },
+          {
+            text: `treasures`,
+            translation: 'skarby',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_4.aac',
+            vocabulary: []     
           }
         ]
-    },
-    { 
-      id: 'a40bcbb9-871a-43db-ba87-622sds591', 
-      type: 'chapter',
-      title: 'Zagraj', 
-      options: {
-          textColor: '#000',
-          backgroundColor: '#91654d',
-          progressBackgroundColor: '#91654d',
       },
-      content: [
-        {
-          id: 1,
-          startTime: "00:11",
-          endTime: "00:22",
-          answerStartTime: "00:22",
-          answerEndTime: "00:27",
-          text: "Kto mieszka w koronie dębu?"
-        },
-        {
-          id: 2,
-          startTime: "00:35",
-          endTime: "00:41",
-          answerStartTime: "00:41",
-          answerEndTime: "00:47",
-          text: "Gdzie śpią małe wiewiórki?"
-        },
-        {
-          id: 3,
-          startTime: "00:50",
-          endTime: "00:59",
-          answerStartTime: "01:00",
-          answerEndTime: "01:12",
-          text: "Co robią wiewiórki w ciągu dnia?"
-        }
-      ]
+      {
+        title: "A Brief History of Time",
+        imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/watch-icon.png',
+        paragraphs: [
+          {
+            text: `The watchmaker showed the mouse around his workshop.`,
+            translation: 'Zegarmistrz oprowadził myszkę po swoim zakładzie.',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_1.aac',
+            vocabulary: []     
+          },
+          {
+            text: `Time is my profession.`,
+            translation: 'długi szalik, gdyby nagle zrobiło się chłodno',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_2.aac',
+            vocabulary: []     
+          },
+          {
+            text: `Time is my profession.`,
+            translation: 'Czas to mój zawód.',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_3.aac',
+            vocabulary: []     
+          },
+        ]
+      }
+    ]
+  },
+  { 
+    id: '622sds59199fc9fEinsten1', 
+    type: 'chapter-img',
+    title: 'Chronos', 
+    imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/cronos-icon.png',
+    options: {
+        textColor: '#000',
+        backgroundColor: '#91654d',
+        progressBackgroundColor: '#91654d',
     },
-    { 
-      id: 'a40bcbb9-871a-43db-ba87-622sds5919', 
+    content: [
+      {
+        title: "Vocabulary",
+        imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/chroso2.png',
+        paragraphs: [
+          {
+            text: `tomcat`,
+            translation: 'kocur',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_1.aac',
+            vocabulary: []     
+          },
+          {
+            text: `muzzle`,
+            translation: 'pysk',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_2.aac',
+            vocabulary: []     
+          },
+          {
+            text: `hiss`,
+            translation: 'prychnięcie',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_3.aac',
+            vocabulary: []     
+          },
+          {
+            text: `to jump away`,
+            translation: 'odskoczyć',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_4.aac',
+            vocabulary: []     
+          }
+        ]
+      },
+      {
+        title: "Chronos and the Mouse",
+        imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/chronos.png',
+        paragraphs: [
+          {
+            text: `The shadow of the tomcat emerged from behind the clock.`,
+            translation: 'Cień kocura wysunął się zza zegara.',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_1.aac',
+            vocabulary: [
+              {
+                word: 'emerged from',
+                translation: 'wysunął się',
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/2_2_1.mp3'
+              }
+            ]     
+          },
+          {
+            text: `The tomcat hissed and jumped onto the clocks.`,
+            translation: 'Kocur prychnął i wskoczył na zegary.',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_2.aac',
+            vocabulary: []     
+          },
+          {
+            text: `The mouse ran along the wall.`,
+            translation: 'Myszka biegła wzdłuż ściany.',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_3.aac',
+            vocabulary: []     
+          }
+        ]
+      }
+    ]
+  } 
+]
+
+export const einstainImage = [
+  { 
+      id: 'a40bcbb9-871a-43db-ba87-Einstain2', 
       type: 'image',
-      title: 'Zagraj', 
+      title: 'What time is it?', 
       options: {
-          textColor: '#000',
+          textColor: '#fff',
           backgroundColor: '#91654d',
           progressBackgroundColor: '#91654d',
       },
       content: [
         {
-          id: 1,
-          startTime: "00:11",
-          endTime: "00:22",
-          answerStartTime: "00:22",
-          answerEndTime: "00:27",
-          text: "Kto mieszka w koronie dębu?"
+          imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/clock2.png',
+          thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/clock-min.png',
+          vocabulary: [
+            {
+              word: 'midnight',
+              translation: 'północ',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_2.mp3',
+              colorWord: '#fff',
+              colorTranslation: '#fff',
+              position: { 
+                top: 27, 
+                left: 37
+              }
+            },
+            {
+              word: "six o'clock",
+              translation: 'szósta',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_2.mp3',
+              colorWord: '#fff',
+              colorTranslation: '#fff',
+              position: { 
+                top: 67, 
+                left: 37
+              }
+            },
+            {
+              word: "three o'clock",
+              translation: 'trzecia',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_2.mp3',
+              colorWord: '#fff',
+              colorTranslation: '#fff',
+              position: { 
+                top: 47, 
+                left: 20
+              }
+            },
+            {
+              word: "nine o'clock",
+              translation: 'dziewiąta',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_2.mp3',
+              colorWord: '#fff',
+              colorTranslation: '#fff',
+              position: { 
+                top: 47, 
+                left: 50
+              }
+            }
+          ]
         },
-        {
-          id: 2,
-          startTime: "00:35",
-          endTime: "00:41",
-          answerStartTime: "00:41",
-          answerEndTime: "00:47",
-          text: "Gdzie śpią małe wiewiórki?"
-        },
-        {
-          id: 3,
-          startTime: "00:50",
-          endTime: "00:59",
-          answerStartTime: "01:00",
-          answerEndTime: "01:12",
-          text: "Co robią wiewiórki w ciągu dnia?"
-        }
       ]
-    },
-    { 
-      id: 'a40bcbb9-871a-43db-ba87-777', 
-      type: 'image',
-      title: 'Zagraj', 
-      options: {
-          textColor: '#000',
-          backgroundColor: '#91654d',
-          progressBackgroundColor: '#91654d',
-      },
-      content: [
-        {
-          id: 1,
-          startTime: "00:11",
-          endTime: "00:22",
-          answerStartTime: "00:22",
-          answerEndTime: "00:27",
-          text: "Kto mieszka w koronie dębu?"
-        },
-        {
-          id: 2,
-          startTime: "00:35",
-          endTime: "00:41",
-          answerStartTime: "00:41",
-          answerEndTime: "00:47",
-          text: "Gdzie śpią małe wiewiórki?"
-        },
-        {
-          id: 3,
-          startTime: "00:50",
-          endTime: "00:59",
-          answerStartTime: "01:00",
-          answerEndTime: "01:12",
-          text: "Co robią wiewiórki w ciągu dnia?"
-        }
-      ]
-    }
-  ]
+  },
+]

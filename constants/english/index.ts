@@ -1,5 +1,5 @@
-import { einstein } from "./einstein";
+import { einstein, einstainImage } from "./einstein";
 import { wamp, wamp1 } from "./wamp";
 import { tumiluImage, tumiluText } from "./tumilu";
 
-export const english = [...wamp, ...wamp1, ...einstein, ...tumiluText, ...tumiluImage]
+export const english = [...wamp, ...wamp1, ...einstein, ...tumiluText, ...tumiluImage, ...einstainImage]

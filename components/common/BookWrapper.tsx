@@ -10,6 +10,7 @@ interface BookWrapperProps {
     title: string;
     description: string;
     textColor?: string,
+    backgroundColor?: string,
   };
   children?: React.ReactNode;
 }
@@ -71,8 +72,19 @@ const BookWrapper: React.FC<BookWrapperProps> = ({ props, children }) => {
           ))}
         </View>
       <View style={styles.content}>
-        <Text style={[styles.title, {color: props.textColor}]}>{props.title}</Text>
-        <Text style={[styles.description, {color: props.textColor}]}>{props.description}</Text>
+        <View style={
+          [ styles.contentText, 
+            styles.contentText, 
+            { 
+              backgroundColor: props.backgroundColor, 
+              marginTop: props.backgroundColor ? 10 : 0, 
+              paddingHorizontal: props.backgroundColor ? 20 : 0,
+              paddingBottom: props.backgroundColor ? 20 : 0
+            }
+          ]}>
+          <Text style={[styles.title, {color: props.textColor}]}>{props.title}</Text>
+          <Text style={[styles.description, {color: props.textColor}]}>{props.description}</Text>
+        </View>
         <AgeRange ageRangeId={props.ageGroupId} textColor={props.textColor}/>
         <View style={styles.contentButtons}>
           {children}
@@ -133,7 +145,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     marginTop: -50,
-
+  },
+  contentText: {
+    paddingTop: 10,
+    borderRadius: 25,
   },
   contentButtons: {
     flex: 1,
