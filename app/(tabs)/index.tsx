@@ -19,7 +19,7 @@ const HomeStack = createStackNavigator();
 
 export default function HomeScreenStack() {
   return (
-    <ImageBackground source={require('@/assets/background.webp')}  style={styles.rootContainer} resizeMode='cover'>
+    <ImageBackground source={require('@/assets/bg3.png')}  style={styles.rootContainer} resizeMode='cover'>
       <NavigationIndependentTree>
         <NavigationContainer theme={globalTheme}>
           <HomeStack.Navigator screenOptions={{cardStyle: { backgroundColor: 'transparent' }}}>
@@ -258,12 +258,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sectionTitle: {
+    color: '#fff',
     fontSize: 24,
     marginHorizontal: 10,
     marginTop: 20,
     fontFamily: 'ShantellSans-SemiBoldItalic'
   },
   sectionPlayerTitle: {
+    color: '#fff',
     fontSize: 20,
     marginHorizontal: 10,
     marginTop: 20,

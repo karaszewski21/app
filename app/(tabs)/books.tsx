@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, FlatList, NativeScrollPoint } from 'react-native';
+import { StyleSheet, FlatList, NativeScrollPoint, ImageBackground } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import BookScreen from '@/app/screens/book';
 import ListItem from '@/components/common/ListItem';
@@ -13,16 +13,24 @@ import { AgeGroup, Book } from '@/model';
 import RatingView from '@/components/common/RatingView';
 import Overlay from '@/components/Overlay';
 import useRating from '@/hooks/useRating';
+import { globalTheme } from '@/constants/Colors';
+import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
 
 const BooksStack = createStackNavigator();
 
 export default function BooksStackScreen() {
 
   return (
-    <BooksStack.Navigator>
-      <BooksStack.Screen name="Books" component={BooksScreen} options={{headerShown: false}}/>
-      <BooksStack.Screen name="Book" component={BookScreen} options={{headerShown: false}}/>
-    </BooksStack.Navigator>
+    <ImageBackground source={require('@/assets/bg3.png')}  style={styles.rootContainer} resizeMode='cover'>
+      <NavigationIndependentTree>
+        <NavigationContainer theme={globalTheme}>
+          <BooksStack.Navigator>
+            <BooksStack.Screen name="Books" component={BooksScreen} options={{headerShown: false}}/>
+            <BooksStack.Screen name="Book" component={BookScreen} options={{headerShown: false}}/>
+          </BooksStack.Navigator>
+         </NavigationContainer>
+      </NavigationIndependentTree>
+    </ImageBackground>
   );
 }
 
@@ -75,7 +83,7 @@ const BooksScreen = ({ navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/baner_book.webp" hidden={hiddenBanner}/>
+      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/baner_book.webp" hidden={hiddenBanner} title='Książki'/>
       <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup} reset={true}/>
       <FlatList
           data={bookList}
@@ -99,6 +107,12 @@ const BooksScreen = ({ navigation }:any) => {
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    zIndex: 100
+  },
   container: {
     flex: 1,
     paddingBottom: 60

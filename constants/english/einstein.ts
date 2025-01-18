@@ -17,25 +17,25 @@ export const einstein = [
           {
             text: `The old watchmaker`,
             translation: 'Stary Zegarmistrz',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_1.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/1_1.aac',
             vocabulary: []     
           },
           {
             text: `workshop`,
             translation: 'zakład',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_2.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/1_2.aac',
             vocabulary: []     
           },
           {
             text: `backroom`,
             translation: 'zaplecze',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_3.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/1_3.aac',
             vocabulary: []     
           },
           {
             text: `treasures`,
             translation: 'skarby',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_4.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/1_4.aac',
             vocabulary: []     
           }
         ]
@@ -47,19 +47,19 @@ export const einstein = [
           {
             text: `The watchmaker showed the mouse around his workshop.`,
             translation: 'Zegarmistrz oprowadził myszkę po swoim zakładzie.',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_1.aac',
-            vocabulary: []     
-          },
-          {
-            text: `Time is my profession.`,
-            translation: 'długi szalik, gdyby nagle zrobiło się chłodno',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_2.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/2_1.aac',
             vocabulary: []     
           },
           {
             text: `Time is my profession.`,
             translation: 'Czas to mój zawód.',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_3.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/2_2.aac',
+            vocabulary: []     
+          },
+          {
+            text: `The hanging clocks were very large.`,
+            translation: 'Wiszące zegary były bardzo duże.',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/2_3.aac',
             vocabulary: []     
           },
         ]
@@ -84,25 +84,25 @@ export const einstein = [
           {
             text: `tomcat`,
             translation: 'kocur',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_1.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/3_1.mp3',
             vocabulary: []     
           },
           {
             text: `muzzle`,
             translation: 'pysk',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_2.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/3_2.mp3',
             vocabulary: []     
           },
           {
             text: `hiss`,
             translation: 'prychnięcie',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_3.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/3_3.mp3',
             vocabulary: []     
           },
           {
             text: `to jump away`,
             translation: 'odskoczyć',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_4.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/3_4.mp3',
             vocabulary: []     
           }
         ]
@@ -114,25 +114,25 @@ export const einstein = [
           {
             text: `The shadow of the tomcat emerged from behind the clock.`,
             translation: 'Cień kocura wysunął się zza zegara.',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_1.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/4_1.mp3',
             vocabulary: [
               {
                 word: 'emerged from',
                 translation: 'wysunął się',
-                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/2_2_1.mp3'
+                audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/4_1_1.mp3'
               }
             ]     
           },
           {
             text: `The tomcat hissed and jumped onto the clocks.`,
             translation: 'Kocur prychnął i wskoczył na zegary.',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_2.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/4_2.mp3',
             vocabulary: []     
           },
           {
             text: `The mouse ran along the wall.`,
             translation: 'Myszka biegła wzdłuż ściany.',
-            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/audio/1_3.aac',
+            audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/4_3.mp3',
             vocabulary: []     
           }
         ]
@@ -156,10 +156,11 @@ export const einstainImage = [
           imageUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/clock2.png',
           thumbnailUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/clock-min.png',
           vocabulary: [
+
             {
               word: 'midnight',
               translation: 'północ',
-              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_2.mp3',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/5_1.mp3',
               colorWord: '#fff',
               colorTranslation: '#fff',
               position: { 
@@ -170,7 +171,7 @@ export const einstainImage = [
             {
               word: "six o'clock",
               translation: 'szósta',
-              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_2.mp3',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/5_2.mp3',
               colorWord: '#fff',
               colorTranslation: '#fff',
               position: { 
@@ -181,7 +182,7 @@ export const einstainImage = [
             {
               word: "three o'clock",
               translation: 'trzecia',
-              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_2.mp3',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/5_3.mp3',
               colorWord: '#fff',
               colorTranslation: '#fff',
               position: { 
@@ -192,7 +193,7 @@ export const einstainImage = [
             {
               word: "nine o'clock",
               translation: 'dziewiąta',
-              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/english/image/1_2.mp3',
+              audioUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/english/audio/5_4.mp3',
               colorWord: '#fff',
               colorTranslation: '#fff',
               position: { 

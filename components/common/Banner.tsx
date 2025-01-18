@@ -1,6 +1,6 @@
 import { BANNER_HEIGHT } from '@/constants/Common';
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Text } from 'react-native';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -9,10 +9,11 @@ import Animated, {
 
 interface BannerProps {
   imageUrl: string,
-  hidden: boolean
+  hidden: boolean,
+  title: string
 }
 
-const Banner: React.FC<BannerProps> = ({ imageUrl, hidden }) => {
+const Banner: React.FC<BannerProps> = ({ imageUrl, hidden, title }) => {
     const bannerTranslateY = useSharedValue<number>(0);
 
     const bannerAnimatedStyle = useAnimatedStyle(() => ({
@@ -29,11 +30,12 @@ const Banner: React.FC<BannerProps> = ({ imageUrl, hidden }) => {
     <Animated.View style={[styles.bannerContainer, bannerAnimatedStyle, {transform: [{translateY: 0}]}]}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-        <Image
+        {/* <Image
             source={{ uri: imageUrl }}
             style={styles.headerImage}
             
-        />
+        /> */}
+          <Text style={styles.title}>{title}</Text>
         </View>
       </View>
     </Animated.View>
@@ -55,15 +57,23 @@ const styles = StyleSheet.create({
       zIndex: 3,
     },
     imageContainer: {
-      height: 100,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 80,
       marginBottom: 10,
       borderRadius: 15,
-      overflow: 'hidden', 
+     // overflow: 'hidden', 
     },
     headerImage: {
       width: '100%',
       height: '100%',
       resizeMode: 'cover',
+    },
+    title: {
+      color: '#fff',
+      fontFamily: 'ShantellSans-SemiBoldItalic',
+      fontSize: 50
     }
   });
 

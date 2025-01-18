@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     },
     filterContainer: {
       position: 'absolute',
-      top: 130,
+      top: 100,
       left: 0,
       right: 0,
       height: FILTER_HEIGHT,

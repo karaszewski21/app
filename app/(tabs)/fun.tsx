@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, Dimensions, NativeScrollPoint} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Dimensions, NativeScrollPoint, ImageBackground} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import ReaderStackScreen from '@/app/screens/reader';
 import AudioPlayScreen from '@/app/screens/audio_play';
@@ -17,29 +17,37 @@ import Filter from '@/components/common/Filter';
 import { AgeGroup, AudioPlay, Reader } from '@/model';
 import useRating from '@/hooks/useRating';
 import { useFocusEffect } from '@react-navigation/native';
+import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
+import { globalTheme } from '@/constants/Colors';
 
 const FunStack = createStackNavigator();
 const { width } = Dimensions.get('window');
 
 export default function FunStackScreen({route}:any) {
   return (
-    <FunStack.Navigator>
-      <FunStack.Screen name="FunDetails" component={FunScreen} options={{headerShown: false}} initialParams={route.params}/>
-      <FunStack.Screen 
-          name="ReaderDetails" 
-          component={ReaderStackScreen}
-          options={{
-            headerShown: false
-          }}
-        />
-      <FunStack.Screen 
-          name="AudioPlay" 
-          component={AudioPlayScreen}
-          options={{
-            headerShown: false
-          }}
-       />
-    </FunStack.Navigator>
+       <ImageBackground source={require('@/assets/bg3.png')}  style={styles.rootContainer} resizeMode='cover'>
+          <NavigationIndependentTree>
+            <NavigationContainer theme={globalTheme}>
+              <FunStack.Navigator>
+                <FunStack.Screen name="FunDetails" component={FunScreen} options={{headerShown: false}} initialParams={route.params}/>
+                <FunStack.Screen 
+                    name="ReaderDetails" 
+                    component={ReaderStackScreen}
+                    options={{
+                      headerShown: false
+                    }}
+                  />
+                <FunStack.Screen 
+                    name="AudioPlay" 
+                    component={AudioPlayScreen}
+                    options={{
+                      headerShown: false
+                    }}
+                />
+              </FunStack.Navigator>
+            </NavigationContainer>
+          </NavigationIndependentTree>
+        </ImageBackground>
   );
 }
 
@@ -185,7 +193,7 @@ const FunScreen = ({route, navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/baner_story.webp" hidden={hiddenBanner}/>
+        <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/baner_story.webp" hidden={hiddenBanner} title='Opowieści'/>
         <Filter hidden={hiddenBanner} onOptionSelect={setAgeGroup} reset={true}/>
         <FilterButtons activeFilter={activeFilter} onFilterChange={onFilterChange} hidden={hiddenBanner}/>
         <Animated.View style={[styles.animatedContainer, animatedStyle]}>
@@ -211,6 +219,12 @@ const FunScreen = ({route, navigation }:any) => {
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    zIndex: 100
+  },
   container: {
     flex: 1,
     paddingBottom: 60
@@ -218,7 +232,7 @@ const styles = StyleSheet.create({
 
   filterContainer: {
     position: 'absolute',
-    top: 180,
+    top: 150,
     left: 0,
     right: 0,
     height: 50,
@@ -246,6 +260,7 @@ const styles = StyleSheet.create({
 
   filterText: {
     fontWeight: 'bold',
+    color: '#fff'
   },
   
   flatListWrapper: {

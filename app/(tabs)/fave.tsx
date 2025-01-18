@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, FlatList, View, NativeScrollPoint} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, FlatList, View, NativeScrollPoint, ImageBackground} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useFavorite from '@/hooks/useFavorite';
@@ -14,44 +14,53 @@ import { AudioPlay, Book, Reader } from '@/model';
 import useRating from '@/hooks/useRating';
 import Overlay from '@/components/Overlay';
 import RatingView from '@/components/common/RatingView';
+import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
+import { globalTheme } from '@/constants/Colors';
+
 
 const FaveStack = createStackNavigator();
 
 export default function FunStackScreen() {
   return (
-    <FaveStack.Navigator
-      screenOptions={{detachPreviousScreen: true}}
-    >
-      <FaveStack.Screen 
-          name="FaveDetails" 
-          component={FaveScreen} 
-          options={{
-            headerShown: false,
-            detachPreviousScreen: true
-          }}
-        />
-      <FaveStack.Screen 
-          name="BookDetails" 
-          component={BookStackScreen}
-          options={{
-            headerShown: false
-          }}
-        />
-      <FaveStack.Screen 
-          name="ReaderDetails" 
-          component={ReaderStackScreen}
-          options={{
-            headerShown: false
-          }}
-        />
-      <FaveStack.Screen 
-          name="AudioPlay" 
-          component={AudioPlayScreen}
-          options={{
-            headerShown: false
-          }}
-       />
-    </FaveStack.Navigator>
+      <ImageBackground source={require('@/assets/bg3.png')}  style={styles.rootContainer} resizeMode='cover'>
+        <NavigationIndependentTree>
+          <NavigationContainer theme={globalTheme}>
+            <FaveStack.Navigator
+              screenOptions={{detachPreviousScreen: true}}
+            >
+              <FaveStack.Screen 
+                  name="FaveDetails" 
+                  component={FaveScreen} 
+                  options={{
+                    headerShown: false,
+                    detachPreviousScreen: true
+                  }}
+                />
+              <FaveStack.Screen 
+                  name="BookDetails" 
+                  component={BookStackScreen}
+                  options={{
+                    headerShown: false
+                  }}
+                />
+              <FaveStack.Screen 
+                  name="ReaderDetails" 
+                  component={ReaderStackScreen}
+                  options={{
+                    headerShown: false
+                  }}
+                />
+              <FaveStack.Screen 
+                  name="AudioPlay" 
+                  component={AudioPlayScreen}
+                  options={{
+                    headerShown: false
+                  }}
+              />
+            </FaveStack.Navigator>
+          </NavigationContainer>
+        </NavigationIndependentTree>
+      </ImageBackground>
   );
 }
 
@@ -82,7 +91,7 @@ const FaveScreen = ({ navigation }:any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/banerbook2.png" hidden={hiddenBanner}/>
+      <Banner imageUrl="https://goldfish.fra1.digitaloceanspaces.com/banerbook2.png" hidden={hiddenBanner} title='Ulubione'/>
       <FlatList
         data={favorites}
         renderItem={({ item }) => {
@@ -116,6 +125,12 @@ const FaveScreen = ({ navigation }:any) => {
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    zIndex: 100
+  },
   container: {
     flex: 1,
     paddingBottom: 60

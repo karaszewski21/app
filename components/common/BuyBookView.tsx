@@ -23,7 +23,7 @@ const BuyBookView: React.FC<BuyBookViewProps> = ({ book, backgroundColor, textCo
   return (
     <TouchableOpacity activeOpacity={1} onPress={onClose}>
       <LinearGradient
-        colors={[backgroundColor,backgroundColor,backgroundColor]}
+        colors={['#235faf','#161d46','#0c1a45']}
         style={styles.container}
       >
         <View style={styles.closeButton}>
@@ -34,9 +34,9 @@ const BuyBookView: React.FC<BuyBookViewProps> = ({ book, backgroundColor, textCo
             onPress={onClose}
           />
         </View>
-        <Text style={[styles.title, {color: textColor}]}>{book.title}</Text>
+        <Text style={[styles.title, {color:  '#fff'}]}>{book.title}</Text>
         <Image source={{ uri: book.gallery[0] }} style={styles.bookImage} />
-        <Text style={[styles.description, {color: textColor}]}>
+        <Text style={[styles.description, {color:  '#fff'}]}>
           Niestety, ta książka jest obecnie niedostępna. Podaj swój adres e-mail,
           a powiadomimy Cię, gdy książka będzie znów dostępna!
         </Text>
@@ -53,7 +53,7 @@ const BuyBookView: React.FC<BuyBookViewProps> = ({ book, backgroundColor, textCo
           onPress={handleSubmit}
           disabled={!email}
         >
-          <Text style={[styles.submitButtonText,{color: textColor}]}>Powiadom mnie</Text>
+          <Text style={[styles.submitButtonText,{color: '#fff'}]}>Powiadom mnie</Text>
         </TouchableOpacity>
       </LinearGradient>
     </TouchableOpacity>

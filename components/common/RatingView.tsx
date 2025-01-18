@@ -29,7 +29,7 @@ const RatingView: React.FC<RatingViewProps> = ({title, subTitle, onSubmit, onClo
   return (
     <TouchableOpacity onPress={handleClose}>
         <LinearGradient
-            colors={['#000','#000','#000']}
+            colors={['#235faf','#161d46','#0c1a45']}
             style={styles.container}
         >
         <View style={styles.closeButton}>
