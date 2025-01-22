@@ -1,8 +1,8 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withSpring, withTiming } from 'react-native-reanimated';
 import Overlay from '@/components/Overlay';
@@ -17,6 +17,7 @@ import BuyBookView from '@/components/common/BuyBookView';
 import { OptionsBook } from '@/model/book';
 import AnimatedQuestionCard from '@/components/quiz/component/AnimatedQuestionCard';
 import { VoiceQuiz } from '@/model/quiz';
+import { Image } from 'expo-image';
 
 const VoiceQuizesStack = createStackNavigator();
 const { height: HEIGHT_SCREEN } = Dimensions.get('window');
@@ -390,7 +391,7 @@ const VoiceQuizScreen = ({route, navigation }:any) => {
           { !analizeRecording && 
              <View style={styles.recordContainer}>
               { recording && 
-                <>
+                <Fragment>
                   { waveStyles.map((style, index) => (
                     <Animated.View
                       key={index}
@@ -398,29 +399,31 @@ const VoiceQuizScreen = ({route, navigation }:any) => {
                     />
                   ))}
                   <TouchableOpacity style={[styles.micButton, { backgroundColor: audioQuiz.options.backgroundColor }]} onPress={stopRecording}>
-                    <Text style={styles.textButton}>Przerwij</Text>
+                    <Text style={[styles.textButton, { color: audioQuiz.options.textColor }]}>Przerwij</Text>
                   </TouchableOpacity>
-                </>
+                </Fragment>
               }
               { !recording &&
-                <>
+                <Fragment>
                   <TouchableOpacity style={[styles.micButton, { backgroundColor: audioQuiz.options.backgroundColor }]} onPress={startRecording}>
                     <Text style={[styles.textButton, { color: audioQuiz.options.textColor }]}>Start</Text>
                   </TouchableOpacity>
-                </>
+                </Fragment>
               }
             </View>
           }
         
           { analizeRecording && 
             <View style={styles.recordContainer}>
-              <Text>Trwa analiza jakaś anuimacja</Text>  
+              <Text style={[styles.textButton, { color: audioQuiz.options.textColor }]}>Analizuje</Text>  
+              <Text style={[styles.textButton, { color: audioQuiz.options.textColor }]}>Twoje odpowiedzi</Text>  
+               <Image source={require('@/assets/gifs/loader.gif')} style={{width: 100, height: 100}} contentFit='contain'/>
             </View>
           }
 
           <View style={styles.speakerContainer}>
             <TouchableOpacity style={styles.speakerButton}>
-              <MaterialCommunityIcons name="speaker" size={30} color="#FFFFFF" />
+              <FontAwesome name="microphone" size={40} color={audioQuiz.options.backgroundColor} />
             </TouchableOpacity>
           </View>
 

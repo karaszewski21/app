@@ -2,7 +2,7 @@ export const quizUgly = {
   "id": "a1b2c3d4-5678-9101-Ugly",
   "title": "Przygody Brzydkiego Kaczątka",
   "synopsis": "Zapraszamy do quizu opartego na klasycznej baśni Hansa Christiana Andersena „Brzydkie Kaczątko”. Sprawdź swoją wiedzę o losach małego kaczątka, które w końcu odkrywa swoją prawdziwą tożsamość.",
-  "audioUrl": "",
+  "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/1.aac",
   "totalQuestions": 6,
   "checkAutoAnswer": false,
   "timer": false,
@@ -41,7 +41,7 @@ export const quizUgly = {
     {
       "id": 1,
       "text": "Co powiedziała sąsiadka kaczka o dużym jajku w gnieździe?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/1_1.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -60,7 +60,7 @@ export const quizUgly = {
     {
       "id": 2,
       "text": "Dlaczego inne kaczki wyśmiewały brzydkie kaczątko?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/1_2.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -79,7 +79,7 @@ export const quizUgly = {
     {
       "id": 3,
       "text": "Co się wydarzyło, gdy kaczątko zobaczyło łabędzie po raz pierwszy?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/1_3.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -98,7 +98,7 @@ export const quizUgly = {
     {
       "id": 4,
       "text": "Jak zakończyła się historia brzydkiego kaczątka?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/1_4.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -121,7 +121,7 @@ export const quizUgly1 = {
   "id": "b2c3d4e5-6789-1011-quizBrzydkieKaczatko2",
   "title": "Przygody Brzydkiego Kaczątka - Quiz 2",
   "synopsis": "W drugim quizie sprawdzimy Twoją wiedzę na temat trudnych doświadczeń brzydkiego kaczątka oraz postaci, które spotkało na swojej drodze.",
-  "audioUrl": "",
+  "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/2.aac",
   "totalQuestions": 5,
   "checkAutoAnswer": false,
   "timer": false,
@@ -160,7 +160,7 @@ export const quizUgly1 = {
     {
       "id": 1,
       "text": "Gdzie brzydkie kaczątko ukryło się podczas polowania?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/2_1.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -179,7 +179,7 @@ export const quizUgly1 = {
     {
       "id": 2,
       "text": "Jak zareagował pies myśliwski, gdy zobaczył kaczątko?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/2_2.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -198,7 +198,7 @@ export const quizUgly1 = {
     {
       "id": 3,
       "text": "Co zrobiło kaczątko, gdy trafiło do chaty starej kobiety?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/2_3.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -217,7 +217,7 @@ export const quizUgly1 = {
     {
       "id": 4,
       "text": "Jakie uczucie towarzyszyło kaczątku, gdy zobaczyło swój obraz w wodzie jako łabędź?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/2_4.aac",
       "image": "",
       "type": "text",
       "answerType": "single",
@@ -236,7 +236,7 @@ export const quizUgly1 = {
     {
       "id": 5,
       "text": "Dlaczego dzieci rzucały jedzenie łabędziowi na końcu historii?",
-      "audioUrl": "",
+      "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/ugly_duck/quiz/2_5.aac",
       "image": "",
       "type": "text",
       "answerType": "single",

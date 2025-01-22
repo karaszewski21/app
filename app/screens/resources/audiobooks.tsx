@@ -82,6 +82,16 @@ const AudiobooksScreen = ({ route, navigation }:any) => {
                   </View>  */}
                 </View>
               }
+               { item.type === 'nute' && 
+                <View style={{flex: 1, alignItems: 'center'}}>
+                  <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={2}>{item.name}</Text>
+                  <Image source={require('@/assets/icons/nuta-icon.png')} style={{width: 50, height: 50, marginBottom: 5}} contentFit='contain'/>
+                  {/* <View style={styles.tilePlayContent}>
+                    <Text style={{...styles.tileTitle, marginRight: 5, color: item.options.textPlayColor}}>słuchaj</Text>
+                    <Image source={require('@/assets/icons/play.png')} style={{width: 20, height: 20}} contentFit='contain'/> 
+                  </View>  */}
+                </View>
+              }
               { item.type === 'eng' && 
                 <View style={{flex: 1, alignItems: 'center'}}>
                   <Text style={[styles.tileTitle, {color: item.options.textColor}]} numberOfLines={2}>{item.name}</Text>

@@ -10,20 +10,20 @@ export const quizKot = {
     "previousButton": true,
     "sendMailScore": false,
     "options": {
-      "textColor": "#000",
-      "backgroundColor": "#e9cda4"
+      "textColor": "#fff",
+      "backgroundColor": "#ea6d51"
     },
     "theme": {
       "welcomeTheme": {
         "textColor": "#000",
         "backgroundScreen": "#ffffff",
-        "buttonBgColor": "#4CAF50",
+        "buttonBgColor": "#ea6d51",
         "buttonTextColor": "#FFFFFF",
         "buttonBorderColor": "#4CAF50"
       },
       "quizTheme": {
-        "textColor": "#000",
-        "buttonBgColor": "#4CAF50",
+        "textColor": "#fff",
+        "buttonBgColor": "#009292",
         "buttonTextColor": "#FFFFFF",
         "buttonBorderColor": "#388E3C",
         "optionBgColor": "#e0f2f1",
@@ -32,7 +32,7 @@ export const quizKot = {
         "optionSelectedBgColor": "green",
         "correctColor": "#4CAF50",
         "incorrectColor": "#f44336",
-        "progressBarBgColor": "#4CAF50",
+        "progressBarBgColor": "#ea6d51",
         "scoreTextColor": "#000",
         "timerTextColor": "#000"
       }
@@ -59,7 +59,7 @@ export const quizKot = {
       },
       {
         "id": 2,
-        "text": "Co poprosił kot Janka, aby mu kupił?",
+        "text": "O co poprosił kot Janka, aby mu kupił?",
         "audioUrl": "",
         "image": "",
         "type": "text",
@@ -148,20 +148,20 @@ export const quizKot1 = {
     "previousButton": true,
     "sendMailScore": false,
     "options": {
-      "textColor": "#000",
-      "backgroundColor": "#e9cda4"
+      "textColor": "#fff",
+      "backgroundColor": "#009292"
     },
     "theme": {
       "welcomeTheme": {
-        "textColor": "#000",
-        "backgroundScreen": "#ffffff",
-        "buttonBgColor": "#4CAF50",
+        "textColor": "#fff",
+        "backgroundScreen": "#009292",
+        "buttonBgColor": "#ea6d51",
         "buttonTextColor": "#FFFFFF",
         "buttonBorderColor": "#4CAF50"
       },
       "quizTheme": {
-        "textColor": "#000",
-        "buttonBgColor": "#4CAF50",
+        "textColor": "#fff",
+        "buttonBgColor": "#009292",
         "buttonTextColor": "#FFFFFF",
         "buttonBorderColor": "#388E3C",
         "optionBgColor": "#e0f2f1",
@@ -170,7 +170,7 @@ export const quizKot1 = {
         "optionSelectedBgColor": "green",
         "correctColor": "#4CAF50",
         "incorrectColor": "#f44336",
-        "progressBarBgColor": "#4CAF50",
+        "progressBarBgColor": "#ea6d51",
         "scoreTextColor": "#000",
         "timerTextColor": "#000"
       }

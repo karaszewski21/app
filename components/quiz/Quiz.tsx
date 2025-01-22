@@ -104,6 +104,8 @@ const Quiz = ({ quizData, theme = {}}: any) => {
     const currentQuestion = quizData.questions[currentQuestionIndex];
     let newSelectedOptions:any = {...selectedOptions};
 
+    console.log('====',newSelectedOptions[currentQuestionIndex])
+
     if (!newSelectedOptions[currentQuestionIndex]) {
         newSelectedOptions[currentQuestionIndex] = [];
     }
@@ -222,11 +224,11 @@ const Quiz = ({ quizData, theme = {}}: any) => {
       return (
         <TouchableOpacity
           key={uuid.v4() as string}
-          style={[styles.imageOptionContainer, optionStyle, isSelected && {...styles.selectedOption, backgroundColor: currentTheme.optionSelectedBgColor}]}
+          style={[styles.imageOptionContainer, optionStyle, isSelected && {...styles.selectedOption, borderColor: currentTheme.optionSelectedBgColor, borderWidth: 2}]}
           onPress={() => handleOptionSelect(index)}
           disabled={answerChecked[currentQuestionIndex]}
         >
-          <Image source={{ uri: option }} style={styles.optionImage}  resizeMode='contain'/>
+          <Image source={{ uri: option }} style={styles.optionImage} contentFit='contain' placeholder={require('@/assets/gifs/loader.gif')}/>
           <TouchableOpacity 
             style={styles.zoomButton}
             onPress={() => handleImagePress(option)}
@@ -341,13 +343,18 @@ const renderResult = () => (
       let isCorrect;
 
       if (question.answerType === 'multiple') {
-        const correctOptions = question.correctOptionIndex.sort((a: number, b: number) => a - b);
-        const selected = selectedOptions[index].sort((a: number, b: number) => a - b);
-        isCorrect = correctOptions.length === selected.length &&  correctOptions.every((value: number, i: number) => value === selected[i]);
+
+         if (selectedOptions[index] === undefined) {
+            isCorrect = false;
+         } else {
+            const correctOptions = question.correctOptionIndex.sort((a: number, b: number) => a - b);
+            const selected = selectedOptions[index] ?? selectedOptions[index].sort((a: number, b: number) => a - b);
+            isCorrect = correctOptions.length === selected.length &&  correctOptions.every((value: number, i: number) => value === selected[i]);
+         } 
       }
 
       if (question.answerType === 'single') {
-        isCorrect = selectedOptions[index] == question.correctOptionIndex 
+          isCorrect = selectedOptions[index] == question.correctOptionIndex 
       }
 
       return (

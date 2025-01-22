@@ -266,7 +266,7 @@ export const quizTumilu2 = {
   "totalQuestions": 5,
   "checkAutoAnswer": false,
   "timer": true,
-  "duration": 60,
+  "duration": 5,
   "previousButton": true,
   "sendMailScore": false,
   "options": {

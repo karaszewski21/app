@@ -1,116 +1,48 @@
-export const voice_play2 = [
-    { 
-        id: 'axxx40bcbb9-871a-43db-ba87-622sds59199fc9f', 
-        title: 'Zagraj', 
-        audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_v3.mp4",
-        audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-        options: {
-            textColor: '#000',
-            backgroundColor: '#fff',
-            progressBackgroundColor: '#91654d',
-        },
-        total: '01:33',
-        manifest: [
-            {
-              id: 1,
-              startTime: "00:11",
-              endTime: "00:22",
-              answerStartTime: "00:22",
-              answerEndTime: "00:27",
-              text: "Kto mieszka w koronie dębu?"
-            },
-            {
-              id: 2,
-              startTime: "00:35",
-              endTime: "00:41",
-              answerStartTime: "00:41",
-              answerEndTime: "00:47",
-              text: "Gdzie śpią małe wiewiórki?"
-            },
-            {
-              id: 3,
-              startTime: "00:50",
-              endTime: "00:59",
-              answerStartTime: "01:00",
-              answerEndTime: "01:12",
-              text: "Co robią wiewiórki w ciągu dnia?"
-            }
-          ]
-    },
-    { 
-        id: 'a40bxxcbb9-871a-43db-ba87-622sdsfdf59199fc9f', 
-        title: 'Zagraj', 
-        audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_v3.mp4",
-        audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-        options: {
-            textColor: '#000',
-            backgroundColor: '#fff',
-            progressBackgroundColor: '#91654d',
-        },
-        total: '01:54',
-        manifest: [
-            {
-              id: 1,
-              startTime: "00:11",
-              endTime: "00:22",
-              answerStartTime: "00:22",
-              answerEndTime: "00:27",
-              text: "Kto mieszka w koronie dębu?"
-            },
-            {
-              id: 2,
-              startTime: "00:35",
-              endTime: "00:41",
-              answerStartTime: "00:41",
-              answerEndTime: "00:47",
-              text: "Gdzie śpią małe wiewiórki?"
-            },
-            {
-              id: 3,
-              startTime: "00:50",
-              endTime: "00:59",
-              answerStartTime: "01:00",
-              answerEndTime: "01:12",
-              text: "Co robią wiewiórki w ciągu dnia?"
-            }
-          ]
-    },
-    { 
-        id: 'a40bcbbxxx9-871a-43db-ba87-622fdfsds59199fc9f', 
-        title: 'Zagraj', 
-        audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_v3.mp4",
-        audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
-        options: {
-            textColor: '#000',
-            backgroundColor: '#fff',
-            progressBackgroundColor: '#91654d',
-        },
-        total: '01:12',
-        manifest: [
-            {
-              id: 1,
-              startTime: "00:11",
-              endTime: "00:22",
-              answerStartTime: "00:22",
-              answerEndTime: "00:27",
-              text: "Kto mieszka w koronie dębu?"
-            },
-            {
-              id: 2,
-              startTime: "00:35",
-              endTime: "00:41",
-              answerStartTime: "00:41",
-              answerEndTime: "00:47",
-              text: "Gdzie śpią małe wiewiórki?"
-            },
-            {
-              id: 3,
-              startTime: "00:50",
-              endTime: "00:59",
-              answerStartTime: "01:00",
-              answerEndTime: "01:12",
-              text: "Co robią wiewiórki w ciągu dnia?"
-            }
-          ]
-    }
-  ];
+export const einstein = [
+  { 
+      id: 'a40bcbb9-871a-43db-ba87-622sds59199fc9f-einstain', 
+      title: 'Zgadywanka kolorów', 
+      audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/einstein/voice/ques_einstein.aac",
+      audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/voice/res_einstein.aac',
+      options: {
+          textColor: '#fff',
+          backgroundColor: '#bc9c57',
+          progressBackgroundColor: '#bc9c57',
+      },
+      total: '01:51',
+      manifest: [
+          {
+            id: 1,
+            startTime: "00:22",
+            endTime: "00:39",
+            answerStartTime: "00:34",
+            answerEndTime: "00:39",
+            text: "Dlaczego myszka chciała cofnąć się w czasie?"
+          },
+          {
+            id: 2,
+            startTime: "00:42",
+            endTime: "00:50",
+            answerStartTime: "00:45",
+            answerEndTime: "00:50",
+            text: "Do jakiego roku przeniosła się myszka podczas swojej podróży w czasie"
+          },
+          {
+            id: 3,
+            startTime: "00:53",
+            endTime: "01:15",
+            answerStartTime: "01:10",
+            answerEndTime: "01:15",
+            text: "W jaki sposób myszka próbowała cofnąć czas?"
+          },
+          {
+            id: 4,
+            startTime: "01:17",
+            endTime: "01:35",
+            answerStartTime: "01:30",
+            answerEndTime: "01:35",
+            text: "Jaka teoria naukowa Einsteina jest przedstawiona w książce?"
+          }
+        ]
+  }
+];

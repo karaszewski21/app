@@ -1,12 +1,12 @@
-export const tumilu = [
+export const sam = [
     { 
-        id: 'a40bcbb9-871a-43db-ba87-622sds59199fc9f-tumilu', 
-        title: 'Zgadywanka kolorów', 
+        id: 'a40bcbb9-871a-43db-ba87-622sds59199fc9f-sam', 
+        title: 'Zgadywanka polskich kolęd', 
         audioUrl: "https://goldfish.fra1.digitaloceanspaces.com/books/tumilu/voice/vioce-quiz_tumilu.aac",
         audioUrlResponse: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/quiz_voice/wamp_vq_responce.mp3',
         options: {
             textColor: '#fff',
-            backgroundColor: '#ac295c',
+            backgroundColor: '#d10c07',
             progressBackgroundColor: '#ac295c',
         },
         total: '01:54',

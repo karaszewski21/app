@@ -1,9 +1,9 @@
-export const tumilu = [
+export const mis = [
     {
-      id: 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-tumilu',
-      type: 'image',
-      title: 'Porównaj i zgadnij!',
-      name: 'Porównaj i zgadnij!',
+      id: 'bc6de1ad-de39-44d0-97fa-6bac2301e92b-mis',
+      type: 'eng',
+      title: "Let's save money",
+      name: "Let's save money",
       ageGroup: "adult",
       narrator: "Anna Nowak",
       duration: 10000,
