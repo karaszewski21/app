@@ -1,6 +1,7 @@
 import { View,StyleSheet} from 'react-native'
 import React from 'react'
 import TabBarButton from './TabBarButton';
+import { CommonActions } from '@react-navigation/native';
 
 const TabBar = ({ state, descriptors, navigation }) => {
     const primaryColor = '#b17c08';
@@ -26,7 +27,14 @@ const TabBar = ({ state, descriptors, navigation }) => {
               });
 
               if (!isFocused && !event.defaultPrevented) {
-                navigation.navigate(route.name, route.params);
+                //navigationRef.navigate(route.name, route.params);
+                
+                navigation.dispatch({
+                  ...CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: route.name }],
+                  })
+                })
               }
             };
 

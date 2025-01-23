@@ -12,6 +12,8 @@ import { DefaultTheme, NavigationContainer, DarkTheme } from '@react-navigation/
 import { globalTheme } from '@/constants/Colors';
 import { NativeBaseProvider } from "native-base";
 import { AudioSentenceProvider } from '@/components/common/SentenceItem';
+import { StatusBar } from "expo-status-bar";
+
 
 export default function Root() {
     const [loaded, error] = useFonts({
@@ -43,6 +45,7 @@ export default function Root() {
                   <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                   <Stack.Screen name="(auth)" options={{ headerShown: false }} />
                   <Stack.Screen name="index" options={{ headerShown: false }} />
+                  <StatusBar style="light" />
                 </Stack>
               </GlobalModalProvider>
             </PlayerModalProvider>

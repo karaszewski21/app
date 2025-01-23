@@ -5,7 +5,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 import { Fragment, useEffect } from 'react';
 import { useTabsScreen } from '@/context/tabContext';
 import { usePlayerModal } from '@/context/playerModalContext';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Easing, StyleSheet, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './index';
 import BooksScreen from './books';
@@ -77,7 +77,11 @@ export default function TabLayout() {
 
   return (
     <Tab.Navigator
-      screenOptions={{headerShown: false}} 
+      screenOptions={
+        {
+          headerShown: false,
+          animation: 'shift'
+        }} 
       tabBar={props => 
         <Fragment>
           {  
@@ -97,7 +101,6 @@ export default function TabLayout() {
         component={HomeScreen}
         options={{
           title: 'Home',
-          popToTopOnBlur: true,
         }}
       />
       <Tab.Screen
@@ -105,7 +108,6 @@ export default function TabLayout() {
         component={BooksScreen}
         options={{
           title: 'Książki',
-          popToTopOnBlur: true,
         }}
       />
       <Tab.Screen
@@ -113,7 +115,6 @@ export default function TabLayout() {
         component={FavoritesScreen}
         options={{
           title: 'Ulubione',
-          popToTopOnBlur: true,
         }}
       />
       <Tab.Screen
@@ -121,7 +122,6 @@ export default function TabLayout() {
         component={FunScreen}
         options={{
           title: 'Opowieści',
-          popToTopOnBlur: true,
         }}
       />
       <Tab.Screen
@@ -129,7 +129,6 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profil',
-          popToTopOnBlur: true,
           headerShown: false
         }}
       />

@@ -17,12 +17,35 @@ import { globalTheme } from '@/constants/Colors';
 
 const HomeStack = createStackNavigator();
 
+const config = {
+  animation: 'timing' as any,
+  config: {
+    stiffness: 500,
+    damping: 200,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
+};
+
 export default function HomeScreenStack() {
   return (
     <ImageBackground source={require('@/assets/bg3.png')}  style={styles.rootContainer} resizeMode='cover'>
       <NavigationIndependentTree>
-        <NavigationContainer theme={globalTheme}>
-          <HomeStack.Navigator screenOptions={{cardStyle: { backgroundColor: 'transparent' }}}>
+        <NavigationContainer 
+            theme={globalTheme}
+            onStateChange={(state) => console.log('New state is', state)}
+        >
+          <HomeStack.Navigator 
+            screenOptions={{
+              cardStyle: { backgroundColor: 'transparent' },
+              transitionSpec: {
+                open: config,
+                close: config,
+              }}
+            }
+          >
             <HomeStack.Screen 
               name="Home" 
               component={HomeScreen} 
