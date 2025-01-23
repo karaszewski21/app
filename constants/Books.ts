@@ -17,7 +17,7 @@ export const books = [
                   Czy nie byłaby to odpowiedź na pytanie, jakim cudem pracownik szwajcarskiego urzędu patentowego wywrócił do góry nogami zasady fizyki oraz nasze wyobrażenie o przestrzeni i czasie?`,
     isLock: false,
     rating: 4.5, 
-    reviewCount: 85,
+    reviewCount: 17,
     content: {
       options: {
         backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/einstein/background2.webp',
@@ -115,8 +115,8 @@ export const books = [
   title: "Obchodzimy Boże Narodzenie",
   description: "Szukasz prezentu na święta albo mikołajki, który rozwinie zainteresowania dziecka, ale też sprawi mu mnóstwo frajdy? Książka „Obchodzimy Boże Narodzenie” to strzał w dziesiątkę - niezależnie od tego, w co (i czy) wierzymy. Mnóstwo wiedzy o tradycjach świątecznych podanej w lekki sposób i w otoczeniu realistycznych ilustracji.",
   isLock: true,
-  rating: 3.5, 
-  reviewCount: 85,
+  rating: 5, 
+  reviewCount: 22,
   content: {
     options: {
       backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/sam/background1.webp',
@@ -155,8 +155,8 @@ export const books = [
   title: "Miś Expertuś Oszczędza",
   description: `Poznaj Misia Expertusia, który uczy się, że oszczędzanie może być dziecinnie łatwe. Może też być jednocześnie zabawą i nauką, które zaangażują całą rodzinę.`,
   isLock: true,
-  rating: 3.5, 
-  reviewCount: 85,
+  rating: 4, 
+  reviewCount: 9,
   content: {
     options: {
       backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/mis/background.png',
@@ -196,8 +196,8 @@ export const books = [
     title: "Wielki atlas małych przyjemności",
     description: "O pięknych, darmowych przyjemnostkach dnia codziennego. Czyli o rzeczach, których czasem nie doceniamy lub o których zapomnieliśmy, że możemy się nimi cieszyć tak po prostu…",
     isLock: true,
-    rating: 3.5, 
-    reviewCount: 85,
+    rating: 4, 
+    reviewCount: 18,
     content: {
       options: {
         backgroundUrl: 'https://goldfish.fra1.digitaloceanspaces.com/books/wamp/bacground.png',
