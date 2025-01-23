@@ -45,7 +45,7 @@ export default function HomeScreenStack() {
               component={BookStackScreen}
               options={{
                 headerShown: false,
-                detachPreviousScreen: false
+                detachPreviousScreen: true
               }}
             />
             <HomeStack.Screen 
@@ -53,7 +53,7 @@ export default function HomeScreenStack() {
               component={ReaderStackScreen}
               options={{
                 headerShown: false,
-                detachPreviousScreen: false
+                detachPreviousScreen: true
               }}
             />
             <HomeStack.Screen 

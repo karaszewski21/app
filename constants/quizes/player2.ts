@@ -2,7 +2,7 @@ export const quizKot = {
     "id": "quizKotwButach1",
     "title": "Przygody Kota w Butach - Quiz",
     "synopsis": "Sprawdź swoją wiedzę na temat sprytnego Kota w Butach i jego niezwykłych przygód!",
-    "audioUrl": "",
+    "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/1.aac",
     "totalQuestions": 5,
     "checkAutoAnswer": false,
     "timer": false,
@@ -41,7 +41,7 @@ export const quizKot = {
       {
         "id": 1,
         "text": "Co otrzymał Janek po podziale majątku ojca?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/1_1.aac",
         "image": "",
         "type": "text",
         "answerType": "single",
@@ -60,7 +60,7 @@ export const quizKot = {
       {
         "id": 2,
         "text": "O co poprosił kot Janka, aby mu kupił?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/1_2.aac",
         "image": "",
         "type": "text",
         "answerType": "single",
@@ -79,7 +79,7 @@ export const quizKot = {
       {
         "id": 3,
         "text": "Jak kot zdobył zamek dla Janka?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/1_3.aac",
         "image": "",
         "type": "text",
         "answerType": "single",
@@ -98,7 +98,7 @@ export const quizKot = {
       {
         "id": 4,
         "text": "Jak zareagował król, gdy kot przyniósł mu upolowaną zwierzynę?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/1_4.aac",
         "image": "",
         "type": "text",
         "answerType": "single",
@@ -117,7 +117,7 @@ export const quizKot = {
       {
         "id": 5,
         "text": "Co stało się na końcu historii?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/1_5.aac",
         "image": "",
         "type": "text",
         "answerType": "single",
@@ -140,7 +140,7 @@ export const quizKot1 = {
     "id": "quizKotwButach2",
     "title": "Kot w Butach - Quiz 2",
     "synopsis": "Sprawdź swoją wiedzę na temat przygód Kota w Butach oraz sprytnych planów, które zmieniły życie Janka!",
-    "audioUrl": "",
+    "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/2.aac",
     "totalQuestions": 5,
     "checkAutoAnswer": false,
     "timer": false,
@@ -153,7 +153,7 @@ export const quizKot1 = {
     },
     "theme": {
       "welcomeTheme": {
-        "textColor": "#fff",
+        "textColor": "#000",
         "backgroundScreen": "#009292",
         "buttonBgColor": "#ea6d51",
         "buttonTextColor": "#FFFFFF",
@@ -179,7 +179,7 @@ export const quizKot1 = {
       {
         "id": 1,
         "text": "Dlaczego kot postanowił pomóc Jankowi?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/2_1.aac",
         "image": "",
         "type": "text",
         "answerType": "single",
@@ -198,7 +198,7 @@ export const quizKot1 = {
       {
         "id": 2,
         "text": "Jak kot przekonał kosiarzy i żniwiarzy, aby powiedzieli, że ziemie należą do Janka?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/2_2.aac",
         "image": "",
         "type": "text",
         "answerType": "single",
@@ -217,7 +217,7 @@ export const quizKot1 = {
       {
         "id": 3,
         "text": "Dlaczego król postanowił odwiedzić Janka?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/2_3.aac",
         "image": "",
         "type": "text",
         "answerType": "single",
@@ -236,7 +236,7 @@ export const quizKot1 = {
       {
         "id": 4,
         "text": "Jakie zwierzęta kot złowił dla króla podczas polowania?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/2_4.aac",
         "image": "",
         "type": "text",
         "answerType": "single",
@@ -255,7 +255,7 @@ export const quizKot1 = {
       {
         "id": 5,
         "text": "Co kot zrobił, aby pokonać czarownika?",
-        "audioUrl": "",
+        "audioUrl": "https://goldfish.fra1.digitaloceanspaces.com/players/cat/quiz/2_5.aac",
         "image": "",
         "type": "text",
         "answerType": "single",

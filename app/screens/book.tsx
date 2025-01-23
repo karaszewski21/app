@@ -51,7 +51,7 @@ export default function BookStackScreen({route}:any) {
   );
 }
 
-const BookScreen = ({ route, navigation }:any) => {
+export const BookScreen = ({ route, navigation }:any) => {
   const book = route.params.book as Book; 
   const resources = book.resource as Resource[];
   const content = book.content as BookContent;
