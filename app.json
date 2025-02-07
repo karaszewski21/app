@@ -8,7 +8,7 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/bg3.png",
+      "image": "./assets/icons/goldfish-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#000"
     },
@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/icons/goldfish-logo.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.smyksmyk.app",
+      "package": "com.goldfish.app",
       "permissions": [
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
