@@ -57,7 +57,9 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Chewy-Regular.ttf"]
+          "fonts": [
+            "./assets/fonts/Chewy-Regular.ttf"
+          ]
         }
       ],
       [
